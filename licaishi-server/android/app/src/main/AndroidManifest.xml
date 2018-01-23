@@ -59,13 +59,14 @@
             android:name=".activity.SplashActivity"
             android:screenOrientation="portrait"
             android:theme="@style/splash">
+
+        </activity>
+        <activity android:name=".activity.LoginCloudActivity" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".activity.LoginCloudActivity" />
         <activity
             android:name=".activity.MainActivity"
             android:launchMode="singleTask" />
