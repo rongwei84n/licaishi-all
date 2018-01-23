@@ -55,7 +55,8 @@
         <EditText
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/edt_neturl"/>
+            android:id="@+id/edt_neturl"
+            android:hint="输入网址长按后跳转"/>
 
         <!--<TextView-->
         <!--android:id="@+id/tv_login"-->
