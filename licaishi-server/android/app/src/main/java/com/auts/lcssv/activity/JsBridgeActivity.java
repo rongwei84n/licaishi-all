@@ -131,7 +131,7 @@ public class JsBridgeActivity extends BaseActivity {
             @Override
             public void onReceivedError(WebView webView, int i, String s, String s1) {
                 LogUtils.debug("onReceivedError: " + s1);
-                hideLoading();
+//                hideLoading();
                 ToastUtil.show("网络异常，请稍后再试");
                 finish();
             }
@@ -144,7 +144,7 @@ public class JsBridgeActivity extends BaseActivity {
             @Override
             public void onPageStarted(WebView webView, String s, Bitmap bitmap) {
                 super.onPageStarted(webView, s, bitmap);
-                showLoading();
+//                showLoading();
 //                mJavaBridge.loadJsBridge(mWebView);
             }
 

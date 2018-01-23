@@ -72,7 +72,7 @@ public class SceneFragment extends BaseFragment {
 
     @Override
     public void afterInitView() {
-        EventBus.getDefault().register(this);
+//        EventBus.getDefault().register(this);
         mTvTitle.setText(R.string.scene);
         mIvBack.setVisibility(View.GONE);
         mIvMenu.setVisibility(View.VISIBLE);
@@ -231,7 +231,7 @@ public class SceneFragment extends BaseFragment {
 
     @Override
     public void onDestroy() {
-        EventBus.getDefault().unregister(this);
+//        EventBus.getDefault().unregister(this);
         super.onDestroy();
     }
 }
