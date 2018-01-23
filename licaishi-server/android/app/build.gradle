@@ -1,0 +1,241 @@
+apply plugin: 'com.android.application'
+apply plugin: 'bugly'
+apply from: '../config/quality.gradle'
+
+def final BUGLY_APPID = "4adbe54f3b"
+def final BUGLY_APPKEY = "d4be1983-f304-4a2e-93a4-86b441238b31"
+def final JPUSH_APPKEY = "0e621306bf07eb4eefc49e66"
+def final JPUSH_CHANNEL = "9a3869c9d2fec8333db84a2e"
+def final AUTHORITIES = "com.auts.lcssv.fileprovider"
+def final JPUSH_PKGNAME = "com.auts.lcssv"
+def appChannel = System.getenv('app_channel') as String ?: "clean assemble";
+
+//此处配置用于上传符号表
+bugly {
+    appId = BUGLY_APPID
+    appKey = BUGLY_APPKEY
+    //是否上传符号表，由Jenkins构建时作为参数传入
+    uploadMapping = appChannel.contains("upload") && appChannel.contains("SymtabFile")
+    println appChannel
+}
+
+android {
+    def final APK_NAME_PRODUCT = "Lcssv"
+    def final BASE_VERSION_NAME = "1.0.0"
+//    def isBuildFromJenkins = System.getenv()['BUILD_NUMBER'] as Integer ? true : false
+    def env = System.getenv()
+    def qaNumber = env['QA_NUMBER'] as Integer ?: 0
+    def buildNumber = env['BUILD_NUMBER'] as Integer ?: 0
+    def keystorePath = env['ANDROID_KEYSTORE_PHIHOME'] as String ? env['ANDROID_KEYSTORE_PHIHOME'] : '/Users/huangrongwei/Documents/6_backup/rongwei_huang/phihome.jks';
+
+    aaptOptions.cruncherEnabled = false
+    aaptOptions.useNewCruncher = false
+
+    compileSdkVersion 25
+    buildToolsVersion "25.0.2"
+    defaultConfig {
+        applicationId "com.auts.lcssv"
+        minSdkVersion 16
+        //为避开Android6.0运行时权限，targetSdkVersion设为22，不能随意修改
+        targetSdkVersion 22
+        versionCode 3
+        versionName "1.0.4"
+        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+        multiDexEnabled true
+
+        ndk {
+            abiFilters "armeabi", "armeabi-v7a"
+        }
+
+        sourceSets {
+            main {
+                jniLibs.srcDirs = ['libs']
+            }
+        }
+
+        //线上环境
+        buildConfigField "int", "build_number", buildNumber + ""
+        buildConfigField "String", "host_cloud_acount", "\"https://accountsym.phicomm.com\""
+        buildConfigField "String", "host_cloud_portrait", "\"https://portraitsym.phicomm.com\""
+        buildConfigField "String", "host_sz", "\"https://home.phicomm.com\""
+        buildConfigField "String", "mqtt_host", "\"home.phicomm.com\""
+        buildConfigField "int", "mqtt_port", "61613"
+        buildConfigField "boolean", "mqtt_ssl", "true"
+        buildConfigField "int", "mqtt_ssl_port", "8883"
+    }
+
+    lintOptions {
+        abortOnError false
+    }
+
+    signingConfigs {
+        config {
+            keyAlias "phihomeapp"
+            keyPassword "phihome2017"
+            storeFile file(keystorePath)
+            storePassword "phihome2017"
+        }
+    }
+
+    buildTypes {
+        debug {
+            signingConfig signingConfigs.config
+            buildConfigField "boolean", "isDebug", "true"
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+        release {
+            signingConfig signingConfigs.config
+            buildConfigField "boolean", "isDebug", "false"
+            minifyEnabled true
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            shrinkResources = true; //移除无用的Resource资源
+            zipAlignEnabled = true; //Zipalign优化
+        }
+    }
+
+
+    applicationVariants.all { variant ->
+        variant.outputs.each { output ->
+            output.outputFile = new File(output.outputFile.parentFile,
+                    output.outputFile.name.replace("app-", APK_NAME_PRODUCT + "-" + "${variant.versionName}-")
+                            .replace("qa-release", "dev"));
+        }
+    }
+
+    productFlavors {
+        //开发环境 rd:research and development
+        szrd {
+            applicationIdSuffix ".szrd"
+            buildConfigField "String", "host_cloud_acount", "\"http://114.141.173.53\""
+            buildConfigField "String", "host_cloud_portrait", "\"http://114.141.173.53\""
+            buildConfigField "String", "host_sz", "\"http://dev.home.phiwifi.com\""
+            buildConfigField "String", "mqtt_host", "\"dev.home.phiwifi.com\""
+            buildConfigField "boolean", "mqtt_ssl", "false"
+        }
+
+        //测试环境
+        qa {
+            applicationIdSuffix ".qa"
+            buildConfigField "String", "host_cloud_acount", "\"http://114.141.173.53\""
+            buildConfigField "String", "host_cloud_portrait", "\"http://114.141.173.53\""
+            buildConfigField "String", "host_sz", "\"https://sithome.phicomm.com\""
+            buildConfigField "String", "mqtt_host", "\"sit.home.phicomm.com\""
+        }
+
+        //彩盒
+        BZHCA {}
+
+        //说明书
+        YSMSB {}
+
+        //壳体
+        SBKZC {}
+
+        //阿里应用分发开放平台
+        ALSTG {}
+
+        //百度开发者平台
+        BDKFH {}
+
+        //腾讯开放平台
+        TENXI {}
+
+        //360移动开放平台
+        QIHUJ {}
+
+        //小米开放平台
+        XIMIK {}
+
+        //魅族Flyme开放平台
+        MZFML {}
+
+        //OPPO开放者平台
+        OBKFM {}
+
+        //华为智汇云应用市场
+        HUWEN {}
+
+        //vivo开发者平台
+        WEWOP {}
+
+        productFlavors.all { flavor ->
+//            versionName BASE_VERSION_NAME + "-build" + qaNumber + "." + buildNumber
+            versionName BASE_VERSION_NAME
+            if (name.equals("qa")) {
+                JPUSH_APPKEY = "afe91b12a2f15e12c2971c1d";
+                JPUSH_CHANNEL = "47f5e9299cf6a9842e028397"
+                AUTHORITIES = "com.auts.lcssv.qa.fileprovider"
+                JPUSH_PKGNAME = "com.auts.lcssv.qa"
+            } else if (name.equals("szrd")) {
+                JPUSH_APPKEY = "76dbafff824c6cc1b25d957d";
+                JPUSH_CHANNEL = "de57219ff2a38ea5d716dbc2"
+                AUTHORITIES = "com.auts.lcssv.szrd.fileprovider"
+                JPUSH_PKGNAME = "com.auts.lcssv.szrd"
+            }
+            buildConfigField "String", "authorities", "\"${AUTHORITIES}\""
+            flavor.manifestPlaceholders = [BUGLY_APPID        : BUGLY_APPID,
+                                           BUGLY_APP_CHANNEL  : name,
+                                           JPUSH_PKGNAME      : JPUSH_PKGNAME,
+                                           JPUSH_APPKEY       : JPUSH_APPKEY,
+                                           JPUSH_CHANNEL      : JPUSH_CHANNEL,
+                                           AUTHORITIES        : AUTHORITIES,
+                                           UMENG_CHANNEL_VALUE: name]
+        }
+
+    }
+}
+
+repositories {
+    flatDir {
+        dirs 'libs'
+    }
+}
+
+dependencies {
+    compile fileTree(include: ['*.jar'], dir: 'libs')
+    androidTestCompile('com.android.support.test.espresso:espresso-core:2.2.2', {
+        exclude group: 'com.android.support', module: 'support-annotations'
+    })
+    compile 'com.android.support:appcompat-v7:25.3.1'
+    compile 'com.android.support:recyclerview-v7:25.3.1'
+    compile 'com.android.support:design:25.3.1'
+    compile 'com.jakewharton:butterknife:8.4.0'
+    annotationProcessor 'com.jakewharton:butterknife-compiler:8.4.0'
+//    compile 'com.alibaba:fastjson:1.2.31'这是标准fastjson，下面这个是专给Android用的fastjosn，更轻量
+    compile 'com.alibaba:fastjson:1.1.67.android'
+    compile 'com.squareup.okhttp3:okhttp:3.6.0'
+    compile 'com.squareup.okio:okio:1.11.0'
+    compile 'org.xutils:xutils:3.5.0'
+    //阿里用户反馈依赖
+    compile(name: 'alicloud-android-feedback-3.1.0', ext: 'aar')
+    //下拉刷新和上拉加载 com.github.CymChad:BaseRecyclerViewAdapterHelper:2.9.22
+    compile(name: 'library-release', ext: 'aar')
+    //eventBus
+    compile 'org.greenrobot:eventbus:3.0.0'
+    //图片加载
+    compile 'com.github.bumptech.glide:glide:3.7.0'
+    //bugLy
+    compile 'com.tencent.bugly:crashreport:latest.release'
+    //拍照、取图、裁图 https://github.com/crazycodeboy/TakePhoto
+    compile 'com.jph.takephoto:takephoto_library:4.0.3'
+    //图片压缩https://github.com/Curzibn/Luban
+    compile 'top.zibin:Luban:1.1.2'
+    //轻量级数据库LitePal  https://github.com/LitePalFramework/LitePal
+    compile 'org.litepal.android:core:1.6.0'
+    // 流布局 https://github.com/hongyangAndroid/FlowLayout
+    compile 'com.zhy:flowlayout-lib:1.0.3'
+    //极光推送
+    compile 'cn.jiguang.sdk:jpush:3.0.8'
+    compile 'cn.jiguang.sdk:jcore:1.1.6'
+    //友盟统计
+    compile 'com.umeng.sdk:common:latest.integration'
+    compile 'com.umeng.analytics:analytics:latest.integration'
+    //LeakCanary
+    debugCompile 'com.squareup.leakcanary:leakcanary-android:1.5.4'
+    releaseCompile 'com.squareup.leakcanary:leakcanary-android-no-op:1.5.4'
+    //第三方下拉、上拉刷新
+    compile 'in.srain.cube:ptr-load-more:1.0.6'
+    //分包方案解除65K限制
+    compile 'com.android.support:multidex:1.0.1'
+}

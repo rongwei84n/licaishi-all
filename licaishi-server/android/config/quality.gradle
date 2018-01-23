@@ -1,0 +1,59 @@
+apply plugin: 'checkstyle'
+apply plugin: 'pmd'
+
+checkstyle {
+    toolVersion '7.1.2'
+}
+
+def reportsDir = "${project.buildDir}/reports"
+def configDir = "${project.rootDir}/config/quality"
+
+check.dependsOn 'checkstyle', 'pmd'
+
+task checkstyle(type: Checkstyle) {
+    configFile file("${project.rootDir}/config/quality/checkstyle/google_checks.xml")
+    configProperties.checkstyleSuppressionsPath = file("${project.rootDir}/config/quality/checkstyle/suppressions.xml").absolutePath
+    source 'src'
+    include '**/*.java'
+    exclude '**/gen/**'
+    exclude '**/test/**'
+    exclude '**/eclipse/paho/**'
+    exclude '**/jsbridge/**'
+    classpath = files()
+
+    ignoreFailures = false
+}
+
+task pmd(type: Pmd) {
+    ruleSetFiles = files("${project.rootDir}/config/quality/pmd/java/basic.xml", //基本代码规范
+            "${project.rootDir}/config/quality/pmd/java/android.xml", //android相关
+            "${project.rootDir}/config/quality/pmd/java/braces.xml", //条件分支
+            //"${project.rootDir}/config/quality/pmd/java/design.xml", //设计规范
+            "${project.rootDir}/config/quality/pmd/java/empty.xml", //空代码块检测
+            "${project.rootDir}/config/quality/pmd/java/imports.xml",  //导入相关
+            //"${project.rootDir}/config/quality/pmd/java/naming.xml",  //命名规范相关
+            "${project.rootDir}/config/quality/pmd/java/optimizations.xml",//性能相关
+            "${project.rootDir}/config/quality/pmd/java/strings.xml",//String相关, StrinBuffer .etc
+            "${project.rootDir}/config/quality/pmd/java/unnecessary.xml", //不必要的代码检测
+            "${project.rootDir}/config/quality/pmd/java/unusedcode.xml") //无用代码检测
+    ruleSets = []
+    ignoreFailures = true
+
+    source 'src'
+    include '**/*.java'
+    exclude '**/gen/**'
+    exclude '**/test/**'
+    exclude '**/eclipse/paho/**'
+    exclude '**/jsbridge/**'
+
+    reports {
+        xml.enabled = true
+        html.enabled = true
+        xml {
+            destination "${project.buildDir}/reports/pmd/pmd.xml"
+        }
+        html {
+            destination "${project.buildDir}/reports/pmd/pmd.html"
+        }
+    }
+}

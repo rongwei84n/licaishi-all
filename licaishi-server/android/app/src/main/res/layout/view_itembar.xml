@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_height="match_parent"
+    android:layout_width="match_parent"
+    android:background="@drawable/selector_itembar"
+    android:minHeight="52dp" >
+
+    <ImageView
+        android:background="@drawable/housemanage_cycle"
+        android:id="@+id/iv_LeftImage"
+        android:layout_alignParentLeft="true"
+        android:layout_centerInParent="true"
+        android:layout_height="30dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:layout_width="30dp"
+        android:scaleType="centerCrop"
+        android:transitionName="shareImg"
+        android:visibility="gone" />
+
+    <TextView
+        android:id="@+id/tv_LeftTitle"
+        android:layout_alignParentLeft="true"
+        android:layout_centerInParent="true"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="10dp"
+        android:layout_width="wrap_content"
+        android:singleLine="true"
+        android:maxLines="1"
+        android:textColor="#313131"
+        android:textSize="15sp"
+        android:visibility="gone" />
+
+    <TextView
+        android:id="@+id/tv_LeftMessage"
+        android:layout_centerInParent="true"
+        android:layout_height="wrap_content"
+        android:layout_toEndOf="@+id/iv_LeftImage"
+        android:layout_toRightOf="@+id/iv_LeftImage"
+        android:layout_width="wrap_content"
+        android:maxLines="1"
+        android:singleLine="true"
+        android:scrollbarAlwaysDrawHorizontalTrack="true"
+        android:scrollbars="horizontal"
+        android:textColor="#313131"
+        android:textSize="15sp"
+        android:transitionName="shareMsg"
+        android:visibility="gone" />
+
+
+    <ImageView
+        android:id="@+id/iv_RightArrow"
+        android:layout_alignParentRight="true"
+        android:layout_centerInParent="true"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="16dp"
+        android:layout_marginRight="3dp"
+        android:layout_marginTop="16dp"
+        android:layout_width="wrap_content"
+        android:src="@drawable/housemanage_arrow" />
+
+    <ImageView
+        android:background="@drawable/housemanage_cycle"
+        android:id="@+id/iv_RightImage"
+        android:layout_centerInParent="true"
+        android:layout_height="30dp"
+        android:layout_marginRight="2dp"
+        android:layout_toLeftOf="@id/iv_RightArrow"
+        android:layout_width="30dp"
+        android:transitionName="shareImg"
+        android:visibility="gone" />
+
+    <TextView
+        android:id="@+id/tv_RightTitle"
+        android:layout_centerInParent="true"
+        android:layout_height="wrap_content"
+        android:layout_marginRight="3dp"
+        android:layout_toLeftOf="@id/iv_RightArrow"
+        android:layout_width="wrap_content"
+        android:textColor="#898989"
+        android:textSize="15sp"
+        android:singleLine="true"
+        android:maxLines="1"
+        android:visibility="gone" />
+
+    <TextView
+        android:id="@+id/tv_RightMessage"
+        android:layout_centerInParent="true"
+        android:layout_height="wrap_content"
+        android:layout_toLeftOf="@id/iv_RightImage"
+        android:layout_width="wrap_content"
+        android:textColor="#313131"
+        android:textSize="15sp"
+        android:maxLines="1"
+        android:singleLine="true"
+        android:visibility="gone" />
+
+</RelativeLayout>
