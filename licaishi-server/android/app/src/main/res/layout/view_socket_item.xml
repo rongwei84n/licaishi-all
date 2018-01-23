@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="63dp">
+
+    <CheckBox
+        android:id="@+id/iv_socket"
+        android:button="@drawable/selector_socket_selected_checkbox"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
+        android:layout_marginLeft="10dp"
+        android:src="@drawable/paicha02" />
+
+    <TextView
+        android:layout_toRightOf="@id/iv_socket"
+        android:layout_centerVertical="true"
+        android:id="@+id/tv_socket"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="10dp"
+        style="@style/PhiHome_Common_Text"
+        tools:text="插座1"/>
+
+    <CheckBox
+        android:id="@+id/iv_socket_trigger"
+        android:layout_centerVertical="true"
+        android:layout_alignParentRight="true"
+        android:button="@drawable/selector_socket_checkbox"
+        android:layout_marginRight="6dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+    <View
+        android:id="@+id/bottom_line"
+        android:layout_width="350dp"
+        android:layout_height="1dp"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:background="#e7e7e7"/>
+
+</RelativeLayout>

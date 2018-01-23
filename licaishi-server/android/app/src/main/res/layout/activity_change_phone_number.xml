@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <include layout="@layout/include_common_header" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="10dp"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="30dp"
+        android:text="@string/change_phone_warnings"
+        android:textColor="@color/text_oringe"
+        android:textSize="@dimen/text_small" />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="34dp">
+
+        <TextView
+            android:layout_marginTop="3dp"
+            android:id="@+id/tv_new_phone_number_label"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:layout_marginStart="10dp"
+            android:text="@string/new_phone_number"
+            android:textColor="@color/text_large"
+            android:textSize="@dimen/text_normal" />
+
+        <TextView
+            android:id="@+id/tv_get_verification_code"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentRight="true"
+            android:paddingEnd="18dp"
+            android:paddingLeft="18dp"
+            android:paddingRight="18dp"
+            android:paddingStart="18dp"
+            android:text="@string/get_verification_code"
+            android:textColor="@color/btn_disable_bg"
+            android:textSize="@dimen/text_normal" />
+
+        <com.auts.lcssv.views.MyEditText
+            android:id="@+id/met_new_phone_number"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:layout_marginStart="10dp"
+            android:layout_toEndOf="@+id/tv_new_phone_number_label"
+            android:layout_toLeftOf="@+id/tv_get_verification_code"
+            android:layout_toRightOf="@+id/tv_new_phone_number_label"
+            android:layout_toStartOf="@+id/tv_get_verification_code"
+            app:has_delete="false"
+            app:hint="@string/input_new_phone_number"
+            app:input_type="1"
+            app:is_phone="true"
+            app:line_margin_top="0dp"
+            app:max_length="11" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/tv_new_phone_number_label"
+            android:layout_marginLeft="10dp"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="43dp"
+            android:text="@string/verifiaction_code"
+            android:textColor="@color/text_large"
+            android:textSize="@dimen/text_normal" />
+
+        <com.auts.lcssv.views.MyEditText
+            android:id="@+id/met_short_message_verification_code"
+            android:layout_width="160dp"
+            android:layout_height="wrap_content"
+            android:layout_alignEnd="@+id/met_new_phone_number"
+            android:layout_alignLeft="@+id/met_new_phone_number"
+            android:layout_alignRight="@+id/met_new_phone_number"
+            android:layout_alignStart="@+id/met_new_phone_number"
+            android:layout_below="@+id/tv_new_phone_number_label"
+            android:layout_marginTop="40dp"
+            app:has_delete="false"
+            app:input_type="1"
+            app:line_margin_top="0dp"
+            app:max_length="6" />
+    </RelativeLayout>
+
+    <TextView
+        android:id="@+id/tv_next_step"
+        style="@style/btn_common"
+        android:layout_marginEnd="10dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="50dp"
+        android:enabled="false"
+        android:text="@string/next_step" />
+
+</LinearLayout>

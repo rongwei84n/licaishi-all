@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="150dp"
+    android:layout_height="150dp"
+    android:alpha="0.8"
+    android:background="@drawable/scene"
+    android:layout_marginLeft="6dp"
+    android:layout_marginRight="30dp"
+    android:layout_marginTop="16dp">
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/edit"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentTop="true"
+        android:padding="3dp"
+        android:id="@+id/iv_edit" />
+
+    <com.auts.lcssv.views.recyclerview.RefreshView
+        android:layout_width="66dp"
+        android:layout_height="66dp"
+        android:layout_below="@+id/iv_edit"
+        android:layout_centerHorizontal="true"
+        android:id="@+id/iv_scene"
+        android:src="@drawable/scene_default"/>
+
+    <TextView
+        android:id="@+id/tv_scene"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="12sp"
+        android:textColor="#313131"
+        android:text="早上"
+        android:layout_below="@+id/iv_scene"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="12dp" />
+
+
+</RelativeLayout>

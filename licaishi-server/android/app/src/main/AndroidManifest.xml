@@ -1,0 +1,196 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    package="com.auts.lcssv">
+
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.CHANGE_NETWORK_STATE"/>
+    <uses-permission android:name="android.permission.CHANGE_WIFI_STATE" />
+    <uses-permission android:name="android.permission.CHANGE_WIFI_MULTICAST_STATE" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
+    <uses-permission android:name="android.permission.READ_LOGS" />
+    <uses-permission android:name="android.permission.CAMERA" />
+    <uses-permission android:name="android.permission.FLASHLIGHT" />
+    <uses-permission android:name="android.permission.VIBRATE" />
+    <uses-permission android:name="android.permission.FLASHLIGHT"/>
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+
+
+    <!-- mqtt add -->
+    <uses-permission android:name="android.permission.WAKE_LOCK" />
+
+    <application
+        android:name=".PhApplication"
+        android:allowBackup="false"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:persistent="true"
+        android:supportsRtl="true"
+        android:theme="@style/AppTheme"
+        tools:replace="android:allowBackup"
+        >
+
+        <!-- Glide配置 -->
+        <meta-data
+            android:name="com.auts.lcssv.manager.imageloader.GlideConfig"
+            android:value="GlideModule" />
+
+        <!-- Bugly -->
+        <meta-data
+            android:name="BUGLY_APPID"
+            android:value="${BUGLY_APPID}" />
+        <meta-data
+            android:name="BUGLY_APP_CHANNEL"
+            android:value="${BUGLY_APP_CHANNEL}" />
+
+        <!-- 友盟统计 -->
+        <meta-data
+            android:name="UMENG_APPKEY"
+            android:value="59b659f5f29d98340b000217" />
+        <meta-data
+            android:name="UMENG_CHANNEL"
+            android:value="${UMENG_CHANNEL_VALUE}" />
+
+        <activity
+            android:name=".activity.SplashActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/splash">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity android:name=".activity.LoginCloudActivity" />
+        <activity
+            android:name=".activity.MainActivity"
+            android:launchMode="singleTask" />
+        <activity android:name=".activity.WifiScanListActivity" />
+        <activity
+            android:name=".activity.X5WebActivity"
+            android:configChanges="orientation|screenSize|keyboardHidden"
+            android:windowSoftInputMode="stateHidden|adjustResize" />
+        <activity android:name=".activity.TestActivity" />
+        <activity
+            android:name=".activity.RegisterCodeActivity"
+            android:windowSoftInputMode="adjustPan|stateAlwaysVisible" />
+        <activity
+            android:name=".activity.AccountRegisterActivity"
+            android:windowSoftInputMode="adjustPan|stateAlwaysVisible" />
+        <activity android:name=".activity.PersonalInformationActivity" />
+        <activity android:name=".activity.CropImageActivity" />
+        <activity android:name=".activity.GetPhotoActivity" />
+        <activity
+            android:name=".activity.ChangeNicknameActivity"
+            android:windowSoftInputMode="adjustPan|stateAlwaysVisible" />
+        <activity
+            android:name=".activity.ModifyPasswordActivity"
+            android:windowSoftInputMode="adjustPan|stateAlwaysVisible" />
+        <activity android:name=".activity.FactoryActivity" />
+        <activity android:name=".activity.BindingPhoneActivity" />
+        <activity
+            android:name=".activity.SecurityVerificationActivity"
+            android:windowSoftInputMode="adjustPan|stateAlwaysVisible" />
+        <activity
+            android:name=".activity.ChangePhoneNumberActivity"
+            android:windowSoftInputMode="adjustPan|stateAlwaysVisible" />
+        <activity
+            android:name=".activity.ForgotPwdCodeActivity"
+            android:windowSoftInputMode="adjustPan|stateAlwaysVisible" />
+        <activity
+            android:name=".activity.ResetPwdActivity"
+            android:windowSoftInputMode="adjustPan|stateAlwaysVisible" />
+        <activity
+            android:name=".activity.AboutActivity"
+            android:theme="@style/greyBackgroundTheme" />
+        <activity android:name=".zxing.CaptureActivity" />
+        <activity android:name=".zxing.PreferencesActivity" />
+        <activity android:name=".activity.JsBridgeActivity" />
+
+        <receiver
+            android:name=".receiver.NetworkStateReceiver"
+            android:enabled="true"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.net.conn.CONNECTIVITY_CHANGE" />
+            </intent-filter>
+        </receiver>
+
+        <provider
+            android:name="android.support.v4.content.FileProvider"
+            android:authorities="${AUTHORITIES}"
+            android:exported="false"
+            android:grantUriPermissions="true">
+            <meta-data
+                android:name="android.support.FILE_PROVIDER_PATHS"
+                android:resource="@xml/file_paths" />
+        </provider>
+
+        <activity android:name=".activity.HouseManageActivity" />
+        <activity android:name=".activity.HouseEditActivity" />
+        <activity
+            android:name=".activity.HouseNameEditActivity"
+            android:windowSoftInputMode="adjustPan|stateAlwaysVisible" />
+        <activity android:name=".activity.HousePicManageActivity" />
+        <activity
+            android:name=".activity.RoomManageActivity"
+            android:launchMode="singleTask" />
+        <activity
+            android:name=".activity.RoomAddActivity"
+            android:windowSoftInputMode="adjustPan|stateAlwaysVisible" />
+        <activity android:name=".activity.DevicePicActivity" />
+
+        <activity
+            android:name=".activity.IntroductionActivity"
+            android:theme="@style/greyBackgroundTheme" />
+        <activity
+            android:name=".activity.MessageActivity"
+            android:theme="@style/greyBackgroundTheme" />
+        <activity
+            android:name=".activity.RemindSettingActivity"
+            android:theme="@style/greyBackgroundTheme" />
+        <activity
+            android:name=".activity.UpdateDetailActivity"
+            android:theme="@style/greyBackgroundTheme" />
+        <activity
+            android:name=".activity.SceneEditActivity"
+            android:theme="@style/greyBackgroundTheme" />
+        <activity
+            android:name=".activity.ScenePicActivity"
+            android:theme="@style/greyBackgroundTheme" />
+        <activity
+            android:name=".activity.DeviceListActivity"
+            android:theme="@style/greyBackgroundTheme" />
+        <activity
+            android:name=".activity.SettingActivity"
+            android:theme="@style/greyBackgroundTheme" />
+
+        <receiver
+            android:name=".receiver.JPushReceiver"
+            android:enabled="true"
+            android:exported="false">
+            <intent-filter>
+                <action android:name="cn.jpush.android.intent.REGISTRATION" />
+                <action android:name="cn.jpush.android.intent.MESSAGE_RECEIVED" />
+                <action android:name="cn.jpush.android.intent.NOTIFICATION_RECEIVED" />
+                <action android:name="cn.jpush.android.intent.NOTIFICATION_OPENED" />
+                <action android:name="cn.jpush.android.intent.NOTIFICATION_CLICK_ACTION" />
+                <action android:name="cn.jpush.android.intent.CONNECTION" />
+
+                <category android:name="com.auts.lcssv" />
+            </intent-filter>
+        </receiver>
+
+        <service
+            android:name=".service.CommonService"
+            android:enabled="true"
+            android:exported="false" />
+
+        <activity android:name=".activity.ProtocolActivity"></activity>
+    </application>
+
+</manifest>

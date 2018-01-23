@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:id="@+id/ll_parent"
+    android:orientation="vertical">
+
+    <include
+        android:id="@+id/head"
+        layout="@layout/include_common_header" />
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/rv_scene"
+        android:paddingRight="10dp"
+        android:paddingTop="10dp"
+        android:paddingLeft="15dp"
+        android:background="@drawable/scene_background"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+    </android.support.v7.widget.RecyclerView>
+
+</LinearLayout>

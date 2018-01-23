@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/ll_popup"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/shape_white_bottom_cornor"
+    android:orientation="vertical">
+
+    <ListView
+        android:id="@+id/lv_room"
+        android:layout_width="95dp"
+        android:layout_height="wrap_content"
+        android:divider="@null"
+        android:paddingBottom="5dp"
+        android:paddingTop="2dp"
+        android:scrollbars="none" />
+
+    <FrameLayout
+        android:id="@+id/fl_shadow"
+        android:layout_width="95dp"
+        android:layout_height="3dp"
+        android:paddingBottom="5dp"
+        android:paddingLeft="5dp"
+        android:paddingRight="5dp"
+        android:paddingTop="2dp" />
+
+</LinearLayout>

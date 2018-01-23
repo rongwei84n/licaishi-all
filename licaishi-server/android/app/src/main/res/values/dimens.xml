@@ -1,0 +1,50 @@
+<resources>
+    <!-- Default screen margins, per the Android Design guidelines. -->
+    <dimen name="activity_horizontal_margin">16dp</dimen>
+    <dimen name="activity_vertical_margin">16dp</dimen>
+    <dimen name="fab_margin">16dp</dimen>
+
+    <!--自定义编辑框中底部承载线距离顶部的默认高度-->
+    <dimen name="line_margin_top">8dp</dimen>
+
+    <dimen name="text_large">24sp</dimen>
+    <dimen name="text_middle">17sp</dimen>
+    <dimen name="text_normal">15sp</dimen>
+    <dimen name="text_small">12sp</dimen>
+
+    <dimen name="top_space">20dp</dimen>
+    <dimen name="left_space">20dp</dimen>
+
+    <!--下面十个数据为AddSpecificDeviceActivity界面专用，除非修改该界面布局，否则不要动。-->
+    <dimen name="ada_text_margin1">90dp</dimen>
+    <dimen name="ada_image_width1">200dp</dimen>
+    <dimen name="ada_image_height1">105dp</dimen>
+    <dimen name="ada_image_margin1">75dp</dimen>
+    <dimen name="ada_btn_margin1">95dp</dimen>
+
+    <dimen name="ada_text_margin2">45dp</dimen>
+    <dimen name="ada_image_width2">250dp</dimen>
+    <dimen name="ada_image_height2">240dp</dimen>
+    <dimen name="ada_image_margin2">45dp</dimen>
+    <dimen name="ada_btn_margin2">70dp</dimen>
+
+    <!--下面五个数据，是两个圆的动画时的数据，除非修改该界面布局，否则不要动。-->
+    <dimen name="canvas_width">240dp</dimen>
+    <dimen name="canvas_height">240dp</dimen>
+    <dimen name="bitmap_radius">40dp</dimen>
+    <dimen name="dashed_circle_radius">80dp</dimen>
+    <dimen name="ball_radius">8dp</dimen>
+
+    <!--下面五个数据，是三个圆的动画时的数据，除非修改该界面布局，否则不要动。-->
+    <dimen name="canvas_width_for_three">290dp</dimen>
+    <dimen name="canvas_height_for_three">290dp</dimen>
+    <dimen name="bitmap_radius_for_three">40dp</dimen>
+    <dimen name="dashed_circle_radius_for_three">105dp</dimen>
+    <dimen name="ball_radius_for_three">8dp</dimen>
+
+    <dimen name="text_top2">70dp</dimen>
+    <dimen name="image_top2">60dp</dimen>
+
+    <dimen name="text_top3">35dp</dimen>
+    <dimen name="image_top3">35dp</dimen>
+</resources>

@@ -1,0 +1,1238 @@
+<?xml version="1.0" encoding="utf-8"?>
+<lint>
+    <!-- AdapterViews cannot have children in XML -->
+    <!-- 确保Adapter有数据源 -->
+    <issue id="AdapterViewChildren" severity="warning" />
+
+    <!-- onClick method does not exist -->
+    <!-- 确保XML文件声明的OnClick的调用函数在代码中实际存在 -->
+    <issue id="OnClick" severity="error" />
+
+    <!-- Missing Permissions -->
+    <!-- 检查是否使用了未申请的权限 -->
+    <issue id="MissingPermission" severity="error" />
+
+    <!-- MissingSuperCall -->
+    <!-- 某些代码必须调用超类的方法 -->
+    <issue id="MissingSuperCall" severity="error" />
+
+    <!-- Hardcoded Package in Namespace -->
+    <!-- 命名空间把包名写死，如布局中用到了自定义View的自定义属性，命名空间应写成如下：
+       http://schemas.android.com/apk/res-auto -->
+    <issue id="ResAuto" severity="error" />
+
+    <!-- 'import android.R' statement -->
+    <!-- 导错R包 -->
+    <issue id="SuspiciousImport" severity="warning" />
+
+    <!-- Minimum SDK and target SDK attributes not defined -->
+    <!-- 没有指定Minimum SDK 和 target SDK -->
+    <issue id="UsesMinSdkAttributes" severity="warning" />
+
+    <!-- Potential AAPT crash -->
+    <!-- 打包工具存在崩溃风险：
+         定义一种设置了android:id来动态生成id的Style,会引起AAPT（AndroidAssetPackagingTool,资源打包工具）很多版本的崩溃。
+         为了解决这个问题，显式地用<item type="id" name="..."/>来声明id，不要用前面那种方法。
+         -->
+    <issue id="AaptCrash" severity="error" />
+
+    <!-- Incompatible Android Gradle Plugin -->
+    <!-- SDK的BuildToolsVersion和项目使用的GradleBuildToolsVersion不一致 -->
+    <issue id="GradlePluginVersion" severity="error" />
+
+    <!-- Incompatible Gradle Versions -->
+    <!-- 版本名和版本号必须是字符串或数字，不能是引用 -->
+    <issue id="IllegalResourceRef" severity="warning" />
+
+    <!-- Missing Leanback Launcher Intent Filter. -->
+    <!-- 该检查项用在AndroidTv上，可以忽略 -->
+    <issue id="MissingLeanbackLauncher" severity="ignore" />
+
+    <!-- Missing registered class -->
+    <!-- 写好的四大组件未在Manifest文件中注册 -->
+    <issue id="MissingRegistered" severity="error" />
+
+    <!-- Using mock location provider in production -->
+    <!-- 只允许在debug或测试版本使用以下权限：ACCESS_MOCK_LOCATION -->
+    <issue id="MockLocation" severity="error" />
+
+    <!-- Misspelled namespace declaration -->
+    <!-- 某些命名空间的缺失会导致错误 -->
+    <issue id="NamespaceTypo" severity="error" />
+
+    <!-- Incorrect Interpolation -->
+    <!-- Groovy语法相关的规则，可以忽略  -->
+    <issue id="NotInterpolated" severity="ignore" />
+
+    <!-- Using obsolete ProGuard configuration -->
+    <!-- 混淆配置中使用了过时的语法 -->
+    <issue id="Proguard" severity="error" />
+
+    <!-- RecyclerView Problems -->
+    <!-- 在RecyclerView中，使用getAdapterPosition()的方法获取position -->
+    <issue id="RecyclerView" severity="error" />
+
+    <!-- Incorrect reference types -->
+    <!-- 当您生成资源别名时，您指向的资源必须是与别名相同的类型 -->
+    <issue id="ReferenceType" severity="error" />
+
+    <!-- Cycle in resource definitions -->
+    <!-- 在资源定义中不应该有循环，因为这会导致运行时异常 -->
+    <issue id="ResourceCycle" severity="error" />
+
+    <!-- Resource with Wrong Prefix -->
+    <!-- 为Resource资源文件指定前缀名，以避免和依赖库同名的资源混淆 -->
+    <issue id="ResourceName" severity="ignore" />
+
+    <!-- ScrollViews can have only one child -->
+    <!-- ScrollViews 只能包含一个子View -->
+    <issue id="ScrollViewCount" severity="warning" />
+
+    <!-- String should be int -->
+    <!-- compileSdkVersion, minSdkVersion 和 targetSdkVersion，它们的值必须是int类型 -->
+    <issue id="StringShouldBeInt" severity="error" />
+
+    <!-- Reference to an unknown id -->
+    <!-- 同一份布局文件为控件添加了相同的id，或者控件初始化时指向了不存在的id -->
+    <issue id="UnknownId" severity="error" />
+
+    <!-- Resource file in the wrong res folder -->
+    <!-- 资源文件放在了错误的文件夹下 -->
+    <issue id="WrongFolder" severity="error" />
+
+    <!-- Missing commit() calls -->
+    <!-- FragmentTransaction中开启事务，却没有commmit -->
+    <issue id="CommitTransaction" severity="warning" />
+
+    <!-- Method considered overridden by Dalvik -->
+    <!-- Dalvik虚拟机相关，可以忽略 -->
+    <issue id="DalvikOverride" severity="ignore" />
+
+    <!-- Malformed Device Admin -->
+    <!-- 如果一个广播用到了Admin权限，必须增加Intent-filter如下：action android:name="android.app.action.DEVICE_ADMIN_ENABLED" -->
+    <issue id="DeviceAdmin" severity="warning" />
+
+    <!-- Duplicate ids within a single layout -->
+    <!-- 在布局文件中，每一个控件的id都必须是唯一的 -->
+    <issue id="DuplicateIds" severity="error" />
+
+    <!-- Inconsistencies in array element counts -->
+    <!-- 数组元素国际化问题，可以忽略 -->
+    <issue id="InconsistentArrays" severity="ignore" />
+
+    <!-- Nested scrolling widgets -->
+    <!-- 不要在可滚动的控件中再嵌套另一个可滚动控件 -->
+    <issue id="NestedScrolling" severity="warning" />
+
+    <!-- Should pass resolved color instead of resource id -->
+    <!-- 不要直接用数字定义一种颜色，而应该通过getResources().getColor(resource)的方式获取颜色值 -->
+    <issue id="ResourceAsColor" severity="error" />
+
+    <!-- Wrong Resource Type -->
+    <!-- Resource取值时传入的类型错误，比如Resources.getColor(R.string.name) -->
+    <issue id="ResourceType" severity="error" />
+
+    <!-- ScrollView size validation -->
+    <!-- ScrollView 的宽高最好不要用match_parent而是用wrap_content -->
+    <issue id="ScrollViewSize" severity="ignore" />
+
+    <!-- TextView should probably be an EditText instead -->
+    <!-- 如果到文字输入，采用EditText，而不是TextView -->
+    <issue id="TextViewEdits" severity="warning" />
+
+    <!-- WebViews in wrap_content parents -->
+    <!-- WebViews的父控制如果采用的是wrap_content，可能会出现显示不正确的问题 -->
+    <issue id="WebViewLayout" severity="error" />
+
+    <!-- Using Wrong AppCompat Method -->
+    <!-- 错误地使用AppCompat相关的方法，如getActionBar()最好用getSupportActionBar()代替 -->
+    <issue id="AppCompatMethod" severity="warning" />
+
+    <!-- Assertions -->
+    <!-- 使用了未测试过的断言，断言一般用在单元测试上 -->
+    <issue id="Assert" severity="warning" />
+
+    <!-- Ignoring results -->
+    <!-- 调用了有返回值的方法但却不接收返回值 -->
+    <issue id="CheckResult" severity="ignore" />
+
+    <!-- Missing commit() on SharedPreference editor -->
+    <!-- SharedPreference开启了事务，但没有提交（commit或apply） -->
+    <issue id="CommitPrefEdits" severity="warning" />
+
+    <!-- Mismatched Styleable/Custom View Name -->
+    <!-- 自定义View在styleable中定义的属性和在布局文件中使用的属性不一致 -->
+    <issue id="CustomViewStyleable" severity="warning" />
+
+    <!-- Likely cut & paste mistakes -->
+    <!-- 剪切&粘贴可能会错误：
+         这个Lint检查查找你剪切&粘贴时调用了findViewById但是却忘了更新R.id.field的情况。
+         有可能你的代码只是简单地（冗余地）重复查找字段，但是Lint不能分辨例如你是想要初始化上一页下一页
+         还是剪切&粘贴findViewById但是忘了更新第二个R.id.next的初始化的情况
+         -->
+    <issue id="CutPasteId" severity="warning" />
+
+    <!-- Implied default locale in case conversion -->
+    <!-- 使用大小写转换API时，没有指定本地语言 -->
+    <issue id="DefaultLocale" severity="warning" />
+
+    <!-- Duplicate ids across layouts combined with include tags -->
+    <!-- 资源id重复 -->
+    <issue id="DuplicateIncludedIds" severity="warning" />
+
+    <!-- Deprecated Gradle Construct -->
+    <!-- 两个不同的布局，可以定义相同id的控件，但如果是include另一个有相同id控件的布局，则会出现错误， -->
+    <issue id="GradleDeprecated" severity="error" />
+
+    <!-- Gradle Implicit Getter Call -->
+    <!-- Gradle让你可以在脚本中防止特殊的常量然后通过方法调用，所以你可以基于当前版本的控制修订号动态的计算例如你的版本号，
+     而不是硬编码数字版本号的字符串。当计算版本名时，可以通过例如getVersionName这样的方法很容易地调用。
+     但是，当你放置调用defaultConfig块中的方法时，你实际上是通过调用Groovy getter来获取版本名属性的。
+     因此，在命名你的方法的时候，不能与现有的隐式getter冲突。考虑使用prefix（计算）做为方法前缀，不要用get做为前缀。-->
+    <issue id="GradleGetter" severity="ignore" />
+
+    <!-- Inconsistent Layouts -->
+    <!-- 布局不一致：
+         定义在多个layout资源文件下的layout文件，应该包含相同的控件，如一个main_activity.xml在layout-large和layout-middle下同时存在，
+         那么里面的控件应该是一样的，否则在findViewById的时候失败，可能会引起运行时崩溃。
+         但也有可能是故意设成不一样的，例如一个为大平板用的layout额外添加了一些控件，这些控件在手机版本的布局中是不会出现的，
+         只要小心处理访问资源的代码就可以。这种情况下可以为这个多出来或缺失的控件，或整个布局，suppess(废弃)这个lint check.-->
+    <issue id="InconsistentLayout" severity="warning" />
+
+    <!-- Using inlined constants on older versions -->
+    <!-- 使用了过时的API常量 -->
+    <issue id="InlinedApi" severity="warning" />
+
+    <!-- Registered class is not instantiatable -->
+    <!-- 在manifest文件中注册的四大组件，必须是公开的类，而不能是私有的 -->
+    <issue id="Instantiatable" severity="error" />
+
+    <!-- Invalid ID declaration -->
+    <!-- 控件id的命名要符合基本的命名规范，这个IDE会检查，可以忽略 -->
+    <issue id="InvalidId" severity="ignore" />
+
+    <!-- Package not included in Android -->
+    <!-- 检查所有的libraries，是否使用了Android不支持的API，由于是第三方librarie，无法控制，可以忽略 -->
+    <issue id="InvalidPackage" severity="ignore" />
+
+    <!-- Invalid Resource Folder -->
+    <!-- 资源文件夹命名不正确，会导致打包时被忽略， -->
+    <issue id="InvalidResourceFolder" severity="error" />
+
+    <!-- Invalid name attribute for uses element. -->
+    <!-- uses元素无效的属性名称：
+         <automotiveApp>元素中的<uses>元素应该为name属性包含一个有效的值。有效值是media或notification-->
+    <issue id="InvalidUsesTagAttribute" severity="error" />
+
+    <!-- Custom views in libraries should use res-auto-namespace -->
+    <!-- 在布局中使用自定义View，如果要用到自定义属性，在根节点要加上以下命名空间：http://schemas.android.com/apk/res-auto -->
+    <issue id="LibraryCustomView" severity="error" />
+
+    <!-- Wrong locale name -->
+    <!-- 文件夹命名本地化相关,不太明白，可以忽略 -->
+    <issue id="LocaleFolder" severity="ignore" />
+
+    <!-- Manifest Resource References -->
+    <!-- 清单文件中的元素可以引用资源，但这些资源的配置必须相同 -->
+    <issue id="ManifestResource" severity="error" />
+
+    <!-- Missing intent-filter with action android.media.action.MEDIA_PLAY_FROM_SEARCH -->
+    <!-- 为了支持Android手机上的语音搜索，你也应该注册以下意图过滤器：android.media.action.media_play_from_search -->
+    <issue id="MissingIntentFilterForMediaSearch" severity="error" />
+
+    <!-- Missing Leanback Support. -->
+    <!-- Android TV相关 -->
+    <issue id="MissingLeanbackSupport" severity="ignore" />
+
+    <!-- Missing intent-filter with action android.media.browse.MediaBrowserService. -->
+    <!-- Android Auto(车载系统)相关，可以忽略 -->
+    <issue id="MissingMediaBrowserServiceIntentFilter" severity="ignore" />
+
+    <!-- Missing onPlayFromSearch. -->
+    <!-- Android Auto(车载系统)相关，可以忽略 -->
+    <issue id="MissingOnPlayFromSearch" severity="ignore" />
+
+    <!-- Missing Android XML namespace -->
+    <!-- xml文件命名空间缺失 -->
+    <issue id="MissingPrefix" severity="error" />
+
+    <!-- Multiple <uses-sdk> elements in the manifest -->
+    <!-- 像compileSdkVersion、targetSdkVersion这些定义不能重复定义 -->
+    <issue id="MultipleUsesSdk" severity="error" />
+
+    <!-- Calling new_icon methods on older versions -->
+    <!-- 检查是否调用了低于minSdkVersion所支持的API -->
+    <issue id="NewApi" severity="error" />
+
+    <!-- RelativeLayout Invalid Constraints -->
+    <!-- 相对布局中的一个控件，必须指定其和另一个控件的相对位置，如位于父控件中央，或者位于另一个控件下方 -->
+    <issue id="NotSibling" severity="error" />
+
+    <!-- Target SDK attribute is not targeting latest version -->
+    <!-- 检查targetSdkVersion是否用到SDK中最新的，可以忽略 -->
+    <issue id="OldTargetApi" severity="ignore" />
+
+    <!-- Method conflicts with new_icon inherited method -->
+    <!-- 自定义方法覆盖了Android提供的方法 -->
+    <issue id="Override" severity="error" />
+
+    <!-- Not overriding abstract methods on older platforms -->
+    <!-- 如果您的代码是针对旧版本的平台，某些方法仍然是抽象的，代码会崩溃。你必须重写所有抽象方法 -->
+    <issue id="OverrideAbstract" severity="error" />
+
+    <!-- Incorrect property escapes -->
+    <!-- 不同系统的目录分隔符是不一样的，比如在Windows系统上，需要加转义，如 \\android\\as\\gradle -->
+    <issue id="PropertyEscape" severity="error" />
+
+    <!-- Outside Range -->
+    <!-- 在特定数值范围内需要一些参数；此检查确保传递的参数在范围内。对于数组，字符串和集合这是指的大小或长度。 -->
+    <issue id="Range" severity="error" />
+
+    <!-- Class is not registered in the manifest -->
+    <!-- 用到的四大组件未在清单文件注册 -->
+    <issue id="Registered" severity="warning" />
+
+    <!-- Hardcoded reference to /sdcard -->
+    <!-- SD卡路径应该用系统API获取，而不是采用硬编码 -->
+    <issue id="SdCardPath" severity="error" />
+
+    <!-- Wrong system service casts -->
+    <!-- 当你调用context.getsystemservice()，往往需要做类型转换，此检查用于确保转换的类型是正确的 -->
+    <issue id="ServiceCast" severity="error" />
+
+    <!-- Short or Frequent Alarm -->
+    <!-- AlarmManager的重复间隔至少在60秒，如果是短时间的重复任务，建议用Handler -->
+    <issue id="ShortAlarm" severity="warning" />
+
+    <!-- Toast created but not shown -->
+    <!-- 创造了一个Toast但没有显示出来 -->
+    <issue id="ShowToast" severity="warning" />
+
+    <!-- Implied locale in date format -->
+    <!-- 使用日期格式化时，要么传递一个显式的语言环境区域，如locale,使用SinpleDateFormat的构造方法,
+         或者使用一个实例化方法，如getDateInstance(),getDateTimeInstance(),getTimeInstance(),
+         或者你知道你在做什么的话，你可以suppress这个error.-->
+    <issue id="SimpleDateFormat" severity="warning" />
+
+    <!-- Suspicious 0dp dimension -->
+    <!-- 控件使用了0db，但没有加权重（weight）,将导致控件不可见 -->
+    <issue id="Suspicious0dp" severity="error" />
+
+    <!-- Permission names are not unique -->
+    <!-- 权限的名称必须是唯一的 -->
+    <issue id="UniquePermission" severity="error" />
+
+    <!-- Unsupported TV Hardware Feature -->
+    <!-- Android TV 相关，可以忽略 -->
+    <issue id="UnsupportedTvHardware" severity="ignore" />
+
+    <!-- Attribute unused on older versions -->
+    <!-- 检查是否使用了低于minSdkVersion支持的属性  -->
+    <issue id="UnusedAttribute" severity="warning" />
+
+    <!-- Using 3-letter Codes -->
+    <!-- 不太明白，检查到有warning再看看 -->
+    <issue id="UseAlpha2" severity="warning" />
+
+    <!-- Fragment not instantiatable -->
+    <!-- 每一个Fragment都必须有空的构造函数，否则进入后台，横竖屏切换，会让fragment重新创建，如果没有空的构造就会出运行异常。-->
+    <issue id="ValidFragment" severity="error" />
+
+    <!-- Using wrong draw/layout method -->
+    <!-- 自定义View如果需要调用子View的measure()的方法，不能写成onMeasure。
+        另外onDraw, onLayout也是同理 -->
+    <issue id="WrongCall" severity="error" />
+
+    <!-- Wrong manifest parent -->
+    <!-- 清单文件标签闭合不正确 -->
+    <issue id="WrongManifestParent" severity="error" />
+
+    <!-- Suspicious Language/Region Combination -->
+    <!-- 编码问题，因为项目已经统一了utf-8，该项检查不会有问题 -->
+    <issue id="WrongRegion" severity="warning" />
+
+    <!-- Wrong Thread -->
+    <!-- 线程同步问题，比如子线程不能更新UI -->
+    <issue id="WrongThread" severity="error" />
+
+    <!-- Menu namespace -->
+    <!-- 菜单的命名空间：
+          当使用AppCompat库时，菜单资源应该考虑使用app:namespace下的showAsAction,而不是android:namespace.
+          同样的，不使用AppCompat库时，应该使用android:namespace属性。-->
+    <issue id="AppCompatResource" severity="error" />
+
+    <!-- App Links Auto Verification Failure -->
+    <!-- 应用程序自动链接失效：
+         默认不可用，使用\-\-enable AppLinksAutoVerifyError启用。
+         确保你的APP链接正确地设置了而且能用网站关联。-->
+    <issue id="AppLinksAutoVerifyerror" severity="error" />
+
+    <!-- Activity registered more than once -->
+    <!-- 清单文件中重复注册Activity -->
+    <issue id="DuplicateActivity" severity="error" />
+
+    <!-- Feature declared more than once -->
+    <!-- 一个给定的功能应该只在清单文件中定义一次 -->
+    <issue id="DuplicateUsesFeature" severity="warning" />
+
+    <!-- Valid Full Backup Content File -->
+    <!-- 有效的全备份文件内容：
+         确保在manifest中配置了android:fullBackupContent属性的一个<full-backup-content>文件是有效的。-->
+    <issue id="FullBackupContent" severity="error" />
+
+    <!-- Layout Inflation without a Parent -->
+    <!-- inflat layout时,如果第二个参数传null，那么layout的根部局的所有属性都被忽略。
+        项目亲测，比如ListView的item通过inflat进来，如果第二个参数传parent，会报错，故忽略-->
+    <issue id="InflateParams" severity="ignore" />
+
+    <!-- Mismatched Log Tags -->
+    <!-- 如果用原生的Log打日志时，必须加上Tag -->
+    <issue id="LogTagMismatch" severity="error" />
+
+    <!-- Too Long Log Tags -->
+    <!-- Log Tag太长，超过23个字符 -->
+    <issue id="LongLogTag" severity="error" />
+
+    <!-- Incorrect order of elements in manifest -->
+    <!-- 清单文件中引入了不正确的标签 -->
+    <issue id="ManifestOrder" severity="warning" />
+
+    <!-- Typos in manifest tags -->
+    <!-- 检查清单文件中拼写错误的标签 -->
+    <issue id="ManifestTypo" severity="error" />
+
+    <!-- Fragments should specify an id or tag -->
+    <!-- 如果是动态的方式添加fragment，最好为每个fragment指定id -->
+    <issue id="MissingId" severity="warning" />
+
+    <!-- TV Missing Banner -->
+    <!-- Android TV相关，可以忽略 -->
+    <issue id="MissingTvBanner" severity="ignore" />
+
+    <!-- Whitespace in NFC tech lists -->
+    <!-- NFC技术列表中的空格：
+         在<tech-list>中，空格可以包围<tech>元素，但是<tech>不能包含空格。这是因为在tech list中读取的代码当前是非常严格的，
+         并且把空格做为名字的一部分。换句话说，使用<tech>name</tech>,而不是<tech> name </tech>。（注意，第二个tech标签中，
+         name前后有空格，第一个则没有。）-->
+    <issue id="NfcTechWhitespace" severity="error" />
+
+    <!-- Using system app permission -->
+    <!-- 试图使用受保护的系统权限 -->
+    <issue id="ProtectedPermissions" severity="error" />
+
+    <!-- Using STRING instead of TEXT -->
+    <!-- SQLLite数据库，如果是字符类型，应该使用TEXT -->
+    <issue id="SQLiteString" severity="warning" />
+
+    <!-- Unreachable state in a <selector> -->
+    <!-- Selector应该都有一个代表默认状态的选择项 -->
+    <issue id="StateListReachable" severity="warning" />
+
+    <!-- 引用了一个并不在布局中的id，比如第一个Activity的某个控件，findViewById到另一个Activity对应的布局 -->
+    <issue id="UnknownIdInLayout" severity="error" />
+
+    <!-- SMS phone number missing country code -->
+    <!-- SMS发短信国际化相关，可以忽略 -->
+    <issue id="UnlocalizedSms" severity="ignore" />
+
+    <!-- Invalid Restrictions Descriptor -->
+    <!-- 无效的描述符号限制：
+         确保应用限制xml文件的格式。-->
+    <issue id="ValidRestrictions" severity="error" />
+
+    <!-- Vector Image Generation -->
+    <!-- 矢量图像生成：
+         矢量图标需要API21.但是当使用AndroidGradle插件1.4及以上版本的话，放在drawable文件夹下的矢量图会被自动
+         移动到drawable-*dpi-v21下，并且为每个drawable-*dpi生成位图，以达到向前兼容的目的（minSdkVersion小于21的情况）。
+         但是，矢量图生成是有限制的，并且这个Lint检查没有完全支持的标志元素和属性，你应该手动检查为老版本生成的输出是否是可接受的。-->
+    <issue id="VectorRaster" severity="error" />
+
+    <!-- Obsolete Gradle Dependency -->
+    <!-- 检查引用的第三方库是否有新版本，考虑到很多第三方库并不一定要用最新版本，该检查可以忽略 -->
+    <issue id="GradleDependency" severity="ignore" />
+
+    <!-- Gradle Dynamic Version -->
+    <!-- 依赖第三方库时，推荐引用release或+的版本，这样每次编译总会使用最新的版本，但该检查可以忽略 -->
+    <issue id="GradleDynamicVersion" severity="ignore" />
+
+    <!-- Gradle IDE Support Issues -->
+    <!-- 检查Gradle文件是否出现了非法输入，导致Gradle结构被破坏，比如缺少闭合标签等 -->
+    <issue id="GradleIdeerror" severity="error" />
+
+    <!-- Value overridden by Gradle build script -->
+    <!-- Gralde覆盖了清单文件中的配置，比如minSdkVersion，如果两边都配置了，会以Gradle的配置为准 -->
+    <issue id="GradleOverrides" severity="warning" />
+
+    <!-- Gradle Path Issues -->
+    <!-- Gradle是跨平台的，所以文件路径应使用UNIX风格的分隔符（向前斜杠），而不是windows的分隔符（反斜杠） -->
+    <issue id="GradlePath" severity="warning" />
+
+    <!-- GridLayout validation -->
+    <!-- GridLayout验证：
+         有时候无意间会声明一个layout_row或layout_column大于声明的GridLayout的行数或列数。
+         即声明的行号或列号值，大于GridLayout的行数或列数。-->
+    <issue id="GridLayout" severity="error" />
+
+    <!-- Using mm or in dimensions -->
+    <!-- 避免使用毫米（mm）或英寸（inches）之类的单位，而应使用db,sp -->
+    <issue id="InOrMmUsage" severity="warning" />
+
+    <!-- Newer Library Versions Available -->
+    <!-- 检查依赖库是否有最新版本，可以忽略 -->
+    <issue id="NewerVersionAvailable" severity="ignore" />
+
+    <!-- Missing layout_width or layout_height attributes -->
+    <!-- 控件缺失必要的layout_width或layout_height属性 -->
+    <issue id="RequiredSize" severity="error" />
+
+    <!-- Wrong case for view tag -->
+    <!-- 检查不存在的View标签，如<fragment> -->
+    <issue id="WrongCase" severity="error" />
+
+    <!-- Extraneous text in resource files -->
+    <!-- xml文件中不应该出现文本，如果用到文本，应该引用string.xml中的文本 -->
+    <issue id="ExtraText" severity="error" />
+
+    <!-- Inner classes should use $ rather than . -->
+    <!-- 当你在清单文件中引用内部类时，应该使用$作为分隔符，比如Outer$Inner -->
+    <issue id="InnerclassSeparator" severity="warning" />
+
+    <!-- @SuppressLint on invalid element -->
+    <!-- 检查是否有不合规范的注解 -->
+    <issue id="LocalSuppress" severity="error" />
+
+    <!-- Default Parcel Class Loader -->
+    <!-- 类加载器相关，可以忽略 -->
+    <issue id="ParcelClassLoader" severity="ignore" />
+
+    <!-- Missing Parcelable CREATOR field -->
+    <!-- 某个类实现Parceable接口，必须定义CREATOR字段 -->
+    <issue id="ParcelCreator" severity="error" />
+
+    <!-- Permission Implies Unsupported Hardware -->
+    <!-- Android Tv 相关，可以忽略 -->
+    <issue id="PermissionImpliesUnsupportedHardware" severity="ignore" />
+
+    <!-- Using private resources -->
+    <!-- 私有资源应该只放在自己的module下 -->
+    <issue id="PrivateResource" severity="warning" />
+
+    <!-- Proguard.cfg file contains generic Android rules -->
+    <!-- Android SDK有工具可以生成混淆配置，但一般不用，可以忽略 -->
+    <issue id="ProguardSplit" severity="ignore" />
+
+    <!-- Dangerous Flag Constant Declaration -->
+    <!-- 当需要生成连续的整型常量时，推荐使用左移的运算方式得到新常量，
+        如1 << 2，以确保常量的唯一性。个人感觉没必要，可以忽略 -->
+    <issue id="ShiftFlags" severity="ignore" />
+
+    <!-- Using dp instead of sp for text sizes -->
+    <!-- TextSize的单位应该使用sp，而不是dp -->
+    <issue id="SpUsage" severity="ignore" />
+
+    <!-- Missing @IntDef in Switch -->
+    <!-- Switch分支语句，必须包括default分支 -->
+    <issue id="SwitchIntDef" severity="warning" />
+
+    <!-- Overlapping Enumeration Constants -->
+    <!-- 定义了重复的常量 -->
+    <issue id="UniqueConstants" severity="error" />
+
+    <!-- Accidental Octal -->
+    <!-- 以0开头的数字将会被定义成8进制，所以非8进制数字不要以0开头 -->
+    <issue id="AccidentalOctal" severity="error" />
+
+    <!-- Using deprecated resources -->
+    <!-- 使用了过时的控件属性，如singleline是过时的,应该用lines=1代替 -->
+    <issue id="Deprecated" severity="error" />
+
+    <!-- Mangled file line endings -->
+    <!-- Windows下的换行总是以\r\n作为结尾，该检查确保\r\n不会用在其它地方 -->
+    <issue id="MangledCRLF" severity="error" />
+
+    <!-- Missing application name/version -->
+    <!-- 没有为app指定 version_name和version_code -->
+    <issue id="MissingVersion" severity="warning" />
+
+    <!-- Missing explicit orientation -->
+    <!-- LinearLayout控件缺少Orientation属性将会导致错误 -->
+    <issue id="Orientation" severity="error" />
+
+    <!-- Using 'px' dimension -->
+    <!-- 如果使用px，不同分辨率下的屏幕会出现不一致的效果 -->
+    <issue id="PxUsage" severity="warning" />
+
+    <!-- Invalid format string -->
+    <!-- 无效的格式化字符串。-->
+    <issue id="StringFormatInvalid" severity="error" />
+
+    <!-- String.format string doesn't match the XML format string -->
+    <!-- 这个Lint检查确保以下几点:
+         (1)如果有多个关于格式化字符串的译本,那么所有译本使用相同类型相同的参数编号
+         (2)在Java中格式化字符串的用法与格式字符串是一致的,也就是说,传递给String.format的参数类型要与那些格式化字符串一致。-->
+    <issue id="StringFormatMatches" severity="error" />
+
+    <!-- Missing quantity translation -->
+    <!-- 缺失量词翻译。-->
+    <issue id="MissingQuantity" severity="error" />
+
+    <!-- Incomplete translation -->
+    <!-- 翻译不完全：如果应用有多个区域，那么在任何一种语言下声明的字符串，都应该在其他语言中也被翻译过来。-->
+    <issue id="MissingTranslation" severity="error" />
+
+    <!-- Spelling error -->
+    <!-- 拼写错误-->
+    <issue id="Typos" severity="warning" />
+
+    <!-- Extra translation -->
+    <!-- 额外的翻译：如果一个字符串出现在一个特定的语言翻译文件中，但是默认语言环境中没有对应的字符串，那么这个字符串可能从未被使用过。
+         如果你的应用计划只在一个地区运行，从技术上是可行的，但是提供一个可靠的备选方案依然是个不错的主意。
+         注意，如果字符串在没有提供翻译的语言环境中查找，那么这些字符串可能导致崩溃，因此清理它们非常重要。-->
+    <issue id="ExtraTranslation" severity="error" />
+
+    <!-- Implied Quantities -->
+    <!-- 潜在的量词：复数字符串应该包含 a %s 或 %d 这样格式化的内容。像在英国当地，一个数量只能被应用在一个单个值中，例如1，但是并不是哪里都适用的。
+         例如，在斯洛文尼亚，一个数量将被用于1，101，201，301等。同样的，有一些本地化的东西，多个值匹配0和两个量词。-->
+    <issue id="ImpliedQuantity" severity="error" />
+
+    <!-- Potential Plurals -->
+    <!-- 可能的复数：当你翻译了一个包含量词并且字符串部分可能需要做语法上改变的信息的时候，这个Lint检查国际化中可能出现的错误。-->
+    <issue id="PluralsCandidate" severity="warning" />
+
+    <!-- Formatting argument types incomplete or inconsistent -->
+    <!-- 格式化参数类型不完整或不一致：当一个格式化字符串使用参数时，在所有的翻译中它通常需要引用相同的参数。
+         这并非个例，所以这个问题默认是一个warning而不是一个error。但是，当一门语言没有被正确翻译或更新时，它通常都会发生。-->
+    <issue id="StringFormatCount" severity="warning" />
+
+    <!-- Unused quantity translations -->
+    <!-- 未使用的量词翻译：Android定义了一些量词，如0，1，few和many。但是很多语言并没有在语法上对这些量词进行区分。
+         这个lint检查查看不同翻译下的量词，并且标记没有使用到的量词。-->
+    <issue id="UnusedQuantity" severity="warning" />
+
+    <!-- addJavascriptInterface Called -->
+    <!-- 调用了addJavascriptInterface：在API17以下构建应用时，WebView.addJavascriptInterface在目标web页面上使用JavaScript时，因为有能力
+         通过反射来访问注解的公共字段，用非预期的方式操控主机应用，因此存在风险。-->
+    <issue id="AddJavascriptInterface" severity="warning" />
+
+    <!-- Cipher.getInstance with ECB -->
+    <!-- Cipher.getInstance和ECB共同使用：Cipher.getInstance不应该和ECB一起做为密码模式或不设密码模式被调用，因为安卓默认的模式是ECB，
+         这是不安全的。-->
+    <issue id="GetInstance" severity="ignore" />
+
+    <!-- Using a fixed seed with SecureRandom -->
+    <!-- 与SecureRandom使用了一个固定的种子数：
+         指定一个固定的种子将会导致实例返回一个可预测的数字序列。这可能对测试有用，但不适用于安全使用。-->
+    <issue id="SecureRandom" severity="warning" />
+
+    <!-- Weak RNG -->
+    <!-- 弱随机序列生成器（RandomNumberGeneration）：在安卓4.3及以下，伪随机序列生成器（PseudoRandomNumberGeneration）初始化不当，
+         可能会导致密钥生成，签名，加密，和随机数生成，没有接收到加密强值。
+         如果你的应用依赖于密码安全随机数生成，你应该使用https://android-developers.blogspot.com/2013/08/some-securerandom-thoughts.htm 描述的方案。
+         这个检查规则是很有用的，它不准确监测是否需要密码安全RNG，或者解决方案是否已经应用。读了博客条目并在必要的时候更新代码之后，可以禁用
+    这个lint问题。-->
+    <issue id="TrulyRandom" severity="ignore" />
+
+    <!-- PreferenceActivity should not be exported -->
+    <!-- 首选项设置页不能设置为exported:
+         Fragment注入给了任何能向你的PreferenceActivity发送一个Intent的人在你的进程里加载任意fragment,携带任意参数的能力。-->
+    <issue id="ExportedPreferenceActivity" severity="warning" />
+
+    <!-- Missing @JavascriptInterface on methods -->
+    <!-- 方法缺失@JavascriptInterface注解：
+         API17以上，表明一个方法是JavaScript方法时，必须对方法使用@JavascriptInterface注解。-->
+    <issue id="JavascriptInterface" severity="error" />
+
+    <!-- Potential Multiple Certificate Exploit -->
+    <!-- 潜在多重证书开发：对应用程序签名的不正确验证可能导致恶意软件的出现。应用程序将自己提交给PlayStore，它的真实证书和假证书都是假的。
+         由于另一个应用程序只检查假证书和忽略其余的证书,恶意程序将获得它不应该拥有的功能或信息的访问权。
+         请确保验证所返回的所有签名方法。-->
+    <issue id="PackageManagerGetSignatures" severity="Information" />
+
+    <!-- Packaged private key -->
+    <!-- 包含私钥：
+         不要在app中包含私钥文件-->
+    <issue id="PackagedPrivateKey" severity="error" />
+
+    <!-- Content provider shares everything -->
+    <!-- ContentProvider什么东西都分享：
+         <grant-uri-permission> 元素允许分享特定的路径。这个检查器只检查路径URL中的"/"，这可能不是你想要的，应该限制对子集的访问。-->
+    <issue id="GrantAllUris" severity="warning" />
+
+    <!-- Insecure HostnameVerifier -->
+    <!-- 不安全的主机名验证器：这个检查查找使用HostnameVerifier实现的验证方法总是返回true(因此信任任何主机名)，这会导致结果
+         由于tls/ssl中的任意主机名而导致的不安全网络通信由同行提供的证书。
+         这个检查跟具体业务有关，暂时可以忽略-->
+    <issue id="AllowAllHostnameVerifier" severity="ignore" />
+
+    <!-- Insecure HostnameVerifier -->
+    <!-- 不安全的主机名验证器：这个检查查找实现HostnameVerifier的验证方法总是返回true(因此信任任何主机名)，这会导致结果
+         由于tls/ssl中的任意主机名而导致的不安全网络通信由同行提供的证书。
+          SSL校验相关，暂时忽略 -->
+    <issue id="BadHostnameVerifier" severity="ignore" />
+
+    <!-- Code contains easter egg -->
+    <!-- 默认关闭，添加\-\-enable EasterEgg开启。
+         代码包含复活节彩蛋：复活节彩蛋是潜在用户或开发者故意隐藏在代码里的，这个检查查找看起来可能藏有彩蛋的代码。。-->
+    <issue id="EasterEgg" severity="warning" />
+
+    <!-- Insecure call to SSLCertificateSocketFactory.createSocket() -->
+    <!-- 不安全地调用SSLCertificateSocketFactory.createSocket()：
+         当InetAddress做为第一个参数的SSLCertificatesSocketFactoty.createSocket()被调用时
+         是不执行TLS/SSL主机名验证的，这将因为信任任何TLS/SSL证书中的主机而导致不安全的网络流量。
+         因为这个原因，开发者必须确保InetAddress能明确通过其他方式的验证，如调用SSLCertificateSocketFactory.getDefaultHostnameVerifier()
+         来取得HostnameVerifier，调用HostnameVerifier.verify().-->
+    <issue id="SSLCertificateSocketFactoryCreateSocket" severity="warning" />
+
+    <!-- Call to SSLCertificateSocketFactory.getInsecure() -->
+    <!-- 调用SSLCertificateSocketFactory.getInsecure()：
+         SSLCertificateSocketFactory.getInsecure()方法返回一个禁用TLS / SSL安全检查的SSLSocketFactory,
+         这可能会导致不安全的网络流量造成的信任任意TLS / SSL证书了。
+         除非需要特殊情况，例如调试，否则应该避免这种方法,而应该使用SSLCertificateSocketFactory.getDefault()。-->
+    <issue id="SSLCertificateSocketFactoryGetInsecure" severity="warning" />
+
+    <!-- Using setJavaScriptEnabled -->
+    <!-- WebView启用JavaScript可能会带来一些风险，但这是不必要的担心，可以忽略 -->
+    <issue id="SetJavaScriptEnabled" severity="ignore" />
+
+    <!-- File.setReadable() used to make file world-readable -->
+    <!-- File.setReadable()经常设为全局可读:
+         设置文件为world_writable是非常危险的，并且对应用造成安全隐患。因此，千万不要这样做，
+         而应该使用制定好的交互方案，如ContentProvider，BroadcastReceiver和Service-->
+    <issue id="SetWorldReadable" severity="warning" />
+
+    <!-- File.setWritable() used to make file world-writable -->
+    <!-- File.setWritable()经常设为文件全局可写：
+         设置文件为world_writable是非常危险的，并且对应用造成安全隐患。因此，千万不要这样做，
+         而应该使用制定好的交互方案，如ContentProvider，BroadcastReceiver和Service-->
+    <issue id="SetWorldWritable" severity="warning" />
+
+    <!-- Insecure TLS/SSL trust manager -->
+    <!-- 不安全的TLS/SSL信任管理器，比如自定义了空实现的TrustManager。跟据具体业务，该项暂时忽略 -->
+    <issue id="TrustAllX509TrustManager" severity="ignore" />
+
+    <!-- Unprotected SMS BroadcastReceiver -->
+    <!-- 未保护的SMS BroadcastReceiver:
+         为SMS_DELIVER或SMS_RECEIVED声明了intent-filter的广播接收器，必须uebao调用者有BROADCAST_SMS权限，否则可能会受到恶意攻击。-->
+    <issue id="UnprotectedSMSBroadcastReceiver" severity="warning" />
+
+    <!-- Unsafe Protected BroadcastReceiver -->
+    <!-- 未安全地保护广播接收器:
+         为一个受保护的广播行为声明了intent-filter的BroadcastReceiver必须检查接收器intent的action是否与期望的值相同，
+         否则可能会受到恶意攻击。-->
+    <issue id="UnsafeProtectedBroadcastReceiver" severity="warning" />
+
+    <!-- Using the result of check permission calls -->
+    <!-- 使用检查权限调用的结果：
+         一般情况下，可能想要使用检查权限的回调结果，这些方法返回是否授权信息，未授权时也不会抛异常。
+         和返回值无关的代码应该调用强制方法来替换，例如，调用Contet.enforceCallingPermission()要比调用
+          Context.checkCallingPermission()方法好。-->
+    <issue id="UseCheckPermission" severity="warning" />
+
+    <!-- Using HTTP instead of HTTPS -->
+    <!-- 使用Http替代了Https:
+         GradleWrapper允许Http和Https,但https更加安全。AS中一些老项目用的是http，但是现在默认并且推荐老项目使用https-->
+    <issue id="UsingHttp" severity="ignore" />
+
+    <!-- Incorrect constant -->
+    <!-- 不正确的常数：
+         一个方法中的参数只允许一组特定的常量时，要确保调用时遵循这些规则。-->
+    <issue id="WrongConstant" severity="error" />
+
+    <!-- Content provider does not require permission -->
+    <!-- content provider默认是对外的并且系统上任何应用都潜在地可能会读写它。如果这个content provider访问了敏感数据，它应该通过
+         在mainfest中指定export=false或一个可以授权给其他应用的权限来保护。-->
+    <issue id="ExportedContentProvider" severity="warning" />
+
+    <!-- Receiver does not require permission -->
+    <!-- Receiver不需要许可：
+         对外Receiver(指定了exported=true或包含一个intent-filter且没有指定exported=false)应该定义一个实体必须启动或绑定的权限，
+         没有这个权限时，任何应用都不能使用它。-->
+    <issue id="ExportedReceiver" severity="warning" />
+
+    <!-- Exported service does not require permission -->
+    <!-- 导出服务不需要许可：
+         对外Service(指定了exported=true或包含一个intent-filter且没有指定exported=false)应该定义一个实体必须启动或绑定的权限，
+         没有这个权限时任何应用都不能使用它。-->
+    <issue id="ExportedService" severity="warning" />
+
+    <!-- Hardcoded value of android -->
+    <!-- android硬编码值：
+         在manifest中硬编码了android:debuggable属性。最好不要设定这个属性。-->
+    <issue id="HardcodedDebugMode" severity="error" />
+
+    <!-- signatureOrSystem permissions declared -->
+    <!-- signatureOrSystem权限声明：
+         对大部分应用来说，签名保护级别就够了，不管程序安装在哪儿，都可以正常工作。
+         signatureOrSystem 这个级别用于一些特定情况，当多个供应商构建在在同一个系统镜像上需要共享同一指纹，
+         因为他们是一起构建的。-->
+    <issue id="SignatureOrSystemPermissions" severity="warning" />
+
+    <!-- load used to dynamically load code -->
+    <!-- 加载使用了动态加载代码：
+         从应用库或安卓平台内置库目录之外的位置动态加载代码是危险的。
+         如果可以的话，应用应该使用loadLibrary-->
+    <issue id="UnsafeDynamicallyLoadedCode" severity="warning" />
+
+    <!-- Native code outside library directory -->
+    <!-- 本地代码在库目录之外：
+         本地代码应该只放在程序的库目录下，而不是其他位置如res或assets下，可以保证能够程序安装后代码不会被篡改。
+         开发人员应利用开发环境的特性将应用本地库防止到编译的APKs的lib目录中。如果可以的话，应避免将非共享库可执行程序嵌入到应用程序中。-->
+    <issue id="UnsafeNativeCodeLocation" severity="warning" />
+
+    <!-- openFileOutput() or similar call passing MODE_WORLD_READABLE -->
+    <!-- 打开文件输出或类似操作时调用传递时使用了MODE_WORLD_READABLE:
+         当写MODE_WORLD_WRITEABLE readable files时，应小心检查,确保不会泄漏给其他应用私有数据。-->
+    <issue id="WorldReadableFiles" severity="warning" />
+
+    <!-- openFileOutput() or similar call passing MODE_WORLD_WRITEABLE -->
+    <!-- 打开文件输出或类似操作时调用传递时使用了MODE_WORLD_WRITEABLE:
+         当写MODE_WORLD_WRITEABLE writeable files时，应小心检查不要包含私有数据，并且这些数据被恶意程序修改时不会蒙骗或危害你自己的应用-->
+    <issue id="WorldWriteableFiles" severity="warning" />
+
+    <!-- AllowBackup/FullBackupContent Problems -->
+    <!-- AllowBackup/FullBackupContent 问题：
+         allowBackup属性，默认情况下为true。此时用户可以通过adb进行数据备份和恢复。这样可能会引起安全问题。
+         adb数据备份允许启用了USB调试的用户从设备上复制应用程序数据，一旦备份，所有数据都可以有用户读取。
+         adb恢复语序从用户指定的源创建应用程序。恢复之后，应用程序不应该假定是应用程序本身创建了数据、文件权限和目录权限。
+         设置allowBackup="false"使应用程序不可备份和回复。要修复这个警告，要决定应用是否需要支持备份和恢复，并设置
+         android:allowBackup=(true|false).如果没有设置为false,并且target在23及以上，Lint也会警告是否设置
+         android:fullBackupContent来配置自动备份。-->
+    <issue id="AllowBackup" severity="warning" />
+
+    <!-- Memory allocations within drawing code -->
+    <!-- 绘制代码内分配内存：
+         在draw或layout操作期间，尽量避免分配内存，因为将会被频繁调用，所以会引起频繁的垃圾回收，而垃圾回收引起暂停，UI将不够平滑。
+         通常的处理方式是预先分配内存，然后重用它们。一些会分配内存的方法，如Bitmap.create(),也应该使用同样的方式处理。-->
+    <issue id="DrawAllocation" severity="warning" />
+
+    <!-- Incorrect WakeLock usage -->
+    <!-- WakeLock用法不正确:
+         没有适宜地释放wakelock,会让安卓设备保持在高功率模式，这将会减少电池寿命。有几个原因，如在onDestroy()中释放wakelocak
+         而不是在onPause()中释放，在acquired()没有在全部可能的代码区域中调用release()等等。
+         如果你仅仅是为了屏幕常亮使用这个lock,你真的应该使用FLAG_KEEP_SCREEN_ON来替代。用户在不同应用之间切换时，平台能正确管理这个
+         标志，并且不需要额外的权限。-->
+    <issue id="Wakelock" severity="warning" />
+
+    <!-- Missing recycle() calls -->
+    <!-- 缺失recycle()的调用：
+         一些资源类对象，如TypedArrays,VelocityTrackers等，使用之后应该回收掉（通过recycle()方法调用）。-->
+    <issue id="Recycle" severity="warning" />
+
+    <!-- Obsolete layout params -->
+    <!-- 无用的layout属性：
+         通常更改layout类型或者移动view到另一个layout中，但是并没有更改对应的layout属性。
+         这些属性编译的时候不会起作用，而且会误导其他读者，所以最好就是去掉。-->
+    <issue id="ObsoleteLayoutParam" severity="warning" />
+
+    <!-- Node can be replaced by a TextView with compound drawables -->
+    <!-- 节点可以用一个带有复合图片的TextView替代：
+         包含一个ImageView和一个TextView的LinearLayout可以用单个的TextView来替换，TextView使用drawableTop/drawableBottom/
+         drawableLeft/drawableRight等属性。如果ImageView和TextView之间有设置margin间距，可以在刚才的TextView设置
+         drawablePadding属性来解决。-->
+    <issue id="UseCompoundDrawables" severity="ignore" />
+
+    <!-- Tagged object leaks -->
+    <!-- 标记的对象泄漏：
+         在安卓4.0以前，View.setTag(int,Object)的实现方式，是存储一个静态map,里面的值是使用的强引用。
+         这意味着，如果有引用上下文，那么context将泄漏。类似情况，还有cursor等。-->
+    <issue id="ViewTag" severity="warning" />
+
+    <!-- 检查静态context引用 -->
+    <issue id="StaticFieldLeak" severity="ignore" />
+
+    <!-- Unconditional Logging Calls -->
+    <!-- 打印日志时最好先判断一下是否允许打印，如检查BuildConfig.DEBUG，因为用的是统一的日志工具，可以忽略 -->
+    <issue id="LogConditional" severity="ignore" />
+
+    <!-- View Holder Candidates -->
+    <!-- ViewHolder复用：
+         实现一个view Adapter的时候，要避免无脑inflat新布局；如果能找到可复用的布局，应该尝试使用它来替代直接引用。
+         这将会使ListView滚动更加流畅。-->
+    <issue id="ViewHolder" severity="warning" />
+
+    <!-- Using getter instead of field -->
+    <!-- 默认关闭。使用\-\-enable FieldGetter开启。
+         使用getter替换了字符：
+         在类内部引用字段时，使用字段的getter要比使用getter至少快3倍（前提是这个getter方法什么都不做，只
+         是返回这个字段）。安卓2.3以上，虚拟机帮忙优化了。这个检查是针对老版本的。-->
+    <issue id="FieldGetter" severity="warning" />
+
+    <!-- Handler reference leaks -->
+    <!-- Handler引用泄漏：
+         Handler作为内部类时，可能会妨碍外部类被垃圾回收机制回收。如果这个Handler使用了与主线程不同的Looperhe
+         MessageQuene，那么不会出现这条警告。如果这个Handler使用了主线程的Looper和MessageQuene，那么必须修改这个
+         Handler声明，修改方式如下：将这个Handler声明为静态类；在外部类里，实例化一个弱引用引用外部类
+    并在实例化Handler时将这个对象传递给Handler,让所有引用外部类的成员都使用弱引用。-->
+    <issue id="HandlerLeak" severity="warning" />
+
+    <!-- FrameLayout can be replaced with <merge> tag -->
+    <!-- FrameLayout 可以用<merge>替换：
+         如果一个<FrameLayout>是一个layout的根布局，并且没有设置背景、padding等属性，那么一般情况下
+         可以使用<merge>标签来替代，能轻微提升性能。注意，这个要依赖于上下文，所以在这样做之前要确保
+         你理解<merge>标签是如何工作的。-->
+    <issue id="MergeRootFrame" severity="warning" />
+
+    <!-- Should use valueOf instead of new_icon -->
+    <!-- 应该使用valueOf，不要使用new：
+         不要直接用包装类的构造方法，如 new_icon Integer(42)这样。应该使用valueOf这个工厂方法，如
+         Integer.valueOf(42).这样会占用更少的内存，因为常见的证书如0和1将共享一个实例。-->
+    <issue id="UseValueOf" severity="warning" />
+
+    <!-- Missing baselineAligned attribute -->
+    <!-- 缺失baselineAligned属性：
+         当使用线性布局来按比例分配空间时嵌套的布局，应该关闭基线对齐属性。布局计算得更快。-->
+    <issue id="DisableBaselineAlignment" severity="warning" />
+
+    <!-- Using FloatMath instead of Math -->
+    <!-- 使用了FloatMath代替Math：
+         在老版本安卓上，出于性能考虑，操作浮点数时推荐使用FloatMath.
+         但是在现在的硬件上，Double数和Float数运算速度差不多（但Double占更多内存），
+         在近代的安卓版本上，因为JIT优化了Math,FloatMath的运行速度实际上是要比Math慢的。
+         所以，如果应用的target在Froyo及之后的版本，应该用Math代替FloatMat。-->
+    <issue id="FloatMath" severity="warning" />
+
+    <!-- Inefficient layout weight -->
+    <!-- 低效率的布局权重：
+         当LinearLayout中只有一个布局定义了权重，如果把宽/高设为0dp，因为不需要首先测量自己的宽/高尺寸，
+         所以将更有效率地挤占多余空间。-->
+    <issue id="InefficientWeight" severity="warning" />
+
+    <!-- Nested layout weights -->
+    <!-- 权重嵌套：
+         布局中使用权重，控件将被绘制两次。当一个带有非零权重的LinearLayout嵌套在另一个带有非零权重的
+         LinearLayout中时，绘制次数将成倍增加。-->
+    <issue id="NestedWeights" severity="warning" />
+
+    <!-- Overdraw -->
+    <!-- 过度绘制。绘制不只一次。
+         当在根布局上设置背景的时候，应该使用一个自定义的主题，主题背景为null。不然的话，主题背景将被先绘制，
+         除非你的自定义背景完全覆盖它。
+         这个模式匹配算法不是很精确，所以有时候会出错。-->
+    <issue id="Overdraw" severity="warning" />
+
+    <!-- Unused resources -->
+    <!-- 资源未使用：
+         未使用的资源会使应用变大，编译速度降低。-->
+    <issue id="UnusedResources" severity="warning" />
+
+    <!-- Useless leaf layout -->
+    <!-- 无用的叶子布局（区分根布局）：
+         如果一个layout，没有子控件，也没有设置background，那么可以直接移除它，使布局更加扁平化。-->
+    <issue id="UselessLeaf" severity="warning" />
+
+    <!-- Useless parent layout -->
+    <!-- 无用的父layout:
+         一个layout只有一个子控件，而且不是scrollview，也不是根布局，并且没有设置background,那么
+         它可以被移除，直接使用它的子控件，这样可以使布局更加扁平化，更加有效率-->
+    <issue id="UselessParent" severity="warning" />
+
+    <!-- Layout hierarchy is too deep -->
+    <!-- 布局层次结构太深：
+         布局嵌套层次太多，对性能有影响，考虑使用扁平化布局，如RelativeLayout或GridLayout来解决。
+         默认最大嵌套深度为10层，可以通过配置环境变量ANDROID_LINT_MAX_DEPTH更改-->
+    <issue id="TooDeepLayout" severity="warning" />
+
+    <!-- Layout has too many views -->
+    <!-- Layout包含太多view:
+         对性能有影响。单个layout里面加载了太多的view，考虑使用组合布局或其他的技巧来减少单个layout中view的数量。
+         单个layout中view数量默认最大为80，可以通过配置环境变量ANDROID_LINT_MAX_VIEW_COUNT来更改。-->
+    <issue id="TooManyViews" severity="warning" />
+
+    <!-- Unused id -->
+    <!-- 默认关闭，添加 \-\-enable UnusedIds启用。
+         id没有使用：
+         任何地方都没有引用到的资源id没必要去声明，即使不声明也不会有影响，反而能更好地布局和绘制。-->
+    <issue id="UnusedIds" severity="warning" />
+
+    <!-- Unused namespace -->
+    <!-- 命名空间未使用：
+         未使用的命名空间不要去声明。影响性能。-->
+    <issue id="UnusedNamespace" severity="warning" />
+
+    <!-- Hyphen can be replaced with dash -->
+    <!-- 连字符可以用破折号替代：
+         属于排版问题。使用 (–, –) 表范围，使用(—, —) 表转折，不要使用普通的连接符。
+    -->
+    <issue id="TypographyDashes" severity="warning" />
+
+    <!-- Ellipsis string can be replaced with ellipsis character -->
+    <!-- 字符串省略号可以替换为字符省略号：
+         使用…替换"..."（注意，前面三个点是一个整体，引号里面则是单独的三个点）-->
+    <issue id="TypographyEllipsis" severity="warning" />
+
+    <!-- Fraction string can be replaced with fraction character -->
+    <!-- 分数字符串可以用分数字符替换：
+         如用½替换1/2，¼替换1/4。这样可读性更强。-->
+    <issue id="TypographyFractions" severity="warning" />
+
+    <!-- Straight quotes can be replaced with curvy quotes -->
+    <!-- 默认关闭，添加\-\-enable TypographyQuotes启用。
+         直引号可以用弯引号替代：（不确定它到底什么意思，附上原文：
+         Summary: Straight quotes can be replaced with curvy quotes。
+         Straight single quotes and double quotes, when used as a pair, can be replaced
+         by "curvy quotes" (or directional quotes). This can make the text more readable.
+
+         Note that you should never use grave accents and apostrophes to quote, `like this'.
+         (Also note that you should not use curvy quotes for code fragments.)）
+    -->
+    <issue id="TypographyQuotes" severity="warning" />
+
+    <!-- Other typographical problems -->
+    <!-- 其他的一些印刷问题：
+         这个检查查找混乱的印刷问题，并且提供替换解决方案，让文本更容易阅读，让应用更加美观。-->
+    <issue id="TypographyOther" severity="warning" />
+
+    <!-- Icon appears in both -nodpi and dpi folders -->
+    <!-- icon同时出现在  drawale-nodpi和drawable-hdpi(或-mdpi或-ldpi或xdpi等)目录下：
+         -nodpi文件夹下的文件是不可缩放拉伸的，另外一类文件是可以缩放拉伸的，同时存在两种目录下，系统无法分辨到底是允许拉伸还是
+         不允许拉伸。通过删除其中一个或者指定不同的名字来解决。-->
+    <issue id="IconNoDpi" severity="warning" />
+
+    <!-- Icon is specified both as .xml file and as a bitmap -->
+    <!-- icon被同时指定为.xml文件和图片文件(.png或.jpg)：
+         一般drawable下的xml文件用于声明状态，并且每个状态有对应的drawable图片。-->
+    <issue id="IconXmlAndPng" severity="warning" />
+
+    <!-- Icon colors do not follow the recommended visual style -->
+    <!-- icon颜色与推荐的视觉风格不一致：
+         通知栏和状态栏的图标只能是白色的灰色的阴影，从安卓设计指南查看更多信息。
+         注意：这个Lint判断一个图标是动作栏还是通知栏，是基于文件名前缀的：ic_menu_ 是动作栏，ic_stat_ 是通知栏等等。
+         这样做是符合http://developer.android.com/guide/practices/ui_guidelines/icon_design.html中的命名规范文档的。-->
+    <issue id="IconColors" severity="warning" />
+
+    <!-- The launcher icon shape should use a distinct silhouette -->
+    <!-- 启动图标的形状应该使用一个清晰的轮廓：
+         根据安卓设计指南，启动图标应该有一个独特的轮廓，最好看起来有点儿立体，有点儿阴影。这意味这你不要使用直角图片，应该使用圆角。
+        （哇靠，立不立体都能监测出来？我是不是翻译错了？
+         附上原文：According to the Android Design Guide
+         (http://developer.android.com/design/style/iconography.html) your launcher
+            icons should "use a distinct silhouette", a "three-dimensional, front view,
+            with a slight perspective as if viewed from above, so that users perceive some depth."
+            The unique silhouette implies that your launcher icon should not be a filled
+            square.）-->
+    <issue id="IconLauncherShape" severity="warning" />
+
+    <!-- Using .gif format for bitmaps is discouraged -->
+    <!-- 不建议使用.gif格式的图片：
+         推荐使用.png格式，.jpg格式也可以接受。-->
+    <issue id="GifUsage" severity="warning" />
+
+    <!-- Icon density-independent size validation -->
+    <!-- 非密度制约的icon尺寸校验：
+         检查不同密度文件夹下提供的全部图标，估算起来应该有差不多相同的尺寸值。
+         当图片被放置在错误的文件夹里，或者图标尺寸改变但漏了一些文件夹的情况下，会出现错误。-->
+    <issue id="IconDipSize" severity="warning" />
+
+    <!-- Identical bitmaps across various configurations -->
+    <!-- 相同位图出现在不同配置中：
+         在不同配置情况下，如drawable-hdpi和 -v11,通常应该使用不同的icon。这个lint主要检查无意间使用了相同icon的情况。-->
+    <issue id="IconDuplicatesConfig" severity="warning" />
+
+    <!-- Icon has incorrect size -->
+    <!--默认关闭，添加 \-\-enable IconExpectedSize来启用。
+        icon尺寸错误：
+        启动图标有预定义的尺寸，应该根据约定好的规则来设定启动图片的尺寸，这样在不同平台上填充效果会更好。-->
+    <issue id="IconExpectedSize" severity="warning" />
+
+    <!-- Image defined in density-independent drawable folder -->
+    <!-- image定义在不同的非密度制约的drawable文件夹下：
+         res/drawable文件夹主要放置一些自定义的可拉伸图片，如自定义的形状之类的。
+         图片应该根据分辨率放到对应的drawable-hdpi/drawable-mdpi等文件夹中。
+         如果一张图片确实是可拉伸的，如一张填充颜色图，放到drawable-nodpi文件夹中。-->
+    <issue id="IconLocation" severity="warning" />
+
+    <!-- Clashing PNG and 9-PNG files -->
+    <!-- 存在同名的.png和.9.png格式的文件：
+         没啥解释的，就是有一个aaa.png,同时存在了一个aaa.9.png的意思。 -->
+    <issue id="IconMixedNinePatch" severity="warning" />
+
+    <!-- Use Mipmap Launcher Icons -->
+    <!-- 使用Mipmap启动icon:
+         启动图标放到mipmap中要比放到drawable中效果更好，作用和放在drawable中一样，但一些特殊机型上不会模糊 -->
+    <issue id="MipmapIcons" severity="warning" />
+
+    <!-- Missing application icon -->
+    <!-- 缺失应用icon:
+         因为没有默认值，所以必须设置。 -->
+    <issue id="MissingApplicationIcon" severity="warning" />
+
+    <!-- Icon densities validation -->
+    <!-- 检查用到icon是否覆盖了多套主流的分辨率，如hdpi,xhpi，xxhdpi。该项检查可以忽略 -->
+    <issue id="IconDensities" severity="ignore" />
+
+    <!-- Duplicated icons under different names -->
+    <!-- 存在相同icon不同名字的情况：
+         两张或多张图片是完全一样的，只是名字不一样。这时最好删除掉多余的，只保留一张，这样可以让应用更小。-->
+    <issue id="IconDuplicates" severity="warning" />
+
+    <!-- Icon format does not match the file extension -->
+    <!-- 图标格式和文件扩展名不一致：
+         例如，png格式的图标文件的后缀一定是.png，不能是.jpg或.gif等-->
+    <issue id="IconExtension" severity="warning" />
+
+    <!-- Missing density folder -->
+    <!-- 某些分辨率文件夹缺失，如mhdpi,xxxhdpi 没有用到的分辨率可以不建对应的文件夹，因此该项检查忽略 -->
+    <issue id="IconMissingDensityFolder" severity="ignore" />
+
+    <!-- Button order -->
+    <!-- 按钮顺序：
+         根据设计规范，一些常用的按钮应该遵循一定的摆放顺序。如有一对Cancel/OK按钮（如Dialog中），
+         或Close/Wait(如ANR的时候)，在摆放的时候应该把更希望用户使用的放置到右侧。例如上面两组按钮，就应该把
+         Cancel和Close放到左侧，OK和Wait放到右侧。-->
+    <issue id="ButtonOrder" severity="warning" />
+
+    <!-- Dynamic text should probably be selectable -->
+    <!-- selectable属性用于指定该TextView的文本是复可复制，默认是false，这一项没必要检查 -->
+    <issue id="SelectableText" severity="ignore" />
+
+    <!-- Back button -->
+    <!-- 默认关闭，使用 \-\-enable BackButton启用.
+         返回按钮：
+         其他平台使用带有返回标签的显式的返回按钮来允许用户导航到应用程序的层次结构。与之不同，Android使用主动作栏的图标进行分层导航，
+         以及导航栏的后退按钮用于时间导航。这个检查不复杂（只是查找带有"Back"标签的按钮），所以默认情况下是禁用的，不会触发常见场景
+         像 Back/Next 按钮随意翻阅屏幕。-->
+    <issue id="BackButton" severity="warning" />
+
+    <!-- Button should be borderless -->
+    <!-- Button应该是无边框的：
+         按钮栏通常使用一个无边框的风格。为每个Button设置style="?android:attr/buttonBarButtonStyle",为父布局设置
+         style="?android:attr/buttonBarStyle"-->
+    <issue id="ButtonStyle" severity="warning" />
+
+    <!-- Missing support for Google App Indexing Api -->
+    <!--默认是关闭的。通过添加  \-\-enable GoogleAppIndexingApiWarningkaiqi启用。
+        缺少对Google应用索引API的支持：
+        将应用的url添加到谷歌索引，从谷歌搜索获取安装和流量。-->
+    <issue id="GoogleAppIndexingApiwarning" severity="ignore" />
+
+    <!-- URL not supported by app for Google App Indexing -->
+    <!-- 谷歌应用程序索引不支持的URL：
+         确保你的应用支持url，从而从谷歌搜索中获取安装和流量,可以忽略。 -->
+    <issue id="GoogleAppIndexingUrlerror" severity="ignore" />
+
+    <!-- Missing support for Google App Indexing -->
+    <!-- 缺少对Google应用索引的支持：
+         将应用的url添加到谷歌的索引上，从谷歌搜索中获取安装和流量，可以忽略 -->
+    <issue id="GoogleAppIndexingWarning" severity="ignore" />
+
+    <!-- Missing menu title -->
+    <!-- 缺失菜单title:
+         为每一个menu item声明android:title很重要。有三个原因：
+         1、如果action bar上没有足够空间展示action item,那么menu item将会展示在溢出菜单中，并且只显示标题
+         2、视力障碍人员使用的屏幕阅读器将读取menu item的标题。
+         3、如果action item只展示了图标，用户可以长按显示对应的标题。
+         android:icon是可选属性，但建议增加该属性。-->
+    <issue id="MenuTitle" severity="error" />
+
+    <!-- Missing inputType or hint -->
+    <!-- 缺失inputType或hint属性：
+         inputType属性改善了可用性，根据输入类型，将展示最佳的键盘，如数字键盘或字母键盘。
+         hint可以向用户展示希望他输入的内容。Lint也会检测id，如果id包含password,phone,email这样的字段，
+         会要求inputType使用相同的类型。如果确实要保持文本框使用一般的类型，设置inputType="text" -->
+    <issue id="TextFields" severity="warning" />
+
+    <!-- Negative Margins -->
+    <!-- 默认关闭。
+         margin使用了负值：
+         应该使用正值。负值不仅会使图片性能糟糕，还会导致错误的触摸事件处理。对字符串大小的假设可能会导致本地化问题。 -->
+    <issue id="NegativeMargin" severity="warning" />
+
+    <!-- Text size is too small -->
+    <!-- 文字尺寸太小：不要使用小于12sp的字号。 -->
+    <issue id="SmallSp" severity="warning" />
+
+    <!-- Usage of showAsAction=always -->
+    <!-- showAsAction=always用法:
+         在Menu或MenuItem的xml中使用showAsAction="always".
+         在java代码中，SHOW_AS_ACTION_ALWAYS通常与用户界面风格是有偏差的。使用ifRoom或相应的子菜单 SHOW_AS_ACTION_IF_ROOM替代。
+         如果总是谨慎地使用always，通常不会出现问题，并且行为与ifRoom大致相当。不要在同一个菜单里使用超过两次。
+         这个检查查找那些包含两个以上always的行为，或always行为，或没有指定ifRoom的行为。
+         在java代码中，它查找包含设置MenuItem.SHOW_AS_ACTION_ALWAYS和MenuItem.SHOW_AS_ACTION_IF_ROOM的项目。-->
+    <issue id="AlwaysShowAction" severity="warning" />
+
+    <!-- Missing View constructors for XML inflation -->
+    <!-- 缺失xml应用的View构造方法：
+         一些布局工具必须要找到构造方法。如果你的自定义view使用布局编辑器时不工作，需要初始化，你可以围绕view的构造方法，
+         检查view的isInEditMode()是否为false,因为这个方法运行时会返回false，但是用户界面编辑器中却是正常的-->
+    <issue id="ViewConstructor" severity="warning" />
+
+    <!-- Cancel/OK dialog button capitalization -->
+    <!-- 弹窗的Cancel/OK按钮用大写：
+         标准的OK/Cancel弹窗字符串应该是"OK"和"Cancel"。可以使用@andoid:string/ok
+         和@android:string/cancel来保证弹窗使用的是标准的字符串。-->
+    <issue id="ButtonCase" severity="warning" />
+
+    <!-- Accessibility in Custom Views -->
+    <!-- 自定义视图中的无障碍访问：
+         如果一个view重写了onTouchEvent()或使用了没有实现performClick的onToucherListener并在检测到单击时调用了它，
+         这个view将不能正确处理无障碍访问。处理点击动作的逻辑，理想情况下，可以将视图的performClick()作为可访问性服务调用。
+         当单击动作出现时，执行单击。-->
+    <issue id="ClickableViewAccessibility" severity="warning" />
+
+    <!-- Image without contentDescription -->
+    <!-- 无文本控件，如ImageView和ImageButton,应该指定contentDescription属性来详细说明这个控件描述，
+        这样可以使屏幕解说员或其他的无障碍工具可以适当地描述这个用户界面。这个有点严格，忽略掉-->
+    <issue id="ContentDescription" severity="ignore" />
+
+    <!-- Missing labelFor attribute -->
+    <!-- 缺失LabelFor属性：
+         如果minSdkVersion最少是17，那么文本字段应该加上LabelFor属性（一般后面跟当前文本控件的id，如@id/textView）。
+         如果你的文本字段已经添加了LabelFor属性，但是对应的父布局的label不一样，直接在lint里废弃这个警告 -->
+    <issue id="LabelFor" severity="warning" />
+
+    <!-- Byte order mark inside files -->
+    <!-- 文件中存在字节标记顺序：
+         Lint将会标记它在文件中发现的任何一个BOM（Byte order mark）字符。
+         因为我们希望文件用utf-8编码，所以BOM是不必要的(utf-8不需要BOM来表明字节顺序)，并且不是所有工具都能正确处理BOM。
+         例如，如果在一个资源文件的名字的翻译比较特别，包含有一个BOM，这个名字将不能被认为是和原资源文件的名字完全一直，这个翻译就不能用了。-->
+    <issue id="ByteOrderMark" severity="error" />
+
+    <!-- TextView Internationalization -->
+    <!-- 文本国际化：
+         setText时不要使用数字类型的toString()方法，它处理不好分数的分隔符，不能正确处理特定地区的数字格式。使用String的format方法来处理。
+         不要直接传递一个字符串做为显示内容。硬编码文本不能翻译做国际化，使用资源文件来替代。
+         不要拼接大块的messages，这样的messages不能被正确翻译。 -->
+    <issue id="SetTextI18n" severity="warning" />
+
+    <!-- Encoding used in resource files is not UTF-8 -->
+    <!-- 资源文件没有使用utf-8编码：
+         xml支持多种编码方式，但不是所有工具都能正确处理属性编码。同时，几乎所有的安卓APP都使用了utf-8，
+         因此在使用非ASCII字符集时，用utf-8能尽可能减少一些细微异常。尤其是安卓的gradle编译系统是使用utf-8做xml的代码合并的。-->
+    <issue id="EnforceUTF8" severity="error" />
+
+    <!-- Hardcoded text -->
+    <!-- 硬编码文本：
+         不要在layout文件中硬编码文本，要在strings.xml配置然后调用。理由有二：1.配置变化时，如横竖屏切换，必须重复写一遍。
+         2.不利于国际化。 -->
+    <issue id="HardcodedText" severity="error" />
+
+    <!-- Overlapping items in RelativeLayout -->
+    <!-- 相对布局中项目重叠：
+         在相对布局中，如果有text/button这样的控件分别左对齐和右对齐，并且宽度可根据内容增长，将有可能出现相互覆盖显示区域的问题。
+         需要使用toStartOf/toEndOf这样的属性指定相互之间的约束关系。 因为实际项目中会限制字符的长度，不会出现这种情况 -->
+    <issue id="RelativeOverlap" severity="ignore" />
+
+    <!-- Right-to-left text compatibility issues -->
+    <!-- 从右到左文本的兼容性问题：
+         API17时增加了textAlignment属性来对齐文本。如果支持API17以前的版本，则必须指定gravity或layout_gravity属性，
+         因为API17之前的平台会忽略掉textAlignment属性 -->
+    <issue id="RtlCompat" severity="error" />
+
+    <!-- Padding and margin symmetry -->
+    <!-- padding和margin左右对称：
+         双向文本中，如果指定了左侧的padding/margin,最好也指定右侧的padding/margin，以便在RTL排列时显得整齐 -->
+    <issue id="RtlSymmetry" severity="warning" />
+
+    <!-- Using left/right instead of start/end attributes-->
+    <!-- 使用了left/right替代start/end:
+         在双向文本中，应该使用start/end替代left/right，具体包括gravity、layout_gravity的属性值，和paddingLeft、paddingright、marginLeft、marginRight、toLeftOf、toRightOf的属性名。
+         当minSdkVersion小于API17的时候，padding和margin属性名要同时使用left和start两种。gravity和layout_gravity属性值，因为start/end是left/right的超类，因此直接使用
+         start，不使用left|start这样的表达。实际项目中很少用start/end布局，直接忽略掉 -->
+    <issue id="RtlHardcoded" severity="ignore" />
+
+    <!-- Using RTL attributes without enabling RTL support -->
+    <!-- 没有开启RTL支持的情况下使用了REL属性：
+         minSdkVersion在API17及以上时，使用了双向文本的RTL（Right-To-Left）属性，但是没有在manifest的<application>标签下设置android:supportsRtl属性 -->
+    <issue id="RtlEnabled" severity="warning" />
+
+</lint>

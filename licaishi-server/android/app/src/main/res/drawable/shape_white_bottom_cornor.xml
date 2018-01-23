@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?><!--白色填充，圆角，1px，#e2e2e2边框-->
+<shape xmlns:android="http://schemas.android.com/apk/res/android"
+    android:shape="rectangle">
+    <corners
+        android:bottomLeftRadius="10dp"
+        android:bottomRightRadius="10dp" />
+    <solid
+        android:color="@color/room_title_bg" />
+</shape>

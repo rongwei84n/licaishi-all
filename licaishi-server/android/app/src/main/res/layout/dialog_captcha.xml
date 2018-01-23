@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="300dp"
+        android:layout_height="wrap_content"
+        android:layout_margin="5dp"
+        android:gravity="right">
+
+        <ImageView
+            android:id="@+id/iv_close"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/delete_dialog" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="275dp"
+        android:layout_height="185dp"
+        android:layout_gravity="center"
+        android:background="@drawable/captcha"
+        android:orientation="vertical">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="15dp"
+            android:gravity="center"
+            android:text="@string/captchaDialog_title"
+            android:textSize="17sp" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:gravity="center">
+
+            <ImageView
+                android:id="@+id/iv_captcha"
+                android:layout_width="150dp"
+                android:layout_height="50dp"
+                android:background="#FAFAFA" />
+
+            <FrameLayout
+                android:id="@+id/fl_refresh"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:background="#ff9b1a">
+
+                <ImageView
+                    android:id="@+id/iv_refresh"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:src="@drawable/refresh" />
+            </FrameLayout>
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/tv_error"
+            android:layout_width="match_parent"
+            android:layout_height="20dp"
+            android:gravity="center"
+            android:text="@string/captcha_error"
+            android:textColor="#ff0000"
+            android:textSize="12sp"
+            android:visibility="invisible" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:gravity="center">
+
+            <EditText
+                android:id="@+id/captcha1"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_margin="6.5dp"
+                android:background="@drawable/verifytext"
+                android:cursorVisible="false"
+                android:gravity="center"
+                android:maxLength="1" />
+
+            <EditText
+                android:id="@+id/captcha2"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_margin="6.5dp"
+                android:background="@drawable/verifytext"
+                android:cursorVisible="false"
+                android:gravity="center"
+                android:maxLength="1" />
+
+            <EditText
+                android:id="@+id/captcha3"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_margin="6.5dp"
+                android:background="@drawable/verifytext"
+                android:cursorVisible="false"
+                android:gravity="center"
+                android:maxLength="1" />
+
+            <EditText
+                android:id="@+id/captcha4"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_margin="6.5dp"
+                android:background="@drawable/verifytext"
+                android:cursorVisible="false"
+                android:gravity="center"
+                android:maxLength="1" />
+
+
+        </LinearLayout>
+
+
+    </LinearLayout>
+
+</LinearLayout>
