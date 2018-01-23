@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/activity_verification_code"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context="com.auts.lcssv.activity.RegisterCodeActivity">
+
+    <include layout="@layout/include_common_header" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:paddingLeft="10dp"
+        android:paddingRight="10dp">
+
+        <TextView
+            android:textStyle="bold"
+            style="@style/text_large_style"
+            android:layout_marginTop="30dp"
+            android:text="@string/register_account" />
+
+        <TextView
+            style="@style/text_small_style"
+            android:layout_marginTop="40dp"
+            android:text="@string/phone" />
+
+        <com.auts.lcssv.views.MyEditText
+            android:id="@+id/myet_phone"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="15dp"
+            app:hint="@string/hint_login_user"
+            app:input_type="1"
+            app:is_phone="true"
+            app:max_length="11" />
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp">
+
+            <TextView
+                style="@style/text_small_style"
+                android:text="@string/verification_code" />
+
+            <TextView
+                android:id="@+id/tv_get_vercode"
+                style="@style/text_small_style"
+                android:layout_alignParentRight="true"
+                android:text="@string/get_verification_code" />
+        </RelativeLayout>
+
+        <com.auts.lcssv.views.MyEditText
+            android:id="@+id/myet_vercode"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="15dp"
+            app:has_delete="false"
+            app:max_length="6" />
+
+        <TextView
+            android:id="@+id/tv_next"
+            style="@style/btn_common"
+            android:layout_marginTop="45dp"
+            android:text="@string/next_step" />
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="20dp"
+            android:gravity="center"
+            android:orientation="horizontal">
+
+            <TextView
+                style="@style/text_normal_style"
+                android:text="@string/hint_click_next" />
+
+            <TextView
+                android:id="@+id/tv_protocol"
+                style="@style/text_normal_style"
+                android:text="@string/user_proto"
+                android:textColor="#1B81FF" />
+        </LinearLayout>
+    </LinearLayout>
+
+</LinearLayout>

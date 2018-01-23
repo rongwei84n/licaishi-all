@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/ll_root"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/bg_add_device_vague"
+    android:orientation="vertical"
+    app:layout_behavior="@string/appbar_scrolling_view_behavior"
+    tools:context="com.auts.lcssv.activity.DeviceConfigNetSoftActivity"
+    tools:showIn="@layout/activity_device_config_net_soft">
+
+    <include layout="@layout/include_common_header" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="90dp"
+        android:text="@string/device_connect_to_router"
+        android:textColor="@color/text_small"
+        android:textSize="@dimen/text_middle" />
+
+    <RelativeLayout
+        android:id="@+id/rl_wifi_name"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginLeft="50dp"
+        android:layout_marginRight="50dp"
+        android:layout_marginTop="50dp"
+        android:padding="3dp">
+
+        <TextView
+            android:id="@+id/tv_wifi_ssid"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ellipsize="end"
+            android:lines="1"
+            android:textColor="@color/text_normal"
+            android:textSize="@dimen/text_middle"
+            tools:text="ssid名sduahdsadihasjkdsnajkdnsajkdnjka" />
+
+        <ImageView
+            android:id="@+id/iv_getting_wifi"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentRight="true"
+            android:src="@drawable/get_wifi_loading"
+            android:visibility="gone" />
+
+        <ImageView
+            android:id="@+id/iv_right_arrow"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:src="@drawable/arrow_right"
+            android:visibility="gone" />
+
+    </RelativeLayout>
+
+    <View
+        android:id="@+id/view_line"
+        android:layout_width="match_parent"
+        android:layout_height="0.6dp"
+        android:layout_marginLeft="50dp"
+        android:layout_marginRight="50dp"
+        android:layout_marginTop="8dp"
+        android:background="@color/default_line" />
+
+    <com.auts.lcssv.views.MySuperPasswordEditText
+        android:id="@+id/et_password"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginLeft="50dp"
+        android:layout_marginRight="50dp"
+        android:layout_marginTop="30dp"
+        android:focusable="true"
+        android:focusableInTouchMode="true"
+        android:padding="3dp"
+        app:hint="@string/input_wifi_password"
+        app:max_length="63" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="20dp"
+        android:text="@string/only_support_2.4_wifi"
+        android:textColor="@color/text_small"
+        android:textSize="@dimen/text_normal" />
+
+    <TextView
+        android:id="@+id/tv_connect"
+        style="@style/btn_common_hollow"
+        android:layout_width="225dp"
+        android:layout_marginTop="100dp"
+        android:enabled="true"
+        android:text="@string/connect" />
+
+</LinearLayout>
+

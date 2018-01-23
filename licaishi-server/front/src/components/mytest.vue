@@ -1,33 +1,15 @@
 <template>
   <div class="order-container">
-    <p>单选框:</p>
-    <input type="checkbox" id="checkbox" v-model="checked"/>
-    <label >{{checked}}</label> <br>
+    <input type="button" value="点击获取" @click="get()"/>
 
-    <p>多选框：</p>
+    <!--<li v-for="item in arrs" v-on:click="item.completed = ! item.completed">-->
+      <!--&lt;!&ndash; {{item}} &ndash;&gt;-->
 
-    <input type="checkbox" id="roob" value="Roob" v-model="checkedNames"/>
+      <!--<span class="title">{{item.title}}</span>-->
 
-    <input type="checkbox" id="goo" value="Google" v-model="checkedNames"/>
+    <!--</li>-->
 
-    <span>选择的值 {{checkedNames}}</span>
-
-    <select v-model="selected">
-      <option value="未选择">选择一个网址</option>
-      <option value="www.baidu.com">百度</option>
-      <option value="www.google.com">谷歌</option>
-    </select>
-    <p>选择的值是 {{selected}}</p>
-
-    <input v-model.trim="age" />
-
-    <p>年龄是 {{age}}</p>
-
-    <img class="card-img" :src="imgDataUrl" style="height: 16rem;">
-    <div class="card-footer text-muted">
-      <input type="file" id="image" name="image" @change="preview($event)">
-    </div>
-
+    <button v-on:click="invokeNative">调用本地方法</button>
   </div>
 </template>
 <script type="text/javascript">
@@ -39,8 +21,9 @@
       let selected = '未选择'
       let age
       let imgDataUrl = ''
+      let arrs
 
-      return {checked, checkedNames, selected, age, imgDataUrl}
+      return {checked, checkedNames, selected, age, imgDataUrl, arrs}
     },
     vuex:{
       getters: {
@@ -65,7 +48,14 @@
       },
       preview: function(event){
         this.imgDataUrl = event.target.files;
+      },
+      invokeNative: function () {
+        alert('vaue.js')
+        window.phihome.app.toast("vue.js", function (response) {
+
+        })
       }
+
     }
   }
 </script>
