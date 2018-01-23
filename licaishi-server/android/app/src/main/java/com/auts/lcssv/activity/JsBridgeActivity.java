@@ -110,7 +110,7 @@ public class JsBridgeActivity extends BaseActivity {
         mWebView.setDownloadListener(new MyWebViewDownLoadListener());
 
         // 设置 缓存模式
-//        webSettings.setCacheMode(NetworkUtils.isNetAvailable() ? android.webkit.WebSettings.LOAD_DEFAULT : android.webkit.WebSettings.LOAD_CACHE_ELSE_NETWORK);
+        webSettings.setCacheMode(NetworkUtils.isNetAvailable() ? android.webkit.WebSettings.LOAD_DEFAULT : android.webkit.WebSettings.LOAD_CACHE_ELSE_NETWORK);
 
         mWebView.setWebChromeClient(new MyWebChromeClient());
         mWebView.setWebViewClient(new WebViewClient() {
@@ -133,7 +133,7 @@ public class JsBridgeActivity extends BaseActivity {
                 LogUtils.debug("onReceivedError: " + s1);
 //                hideLoading();
                 ToastUtil.show("网络异常，请稍后再试");
-                finish();
+//                finish();
             }
 
             @Override
@@ -173,7 +173,7 @@ public class JsBridgeActivity extends BaseActivity {
         if (mWebView != null && mWebView.canGoBack()) {
             WebBackForwardList historys = mWebView.copyBackForwardList();
             if (historys != null && historys.getSize() > 1) {
-//                mWebView.goBack();
+                mWebView.goBack();
                 mJavaBridge.callHandler("nativeBack");
             } else {
                 super.onGoback();
