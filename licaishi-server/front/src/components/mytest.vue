@@ -51,7 +51,7 @@
       },
       invokeNative: function () {
         alert('调用本地方法')
-        window.phihome.util.netRequest('get','114.141.173.53/v1/accountDetail','', '',function (response) {
+        window.phihome.util.netRequest('get','http://114.141.173.53/v1/accountDetail','', '',function (response) {
 
         })
 
