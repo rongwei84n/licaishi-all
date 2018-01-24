@@ -8,6 +8,7 @@ import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.ViewGroup;
 
 import com.alibaba.fastjson.JSON;
@@ -319,6 +320,7 @@ public class JsBridgeActivity extends BaseActivity {
         mJavaBridge.registerHandler("netRequest", new JavaBridge.JavaHandler() {
             @Override
             public void handle(JSData jsData, final JavaBridge.JsCallback jsCallback) {
+                Log.d("sandy", "netRequest");
                 mNativeModel.netRequest(jsData, mJavaBridge, jsCallback, new NativeModel.NetCallback() {
                     @Override
                     public void onResponse(int errorCode, String errorMesssage, String netResponse) {

@@ -50,10 +50,12 @@
         this.imgDataUrl = event.target.files;
       },
       invokeNative: function () {
-        alert('vaue.js')
-        window.phihome.app.toast("vue.js", function (response) {
+        alert('调用本地方法')
+        window.phihome.util.netRequest('get','114.141.173.53/v1/accountDetail','', '',function (response) {
 
         })
+
+
       }
 
     }
