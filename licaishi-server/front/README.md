@@ -24,4 +24,19 @@ npm run e2e
 npm test
 ```
 
-For detailed explanation on how things work, checkout the [guide](http://vuejs-templates.github.io/webpack/) and [docs for vue-loader](http://vuejs.github.io/vue-loader).
+For detailed explanation on how things work, checkout the [guide](http://vuejs-templates.github.io/webpack/) and [docs for vue-loader](http://vuejs.github.io/vue-loader)
+
+
+first install node.js
+
+then exceute as follow.
+
+cnpm install webpack -g
+
+npm install vue-cli -g
+
+npm install
+
+cnpm install vue-router vue-resource --save
+
+npm run dev

@@ -8,6 +8,7 @@ import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.ViewGroup;
 
 import com.alibaba.fastjson.JSON;
@@ -64,6 +65,9 @@ public class JsBridgeActivity extends BaseActivity {
             ToastUtil.show("设备不在线");
         }
     };
+
+
+    private int mPageIndex = 0;
 
     @Override
     public void initLayout(Bundle savedInstanceState) {
@@ -171,8 +175,9 @@ public class JsBridgeActivity extends BaseActivity {
     @Override
     public void onGoback() {
         if (mWebView != null && mWebView.canGoBack()) {
-            WebBackForwardList historys = mWebView.copyBackForwardList();
-            if (historys != null && historys.getSize() > 1) {
+//            WebBackForwardList historys = mWebView.copyBackForwardList();
+            if (mPageIndex > 0) {
+                mPageIndex --;
                 mWebView.goBack();
                 mJavaBridge.callHandler("nativeBack");
             } else {
@@ -254,6 +259,16 @@ public class JsBridgeActivity extends BaseActivity {
     }
 
     private void initHandler() {
+        mJavaBridge.registerHandler("changePageIndex", new JavaBridge.JavaHandler() {
+            @Override
+            public void handle(JSData jsData, JavaBridge.JsCallback jsCallback) {
+                int pageIndexModifier = jsData.getPageIndexModifier();
+                mPageIndex += pageIndexModifier;
+                mNativeModel.toast(jsData.getMessage());
+                mJavaBridge.callbackSuccess(jsCallback, null);
+            }
+        });
+
         mJavaBridge.registerHandler("toast", new JavaBridge.JavaHandler() {
             @Override
             public void handle(JSData jsData, JavaBridge.JsCallback jsCallback) {
@@ -319,6 +334,7 @@ public class JsBridgeActivity extends BaseActivity {
         mJavaBridge.registerHandler("netRequest", new JavaBridge.JavaHandler() {
             @Override
             public void handle(JSData jsData, final JavaBridge.JsCallback jsCallback) {
+                Log.d("sandy", "netRequest");
                 mNativeModel.netRequest(jsData, mJavaBridge, jsCallback, new NativeModel.NetCallback() {
                     @Override
                     public void onResponse(int errorCode, String errorMesssage, String netResponse) {
