@@ -66,6 +66,9 @@ public class JsBridgeActivity extends BaseActivity {
         }
     };
 
+
+    private int mPageIndex = 0;
+
     @Override
     public void initLayout(Bundle savedInstanceState) {
         setContentView(R.layout.activity_js_bridge);
@@ -172,8 +175,9 @@ public class JsBridgeActivity extends BaseActivity {
     @Override
     public void onGoback() {
         if (mWebView != null && mWebView.canGoBack()) {
-            WebBackForwardList historys = mWebView.copyBackForwardList();
-            if (historys != null && historys.getSize() > 1) {
+//            WebBackForwardList historys = mWebView.copyBackForwardList();
+            if (mPageIndex > 0) {
+                mPageIndex --;
                 mWebView.goBack();
                 mJavaBridge.callHandler("nativeBack");
             } else {
@@ -255,6 +259,16 @@ public class JsBridgeActivity extends BaseActivity {
     }
 
     private void initHandler() {
+        mJavaBridge.registerHandler("changePageIndex", new JavaBridge.JavaHandler() {
+            @Override
+            public void handle(JSData jsData, JavaBridge.JsCallback jsCallback) {
+                int pageIndexModifier = jsData.getPageIndexModifier();
+                mPageIndex += pageIndexModifier;
+                mNativeModel.toast(jsData.getMessage());
+                mJavaBridge.callbackSuccess(jsCallback, null);
+            }
+        });
+
         mJavaBridge.registerHandler("toast", new JavaBridge.JavaHandler() {
             @Override
             public void handle(JSData jsData, JavaBridge.JsCallback jsCallback) {

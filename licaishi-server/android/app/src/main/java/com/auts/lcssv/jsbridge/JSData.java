@@ -58,6 +58,8 @@ public class JSData implements Serializable {
 
     private String pageTitle;
 
+    private int pageIndexModifier;
+
     public String getMessage() {
         return message;
     }
@@ -248,6 +250,14 @@ public class JSData implements Serializable {
 
     public void setPageTitle(String pageTitle) {
         this.pageTitle = pageTitle;
+    }
+
+    public int getPageIndexModifier() {
+        return pageIndexModifier;
+    }
+
+    public void setPageIndexModifier(int pageIndexModifier) {
+        this.pageIndexModifier = pageIndexModifier;
     }
 }
 
