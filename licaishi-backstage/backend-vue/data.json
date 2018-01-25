@@ -1,0 +1,23 @@
+{
+    "items": [
+        {"name":"型号", "value":"number"},
+        {"name":"硬件版本号", "value":"version"},
+        {"name":"新版本号", "value":"newVersion"},
+        {"name":"更新时间", "value":"time"},
+        {"name":"更新内容", "value":"text"},
+        {"name":"固件安装包", "value":"apk"},
+        {"name":"支持版本", "value":"supportVersion"},
+        {"name":"操作时间", "value":"createtime"},
+        {"name":"操作人", "value":"operator"}
+    ],
+    "form": {
+        "name": "",
+        "number": "",
+        "version": "",
+        "newVersion": "",
+        "time": "",
+        "text": "",
+        "supportVersion": ""
+    },
+    "tableData": [{"id":1,"product_family_id":0,"product_family_name":"feixun","product_area_id":1000,"product_area_name":"outlet","product_line_id":1000001,"product_line_name":"t2","hw_ver":"0.0.1","update_time":1504627200,"update_time_str":"2017-09-06 00:00:00","content":"测试版本","fw_ver":"0.0.0.1","file_url":null,"file_name":"","file_md5":null,"file_size":0,"support_ver":"0.0.0.1","op_time":1504856694,"op_time_str":"2017-09-08 15:44:54","operator":"admin","operator_name":"admin","target_ver":null},{"id":2,"product_family_id":0,"product_family_name":"feixun","product_area_id":1000,"product_area_name":"outlet","product_line_id":1000001,"product_line_name":"t2","hw_ver":"0.0.1","update_time":1504627201,"update_time_str":"2017-09-06 00:00:01","content":"测试版本","fw_ver":"0.0.0.2","file_url":null,"file_name":"","file_md5":null,"file_size":0,"support_ver":"0.0.0.1","op_time":1504856705,"op_time_str":"2017-09-08 15:45:05","operator":"admin","operator_name":"admin","target_ver":null},{"id":3,"product_family_id":0,"product_family_name":"feixun","product_area_id":1000,"product_area_name":"outlet","product_line_id":1000000,"product_line_name":"t1","hw_ver":"0.0.1","update_time":1504627200,"update_time_str":"2017-09-06 00:00:00","content":"测试版本","fw_ver":"0.0.0.3","file_url":null,"file_name":"","file_md5":null,"file_size":0,"support_ver":"0.0.0.1,0.0.0.2","op_time":1504856717,"op_time_str":"2017-09-08 15:45:17","operator":"admin","operator_name":"admin","target_ver":null},{"id":4,"product_family_id":0,"product_family_name":"feixun","product_area_id":1000,"product_area_name":"outlet","product_line_id":1000001,"product_line_name":"t2","hw_ver":"0.0.1","update_time":1504627200,"update_time_str":"2017-09-06 00:00:00","content":"测试版本","fw_ver":"0.0.0.4","file_url":null,"file_name":"nginx.conf","file_md5":null,"file_size":0,"support_ver":"0.0.0.3","op_time":1505100756,"op_time_str":"2017-09-11 11:32:36","operator":"admin","operator_name":"admin","target_ver":null},{"id":5,"product_family_id":0,"product_family_name":"feixun","product_area_id":1000,"product_area_name":"outlet","product_line_id":1000000,"product_line_name":"t1","hw_ver":"0.3","update_time":1504866888,"update_time_str":"2017-09-08 18:34:48","content":"测试","fw_ver":"0.4","file_url":null,"file_name":"","file_md5":null,"file_size":0,"support_ver":"0.1","op_time":1504866897,"op_time_str":"2017-09-08 18:34:57","operator":"admin","operator_name":"admin","target_ver":null},{"id":6,"product_family_id":0,"product_family_name":"feixun","product_area_id":1000,"product_area_name":"outlet","product_line_id":1000001,"product_line_name":"t2","hw_ver":"0.0.1","update_time":1504627200,"update_time_str":"2017-09-06 00:00:00","content":"测试版本","fw_ver":"0.0.0.6","file_url":null,"file_name":"nginx.conf","file_md5":null,"file_size":0,"support_ver":"0.0.0.3,0.0.0.4","op_time":1505115846,"op_time_str":"2017-09-11 15:44:06","operator":"admin","operator_name":"admin","target_ver":null}]
+}
