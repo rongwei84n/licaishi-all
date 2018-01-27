@@ -1,10 +1,5 @@
 package com.phicomm.smarthome.authservice.model.common;
 
-/**
- * 斐讯云账号的 bean对象，用来映射斐讯云账号
- * @author rongwei.huang
- *
- */
 public class PhicommAccountDetailModel {
     private String tokenStatus;
     private String error;

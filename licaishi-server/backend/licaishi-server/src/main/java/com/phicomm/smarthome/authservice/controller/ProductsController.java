@@ -28,8 +28,8 @@ import org.springframework.web.bind.annotation.RestController;
  * @author rongwei.huang
  */
 @RestController
-public class PhiCommTokenAuthController {
-    private static final Logger LOGGER = LogManager.getLogger(PhiCommTokenAuthController.class);
+public class ProductsController {
+    private static final Logger LOGGER = LogManager.getLogger(ProductsController.class);
 
     public static final String DEFAULT_CHARSET = "utf-8";
     public static String HTTP_HEAD_AUTHORIZATION = "Authorization";
@@ -39,14 +39,9 @@ public class PhiCommTokenAuthController {
     PhicommServerConfigModel phicommServer;
 
     /**
-     * 根据斐讯云token请求数据.
-     * @param requestParas 请求的deviceid
-     * @return 返回对应的uid
+     * 查询产品.
      */
-    @RequestMapping(value = "/inner/auth/phicommtoken", method = RequestMethod.POST, produces = { "application/json" })
-    @HystrixCommand(fallbackMethod = "authTokenFallback", commandProperties = {
-            @HystrixProperty(name = "execution.isolation.thread.timeoutInMilliseconds", value = "3000")
-    })
+    @RequestMapping(value = "/app/products", method = RequestMethod.POST, produces = { "application/json" })
     public PhicommAccountDetailModel authPhicommToken(@RequestBody InnerAuthPhicommTokenModel requestParas) {
         if (requestParas == null) {
             LOGGER.info("no request params");
@@ -58,7 +53,7 @@ public class PhiCommTokenAuthController {
             return errorResponse(ResponseStatus.STATUS_NO_PARA_IN_REQUEST);
         }
 
-        return getPhicommAccountByToken(phicommServer.getTokenserver(), requestParas.getToken());
+        return errorResponse(ResponseStatus.STATUS_NO_PARA_IN_REQUEST);
     }
 
     private PhicommAccountDetailModel errorResponse(int code) {
@@ -66,11 +61,6 @@ public class PhiCommTokenAuthController {
         model.setTokenStatus(String.valueOf(code));
         model.setMessage(MyResponseutils.parseMsg(code));
         return model;
-    }
-
-    public PhicommAccountDetailModel authTokenFallback(InnerAuthPhicommTokenModel requestParas) {
-        LOGGER.info("auth phicomm token fallback");
-        return errorResponse(ResponseStatus.STATUS_HYSTRIX_ERROR);
     }
 
     private PhicommAccountDetailModel getPhicommAccountByToken(String phicommCloudServer, String token) {
