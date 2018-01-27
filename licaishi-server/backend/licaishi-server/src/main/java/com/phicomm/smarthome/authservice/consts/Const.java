@@ -2,6 +2,10 @@ package com.phicomm.smarthome.authservice.consts;
 
 public interface Const {
 
+    interface ThirdPart {
+        String PHICOMM_ACCOUNT_URL = "https://accountsym.phicomm.com/v1/accountDetail";
+    }
+
     String DEFAULT_CHARSET = "utf-8";
     /**
      * header头部

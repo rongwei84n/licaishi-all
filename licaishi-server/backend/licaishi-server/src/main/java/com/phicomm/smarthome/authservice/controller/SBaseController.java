@@ -2,6 +2,7 @@ package com.phicomm.smarthome.authservice.controller;
 
 import com.alibaba.fastjson.JSON;
 import com.netflix.discovery.EurekaClient;
+import com.phicomm.smarthome.authservice.consts.Const;
 import com.phicomm.smarthome.authservice.model.common.PhiHomeBaseResponse;
 import com.phicomm.smarthome.authservice.model.common.PhicommAccountDetailModel;
 import com.phicomm.smarthome.authservice.util.PhicommHttpsClient;
@@ -24,8 +25,6 @@ import org.springframework.web.client.RestTemplate;
  *
  */
 public abstract class SBaseController {
-
-    private static final String PHICOMM_ACCOUNT_URL = "https://accountsym.phicomm.com/v1/accountDetail";
 
     public static final String DEFAULT_CHARSET = "utf-8";
     public static String HTTP_HEAD_AUTHORIZATION = "Authorization";
@@ -112,7 +111,7 @@ public abstract class SBaseController {
     protected PhicommAccountDetailModel getPhicommAccountByToken(String token) {
         PhicommAccountDetailModel parsedObj = null;
         try {
-            String accountJson = getPhicommAccountByToken(PHICOMM_ACCOUNT_URL, token);
+            String accountJson = getPhicommAccountByToken(Const.ThirdPart.PHICOMM_ACCOUNT_URL, token);
             logger.debug("accountJson: " + accountJson);
             if (StringUtil.isNotEmpty(accountJson)) {
                 parsedObj = JSON.parseObject(accountJson, PhicommAccountDetailModel.class);
