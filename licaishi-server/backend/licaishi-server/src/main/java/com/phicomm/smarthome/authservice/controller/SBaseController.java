@@ -65,7 +65,7 @@ public abstract class SBaseController {
         return response;
     }
 
-    protected Object getUIDByToken(String token, Object object) {
+    protected Object getUIDByToken(String token) {
         logger.info("token: " + token);
         if (StringUtil.isNullOrEmpty(token)) {
             logger.error("No token in request");

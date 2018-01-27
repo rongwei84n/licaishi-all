@@ -45,7 +45,7 @@ public class ProductsController extends SBaseController {
         String token = request.getHeader(Const.AUTHORIZATION);
         // 通过token获取账户uid
         String uid = null;
-        Object object = getUIDByToken(token, rspObj);
+        Object object = getUIDByToken(token);
         if (object instanceof String) {
             uid = (String) object;
         } else {
@@ -63,6 +63,7 @@ public class ProductsController extends SBaseController {
 
             hotProducts.add(model);
         }
-        return successResponse(hotProducts);
+        rspObj.setResult(hotProducts);
+        return successResponse(rspObj);
     }
 }
