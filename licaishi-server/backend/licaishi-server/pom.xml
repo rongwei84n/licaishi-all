@@ -14,12 +14,12 @@
 
     <modelVersion>4.0.0</modelVersion>
 
-    <groupId>com.phicomm.smarthome</groupId>
-    <artifactId>smarthome-auth-service</artifactId>
+    <groupId>com.auts.licaishi.server</groupId>
+    <artifactId>licaishi-server-backend</artifactId>
     <version>0.1-SNAPSHOT</version>
 
-    <name>smarthome-auth-service</name>
-    <description>smarthome-auth-service</description>
+    <name>licaishi-server-backend</name>
+    <description>licaishi-server-backend</description>
 
     <repositories>
         <repository>
