@@ -28,8 +28,8 @@ import org.springframework.web.client.RestTemplate;
 //@EnableCircuitBreaker
 @EnableDiscoveryClient
 @EnableEurekaClient
-public class SmartHomeAuthServiceMain {
-    private static Logger logger = LogManager.getLogger(SmartHomeAuthServiceMain.class);
+public class LicasishiServerMain {
+    private static Logger logger = LogManager.getLogger(LicasishiServerMain.class);
 
     static {
         ParserConfig.getGlobalInstance().addAccept("com.phicomm.smarthome.authservice.model.");
@@ -56,7 +56,7 @@ public class SmartHomeAuthServiceMain {
      * @param args args
      */
     public static void main(String[] args) {
-        SpringApplication.run(SmartHomeAuthServiceMain.class, args);
+        SpringApplication.run(LicasishiServerMain.class, args);
 
         logger.info("startup success!");
     }
