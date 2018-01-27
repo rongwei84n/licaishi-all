@@ -45,6 +45,6 @@ public class ProductsController extends SBaseController {
             return (PhiHomeBaseResponse) object;
         }
 
-        return errorResponse(Const.STATUS_NO_PARA_IN_REQUEST);
+        return errorResponse(Const.STATUS_OK);
     }
 }

@@ -25,7 +25,7 @@ import org.springframework.web.client.RestTemplate;
  */
 public abstract class SBaseController {
 
-    private static final String PHICOMM_ACCOUNT_URL = "https://accountsym.phicomm.com";
+    private static final String PHICOMM_ACCOUNT_URL = "https://accountsym.phicomm.com/v1/accountDetail";
 
     public static final String DEFAULT_CHARSET = "utf-8";
     public static String HTTP_HEAD_AUTHORIZATION = "Authorization";
