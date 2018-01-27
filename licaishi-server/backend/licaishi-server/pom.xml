@@ -207,17 +207,10 @@
     
     <profiles>
         <profile>
-            <id>dev</id>
+            <id>prod</id>
             <activation>
                 <activeByDefault>true</activeByDefault>
             </activation>
-            <properties>
-                <package.env>dev</package.env>
-                <plugin.phase>package</plugin.phase>
-            </properties>
-        </profile>
-        <profile>
-            <id>prod</id>
             <properties>
                 <package.env>prod</package.env>
                 <plugin.phase>package</plugin.phase>

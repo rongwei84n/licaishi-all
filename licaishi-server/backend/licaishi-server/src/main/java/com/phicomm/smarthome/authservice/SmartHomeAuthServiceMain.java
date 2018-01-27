@@ -19,13 +19,13 @@ import org.springframework.context.annotation.PropertySources;
 import org.springframework.web.client.RestTemplate;
 
 /**
- *  Phihome鉴权服务.
+ *  理财师端入口.
  *  @author rongwei.huang
  */
 @SpringBootApplication(scanBasePackages = { "com.phicomm.smarthome.**" })
 @PropertySources({ @PropertySource(value = "classpath:application.properties", ignoreResourceNotFound = true) })
 @MapperScan("com.phicomm.smarthome.authservice.dao.**")
-@EnableCircuitBreaker
+//@EnableCircuitBreaker
 @EnableDiscoveryClient
 @EnableEurekaClient
 public class SmartHomeAuthServiceMain {
