@@ -3,7 +3,6 @@ package com.phicomm.smarthome.authservice.controller;
 import com.phicomm.smarthome.authservice.consts.Const;
 import com.phicomm.smarthome.authservice.model.common.PhiHomeBaseResponse;
 import com.phicomm.smarthome.authservice.model.common.PhicommServerConfigModel;
-import com.phicomm.smarthome.consts.PhihomeConst;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -35,7 +34,7 @@ public class ProductsController extends SBaseController {
     @RequestMapping(value = "/server/hot_products", method = RequestMethod.GET, produces = { "application/json" })
     public PhiHomeBaseResponse hotProducts(HttpServletRequest request) {
         PhiHomeBaseResponse rspObj = new PhiHomeBaseResponse();
-        String token = request.getHeader(PhihomeConst.AUTHORIZATION);
+        String token = request.getHeader(Const.AUTHORIZATION);
         // 通过token获取账户uid
         String uid = null;
         Object object = getUIDByToken(token, rspObj);

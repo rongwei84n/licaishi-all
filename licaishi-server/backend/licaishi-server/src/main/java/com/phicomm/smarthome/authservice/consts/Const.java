@@ -2,6 +2,16 @@ package com.phicomm.smarthome.authservice.consts;
 
 public interface Const {
 
+    String DEFAULT_CHARSET = "utf-8";
+    /**
+     * header头部
+     */
+    String AUTHORIZATION = "Authorization";
+
+    String PHI_HOME_PREFIX = "PHIHOME";
+
+    String X_APP_INFO = "x-app-info";
+
     int STATUS_OK = 200;
     int STATUS_ERROR = 1;
 
