@@ -15,7 +15,12 @@ public class ProductsImpl implements ProductsService {
     ProductsMapper mapper;
 
     @Override
-    public List<ProductModel> queryProducts() {
-        return null;
+    public List<ProductModel> queryHotProducts() {
+        try {
+            return mapper.queryHotProducts();
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        }
     }
 }

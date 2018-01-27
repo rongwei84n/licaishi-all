@@ -2,4 +2,4 @@
 mvn clean package
 
 运行
-java -jar target/xx.jar
+java -jar target/licaishi-server-backend-0.1-SNAPSHOT.jar

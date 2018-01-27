@@ -6,5 +6,5 @@ import com.phicomm.smarthome.authservice.model.dao.ProductModel;
 
 public interface ProductsService {
 
-    List<ProductModel> queryProducts();
+    List<ProductModel> queryHotProducts();
 }

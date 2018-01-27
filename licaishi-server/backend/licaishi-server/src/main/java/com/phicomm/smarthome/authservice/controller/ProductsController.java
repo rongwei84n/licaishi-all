@@ -3,6 +3,11 @@ package com.phicomm.smarthome.authservice.controller;
 import com.phicomm.smarthome.authservice.consts.Const;
 import com.phicomm.smarthome.authservice.model.common.PhiHomeBaseResponse;
 import com.phicomm.smarthome.authservice.model.common.PhicommServerConfigModel;
+import com.phicomm.smarthome.authservice.model.dao.ProductModel;
+import com.phicomm.smarthome.authservice.service.ProductsService;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -28,8 +33,11 @@ public class ProductsController extends SBaseController {
     @Autowired
     PhicommServerConfigModel phicommServer;
 
+    @Autowired
+    ProductsService productsService;
+
     /**
-     * 查询产品.
+     * 查询热门产品.
      */
     @RequestMapping(value = "/server/hot_products", method = RequestMethod.GET, produces = { "application/json" })
     public PhiHomeBaseResponse hotProducts(HttpServletRequest request) {
@@ -44,6 +52,17 @@ public class ProductsController extends SBaseController {
             return (PhiHomeBaseResponse) object;
         }
 
-        return errorResponse(Const.STATUS_OK);
+//        List<ProductModel> hotProducts = productsService.queryHotProducts();
+        List<ProductModel> hotProducts = new ArrayList<>();
+        for (int i = 0; i < 10; i++) {
+            ProductModel model = new ProductModel();
+            model.setId((long) i);
+            model.setName("赚钱" + i);
+            model.setTimeLimit("12个月");
+            model.setUrl("www.baidu.com");
+
+            hotProducts.add(model);
+        }
+        return successResponse(hotProducts);
     }
 }
