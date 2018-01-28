@@ -54,12 +54,16 @@ public class ProductsController extends SBaseController {
 
 //        List<ProductModel> hotProducts = productsService.queryHotProducts();
         List<ProductModel> hotProducts = new ArrayList<>();
-        for (int i = 0; i < 10; i++) {
+        for (int i = 0; i < 3; i++) {
             ProductModel model = new ProductModel();
             model.setId((long) i);
             model.setName("赚钱" + i);
             model.setTimeLimit("12个月");
-            model.setUrl("www.baidu.com");
+            model.setPic("www.baidu.com");
+            model.setField("基础设施");
+            model.setRebateP("0.05");
+            model.setProgress("0.59");
+            model.setIncomeP("0.09");
 
             hotProducts.add(model);
         }

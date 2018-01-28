@@ -8,11 +8,23 @@ public class ProductModel extends BaseDaoModel {
 
     private String name;
 
-    private String url;
+    private String pic;
 
     @JsonProperty("time_limit")
     @JSONField(name = "time_limit")
     private String timeLimit;
+
+    private String field;
+
+    @JsonProperty("rebate_p")
+    @JSONField(name = "rebate_p")
+    private String rebateP;
+
+    private String progress;
+
+    @JsonProperty("income_p")
+    @JSONField(name = "income_p")
+    private String incomeP;
 
     public String getName() {
         return name;
@@ -22,19 +34,51 @@ public class ProductModel extends BaseDaoModel {
         this.name = name;
     }
 
-    public String getUrl() {
-        return url;
-    }
-
-    public void setUrl(String url) {
-        this.url = url;
-    }
-
     public String getTimeLimit() {
         return timeLimit;
     }
 
     public void setTimeLimit(String timeLimit) {
         this.timeLimit = timeLimit;
+    }
+
+    public String getPic() {
+        return pic;
+    }
+
+    public void setPic(String pic) {
+        this.pic = pic;
+    }
+
+    public String getField() {
+        return field;
+    }
+
+    public void setField(String field) {
+        this.field = field;
+    }
+
+    public String getRebateP() {
+        return rebateP;
+    }
+
+    public void setRebateP(String rebateP) {
+        this.rebateP = rebateP;
+    }
+
+    public String getProgress() {
+        return progress;
+    }
+
+    public void setProgress(String progress) {
+        this.progress = progress;
+    }
+
+    public String getIncomeP() {
+        return incomeP;
+    }
+
+    public void setIncomeP(String incomeP) {
+        this.incomeP = incomeP;
     }
 }

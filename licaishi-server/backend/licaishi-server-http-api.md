@@ -54,9 +54,12 @@ response:
     "result": [
     	{
     		"name":"国通信托",
+    		"income_p":"0.09"//预计年化
     		"time_limit":"24个月",
-    		"pic":"http:///xxx.img"
-    		...
+    		"pic":"http:///xxx.img"，
+    		"filed":"基础设施" //投资领域,
+    		"rebate_p":"0.34"//返佣比例,
+    		"progress":"0.8"//进度
     	},
     	{
     	
