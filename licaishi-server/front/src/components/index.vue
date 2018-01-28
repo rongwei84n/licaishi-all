@@ -77,7 +77,7 @@
             },
             getHotProducts: function () {
               alert('热门产品')
-              window.phihome.util.netRequest('get','http://192.168.1.101:8094/server/hot_products','', '',function (response) {
+              window.phihome.util.netRequest('get','http://192.168.1.107:8094/server/hot_products','', '',function (response) {
 
               })
             }
