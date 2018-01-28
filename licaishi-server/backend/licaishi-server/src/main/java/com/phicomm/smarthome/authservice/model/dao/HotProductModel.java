@@ -26,6 +26,16 @@ public class HotProductModel extends BaseDaoModel {
     @JSONField(name = "income_p")
     private String incomeP;
 
+    private String type;
+
+    public String getType() {
+        return type;
+    }
+
+    public void setType(String type) {
+        this.type = type;
+    }
+
     public String getName() {
         return name;
     }

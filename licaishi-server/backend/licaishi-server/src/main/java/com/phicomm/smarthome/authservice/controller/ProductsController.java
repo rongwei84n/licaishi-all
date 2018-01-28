@@ -65,6 +65,7 @@ public class ProductsController extends SBaseController {
             model.setRebateP("0.05");
             model.setProgress("0.59");
             model.setIncomeP("0.09");
+            model.setType("综合资管");
 
             hotProducts.add(model);
         }
@@ -103,6 +104,7 @@ public class ProductsController extends SBaseController {
             model.setRebateP("0.05");
             model.setProgress("0.59");
             model.setIncomeP("0.09");
+            model.setType("综合资管");
 
             hotProducts.add(model);
         }
@@ -139,6 +141,7 @@ public class ProductsController extends SBaseController {
             model.setRebateP("0.05");
             model.setProgress("0.59");
             model.setIncomeP("0.09");
+            model.setType("综合资管");
 
             hotProducts.add(model);
         }
@@ -175,6 +178,7 @@ public class ProductsController extends SBaseController {
             model.setRebateP("0.05");
             model.setProgress("0.59");
             model.setIncomeP("0.09");
+            model.setType("综合资管");
 
             hotProducts.add(model);
         }
