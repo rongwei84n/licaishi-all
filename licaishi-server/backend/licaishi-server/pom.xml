@@ -104,14 +104,14 @@
             <version>${mysql-connector}</version>
         </dependency>
         
-        <dependency>
+        <!-- <dependency>
             <groupId>org.springframework.cloud</groupId>
             <artifactId>spring-cloud-starter-eureka</artifactId>
-        </dependency>
-        <dependency>
+        </dependency> -->
+        <!-- <dependency>
             <groupId>org.springframework.cloud</groupId>
             <artifactId>spring-cloud-starter-hystrix</artifactId>
-        </dependency>
+        </dependency> -->
         
         <!-- <dependency>
             <groupId>com.phicomm.smarthome</groupId>
@@ -182,10 +182,6 @@
             <scope>test</scope>  
         </dependency>
         
-        <dependency>  
-            <groupId>org.springframework.boot</groupId>  
-            <artifactId>spring-boot-starter-data-mongodb</artifactId>  
-        </dependency>
     </dependencies>
     <dependencyManagement>
         <dependencies>

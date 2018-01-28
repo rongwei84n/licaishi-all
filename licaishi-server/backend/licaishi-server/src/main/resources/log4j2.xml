@@ -3,7 +3,7 @@
 <configuration status="off" monitorInterval="1800">  
     <properties>  
         <property name="LOG_HOME">logs</property>  
-        <property name="SERVICE_NAME">licaishi-server</property>
+        <property name="SERVICE_NAME">licaishi-server-backend</property>
     </properties>  
     <appenders>
 		<!-- 定义控制台输出 -->

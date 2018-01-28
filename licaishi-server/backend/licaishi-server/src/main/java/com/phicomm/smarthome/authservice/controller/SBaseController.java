@@ -1,7 +1,7 @@
 package com.phicomm.smarthome.authservice.controller;
 
 import com.alibaba.fastjson.JSON;
-import com.netflix.discovery.EurekaClient;
+//import com.netflix.discovery.EurekaClient;
 import com.phicomm.smarthome.authservice.consts.Const;
 import com.phicomm.smarthome.authservice.model.common.PhiHomeBaseResponse;
 import com.phicomm.smarthome.authservice.model.common.PhicommAccountDetailModel;
@@ -14,8 +14,8 @@ import java.util.Map;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.client.RestTemplate;
+//import org.springframework.beans.factory.annotation.Autowired;
+//import org.springframework.web.client.RestTemplate;
 
 /**
  * Phihome Controller基类, 提供了一些返回的基本功能.
@@ -31,10 +31,10 @@ public abstract class SBaseController {
 
     private static Logger logger = LogManager.getLogger(SBaseController.class);
 
-    private RestTemplate restTemplate = new RestTemplate();
+//    private RestTemplate restTemplate = new RestTemplate();
 
-    @Autowired
-    private EurekaClient discoveryClient;
+//    @Autowired
+//    private EurekaClient discoveryClient;
 
     public static PhiHomeBaseResponse geResponse(Object result) {
         PhiHomeBaseResponse smartHomeResponseT = new PhiHomeBaseResponse();
