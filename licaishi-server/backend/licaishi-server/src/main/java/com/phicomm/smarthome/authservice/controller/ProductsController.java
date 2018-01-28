@@ -51,6 +51,7 @@ public class ProductsController extends SBaseController {
         } else {
             return (PhiHomeBaseResponse) object;
         }
+        LOGGER.info("partialHotProducts uid [{}]", uid);
 
 //        List<ProductModel> hotProducts = productsService.queryHotProducts();
         List<HotProductModel> hotProducts = new ArrayList<>();
@@ -76,6 +77,7 @@ public class ProductsController extends SBaseController {
      */
     @RequestMapping(value = "/server/all_hot_products", method = RequestMethod.GET, produces = { "application/json" })
     public PhiHomeBaseResponse allHotProducts(HttpServletRequest request) {
+        LOGGER.info("allHotProducts");
         PhiHomeBaseResponse rspObj = new PhiHomeBaseResponse();
         String token = request.getHeader(Const.AUTHORIZATION);
         // 通过token获取账户uid
@@ -86,6 +88,8 @@ public class ProductsController extends SBaseController {
         } else {
             return (PhiHomeBaseResponse) object;
         }
+
+        LOGGER.info("allHotProducts uid [{}]", uid);
 
 //        List<ProductModel> hotProducts = productsService.queryHotProducts();
         List<HotProductModel> hotProducts = new ArrayList<>();
@@ -121,6 +125,7 @@ public class ProductsController extends SBaseController {
         } else {
             return (PhiHomeBaseResponse) object;
         }
+        LOGGER.info("partialRecommendProducts uid [{}]", uid);
 
 //        List<ProductModel> hotProducts = productsService.queryHotProducts();
         List<HotProductModel> hotProducts = new ArrayList<>();
@@ -156,6 +161,7 @@ public class ProductsController extends SBaseController {
         } else {
             return (PhiHomeBaseResponse) object;
         }
+        LOGGER.info("allRecommendProducts uid [{}]", uid);
 
 //        List<ProductModel> hotProducts = productsService.queryHotProducts();
         List<HotProductModel> hotProducts = new ArrayList<>();
