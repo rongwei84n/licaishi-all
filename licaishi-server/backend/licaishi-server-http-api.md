@@ -94,7 +94,7 @@ result | object | 业务结果,统一都有带这个字段返回
 请求例子
 
 ```
-get /v1/server/partial_hot_products
+get /v1/server/all_hot_products
 {
    "platid":"2015100011",
 	"vercode":1,  
