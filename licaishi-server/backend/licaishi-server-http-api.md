@@ -109,6 +109,7 @@ response:
     "result": [
     	{
     		"name":"国通信托",
+    		"type":"综合资管",
     		"income_p":"0.09"//预计年化
     		"time_limit":"24个月",
     		"pic":"http:///xxx.img"，
@@ -164,6 +165,7 @@ response:
     "result": [
     	{
     		"name":"国通信托",
+    		"type":"综合资管",
     		"income_p":"0.09"//预计年化
     		"time_limit":"24个月",
     		"pic":"http:///xxx.img"，
@@ -218,6 +220,7 @@ response:
     "result": [
     	{
     		"name":"国通信托",
+    		"type":"综合资管",
     		"income_p":"0.09"//预计年化
     		"time_limit":"24个月",
     		"pic":"http:///xxx.img"，
