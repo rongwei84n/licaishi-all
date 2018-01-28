@@ -4,6 +4,8 @@
             <mt-swipe-item><div class="banner1 banner" style="background:url('./static/banner1.jpg');background-size: cover;"></div></mt-swipe-item>
             <mt-swipe-item><div class="banner2 banner" style="background:url('./static/banner2.jpg');background-size: cover;"></div></mt-swipe-item>
         </mt-swipe>
+
+        <div v-on:click="getHotProducts">热门产品</div>
         <ul class="icon-list">
             <li class="icon">
                 <img src="../assets/scan.png" class="clear">
@@ -34,14 +36,14 @@
                 <h4>个人中心</h4>
                 <p>信息管理，logo更换</p>
                 <i></i>
-            </li>                     
+            </li>
         </ul>
         <mt-popup
           :visible.sync="popupVisible"
           popup-transition="popup-fade"
           position="top">
         同步成功</mt-popup>
-    </div>  
+    </div>
 </template>
 <script type="text/javascript">
     import { synchroOrder } from '../vuex/action'
@@ -50,8 +52,8 @@
         init:function(){
             if(window.localStorage.user == null){
                 //window.location.href = window.location.origin + window.location.pathname + '#!/login'
-                console.log('请登录')
-                this.$router.go({path:'/login'})
+                // console.log('请登录')
+                // this.$router.go({path:'/login'})
             }
         },
         data(){
@@ -72,6 +74,12 @@
                 if(this.order_status){
                     this.popupVisible = !this.popupVisible
                 }
+            },
+            getHotProducts: function () {
+              alert('热门产品')
+              window.phihome.util.netRequest('get','http://192.168.1.101:8094/server/hot_products','', '',function (response) {
+
+              })
             }
         }
     }

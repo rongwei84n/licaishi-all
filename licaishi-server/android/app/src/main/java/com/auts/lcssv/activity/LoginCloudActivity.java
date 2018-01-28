@@ -177,6 +177,12 @@ public class LoginCloudActivity extends BaseActivity implements ILoadingView {
     //点击登录
     @OnClick(R.id.tv_login)
     public void tv_login() {
+        String url = mEdtNetUrl.getText().toString();
+        if (TextUtils.isEmpty(url)) {
+            ToastUtil.show("输入vue的部署地址-调试版本");
+            return;
+        }
+
         mUser = mMyEtUser.getContent();
         mPwd = mMyEtPwd.getAllContent();
         if (checkInput()) {
@@ -248,7 +254,14 @@ public class LoginCloudActivity extends BaseActivity implements ILoadingView {
         if (JPushInterface.isPushStopped(PhApplication.getPhApplication())) {
             JPushInterface.resumePush(PhApplication.getPhApplication());
         }
-        startActivity(new Intent(this, MainActivity.class));
+
+        String url = mEdtNetUrl.getText().toString();
+        if (TextUtils.isEmpty(url)) {
+            return;
+        }
+        Intent intent = new Intent(this, JsBridgeActivity.class);
+        intent.putExtra(AppConstans.Common.INTENT_URL,url);
+        startActivity(intent);
         finish();
     }
 
