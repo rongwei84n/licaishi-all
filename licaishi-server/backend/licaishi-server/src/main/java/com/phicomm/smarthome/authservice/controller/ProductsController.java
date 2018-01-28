@@ -105,4 +105,74 @@ public class ProductsController extends SBaseController {
         rspObj.setResult(hotProducts);
         return successResponse(rspObj);
     }
+
+    /**
+     * 查询首页部分热门产品.
+     */
+    @RequestMapping(value = "/server/partial_recommend_products", method = RequestMethod.GET, produces = { "application/json" })
+    public PhiHomeBaseResponse partialRecommendProducts(HttpServletRequest request) {
+        PhiHomeBaseResponse rspObj = new PhiHomeBaseResponse();
+        String token = request.getHeader(Const.AUTHORIZATION);
+        // 通过token获取账户uid
+        String uid = null;
+        Object object = getUIDByToken(token);
+        if (object instanceof String) {
+            uid = (String) object;
+        } else {
+            return (PhiHomeBaseResponse) object;
+        }
+
+//        List<ProductModel> hotProducts = productsService.queryHotProducts();
+        List<HotProductModel> hotProducts = new ArrayList<>();
+        for (int i = 0; i < 2; i++) {
+            HotProductModel model = new HotProductModel();
+            model.setId((long) i);
+            model.setName("赚钱" + i);
+            model.setTimeLimit("12个月");
+            model.setPic("www.baidu.com");
+            model.setField("基础设施");
+            model.setRebateP("0.05");
+            model.setProgress("0.59");
+            model.setIncomeP("0.09");
+
+            hotProducts.add(model);
+        }
+        rspObj.setResult(hotProducts);
+        return successResponse(rspObj);
+    }
+
+    /**
+     * 查询首页部分热门产品.
+     */
+    @RequestMapping(value = "/server/all_recommend_products", method = RequestMethod.GET, produces = { "application/json" })
+    public PhiHomeBaseResponse allRecommendProducts(HttpServletRequest request) {
+        PhiHomeBaseResponse rspObj = new PhiHomeBaseResponse();
+        String token = request.getHeader(Const.AUTHORIZATION);
+        // 通过token获取账户uid
+        String uid = null;
+        Object object = getUIDByToken(token);
+        if (object instanceof String) {
+            uid = (String) object;
+        } else {
+            return (PhiHomeBaseResponse) object;
+        }
+
+//        List<ProductModel> hotProducts = productsService.queryHotProducts();
+        List<HotProductModel> hotProducts = new ArrayList<>();
+        for (int i = 0; i < 6; i++) {
+            HotProductModel model = new HotProductModel();
+            model.setId((long) i);
+            model.setName("赚钱" + i);
+            model.setTimeLimit("12个月");
+            model.setPic("www.baidu.com");
+            model.setField("基础设施");
+            model.setRebateP("0.05");
+            model.setProgress("0.59");
+            model.setIncomeP("0.09");
+
+            hotProducts.add(model);
+        }
+        rspObj.setResult(hotProducts);
+        return successResponse(rspObj);
+    }
 }
