@@ -3,7 +3,7 @@ package com.phicomm.smarthome.authservice.controller;
 import com.phicomm.smarthome.authservice.consts.Const;
 import com.phicomm.smarthome.authservice.model.common.PhiHomeBaseResponse;
 import com.phicomm.smarthome.authservice.model.common.PhicommServerConfigModel;
-import com.phicomm.smarthome.authservice.model.dao.ProductModel;
+import com.phicomm.smarthome.authservice.model.dao.HotProductModel;
 import com.phicomm.smarthome.authservice.service.ProductsService;
 
 import java.util.ArrayList;
@@ -37,9 +37,9 @@ public class ProductsController extends SBaseController {
     ProductsService productsService;
 
     /**
-     * 查询热门产品.
+     * 查询首页部分热门产品.
      */
-    @RequestMapping(value = "/server/hot_products", method = RequestMethod.GET, produces = { "application/json" })
+    @RequestMapping(value = "/server/partial_hot_products", method = RequestMethod.GET, produces = { "application/json" })
     public PhiHomeBaseResponse hotProducts(HttpServletRequest request) {
         PhiHomeBaseResponse rspObj = new PhiHomeBaseResponse();
         String token = request.getHeader(Const.AUTHORIZATION);
@@ -53,9 +53,9 @@ public class ProductsController extends SBaseController {
         }
 
 //        List<ProductModel> hotProducts = productsService.queryHotProducts();
-        List<ProductModel> hotProducts = new ArrayList<>();
-        for (int i = 0; i < 3; i++) {
-            ProductModel model = new ProductModel();
+        List<HotProductModel> hotProducts = new ArrayList<>();
+        for (int i = 0; i < 2; i++) {
+            HotProductModel model = new HotProductModel();
             model.setId((long) i);
             model.setName("赚钱" + i);
             model.setTimeLimit("12个月");

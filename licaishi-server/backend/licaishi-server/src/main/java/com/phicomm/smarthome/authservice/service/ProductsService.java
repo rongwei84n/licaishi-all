@@ -2,9 +2,9 @@ package com.phicomm.smarthome.authservice.service;
 
 import java.util.List;
 
-import com.phicomm.smarthome.authservice.model.dao.ProductModel;
+import com.phicomm.smarthome.authservice.model.dao.HotProductModel;
 
 public interface ProductsService {
 
-    List<ProductModel> queryHotProducts();
+    List<HotProductModel> queryHotProducts();
 }

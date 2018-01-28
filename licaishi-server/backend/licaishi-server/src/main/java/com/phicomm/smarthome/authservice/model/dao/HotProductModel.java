@@ -4,7 +4,7 @@ import com.alibaba.fastjson.annotation.JSONField;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.phicomm.smarthome.authservice.model.common.BaseDaoModel;
 
-public class ProductModel extends BaseDaoModel {
+public class HotProductModel extends BaseDaoModel {
 
     private String name;
 

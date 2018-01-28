@@ -5,7 +5,7 @@ import java.util.List;
 import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
 
-import com.phicomm.smarthome.authservice.model.dao.ProductModel;
+import com.phicomm.smarthome.authservice.model.dao.HotProductModel;
 
 /**
  * 产品表方法入口
@@ -33,10 +33,10 @@ public interface ProductsMapper {
     /**
      */
     @Select("select * from ph_device where device_id=#{deviceId} and status=0 limit 1")
-    ProductModel queryProducts(@Param("deviceId") String deviceId);
+    HotProductModel queryProducts(@Param("deviceId") String deviceId);
 
     /**
      */
     @Select("select * from ph_device where device_id=#{deviceId} and status=0 limit 1")
-    List<ProductModel> queryHotProducts();
+    List<HotProductModel> queryHotProducts();
 }
