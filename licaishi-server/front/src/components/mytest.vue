@@ -1,29 +1,29 @@
 <template>
   <div class="order-container">
-    <input type="button" value="点击获取" @click="get()"/>
 
-    <!--<li v-for="item in arrs" v-on:click="item.completed = ! item.completed">-->
-      <!--&lt;!&ndash; {{item}} &ndash;&gt;-->
+    <input type="button" value="热门产品" v-on:click="getHotProducts"></input>
+    <p>{{xxx}}</p>
 
-      <!--<span class="title">{{item.title}}</span>-->
+    <ul id="example-1">
+      <li v-for="hot_p in hotProducts">
+        {{ hot_p.name }}
+        {{hot_p.url}}
+      </li>
+    </ul>
 
-    <!--</li>-->
-
-    <button v-on:click="invokeNative">调用本地方法</button>
   </div>
 </template>
 <script type="text/javascript">
   import { changeOrder, changeStatus} from '../vuex/action'
-  export default{
-    data(){
-      let checked = true
-      let checkedNames = []
-      let selected = '未选择'
-      let age
-      let imgDataUrl = ''
-      let arrs
 
-      return {checked, checkedNames, selected, age, imgDataUrl, arrs}
+  let prods = []; // 热门产品
+  export default {
+    data() {
+      return {
+        xxx:'xx',
+        roomJsonArr:[],
+        hotProducts:[prods]
+      }
     },
     vuex:{
       getters: {
@@ -49,13 +49,46 @@
       preview: function(event){
         this.imgDataUrl = event.target.files;
       },
-      invokeNative: function () {
-        alert('调用本地方法')
-        window.phihome.util.netRequest('get','http://114.141.173.53/v1/accountDetail','', '',function (response) {
+      getHotProducts: function () {
+        let _this = this;
+        window.phihome.util.netRequest('get','http://192.168.1.109:8094/server/hot_products','', '',function (response) {
+          let errorMessage;
+          response = JSON.parse(response);
+          if (response.errorCode == 0) {
+            let netResponse = JSON.parse(response.netResponse);
 
+            let responseResult = netResponse.result;
+            _this.roomJsonArr = [];
+            for (let i = 0; i < responseResult.length; i++) {
+              let hotProI = responseResult[i];
+              _this.roomJsonArr.push({'name': hotProI.name, 'url': hotProI.url});
+            }
+            _this.$data.hotProducts = _this.roomJsonArr;
+
+
+            // if (netResponse.status == 200) {
+            //   _this.hotProducts = netResponse.message;
+            //   window.phihome.app.hideLoading('', function (response) {
+            //   });
+            // } else {
+            //   if (netResponse.status == 11001) { // 账号下没有该设备，返回设备首页
+            //     _this.device_name = '智能排插TC1';
+            //     _this.toast_show = true;
+            //   } else {
+            //     window.phihome.app.toast(netResponse.message, function (response) {
+            //     });
+            //     window.phihome.app.hideLoading('', function (response) {
+            //     });
+            //   }
+            // }
+          } else {
+            errorMessage = response.errorMsg;
+            window.phihome.app.toast(errorMessage, function (response) {
+            });
+            window.phihome.app.hideLoading('', function (response) {
+            });
+          }
         })
-
-
       }
 
     }

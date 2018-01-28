@@ -63,7 +63,7 @@ public class JavaBridge implements Serializable {
         } else {
             webView.loadUrl("javascript:" + script);
         }
-//        onPageFinish();
+        onPageFinish();
     }
 
     public static String convertStreamToString(InputStream is) {
