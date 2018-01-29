@@ -18,7 +18,7 @@ Authorization | string | 必填| Header| 构造形式必须 Bearer xxxxxxxxxxxxx
 - 首页查询部分热销产品，一般两条
 
 ```
-get /v1/server/partial_hot_products
+get /srv/v1/partial_hot_products
 ```
 请求参数:
 
@@ -40,7 +40,7 @@ result | object | 业务结果,统一都有带这个字段返回
 请求例子
 
 ```
-get /v1/server/partial_hot_products
+get /srv/v1/partial_hot_products
 {
    "platid":"2015100011",
 	"vercode":1,  
@@ -73,7 +73,7 @@ response:
 - 所有热销产品
 
 ```
-get /v1/server/all_hot_products
+get /srv/v1/all_hot_products
 ```
 请求参数:
 
@@ -95,7 +95,7 @@ result | object | 业务结果,统一都有带这个字段返回
 请求例子
 
 ```
-get /v1/server/all_hot_products
+get /srv/v1/all_hot_products
 {
    "platid":"2015100011",
 	"vercode":1,  
@@ -129,7 +129,7 @@ response:
 - 首页查询部分最新推荐
 
 ```
-get /v1/server/partial_recommend_products
+get /srv/v1/partial_recommend_products
 ```
 请求参数:
 
@@ -151,7 +151,7 @@ result | object | 业务结果,统一都有带这个字段返回
 请求例子
 
 ```
-get /v1/server/partial_recommend_products
+get /srv/v1/partial_recommend_products
 {
    "platid":"2015100011",
 	"vercode":1,  
@@ -184,7 +184,7 @@ response:
 - 所有推荐产品，首页推荐产品更多
 
 ```
-get /v1/server/all_recommend_products
+get /srv/v1/all_recommend_products
 ```
 请求参数:
 
@@ -206,7 +206,7 @@ result | object | 业务结果,统一都有带这个字段返回
 请求例子
 
 ```
-get /v1/server/all_recommend_products
+get /srv/v1/all_recommend_products
 {
    "platid":"2015100011",
 	"vercode":1,  
