@@ -4,8 +4,9 @@ package com.phicomm.smarthome.authservice.controller.account;
 import com.phicomm.smarthome.authservice.controller.SBaseController;
 import com.phicomm.smarthome.authservice.model.common.PhicommServerConfigModel;
 import com.phicomm.smarthome.authservice.model.request.LoginRequestModel;
+import com.phicomm.smarthome.authservice.model.request.RegistRequestModel;
 import com.phicomm.smarthome.authservice.model.response.LoginResponseModel;
-
+import com.phicomm.smarthome.authservice.model.response.RegistResponseModel;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -39,15 +40,6 @@ public class AccountController extends SBaseController {
      */
     @RequestMapping(value = "/srv/v1/login", method = RequestMethod.POST, produces = { "application/json" })
     public LoginResponseModel login(HttpServletRequest request, @RequestBody LoginRequestModel requestModel) {
-//        String token = request.getHeader(Const.AUTHORIZATION);
-//        // 通过token获取账户uid
-//        String uid = null;
-//        Object object = getUIDByToken(token);
-//        if (object instanceof String) {
-//            uid = (String) object;
-//        } else {
-//            return (PhiHomeBaseResponse) object;
-//        }
         LOGGER.info("login request");
 
         LoginResponseModel rsp = new LoginResponseModel();
@@ -57,6 +49,19 @@ public class AccountController extends SBaseController {
         rsp.setRefreshTokenExpire("xx");
         rsp.setRefreshToken("xx");
         rsp.setUid("213");
+        return rsp;
+    }
+
+    /**
+     * 注册.
+     */
+    @RequestMapping(value = "/srv/v1/account", method = RequestMethod.POST, produces = { "application/json" })
+    public RegistResponseModel account(HttpServletRequest request, @RequestBody RegistRequestModel requestModel) {
+        LOGGER.info("regist request [{}]", requestModel);
+
+        RegistResponseModel rsp = new RegistResponseModel();
+        rsp.setError("1");
+        rsp.setUid("234342");
         return rsp;
     }
 }
