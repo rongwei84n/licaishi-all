@@ -4,8 +4,10 @@ package com.phicomm.smarthome.authservice.controller.account;
 import com.phicomm.smarthome.authservice.controller.SBaseController;
 import com.phicomm.smarthome.authservice.model.common.PhicommServerConfigModel;
 import com.phicomm.smarthome.authservice.model.request.LoginRequestModel;
+import com.phicomm.smarthome.authservice.model.request.PasswordRequestModel;
 import com.phicomm.smarthome.authservice.model.request.RegistRequestModel;
 import com.phicomm.smarthome.authservice.model.response.LoginResponseModel;
+import com.phicomm.smarthome.authservice.model.response.PasswordResponseModel;
 import com.phicomm.smarthome.authservice.model.response.RegistResponseModel;
 
 import javax.servlet.http.HttpServletRequest;
@@ -20,8 +22,6 @@ import org.springframework.web.bind.annotation.RestController;
 
 /**
  * 账户相关的Controller.
- * @author huangrongwei
- *
  */
 @RestController
 public class AccountController extends SBaseController {
@@ -62,6 +62,17 @@ public class AccountController extends SBaseController {
         RegistResponseModel rsp = new RegistResponseModel();
         rsp.setError("1");
         rsp.setUid("234342");
+        return rsp;
+    }
+
+    /**
+     * 修改密码.
+     */
+    @RequestMapping(value = "/srv/v1/password", method = RequestMethod.POST, produces = { "application/json" })
+    public PasswordResponseModel password(HttpServletRequest request, @RequestBody PasswordRequestModel requestModel) {
+        LOGGER.info("regist request [{}]", requestModel);
+
+        PasswordResponseModel rsp = new PasswordResponseModel();
         return rsp;
     }
 }
