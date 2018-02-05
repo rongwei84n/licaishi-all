@@ -12,6 +12,7 @@ import android.view.Gravity;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.auts.lcssv.PhApplication;
@@ -66,19 +67,24 @@ public class LoginCloudActivity extends BaseActivity implements ILoadingView {
     @BindView(R.id.tv_login)
     TextView mTvLogin;
     @BindView(R.id.ll_bottom)
-    LinearLayout mLlBottom;
+    RelativeLayout mLlBottom;
     @BindView(R.id.tv_forget_pwd)
     TextView forget;
 
-    @BindView(R.id.edt_neturl)
-    EditText mEdtNetUrl;
+    @BindView(R.id.iv_back)
+    View mIvBack;
 
+    @BindView(R.id.tv_title)
+    TextView mTvtitle;
+
+    @BindView(R.id.view_div)
+    View mViewdiv;
 
     private CloudAccountPresenter mPresenter;
     private String mUser;
     private String mPwd;
     private KeyboardHelper keyboardHelper;
-    private Integer mLlBottomInitHeight;//mllBottom布局初始高度
+//    private Integer mLlBottomInitHeight;//mllBottom布局初始高度
 
     @Override
     public void initLayout(Bundle savedInstanceState) {
@@ -87,36 +93,38 @@ public class LoginCloudActivity extends BaseActivity implements ILoadingView {
 
     @Override
     public void afterInitView() {
+        mViewdiv.setVisibility(View.GONE);
+        mTvtitle.setText("理财社区登录");
         new UpdateManager(this).appUpdate(false);
         initPresenter();
         getExtra();
-        ViewUtils.changeBtn(mMyEtUser.getEt(), 13, mMyEtPwd.getEt(), 6, mTvLogin);
-        ShadowUtil.setShadowSelectorBg(mTvLogin, getResources().getColor(R.color.btn_disable_bg));
+//        ViewUtils.changeBtn(mMyEtUser.getEt(), 13, mMyEtPwd.getEt(), 6, mTvLogin);
+        ShadowUtil.setShadowSelectorBg(mTvLogin, getResources().getColor(R.color.btn_enable_bg));
         mMyEtPwd.setContent("");
         if (!JPushInterface.isPushStopped(PhApplication.getPhApplication())) {
             JPushInterface.stopPush(PhApplication.getPhApplication());
         }
-        mLlBottom.post(new Runnable() {
-            @Override
-            public void run() {
-                mLlBottomInitHeight = mLlBottom.getHeight();
-            }
-        });
+//        mLlBottom.post(new Runnable() {
+//            @Override
+//            public void run() {
+//                mLlBottomInitHeight = mLlBottom.getHeight();
+//            }
+//        });
         keyboardHelper = new KeyboardHelper(this);
         keyboardHelper.onCreate();
-        keyboardHelper.setOnKeyBoardStatusChangeListener(new KeyboardHelper.OnKeyBoardStatusChangeListener() {
-            @Override
-            public void onKeyBoardPop(int keyBoardHeight) {
-                if (null != mLlBottomInitHeight && mLlBottomInitHeight < keyBoardHeight) {
-                    mLlTop.scrollTo(0, keyBoardHeight - mLlBottomInitHeight);
-                }
-            }
-
-            @Override
-            public void onKeyBoardClose(int oldKeyBoardHeight) {
-                mLlTop.scrollTo(0, 0);
-            }
-        });
+//        keyboardHelper.setOnKeyBoardStatusChangeListener(new KeyboardHelper.OnKeyBoardStatusChangeListener() {
+//            @Override
+//            public void onKeyBoardPop(int keyBoardHeight) {
+//                if (null != mLlBottomInitHeight && mLlBottomInitHeight < keyBoardHeight) {
+//                    mLlTop.scrollTo(0, keyBoardHeight - mLlBottomInitHeight);
+//                }
+//            }
+//
+//            @Override
+//            public void onKeyBoardClose(int oldKeyBoardHeight) {
+//                mLlTop.scrollTo(0, 0);
+//            }
+//        });
     }
 
     private void getExtra() {
@@ -172,16 +180,14 @@ public class LoginCloudActivity extends BaseActivity implements ILoadingView {
         });
     }
 
-
-
     //点击登录
     @OnClick(R.id.tv_login)
     public void tv_login() {
-        String url = mEdtNetUrl.getText().toString();
-        if (TextUtils.isEmpty(url)) {
-            ToastUtil.show("输入vue的部署地址-调试版本");
-            return;
-        }
+//        String url = mEdtNetUrl.getText().toString();
+//        if (TextUtils.isEmpty(url)) {
+//            ToastUtil.show("输入vue的部署地址-调试版本");
+//            return;
+//        }
 
         mUser = mMyEtUser.getContent();
         mPwd = mMyEtPwd.getAllContent();
@@ -189,24 +195,6 @@ public class LoginCloudActivity extends BaseActivity implements ILoadingView {
             loginPrepare();
             mTvLogin.requestFocus();
         }
-    }
-
-    @OnLongClick(R.id.edt_neturl)
-    public boolean edt_LongClick() {
-        Intent intent = new Intent(this, JsBridgeActivity.class);
-        String url = mEdtNetUrl.getText().toString();
-        intent.putExtra(AppConstans.Common.INTENT_URL,url);
-
-        startActivity(intent);
-        return true;
-    }
-
-    @OnLongClick(R.id.tv_welcome)
-    public boolean tv_welcome() {
-//        String url = "http://geek.csdn.net/";
-//        String url = (String) SpfUtils.get("current_url", "http://geek.csdn.net/");
-//        startActivity(hasnew Intent(this, JsBridgeActivity.class).putExtra(AppConstans.Common.INTENT_URL, url));
-        return true;
     }
 
     @OnClick(R.id.tv_register)
@@ -255,12 +243,8 @@ public class LoginCloudActivity extends BaseActivity implements ILoadingView {
             JPushInterface.resumePush(PhApplication.getPhApplication());
         }
 
-        String url = mEdtNetUrl.getText().toString();
-        if (TextUtils.isEmpty(url)) {
-            return;
-        }
         Intent intent = new Intent(this, JsBridgeActivity.class);
-        intent.putExtra(AppConstans.Common.INTENT_URL,url);
+//        intent.putExtra(AppConstans.Common.INTENT_URL,url);
         startActivity(intent);
         finish();
     }

@@ -55,7 +55,6 @@ public class JsBridgeActivity extends BaseActivity {
     private NativeModel mNativeModel;
     private JSData mInitJsData;
     private JavaBridge.JsCallback mOpenPageCallback;
-    private String mDeviceId;
     private HashMap<String, MqttCallback> mCbMap = new HashMap<>();
     private ArrayList<String> mPassTopicList = new ArrayList<>();
     private Handler mHandler = new Handler();
@@ -91,8 +90,6 @@ public class JsBridgeActivity extends BaseActivity {
         if (!TextUtils.isEmpty(url)) {
             mUrl = url;
         }
-
-        mDeviceId = getIntent().getStringExtra("device_id");
     }
 
     private void initWebView() {
@@ -229,7 +226,7 @@ public class JsBridgeActivity extends BaseActivity {
     protected void onDestroy() {
 //        EventBus.getDefault().unregister(this);
         closeWebView();
-        mNativeModel.unSucribe(JsBridgeActivity.this, mInitJsData, mDeviceId, mPassTopicList);
+//        mNativeModel.unSucribe(JsBridgeActivity.this, mInitJsData, mDeviceId, mPassTopicList);
         if (mHandler != null && mOutTimeR != null) {
             mHandler.removeCallbacks(mOutTimeR);
         }
@@ -313,7 +310,7 @@ public class JsBridgeActivity extends BaseActivity {
         mJavaBridge.registerHandler("openPage", new JavaBridge.JavaHandler() {
             @Override
             public void handle(JSData jsData, JavaBridge.JsCallback jsCallback) {
-                mNativeModel.openPage(JsBridgeActivity.this, jsData, mJavaBridge, jsCallback, mDeviceId);
+                mNativeModel.openPage(JsBridgeActivity.this, jsData, mJavaBridge, jsCallback, "");
                 mOpenPageCallback = jsCallback;
             }
         });
@@ -371,7 +368,7 @@ public class JsBridgeActivity extends BaseActivity {
             @Override
             public void handle(JSData jsData, JavaBridge.JsCallback jsCallback) {
                 mInitJsData = jsData;
-                mNativeModel.initConfig(JsBridgeActivity.this, jsData, mDeviceId);
+                mNativeModel.initConfig(JsBridgeActivity.this, jsData, "");
                 mJavaBridge.callbackSuccess(jsCallback, null);
             }
         });

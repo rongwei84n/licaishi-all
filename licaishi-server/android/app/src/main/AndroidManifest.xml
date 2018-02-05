@@ -61,7 +61,8 @@
             android:theme="@style/splash">
 
         </activity>
-        <activity android:name=".activity.LoginCloudActivity" >
+        <activity android:name=".activity.LoginCloudActivity"
+            android:label="理财社区登录">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
@@ -110,7 +111,10 @@
             android:theme="@style/greyBackgroundTheme" />
         <activity android:name=".zxing.CaptureActivity" />
         <activity android:name=".zxing.PreferencesActivity" />
-        <activity android:name=".activity.JsBridgeActivity" />
+        <activity android:name=".activity.JsBridgeActivity"
+            android:screenOrientation="portrait">
+
+        </activity>
 
         <receiver
             android:name=".receiver.NetworkStateReceiver"

@@ -3,31 +3,24 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    android:paddingLeft="10dp"
-    android:paddingRight="10dp">
+    android:orientation="vertical">
 
     <include
-        layout="@layout/include_common_header"
-        android:visibility="gone" />
+        layout="@layout/include_common_header"/>
 
     <LinearLayout
         android:id="@+id/ll_top"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical">
-
-        <TextView
-            android:id="@+id/tv_welcome"
-            style="@style/text_large_style"
-            android:layout_marginTop="65dp"
-            android:text="@string/login_welcom_phihome"
-            android:textStyle="bold" />
-
-        <TextView
-            style="@style/text_small_style"
-            android:layout_marginTop="40dp"
-            android:text="@string/account" />
+        android:orientation="vertical"
+        android:paddingLeft="10dp"
+        android:paddingRight="10dp">
+        
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:src="@android:drawable/ic_menu_call"/>
 
         <com.auts.lcssv.views.MyEditText
             android:id="@+id/myet_user"
@@ -39,73 +32,49 @@
             app:is_phone="true"
             app:max_length="11" />
 
-        <TextView
-            style="@style/text_small_style"
-            android:layout_marginTop="20dp"
-            android:text="@string/password" />
-
         <com.auts.lcssv.views.MyEditText
             android:id="@+id/myet_pwd"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="15dp"
+            app:hint="请输入登录密码"
             app:has_eye="true"
             app:input_type="2"
-            app:max_length="20" />
-        <EditText
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:id="@+id/edt_neturl"
-            android:text="http://192.168.1.1:8080"/>
-
-        <!--<TextView-->
-        <!--android:id="@+id/tv_login"-->
-        <!--style="@style/btn_common"-->
-        <!--android:layout_marginBottom="15dp"-->
-        <!--android:layout_marginTop="45dp"-->
-        <!--android:text="@string/login" />-->
-
-        <TextView
-            android:id="@+id/tv_login"
-            android:layout_width="match_parent"
-            android:layout_height="60dp"
-            android:layout_gravity="center"
-            android:layout_marginBottom="10dp"
-            android:layout_marginTop="40dp"
-            android:background="@color/btn_disable_bg"
-            android:enabled="false"
-            android:gravity="center"
-            android:text="@string/login"
-            android:textColor="@color/btn_text"
-            android:textSize="@dimen/text_middle" />
+            app:max_length="20"/>
     </LinearLayout>
 
-    <LinearLayout
+    <TextView
+        android:id="@+id/tv_login"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:layout_gravity="center"
+        android:layout_marginBottom="10dp"
+        android:layout_marginTop="40dp"
+        android:gravity="center"
+        android:text="@string/login"
+        android:textSize="@dimen/text_middle" />
+
+    <RelativeLayout
         android:id="@+id/ll_bottom"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_weight="1"
-        android:orientation="vertical">
-
-        <TextView
-            android:id="@+id/tv_forget_pwd"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:layout_marginTop="35dp"
-            android:text="@string/forget_pwd"
-            android:textColor="@color/text_normal"
-            android:textSize="@dimen/text_normal" />
-
+        android:paddingLeft="10dp"
+        android:paddingRight="10dp"
+        android:layout_weight="1">
         <TextView
             android:id="@+id/tv_register"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:layout_marginTop="30dp"
+            android:layout_alignParentLeft="true"
             android:text="@string/register_now"
-            android:textColor="@color/text_oringe"
             android:textSize="@dimen/text_normal" />
-    </LinearLayout>
+        <TextView
+            android:id="@+id/tv_forget_pwd"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:text="@string/forget_pwd"
+            android:textSize="@dimen/text_normal" />
+    </RelativeLayout>
 
 </LinearLayout>

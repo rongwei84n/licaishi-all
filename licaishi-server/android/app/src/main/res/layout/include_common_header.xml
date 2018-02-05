@@ -68,6 +68,7 @@
     </RelativeLayout>
 
     <View
+        android:id="@+id/view_div"
         android:layout_width="match_parent"
         android:layout_height="3dp"
         android:alpha="0.1"
