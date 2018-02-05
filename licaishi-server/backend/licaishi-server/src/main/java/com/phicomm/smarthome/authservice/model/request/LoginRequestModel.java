@@ -51,4 +51,10 @@ public class LoginRequestModel extends BaseRequestModel {
     public void setUsername(String username) {
         this.username = username;
     }
+
+    @Override
+    public String toString() {
+        return "LoginRequestModel [authorizationcode=" + authorizationcode + ", mailaddress=" + mailaddress
+                + ", password=" + password + ", phonenumber=" + phonenumber + ", username=" + username + "]";
+    }
 }

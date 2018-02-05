@@ -3,12 +3,15 @@ package com.phicomm.smarthome.authservice.controller.account;
 
 import com.phicomm.smarthome.authservice.controller.SBaseController;
 import com.phicomm.smarthome.authservice.model.common.PhicommServerConfigModel;
+import com.phicomm.smarthome.authservice.model.dao.AccountModel;
 import com.phicomm.smarthome.authservice.model.request.LoginRequestModel;
 import com.phicomm.smarthome.authservice.model.request.PasswordRequestModel;
 import com.phicomm.smarthome.authservice.model.request.RegistRequestModel;
 import com.phicomm.smarthome.authservice.model.response.LoginResponseModel;
 import com.phicomm.smarthome.authservice.model.response.PasswordResponseModel;
 import com.phicomm.smarthome.authservice.model.response.RegistResponseModel;
+import com.phicomm.smarthome.authservice.service.AccountService;
+import com.phicomm.smarthome.authservice.util.StringUtil;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -34,22 +37,50 @@ public class AccountController extends SBaseController {
     @Autowired
     PhicommServerConfigModel phicommServer;
 
+    @Autowired
+    AccountService accountService;
 
     /**
      * 登录.
      */
     @RequestMapping(value = "/srv/v1/login", method = RequestMethod.POST, produces = { "application/json" })
     public LoginResponseModel login(HttpServletRequest request, @RequestBody LoginRequestModel requestModel) {
-        LOGGER.info("login request");
+        LOGGER.info("login request model [{}]", requestModel);
+        if (requestModel == null) {
+            LOGGER.info("Login with no request params");
+            return errorLogin("12");
+        }
+
+        String userName = requestModel.getUsername();
+        String phone = requestModel.getPhonenumber();
+        String passwd = requestModel.getPassword();
+
+        if (StringUtil.isNullOrEmpty(phone) || StringUtil.isNullOrEmpty(passwd)) {
+            LOGGER.info("Phone/passwd is empty phone [{}], passwd [{}]", phone, passwd);
+            return errorLogin("12");
+        }
+
+        AccountModel accountMode = accountService.loginPhone(phone, passwd);
+        if (accountMode == null) {
+            return errorLogin("8");
+        }
+
+        LOGGER.debug("accountMode [{}]", accountMode);
 
         LoginResponseModel rsp = new LoginResponseModel();
-        rsp.setAccessToken("acs");
-        rsp.setAccessTokenExpire("xxx");
-        rsp.setError("1");
+        rsp.setAccessToken("acs-" + System.currentTimeMillis());
+        rsp.setAccessTokenExpire("100");
+        rsp.setError("0");
         rsp.setRefreshTokenExpire("xx");
         rsp.setRefreshToken("xx");
-        rsp.setUid("213");
+        rsp.setUid(accountMode.getUid());
         return rsp;
+    }
+
+    private LoginResponseModel errorLogin(String errorCode) {
+        LoginResponseModel error = new LoginResponseModel();
+        error.setError(errorCode);
+        return error;
     }
 
     /**
