@@ -108,10 +108,14 @@ public class AccountController extends SBaseController {
         model.setUpdate_time(curTime);
 
         int result = accountService.register(model);
-
         RegistResponseModel rsp = new RegistResponseModel();
-        rsp.setError("1");
-        rsp.setUid("234342");
+        if (result > 0) {
+            rsp.setError("0");
+            rsp.setUid(model.getUid());
+        } else {
+            rsp.setError("3");
+            rsp.setUid("");
+        }
         return rsp;
     }
 
