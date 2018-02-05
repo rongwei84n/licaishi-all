@@ -1,9 +1,11 @@
 package com.phicomm.smarthome.authservice.dao;
 
+import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
 
 import com.phicomm.smarthome.authservice.model.dao.AccountModel;
+import com.phicomm.smarthome.authservice.model.request.RegistRequestModel;
 
 /**
  * 产品表方法入口
@@ -33,4 +35,8 @@ public interface AccountMapper {
 
     @Select("select * from tbl_user where phone=#{phone} and passwd=#{pwd} and status=0 limit 1")
     AccountModel loginPhone(@Param("phone") String phone, @Param("pwd") String pwd);
+
+    @Insert("insert into tbl_user (uid, user_name, real_name, phone, passwd, email, sex, remark, role, status, create_time, update_time) "
+            + "values (#{ac.uid}, #{ac.user_name},#{ac.real_name},#{ac.phone},#{ac.passwd},#{ac.email},#{ac.sex},#{ac.remark},#{ac.role},#{ac.status},#{ac.create_time},#{ac.update_time})")
+    int register(@Param("model")AccountModel ac);
 }

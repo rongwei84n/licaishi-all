@@ -156,6 +156,8 @@ public class RegistRequestModel extends BaseRequestModel {
 
     @Override
     public String toString() {
-        return "RegistRequestModel []";
+        return "RegistRequestModel [authorizationcode=" + authorizationcode + ", data=" + data + ", mailaddress="
+                + mailaddress + ", password=" + password + ", phonenumber=" + phonenumber + ", registersource="
+                + registersource + ", username=" + username + ", verificationcode=" + verificationcode + "]";
     }
 }

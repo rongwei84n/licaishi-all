@@ -12,6 +12,7 @@ import com.phicomm.smarthome.authservice.model.response.PasswordResponseModel;
 import com.phicomm.smarthome.authservice.model.response.RegistResponseModel;
 import com.phicomm.smarthome.authservice.service.AccountService;
 import com.phicomm.smarthome.authservice.util.StringUtil;
+import com.phicomm.smarthome.authservice.util.UidGenerater;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -89,6 +90,24 @@ public class AccountController extends SBaseController {
     @RequestMapping(value = "/srv/v1/account", method = RequestMethod.POST, produces = { "application/json" })
     public RegistResponseModel account(HttpServletRequest request, @RequestBody RegistRequestModel requestModel) {
         LOGGER.info("regist request [{}]", requestModel);
+
+        AccountModel model = new AccountModel();
+        model.setUid(String.valueOf(UidGenerater.gen()));
+        model.setUser_name(requestModel.getUsername());
+        model.setPasswd(requestModel.getPassword());
+        model.setReal_name("");
+        model.setPhone(requestModel.getPhonenumber());
+        model.setPasswd(requestModel.getPassword());
+        model.setEmail(requestModel.getMailaddress());
+        model.setSex(1);
+        model.setRemark("测试注册接口");
+        model.setRole(1);
+        model.setStatus(0);
+        long curTime = System.currentTimeMillis() / 1000;
+        model.setCreate_time(curTime);
+        model.setCreate_time(curTime);
+
+        int result = accountService.register(model);
 
         RegistResponseModel rsp = new RegistResponseModel();
         rsp.setError("1");

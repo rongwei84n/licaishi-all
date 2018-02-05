@@ -22,4 +22,9 @@ public class AccountImpl implements AccountService {
     public AccountModel loginPhone(String phone, String pwd) {
         return mapper.loginPhone(phone, pwd);
     }
+
+    @Override
+    public int register(AccountModel model) {
+        return mapper.register(model);
+    }
 }
