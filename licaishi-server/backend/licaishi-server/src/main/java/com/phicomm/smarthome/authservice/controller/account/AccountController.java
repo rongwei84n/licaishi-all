@@ -91,6 +91,24 @@ public class AccountController extends SBaseController {
     public RegistResponseModel account(HttpServletRequest request, @RequestBody RegistRequestModel requestModel) {
         LOGGER.info("regist request [{}]", requestModel);
 
+        if (requestModel == null) {
+            LOGGER.info("Register with no params");
+            return errorRegister("4");
+        }
+
+        if (StringUtil.isNullOrEmpty(requestModel.getUsername()) ||
+                StringUtil.isNullOrEmpty(requestModel.getPassword()) ||
+                StringUtil.isNullOrEmpty(requestModel.getPhonenumber())) {
+            LOGGER.info("No usename [{}] or password [{}]", requestModel.getUsername(), requestModel.getPassword());
+            return errorRegister("5");
+        }
+
+        AccountModel acModel = accountService.queryByUserPhone(requestModel.getPhonenumber());
+        if (acModel != null) {
+            LOGGER.info("Already registed phone [{}]", requestModel.getPhonenumber());
+            return errorRegister("14");
+        }
+
         AccountModel model = new AccountModel();
         model.setUid(String.valueOf(UidGenerater.gen()));
         model.setUser_name(requestModel.getUsername());
@@ -113,9 +131,15 @@ public class AccountController extends SBaseController {
             rsp.setError("0");
             rsp.setUid(model.getUid());
         } else {
-            rsp.setError("3");
-            rsp.setUid("");
+            return errorRegister("3");
         }
+        return rsp;
+    }
+
+    private RegistResponseModel errorRegister(String errorCode) {
+        RegistResponseModel rsp = new RegistResponseModel();
+        rsp.setError(errorCode);
+        rsp.setUid("");
         return rsp;
     }
 

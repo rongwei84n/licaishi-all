@@ -11,4 +11,6 @@ public interface AccountService {
     AccountModel loginPhone(String phone, String pwd);
 
     int register(AccountModel model);
+
+    AccountModel queryByUserPhone(String phone);
 }

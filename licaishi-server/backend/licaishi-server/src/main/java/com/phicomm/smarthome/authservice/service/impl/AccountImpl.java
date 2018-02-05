@@ -32,4 +32,9 @@ public class AccountImpl implements AccountService {
     public AccountModel queryMaxUid() {
         return mapper.queryMaxUid();
     }
+
+    @Override
+    public AccountModel queryByUserPhone(String phone) {
+        return mapper.queryByUserPhone(phone);
+    }
 }
