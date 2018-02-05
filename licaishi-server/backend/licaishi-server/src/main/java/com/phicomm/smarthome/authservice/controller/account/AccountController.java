@@ -105,7 +105,7 @@ public class AccountController extends SBaseController {
         model.setStatus(0);
         long curTime = System.currentTimeMillis() / 1000;
         model.setCreate_time(curTime);
-        model.setCreate_time(curTime);
+        model.setUpdate_time(curTime);
 
         int result = accountService.register(model);
 

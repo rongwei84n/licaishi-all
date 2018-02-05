@@ -27,4 +27,9 @@ public class AccountImpl implements AccountService {
     public int register(AccountModel model) {
         return mapper.register(model);
     }
+
+    @Override
+    public AccountModel queryMaxUid() {
+        return mapper.queryMaxUid();
+    }
 }

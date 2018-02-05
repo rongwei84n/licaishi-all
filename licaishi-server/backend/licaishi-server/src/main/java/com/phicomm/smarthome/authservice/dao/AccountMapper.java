@@ -38,5 +38,8 @@ public interface AccountMapper {
 
     @Insert("insert into tbl_user (uid, user_name, real_name, phone, passwd, email, sex, remark, role, status, create_time, update_time) "
             + "values (#{ac.uid}, #{ac.user_name},#{ac.real_name},#{ac.phone},#{ac.passwd},#{ac.email},#{ac.sex},#{ac.remark},#{ac.role},#{ac.status},#{ac.create_time},#{ac.update_time})")
-    int register(@Param("model")AccountModel ac);
+    int register(@Param("ac")AccountModel ac);
+
+    @Select("select * from tbl_user where status=0 order by uid desc limit 1")
+    AccountModel queryMaxUid();
 }
