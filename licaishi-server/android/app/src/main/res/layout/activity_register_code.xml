@@ -76,20 +76,18 @@
             app:hint="请再次输入登录密码"
             app:has_delete="true" />
 
-        <TextView
-            android:id="@+id/tv_next"
-            style="@style/btn_common"
-            android:layout_marginTop="45dp"
-            android:text="@string/next_step" />
-
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:layout_marginTop="20dp"
-            android:gravity="center"
+            android:layout_gravity="left"
+            android:gravity="left"
+            android:layout_marginTop="15dp"
             android:orientation="horizontal">
-
+            <CheckBox
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/ck_protocol"
+                android:checked="true"/>
             <TextView
                 style="@style/text_normal_style"
                 android:text="@string/hint_click_next" />
@@ -98,8 +96,14 @@
                 android:id="@+id/tv_protocol"
                 style="@style/text_normal_style"
                 android:text="@string/user_proto"
-                android:textColor="#1B81FF" />
+                android:textColor="@color/blue" />
         </LinearLayout>
+
+        <TextView
+            android:id="@+id/tv_next"
+            style="@style/btn_common"
+            android:layout_marginTop="15dp"
+            android:text="@string/register_now" />
     </LinearLayout>
 
 </LinearLayout>

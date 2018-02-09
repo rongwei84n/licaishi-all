@@ -91,7 +91,8 @@ public class RegisterCodeActivity extends BaseActivity implements ILoadingView {
         setPageTitle(R.string.register);
         mHandler = new Handler();
         initPresenter();
-        ViewUtils.linkage(mMyEtPhone.getEt(), 13, mMyEtVerCode.getEt(), 6, mTvNext);
+//        ViewUtils.linkage(mMyEtPhone.getEt(), 13, mMyEtVerCode.getEt(), 6, mTvNext);
+        mTvNext.setEnabled(true);
         mMyEtVerCode.setContent("");
         mViewLineVercode.setBackgroundResource(R.color.default_line);
         mMyEtVerCode.addContentFocusChangeListener(new MyEditText.ContentFocusChangeListener() {
@@ -156,13 +157,6 @@ public class RegisterCodeActivity extends BaseActivity implements ILoadingView {
             public void onCheckPhoneSuccess(boolean isExist) {
                 hideLoading();
                 if (isExist) {
-//                    ToastUtil.showAsync(RegisterCodeActivity.this, R.string.check_phone_already_register, 1600, new_icon CommonOneListener() {
-//                        @Override
-//                        public void handle() {
-//                            setResult(RESULT_OK, new_icon Intent().putExtra("mobile_phone", mPhone));
-//                            finish();
-//                        }
-//                    });
                     ToastUtil.show(R.string.check_phone_already_register);
                     setResult(RESULT_OK, new Intent().putExtra("mobile_phone", mPhone));
                     finish();
@@ -193,8 +187,6 @@ public class RegisterCodeActivity extends BaseActivity implements ILoadingView {
                 || !checkPhone()) {
             return;
         }
-
-
         doCheckPhone();
     }
 

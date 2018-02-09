@@ -74,7 +74,7 @@
     <string name="forgot_pwd_reset_login">重置登录密码</string>
     <string name="forgot_pwd_reset_success">密码设置成功</string>
     <string name="check_phone_not_register">该手机号未注册</string>
-    <string name="hint_click_next">点击下一步代表您同意</string>
+    <string name="hint_click_next">同意理财师社区</string>
     <string name="user_proto">《用户协议》</string>
 
     <!--加载框-->
