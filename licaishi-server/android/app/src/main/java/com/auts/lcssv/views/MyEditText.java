@@ -40,6 +40,8 @@ public class MyEditText extends LinearLayout {
     private boolean judgeContent; //是否需要根据文本是否有文字更改下划线颜色
     private boolean mHasContent;
 
+    private ContentFocusChangeListener mContentFocusChangeListener;
+
 
     public MyEditText(Context context) {
         this(context, null);
@@ -124,6 +126,9 @@ public class MyEditText extends LinearLayout {
                     }
 
                 }
+                if (mContentFocusChangeListener != null) {
+                    mContentFocusChangeListener.onFocusChange(hasFocus);
+                }
             }
         });
 
@@ -183,6 +188,10 @@ public class MyEditText extends LinearLayout {
     }
 
     private boolean b;
+
+    public void addContentFocusChangeListener(ContentFocusChangeListener listener) {
+        this.mContentFocusChangeListener = listener;
+    }
 
     private class NewTextWatcher implements TextWatcher {
 
@@ -401,6 +410,10 @@ public class MyEditText extends LinearLayout {
         if (!TextUtils.isEmpty(content)) {
             mEtContent.setSelection(content.length());
         }
+    }
+
+    public interface ContentFocusChangeListener {
+        void onFocusChange(boolean hasFocus);
     }
 
 }

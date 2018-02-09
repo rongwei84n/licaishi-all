@@ -6,6 +6,8 @@ import android.os.Handler;
 import android.text.Editable;
 import android.text.TextUtils;
 import android.text.TextWatcher;
+import android.util.Log;
+import android.view.View;
 import android.widget.TextView;
 
 import com.auts.lcssv.R;
@@ -37,10 +39,20 @@ public class RegisterCodeActivity extends BaseActivity implements ILoadingView {
     MyEditText mMyEtVerCode;
     @BindView(R.id.tv_get_vercode)
     TextView mTvGetVerCode;
+
+    @BindView(R.id.view_line_vercode)
+    View mViewLineVercode;
+
     @BindView(R.id.tv_next)
     TextView mTvNext;
     @BindView(R.id.tv_protocol)
     TextView mTvProtocol;
+
+    @BindView(R.id.my_password)
+    MyEditText mMyPassword;
+
+    @BindView(R.id.my_password_again)
+    MyEditText mMyPasswordAgain;
 
     private static final int REQUEST_CODE_REGISTER = 501;
     private String mPhone;
@@ -81,6 +93,19 @@ public class RegisterCodeActivity extends BaseActivity implements ILoadingView {
         initPresenter();
         ViewUtils.linkage(mMyEtPhone.getEt(), 13, mMyEtVerCode.getEt(), 6, mTvNext);
         mMyEtVerCode.setContent("");
+        mViewLineVercode.setBackgroundResource(R.color.default_line);
+        mMyEtVerCode.addContentFocusChangeListener(new MyEditText.ContentFocusChangeListener() {
+            @Override
+            public void onFocusChange(boolean hasFocus) {
+                if (hasFocus) {
+                    mViewLineVercode.setBackgroundResource(R.color.focused_line);
+                } else {
+                    mViewLineVercode.setBackgroundResource(R.color.default_line);
+                }
+            }
+        });
+        mMyPassword.setContent("");
+        mMyPasswordAgain.setContent("");
         mMyEtPhone.getEt().addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {

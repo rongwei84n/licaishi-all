@@ -61,8 +61,7 @@
             android:theme="@style/splash">
 
         </activity>
-        <activity android:name=".activity.LoginCloudActivity"
-            android:label="理财社区登录">
+        <activity android:name=".activity.LoginCloudActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />

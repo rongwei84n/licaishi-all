@@ -17,17 +17,6 @@
         android:paddingLeft="10dp"
         android:paddingRight="10dp">
 
-        <TextView
-            android:textStyle="bold"
-            style="@style/text_large_style"
-            android:layout_marginTop="30dp"
-            android:text="@string/register_account" />
-
-        <TextView
-            style="@style/text_small_style"
-            android:layout_marginTop="40dp"
-            android:text="@string/phone" />
-
         <com.auts.lcssv.views.MyEditText
             android:id="@+id/myet_phone"
             android:layout_width="match_parent"
@@ -41,26 +30,51 @@
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="20dp">
+            android:layout_marginTop="15dp">
 
-            <TextView
-                style="@style/text_small_style"
-                android:text="@string/verification_code" />
+            <com.auts.lcssv.views.MyEditText
+                android:id="@+id/myet_vercode"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:layout_toLeftOf="@+id/container"
+                app:hint="请输入验证码"
+                app:has_delete="false"/>
 
-            <TextView
-                android:id="@+id/tv_get_vercode"
-                style="@style/text_small_style"
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
                 android:layout_alignParentRight="true"
-                android:text="@string/get_verification_code" />
+                android:layout_centerVertical="true"
+                android:id="@+id/container">
+                <TextView
+                    android:id="@+id/tv_get_vercode"
+                    style="@style/text_middle_style"
+                    android:textColor="@color/red"
+                    android:text="@string/get_verification_code" />
+                <View
+                    android:id="@+id/view_line_vercode"
+                    android:layout_width="match_parent"
+                    android:layout_height="0.5dp"
+                    android:layout_marginTop="8dp" />
+            </LinearLayout>
         </RelativeLayout>
 
         <com.auts.lcssv.views.MyEditText
-            android:id="@+id/myet_vercode"
+            android:id="@+id/my_password"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="15dp"
-            app:has_delete="false"
-            app:max_length="6" />
+            app:hint="请输入登录密码"
+            app:has_delete="true"/>
+        <com.auts.lcssv.views.MyEditText
+            android:id="@+id/my_password_again"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="15dp"
+            app:hint="请再次输入登录密码"
+            app:has_delete="true" />
 
         <TextView
             android:id="@+id/tv_next"
