@@ -8,6 +8,7 @@ import android.text.TextUtils;
 import android.text.TextWatcher;
 import android.util.Log;
 import android.view.View;
+import android.widget.CheckBox;
 import android.widget.TextView;
 
 import com.auts.lcssv.R;
@@ -53,6 +54,9 @@ public class RegisterCodeActivity extends BaseActivity implements ILoadingView {
 
     @BindView(R.id.my_password_again)
     MyEditText mMyPasswordAgain;
+
+    @BindView(R.id.ck_protocol)
+    CheckBox mCkProtrol;
 
     private static final int REQUEST_CODE_REGISTER = 501;
     private String mPhone;
@@ -182,17 +186,19 @@ public class RegisterCodeActivity extends BaseActivity implements ILoadingView {
     @OnClick(R.id.tv_get_vercode)
     public void tv_get_vercode() {
         mPhone = mMyEtPhone.getContent();
-        if (mTvGetVerCode.getText().toString().contains("S")
-                || mTvGetVerCode.getCurrentTextColor() != getResources().getColor(R.color.text_oringe)
-                || !checkPhone()) {
+        if (!checkPhone()) {
             return;
         }
         doCheckPhone();
     }
 
-
     @OnClick(R.id.tv_next)
     public void tv_next() {
+        if (!mCkProtrol.isChecked()) {
+            ToastUtil.show("请先同意《用户协议》");
+            return;
+        }
+
         mPhone = mMyEtPhone.getContent();
         mVerCode = mMyEtVerCode.getContent();
         if (checkAllInput()) {
@@ -261,7 +267,7 @@ public class RegisterCodeActivity extends BaseActivity implements ILoadingView {
     }
 
     private boolean checkPhone() {
-        if (!RegexUtils.checkMobilePhone(mPhone)) {
+        if (TextUtils.isEmpty(mPhone)) {
             ToastUtil.show(R.string.login_user_illegal);
             return false;
         }
