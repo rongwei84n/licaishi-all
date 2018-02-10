@@ -55,7 +55,7 @@ android {
 
         //线上环境
         buildConfigField "int", "build_number", buildNumber + ""
-        buildConfigField "String", "host_cloud_acount", "\"http://192.168.2.107:8094\""
+        buildConfigField "String", "host_cloud_acount", "\"http://192.168.1.102:8094\""
         buildConfigField "String", "host_cloud_portrait", "\"https://portraitsym.phicomm.com\""
         buildConfigField "String", "host_sz", "\"http://192.168.2.107\""
         buildConfigField "String", "mqtt_host", "\"home.phicomm.com\""

@@ -71,6 +71,7 @@
             android:name=".activity.MainActivity"
             android:launchMode="singleTask" />
         <activity android:name=".activity.WifiScanListActivity" />
+        <activity android:name=".activity.RegisterFinishActivity" />
         <activity
             android:name=".activity.X5WebActivity"
             android:configChanges="orientation|screenSize|keyboardHidden"

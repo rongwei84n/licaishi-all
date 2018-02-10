@@ -195,6 +195,28 @@ public class RegisterCodeActivity extends BaseActivity implements ILoadingView {
 
     @OnClick(R.id.tv_next)
     public void tv_next() {
+        if (TextUtils.isEmpty(mMyEtPhone.getContent())) {
+            ToastUtil.show("手机号不能为空");
+            mMyEtPhone.requestFocus();
+            return;
+        }
+        if (TextUtils.isEmpty(mMyEtVerCode.getContent())) {
+            ToastUtil.show("验证码不能为空");
+            mMyEtVerCode.requestFocus();
+            return;
+        }
+
+        String strPwd = mMyPassword.getContent();
+        if (TextUtils.isEmpty(strPwd)) {
+            ToastUtil.show("登录密码不能为空");
+            return;
+        }
+
+        String strPwdAgain = mMyPasswordAgain.getContent();
+        if (!TextUtils.equals(strPwd, strPwdAgain)) {
+            ToastUtil.show("两次输入密码不一致");
+            return;
+        }
         if (!mCkProtrol.isChecked()) {
             ToastUtil.show("请先同意《用户协议》");
             return;
@@ -253,7 +275,7 @@ public class RegisterCodeActivity extends BaseActivity implements ILoadingView {
      * 进入设置密码页面
      */
     private void gotoRegister() {
-        Intent intent = new Intent(this, AccountRegisterActivity.class);
+        Intent intent = new Intent(this, RegisterFinishActivity.class);
         intent.putExtra("register_phone", mPhone);
         intent.putExtra("ver_code", mVerCode);
         startActivityForResult(intent, REQUEST_CODE_REGISTER);
