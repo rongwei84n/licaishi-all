@@ -183,12 +183,6 @@ public class LoginCloudActivity extends BaseActivity implements ILoadingView {
     //点击登录
     @OnClick(R.id.tv_login)
     public void tv_login() {
-//        String url = mEdtNetUrl.getText().toString();
-//        if (TextUtils.isEmpty(url)) {
-//            ToastUtil.show("输入vue的部署地址-调试版本");
-//            return;
-//        }
-
         mUser = mMyEtUser.getContent();
         mPwd = mMyEtPwd.getAllContent();
         if (checkInput()) {

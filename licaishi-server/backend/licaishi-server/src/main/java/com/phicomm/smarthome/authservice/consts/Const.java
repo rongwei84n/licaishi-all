@@ -37,6 +37,15 @@ public interface Const {
             int REGIST_PHONE_ERROR = 34; //手机号格式错误
             int REGIST_ERROR = 50; //系统错误
 
+            //登录类错误码
+            int LOGIN_USER_NOT_EXIST = 7;
+            int LOGIN_PASSWORD_ERROR = 8;
+            int LOGIN_GRANTCODE_ERROR = 11;
+            int LOGIN_PARA_ERROR = 12;
+            int LOGIN_PASSWORD_NOT_SET = 15;
+            int LOGIN_KICK_MULTI_LOGIN = 30;
+            int LOGIN_PHONE_ERROR = 34;
+            int LOGIN_ERROR = 50;
         }
     }
 }

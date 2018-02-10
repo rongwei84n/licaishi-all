@@ -89,7 +89,7 @@ public class AccountController extends SBaseController {
         LOGGER.info("login request model [{}]", requestModel);
         if (requestModel == null) {
             LOGGER.info("Login with no request params");
-            return errorLogin("12");
+            return errorLogin(String.valueOf(Const.ErrorCode.Account.LOGIN_PARA_ERROR));
         }
 
         String userName = requestModel.getUsername();
@@ -98,20 +98,20 @@ public class AccountController extends SBaseController {
 
         if (StringUtil.isNullOrEmpty(phone) || StringUtil.isNullOrEmpty(passwd)) {
             LOGGER.info("Phone/passwd is empty phone [{}], passwd [{}]", phone, passwd);
-            return errorLogin("12");
+            return errorLogin(String.valueOf(Const.ErrorCode.Account.LOGIN_PARA_ERROR));
         }
 
         AccountModel accountMode = accountService.loginPhone(phone, passwd);
         if (accountMode == null) {
-            return errorLogin("8");
+            return errorLogin(String.valueOf(Const.ErrorCode.Account.LOGIN_PASSWORD_ERROR));
         }
 
         LOGGER.debug("accountMode [{}]", accountMode);
 
         LoginResponseModel rsp = new LoginResponseModel();
         rsp.setAccessToken("acs-" + System.currentTimeMillis());
-        rsp.setAccessTokenExpire("100");
-        rsp.setError("0");
+        rsp.setAccessTokenExpire("100000");
+        rsp.setError(String.valueOf(Const.ErrorCode.Account.OK));
         rsp.setRefreshTokenExpire("xx");
         rsp.setRefreshToken("xx");
         rsp.setUid(accountMode.getUid());

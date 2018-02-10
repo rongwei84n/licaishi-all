@@ -16,11 +16,11 @@ public interface UrlConfig {
     interface CloudAccountUrl {
         String URL_HOST = BuildConfig.host_cloud_acount;
         String GET_AUTHORIZATION = URL_HOST + "/srv/v1/authorization"; //获取授权码
-        String LOGIN = URL_HOST + "/v1/login"; //登陆云
-        String REFRESH_TOKEN = URL_HOST + "/v1/token"; //刷新token
+        String LOGIN = URL_HOST + "/srv/v1/login"; //登陆云
+        String REFRESH_TOKEN = URL_HOST + "/srv/v1/token"; //刷新token
         String CHECK_TOKEN = URL_HOST + "/v1/verifyToken"; //校验token
         String CHECK_PHONE = URL_HOST + "/srv/v1/checkPhonenumber"; //检查手机号
-        String LOGOUT = URL_HOST + "/v1/logout"; //退出登陆
+        String LOGOUT = URL_HOST + "/srv/v1/logout"; //退出登陆
         String GET_CAPTCHA = URL_HOST + "/v1/captcha"; //获取图形验证码
         String GET_VER_CODE = URL_HOST + "/v1/verificationMsg"; //获取验证码
         //        String GET_VER_CODE = "https://account.phicomm.com" + "/v1/verificationMsg"; //获取验证码
