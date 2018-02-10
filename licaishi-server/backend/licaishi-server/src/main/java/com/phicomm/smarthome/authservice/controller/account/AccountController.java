@@ -1,16 +1,18 @@
 package com.phicomm.smarthome.authservice.controller.account;
 
-
+import com.phicomm.smarthome.authservice.consts.Const;
 import com.phicomm.smarthome.authservice.controller.SBaseController;
 import com.phicomm.smarthome.authservice.model.common.PhicommServerConfigModel;
 import com.phicomm.smarthome.authservice.model.dao.AccountModel;
 import com.phicomm.smarthome.authservice.model.request.LoginRequestModel;
 import com.phicomm.smarthome.authservice.model.request.PasswordRequestModel;
 import com.phicomm.smarthome.authservice.model.request.RegistRequestModel;
+import com.phicomm.smarthome.authservice.model.response.AuthorizationCodeResponseCode;
 import com.phicomm.smarthome.authservice.model.response.LoginResponseModel;
 import com.phicomm.smarthome.authservice.model.response.PasswordResponseModel;
 import com.phicomm.smarthome.authservice.model.response.RegistResponseModel;
 import com.phicomm.smarthome.authservice.service.AccountService;
+import com.phicomm.smarthome.authservice.util.RegexUtils;
 import com.phicomm.smarthome.authservice.util.StringUtil;
 import com.phicomm.smarthome.authservice.util.UidGenerater;
 
@@ -22,6 +24,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 /**
@@ -42,7 +45,25 @@ public class AccountController extends SBaseController {
     AccountService accountService;
 
     /**
-     * 登录.
+     * 获取授权码.
+     */
+    @RequestMapping(value = "/srv/v1/authorization", method = RequestMethod.GET, produces = { "application/json" })
+    public AuthorizationCodeResponseCode getPushMessages(HttpServletRequest request,
+            @RequestParam(value="client_id", required = false) String client_id,
+            @RequestParam(value="client_secret", required = false) String client_secret,
+            @RequestParam(value="redirect_uri", required = false) String redirect_uri,
+            @RequestParam(value="response_type", required = false) String response_type,
+            @RequestParam(value="scope", required = false) String scope)
+    {
+        AuthorizationCodeResponseCode rsp = new AuthorizationCodeResponseCode();
+        rsp.setError(String.valueOf(Const.ErrorCode.Account.OK));
+        rsp.setAuthorizationcode("lcs-gogo");
+        return rsp;
+    }
+
+
+    /**
+     * 账户登录.
      */
     @RequestMapping(value = "/srv/v1/login", method = RequestMethod.POST, produces = { "application/json" })
     public LoginResponseModel login(HttpServletRequest request, @RequestBody LoginRequestModel requestModel) {
@@ -85,7 +106,7 @@ public class AccountController extends SBaseController {
     }
 
     /**
-     * 注册.
+     * 注册账号.
      */
     @RequestMapping(value = "/srv/v1/account", method = RequestMethod.POST, produces = { "application/json" })
     public RegistResponseModel account(HttpServletRequest request, @RequestBody RegistRequestModel requestModel) {
@@ -93,20 +114,19 @@ public class AccountController extends SBaseController {
 
         if (requestModel == null) {
             LOGGER.info("Register with no params");
-            return errorRegister("4");
+            return errorRegister(String.valueOf(Const.ErrorCode.REQUEST_NO_PARAS));
         }
 
-        if (StringUtil.isNullOrEmpty(requestModel.getUsername()) ||
-                StringUtil.isNullOrEmpty(requestModel.getPassword()) ||
-                StringUtil.isNullOrEmpty(requestModel.getPhonenumber())) {
+        if (StringUtil.isNullOrEmpty(requestModel.getPassword())
+                || StringUtil.isNullOrEmpty(requestModel.getPhonenumber())) {
             LOGGER.info("No usename [{}] or password [{}]", requestModel.getUsername(), requestModel.getPassword());
-            return errorRegister("5");
+            return errorRegister(String.valueOf(Const.ErrorCode.REQUEST_NO_PARAS));
         }
 
         AccountModel acModel = accountService.queryByUserPhone(requestModel.getPhonenumber());
         if (acModel != null) {
             LOGGER.info("Already registed phone [{}]", requestModel.getPhonenumber());
-            return errorRegister("14");
+            return errorRegister(String.valueOf(Const.ErrorCode.Account.REGIST_ACCOUNT_EXISTS));
         }
 
         AccountModel model = new AccountModel();
@@ -128,10 +148,41 @@ public class AccountController extends SBaseController {
         int result = accountService.register(model);
         RegistResponseModel rsp = new RegistResponseModel();
         if (result > 0) {
-            rsp.setError("0");
+            rsp.setError(String.valueOf(Const.ErrorCode.Account.OK));
             rsp.setUid(model.getUid());
         } else {
-            return errorRegister("3");
+            return errorRegister(String.valueOf(Const.ErrorCode.Account.REGIST_ERROR));
+        }
+        return rsp;
+    }
+
+    /**
+     * 检查手机号码，是否是合法的号码，是否已经注册.
+     */
+    @RequestMapping(value = "/srv/v1/checkPhonenumber", method = RequestMethod.GET, produces = { "application/json" })
+    public RegistResponseModel checkPhoneNumber(HttpServletRequest request,
+            @RequestParam(value="authorizationcode", required=false) String authorizationcode,
+            @RequestParam(value="phonenumber", required = true) String phonenumber) {
+        LOGGER.info("regist request authorizationcode [{}] phone [{}]", authorizationcode, phonenumber);
+
+        if (StringUtil.isNullOrEmpty(phonenumber)) {
+            LOGGER.info("Register with no phonenumber");
+            return errorRegister(String.valueOf(Const.ErrorCode.REQUEST_NO_PARAS));
+        }
+
+        AccountModel acModel = accountService.queryByUserPhone(phonenumber);
+        if (acModel != null) {
+            LOGGER.info("Already registed phone [{}]", phonenumber);
+            return errorRegister(String.valueOf(Const.ErrorCode.Account.REGIST_ACCOUNT_EXISTS));
+        }
+
+        boolean result = RegexUtils.checkPhone(phonenumber);
+
+        RegistResponseModel rsp = new RegistResponseModel();
+        if (result) {
+            rsp.setError(String.valueOf(Const.ErrorCode.Account.OK));
+        } else {
+            return errorRegister(String.valueOf(Const.ErrorCode.Account.REGIST_PHONE_ERROR));
         }
         return rsp;
     }

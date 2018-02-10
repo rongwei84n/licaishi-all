@@ -16,7 +16,7 @@ public class UidGenerater {
 
     public static void setUid(String initValue) {
         logger.info("Set init value [{}]", initValue);
-        Holder.ins.setUidInner(initValue);
+        Holder.INS.setUidInner(initValue);
     }
 
     private void setUidInner(String initValue) {
@@ -24,11 +24,10 @@ public class UidGenerater {
     }
 
     /**
-     * 在当前最大uid的基础上+1，产生一个新的uid并返回
-     * @return
+     * 在当前最大uid的基础上+1，产生一个新的uid并返回.
      */
     public static long gen() {
-        return Holder.ins.genInner();
+        return Holder.INS.genInner();
     }
 
     private synchronized long genInner() {
@@ -38,6 +37,6 @@ public class UidGenerater {
 
 
     private static class Holder {
-        private static final UidGenerater ins = new UidGenerater();
+        private static final UidGenerater INS = new UidGenerater();
     }
 }

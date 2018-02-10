@@ -1,7 +1,6 @@
 package com.phicomm.smarthome.authservice.controller;
 
 import com.alibaba.fastjson.JSON;
-//import com.netflix.discovery.EurekaClient;
 import com.phicomm.smarthome.authservice.consts.Const;
 import com.phicomm.smarthome.authservice.model.common.PhiHomeBaseResponse;
 import com.phicomm.smarthome.authservice.model.common.PhicommAccountDetailModel;
@@ -14,8 +13,6 @@ import java.util.Map;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-//import org.springframework.beans.factory.annotation.Autowired;
-//import org.springframework.web.client.RestTemplate;
 
 /**
  * Phihome Controller基类, 提供了一些返回的基本功能.
@@ -66,45 +63,46 @@ public abstract class SBaseController {
     }
 
     protected Object getUIDByToken(String token) {
-        logger.info("token: " + token);
-        if (StringUtil.isNullOrEmpty(token)) {
-            logger.error("No token in request");
-            return errorResponse(Const.STATUS_NO_TOKEN_IN_REQUEST);
-        }
-        token = token.replace("Bearer ", "");
-        // 通过token获取斐讯云uid
-        PhicommAccountDetailModel parsedObj = getPhicommAccountByToken(token);
-        if (parsedObj == null) {
-            logger.error("Failed to get phicomm account parsedObj null");
-            return errorResponse(Const.STATUS_FAILED_GET_PHICOMM_ACCOUNT);
-        }
-        if (StringUtil.equals(parsedObj.getError(), "5")) {
-            logger.error("token is invalid.");
-            return errorResponse(Const.STATUS_TOKEN_INVALID);
-        } else if (StringUtil.equals(parsedObj.getError(), "30")) {
-            logger.error("account logined by other phone.");
-            String reason = String.format("{\"reason\":\"%s\"}", parsedObj.getReason());
-            Object obj = JSON.parse(reason);
-            PhiHomeBaseResponse response = errorResponse(Const.STATUS_LOGIN_BY_OTHER_PHIONE);
-            response.setResult(obj);
-            return response;
-        } else if (StringUtil.equals(parsedObj.getError(), "16")) {
-            logger.error("No account detail.");
-            return errorResponse(Const.STATUS_NO_ACCOUNT_DETAIL);
-        }
-
-        if (!StringUtil.equals(parsedObj.getError(), "0")) { // 根据token获取账户信息失败
-            logger.error("Failed to get phicomm account uid null");
-            return errorResponse(Const.STATUS_FAILED_GET_PHICOMM_ACCOUNT);
-        }
-
-        String uid = parsedObj.getData().getUid();
-        if (StringUtil.isNullOrEmpty(uid)) {
-            logger.error("Failed to get phicomm account uid null");
-            return errorResponse(Const.STATUS_FAILED_GET_PHICOMM_ACCOUNT);
-        }
-        logger.info("uid: {}", uid);
-        return uid;
+        logger.info("getUIDByToken token: " + token);
+        return "";
+//        if (StringUtil.isNullOrEmpty(token)) {
+//            logger.error("No token in request");
+//            return errorResponse(Const.STATUS_NO_TOKEN_IN_REQUEST);
+//        }
+//        token = token.replace("Bearer ", "");
+//        // 通过token获取斐讯云uid
+//        PhicommAccountDetailModel parsedObj = getPhicommAccountByToken(token);
+//        if (parsedObj == null) {
+//            logger.error("Failed to get phicomm account parsedObj null");
+//            return errorResponse(Const.STATUS_FAILED_GET_PHICOMM_ACCOUNT);
+//        }
+//        if (StringUtil.equals(parsedObj.getError(), "5")) {
+//            logger.error("token is invalid.");
+//            return errorResponse(Const.STATUS_TOKEN_INVALID);
+//        } else if (StringUtil.equals(parsedObj.getError(), "30")) {
+//            logger.error("account logined by other phone.");
+//            String reason = String.format("{\"reason\":\"%s\"}", parsedObj.getReason());
+//            Object obj = JSON.parse(reason);
+//            PhiHomeBaseResponse response = errorResponse(Const.STATUS_LOGIN_BY_OTHER_PHIONE);
+//            response.setResult(obj);
+//            return response;
+//        } else if (StringUtil.equals(parsedObj.getError(), "16")) {
+//            logger.error("No account detail.");
+//            return errorResponse(Const.STATUS_NO_ACCOUNT_DETAIL);
+//        }
+//
+//        if (!StringUtil.equals(parsedObj.getError(), "0")) { // 根据token获取账户信息失败
+//            logger.error("Failed to get phicomm account uid null");
+//            return errorResponse(Const.STATUS_FAILED_GET_PHICOMM_ACCOUNT);
+//        }
+//
+//        String uid = parsedObj.getData().getUid();
+//        if (StringUtil.isNullOrEmpty(uid)) {
+//            logger.error("Failed to get phicomm account uid null");
+//            return errorResponse(Const.STATUS_FAILED_GET_PHICOMM_ACCOUNT);
+//        }
+//        logger.info("uid: {}", uid);
+//        return uid;
     }
 
     protected PhicommAccountDetailModel getPhicommAccountByToken(String token) {
