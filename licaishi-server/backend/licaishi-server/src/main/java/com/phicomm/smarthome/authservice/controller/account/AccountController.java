@@ -7,6 +7,7 @@ import com.phicomm.smarthome.authservice.model.dao.AccountModel;
 import com.phicomm.smarthome.authservice.model.request.LoginRequestModel;
 import com.phicomm.smarthome.authservice.model.request.PasswordRequestModel;
 import com.phicomm.smarthome.authservice.model.request.RegistRequestModel;
+import com.phicomm.smarthome.authservice.model.response.AccountBaseResponseModel;
 import com.phicomm.smarthome.authservice.model.response.AuthorizationCodeResponseCode;
 import com.phicomm.smarthome.authservice.model.response.LoginResponseModel;
 import com.phicomm.smarthome.authservice.model.response.PasswordResponseModel;
@@ -58,6 +59,24 @@ public class AccountController extends SBaseController {
         AuthorizationCodeResponseCode rsp = new AuthorizationCodeResponseCode();
         rsp.setError(String.valueOf(Const.ErrorCode.Account.OK));
         rsp.setAuthorizationcode("lcs-gogo");
+        return rsp;
+    }
+
+    /**
+     * 校验短信验证码.
+     */
+    @RequestMapping(value = "/srv/v1/verifyVerificationCode", method = RequestMethod.GET, produces = { "application/json" })
+    public AccountBaseResponseModel verifyVerificationCode(HttpServletRequest request,
+            @RequestParam(value="authorizationcode", required = false) String authorizationcode,
+            @RequestParam(value="phonenumber", required = true) String phonenumber,
+            @RequestParam(value="verificationcode", required = true) String verificationcode) {
+        LOGGER.info("verifyVerificationCode authorizationcode [{}] phonenumber [{}] verificationcode [{}]",
+                authorizationcode,
+                phonenumber,
+                verificationcode);
+
+        AccountBaseResponseModel rsp = new AccountBaseResponseModel();
+        rsp.setError(String.valueOf(Const.ErrorCode.Account.OK));
         return rsp;
     }
 

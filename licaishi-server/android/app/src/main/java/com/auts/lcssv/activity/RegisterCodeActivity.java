@@ -165,7 +165,8 @@ public class RegisterCodeActivity extends BaseActivity implements ILoadingView {
                     setResult(RESULT_OK, new Intent().putExtra("mobile_phone", mPhone));
                     finish();
                 } else {
-                    showDialog();
+//                    showDialog();
+                    ToastUtil.show("验证码已发送");
                 }
             }
 
