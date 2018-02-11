@@ -222,7 +222,7 @@ public class AccountController extends SBaseController {
      */
     @RequestMapping(value = "/v1/password", method = RequestMethod.POST, produces = { "application/json" })
     public PasswordResponseModel password(HttpServletRequest request, @RequestBody PasswordRequestModel requestModel) {
-        LOGGER.info("regist request [{}]", requestModel);
+        LOGGER.info("Modify password request [{}]", requestModel);
 
         PasswordResponseModel rsp = new PasswordResponseModel();
         return rsp;

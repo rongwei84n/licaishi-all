@@ -21,4 +21,9 @@ public class PasswordRequestModel extends BaseRequestModel {
     public void setOldpassword(String oldpassword) {
         this.oldpassword = oldpassword;
     }
+
+    @Override
+    public String toString() {
+        return "PasswordRequestModel [newpassword=" + newpassword + ", oldpassword=" + oldpassword + "]";
+    }
 }
