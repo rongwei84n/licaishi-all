@@ -150,7 +150,11 @@ public class AccountController extends SBaseController {
 
         AccountModel model = new AccountModel();
         model.setUid(String.valueOf(UidGenerater.gen()));
-        model.setUser_name(requestModel.getUsername());
+        String userName = requestModel.getUsername();
+        if (userName == null) {
+            userName = "";
+        }
+        model.setUser_name(userName);
         model.setPasswd(requestModel.getPassword());
         model.setReal_name("");
         model.setPhone(requestModel.getPhonenumber());
