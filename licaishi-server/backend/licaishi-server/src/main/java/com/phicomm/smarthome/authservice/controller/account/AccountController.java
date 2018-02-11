@@ -48,7 +48,7 @@ public class AccountController extends SBaseController {
     /**
      * 获取授权码.
      */
-    @RequestMapping(value = "/srv/v1/authorization", method = RequestMethod.GET, produces = { "application/json" })
+    @RequestMapping(value = "/v1/authorization", method = RequestMethod.GET, produces = { "application/json" })
     public AuthorizationCodeResponseCode getPushMessages(HttpServletRequest request,
             @RequestParam(value="client_id", required = false) String client_id,
             @RequestParam(value="client_secret", required = false) String client_secret,
@@ -65,7 +65,7 @@ public class AccountController extends SBaseController {
     /**
      * 校验短信验证码.
      */
-    @RequestMapping(value = "/srv/v1/verifyVerificationCode", method = RequestMethod.GET, produces = { "application/json" })
+    @RequestMapping(value = "/v1/verifyVerificationCode", method = RequestMethod.GET, produces = { "application/json" })
     public AccountBaseResponseModel verifyVerificationCode(HttpServletRequest request,
             @RequestParam(value="authorizationcode", required = false) String authorizationcode,
             @RequestParam(value="phonenumber", required = true) String phonenumber,
@@ -84,7 +84,7 @@ public class AccountController extends SBaseController {
     /**
      * 账户登录.
      */
-    @RequestMapping(value = "/srv/v1/login", method = RequestMethod.POST, produces = { "application/json" })
+    @RequestMapping(value = "/v1/login", method = RequestMethod.POST, produces = { "application/json" })
     public LoginResponseModel login(HttpServletRequest request, @RequestBody LoginRequestModel requestModel) {
         LOGGER.info("login request model [{}]", requestModel);
         if (requestModel == null) {
@@ -127,7 +127,7 @@ public class AccountController extends SBaseController {
     /**
      * 注册账号.
      */
-    @RequestMapping(value = "/srv/v1/account", method = RequestMethod.POST, produces = { "application/json" })
+    @RequestMapping(value = "/v1/account", method = RequestMethod.POST, produces = { "application/json" })
     public RegistResponseModel account(HttpServletRequest request, @RequestBody RegistRequestModel requestModel) {
         LOGGER.info("regist request [{}]", requestModel);
 
@@ -178,7 +178,7 @@ public class AccountController extends SBaseController {
     /**
      * 检查手机号码，是否是合法的号码，是否已经注册.
      */
-    @RequestMapping(value = "/srv/v1/checkPhonenumber", method = RequestMethod.GET, produces = { "application/json" })
+    @RequestMapping(value = "/v1/checkPhonenumber", method = RequestMethod.GET, produces = { "application/json" })
     public RegistResponseModel checkPhoneNumber(HttpServletRequest request,
             @RequestParam(value="authorizationcode", required=false) String authorizationcode,
             @RequestParam(value="phonenumber", required = true) String phonenumber) {
@@ -216,7 +216,7 @@ public class AccountController extends SBaseController {
     /**
      * 修改密码.
      */
-    @RequestMapping(value = "/srv/v1/password", method = RequestMethod.POST, produces = { "application/json" })
+    @RequestMapping(value = "/v1/password", method = RequestMethod.POST, produces = { "application/json" })
     public PasswordResponseModel password(HttpServletRequest request, @RequestBody PasswordRequestModel requestModel) {
         LOGGER.info("regist request [{}]", requestModel);
 
