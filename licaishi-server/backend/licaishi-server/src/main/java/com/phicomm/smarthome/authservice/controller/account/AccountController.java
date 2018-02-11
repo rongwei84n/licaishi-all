@@ -179,29 +179,33 @@ public class AccountController extends SBaseController {
      * 检查手机号码，是否是合法的号码，是否已经注册.
      */
     @RequestMapping(value = "/v1/checkPhonenumber", method = RequestMethod.GET, produces = { "application/json" })
-    public RegistResponseModel checkPhoneNumber(HttpServletRequest request,
+    public AccountBaseResponseModel checkPhoneNumber(HttpServletRequest request,
             @RequestParam(value="authorizationcode", required=false) String authorizationcode,
             @RequestParam(value="phonenumber", required = true) String phonenumber) {
-        LOGGER.info("regist request authorizationcode [{}] phone [{}]", authorizationcode, phonenumber);
+        LOGGER.info("check phone request authorizationcode [{}] phone [{}]", authorizationcode, phonenumber);
 
         if (StringUtil.isNullOrEmpty(phonenumber)) {
-            LOGGER.info("Register with no phonenumber");
-            return errorRegister(String.valueOf(Const.ErrorCode.REQUEST_NO_PARAS));
+            LOGGER.info("Check phone with no phonenumber");
+            AccountBaseResponseModel rsp = new AccountBaseResponseModel();
+            rsp.setError(String.valueOf(Const.ErrorCode.REQUEST_NO_PARAS));
         }
 
         AccountModel acModel = accountService.queryByUserPhone(phonenumber);
         if (acModel != null) {
             LOGGER.info("Already registed phone [{}]", phonenumber);
-            return errorRegister(String.valueOf(Const.ErrorCode.Account.REGIST_ACCOUNT_EXISTS));
+            AccountBaseResponseModel rsp = new AccountBaseResponseModel();
+            rsp.setError(String.valueOf(Const.ErrorCode.Account.REGIST_ACCOUNT_EXISTS));
+            return rsp;
         }
 
         boolean result = RegexUtils.checkPhone(phonenumber);
 
-        RegistResponseModel rsp = new RegistResponseModel();
+        AccountBaseResponseModel rsp = new AccountBaseResponseModel();
         if (result) {
             rsp.setError(String.valueOf(Const.ErrorCode.Account.OK));
         } else {
-            return errorRegister(String.valueOf(Const.ErrorCode.Account.REGIST_PHONE_ERROR));
+            rsp.setError(String.valueOf(Const.ErrorCode.Account.REGIST_PHONE_ERROR));
+            return rsp;
         }
         return rsp;
     }
