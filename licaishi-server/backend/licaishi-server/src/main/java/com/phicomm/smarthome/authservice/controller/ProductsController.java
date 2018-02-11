@@ -39,7 +39,7 @@ public class ProductsController extends SBaseController {
     /**
      * 查询首页部分热门产品.
      */
-    @RequestMapping(value = "/srv/v1/partial_hot_products", method = RequestMethod.GET, produces = { "application/json" })
+    @RequestMapping(value = "/v1/partial_hot_products", method = RequestMethod.GET, produces = { "application/json" })
     public PhiHomeBaseResponse partialHotProducts(HttpServletRequest request) {
         PhiHomeBaseResponse rspObj = new PhiHomeBaseResponse();
         String token = request.getHeader(Const.AUTHORIZATION);
@@ -76,7 +76,7 @@ public class ProductsController extends SBaseController {
     /**
      * 查询首页所有热门产品.
      */
-    @RequestMapping(value = "/srv/v1/all_hot_products", method = RequestMethod.GET, produces = { "application/json" })
+    @RequestMapping(value = "/v1/all_hot_products", method = RequestMethod.GET, produces = { "application/json" })
     public PhiHomeBaseResponse allHotProducts(HttpServletRequest request) {
         LOGGER.info("allHotProducts");
         PhiHomeBaseResponse rspObj = new PhiHomeBaseResponse();
@@ -115,7 +115,7 @@ public class ProductsController extends SBaseController {
     /**
      * 查询首页部分热门产品.
      */
-    @RequestMapping(value = "/srv/v1/partial_recommend_products", method = RequestMethod.GET, produces = { "application/json" })
+    @RequestMapping(value = "/v1/partial_recommend_products", method = RequestMethod.GET, produces = { "application/json" })
     public PhiHomeBaseResponse partialRecommendProducts(HttpServletRequest request) {
         PhiHomeBaseResponse rspObj = new PhiHomeBaseResponse();
         String token = request.getHeader(Const.AUTHORIZATION);
@@ -152,7 +152,7 @@ public class ProductsController extends SBaseController {
     /**
      * 查询首页部分热门产品.
      */
-    @RequestMapping(value = "/srv/v1/all_recommend_products", method = RequestMethod.GET, produces = { "application/json" })
+    @RequestMapping(value = "/v1/all_recommend_products", method = RequestMethod.GET, produces = { "application/json" })
     public PhiHomeBaseResponse allRecommendProducts(HttpServletRequest request) {
         PhiHomeBaseResponse rspObj = new PhiHomeBaseResponse();
         String token = request.getHeader(Const.AUTHORIZATION);
