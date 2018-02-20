@@ -76,7 +76,7 @@ public class ForgotPwdCodeActivity extends BaseActivity implements ILoadingView 
         showTvMenu(R.string.next_step);
         mHandler = new Handler();
         initPresenter();
-        ViewUtils.linkage(mMyEtPhone.getEt(), 13, mMyEtVerCode.getEt(), 6, mTvNext);
+//        ViewUtils.linkage(mMyEtPhone.getEt(), 13, mMyEtVerCode.getEt(), 6, mTvNext);
         mMyEtVerCode.setContent("");
         mMyEtPhone.getEt().addTextChangedListener(new TextWatcher() {
             @Override
