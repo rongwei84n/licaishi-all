@@ -5,7 +5,6 @@ import com.phicomm.smarthome.authservice.controller.SBaseController;
 import com.phicomm.smarthome.authservice.model.common.PhicommServerConfigModel;
 import com.phicomm.smarthome.authservice.model.dao.AccountModel;
 import com.phicomm.smarthome.authservice.model.dao.TokenModel;
-import com.phicomm.smarthome.authservice.model.request.ForgetPasswordRequestModel;
 import com.phicomm.smarthome.authservice.model.request.PasswordRequestModel;
 import com.phicomm.smarthome.authservice.model.request.RegistRequestModel;
 import com.phicomm.smarthome.authservice.model.response.AccountBaseResponseModel;
@@ -314,25 +313,51 @@ public class AccountController extends SBaseController {
 
     /**
      * 找回密码-重新设置新密码.
-     *0.表示修改成功；1.验证码错误 2.验证码过期； 4.旧密码错误；7.用户名不存在; 11. 授权码错误；23.验证码已使用；50.服务器异常
+     * 0.表示修改成功；1.验证码错误 2.验证码过期； 4.旧密码错误；7.用户名不存在; 11. 授权码错误；23.验证码已使用；50.服务器异常
      */
     @RequestMapping(value = "/v1/forgetpassword", method = RequestMethod.POST, produces = { "application/json" })
-    public AccountBaseResponseModel resetPassword(HttpServletRequest request, @RequestBody ForgetPasswordRequestModel requestModel) {
-        LOGGER.info("Forget password request [{}]", requestModel);
-        if (requestModel == null) {
-            LOGGER.info("Modify password paras is null");
+    public AccountBaseResponseModel resetPassword(HttpServletRequest request,
+            @RequestParam(value = "authorizationcode", required = false) String authorizationcode,
+            @RequestParam(value = "newpassword", required = false) String newpassword,
+            @RequestParam(value = "phonenumber", required = false) String phonenumber,
+            @RequestParam(value = "verificationcode", required = false) String verificationcode) {
+        LOGGER.info("Forget pd request authorizationcode [{}] newpassword [{}] phonenumber [{}] verificationcode [{}]",
+                authorizationcode,
+                newpassword,
+                phonenumber,
+                verificationcode);
+        if (StringUtil.isNullOrEmpty(newpassword)
+                || StringUtil.isNullOrEmpty(phonenumber)
+                || StringUtil.isNullOrEmpty(verificationcode)) {
+            LOGGER.info("Modify password params is null");
             AccountBaseResponseModel rsp = new AccountBaseResponseModel();
             rsp.setError(String.valueOf(Const.ErrorCode.REQUEST_NO_PARAS));
             return rsp;
         }
-
-        String token = request.getHeader(Const.AUTHORIZATION);
-        LOGGER.info("Modify password toekn [{}]", token);
-
-        String uid = getUidByToken(token);
-        LOGGER.info("parsed uid [{}]", uid);
-        if (StringUtil.isNullOrEmpty(uid)) {
-            LOGGER.info("Parsed uid is null, return");
+        AccountModel model = null;
+        try {
+            model = accountService.queryByUserPhone(phonenumber);
+        } catch (Exception e) {
+            LOGGER.info("Query databasse error", e);
+            AccountBaseResponseModel rsp = new AccountBaseResponseModel();
+            rsp.setError(String.valueOf(Const.ErrorCode.Account.LOGIN_ERROR));
+            return rsp;
+        }
+        if (model == null) {
+            LOGGER.info("Account is not exists [{}]", phonenumber);
+            AccountBaseResponseModel rsp = new AccountBaseResponseModel();
+            rsp.setError(String.valueOf(Const.ErrorCode.Account.LOGIN_USER_NOT_EXIST));
+            return rsp;
+        }
+        model.setPasswd(newpassword);
+        model.setUpdate_time(System.currentTimeMillis() / 1000);
+        try {
+            accountService.updateAccount(model);
+        } catch (Exception e) {
+            LOGGER.info("Update database error", e);
+            AccountBaseResponseModel rsp = new AccountBaseResponseModel();
+            rsp.setError(String.valueOf(Const.ErrorCode.Account.LOGIN_ERROR));
+            return rsp;
         }
 
         AccountBaseResponseModel rsp = new AccountBaseResponseModel();

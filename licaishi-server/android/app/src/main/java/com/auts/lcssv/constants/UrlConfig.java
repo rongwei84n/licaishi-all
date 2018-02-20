@@ -31,7 +31,7 @@ public interface UrlConfig {
         String ACCOUNT_DETAIL = URL_HOST + "/v1/accountDetail"; //获取用户云账户公共信息
         String PROPERTY = URL_HOST + "/v1/property"; //修改用户云账户公共信息
         String PASSWORD = URL_HOST + "/v1/password"; //修改密码
-        String FORGOT_PWD = URL_HOST + "srv/v1/forgetpassword"; //忘记密码重新设置
+        String FORGOT_PWD = URL_HOST + "/srv/v1/forgetpassword"; //忘记密码重新设置
     }
 
     interface CloudPortrait {

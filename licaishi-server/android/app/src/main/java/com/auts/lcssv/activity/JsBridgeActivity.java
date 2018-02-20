@@ -50,7 +50,7 @@ public class JsBridgeActivity extends BaseActivity {
     @BindView(R.id.x5_webview)
     WebView mWebView;
 
-    private String mUrl = "http://geek.csdn.net/";
+    private String mUrl = "http://47.97.100.240:9095";
     private JavaBridge mJavaBridge;
     private NativeModel mNativeModel;
     private JSData mInitJsData;
