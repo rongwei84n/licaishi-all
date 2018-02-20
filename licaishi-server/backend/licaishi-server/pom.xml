@@ -218,6 +218,13 @@
                 <plugin.phase>package</plugin.phase>
             </properties>
         </profile>
+        <profile>
+            <id>local</id>
+            <properties>
+                <package.env>local</package.env>
+                <plugin.phase>package</plugin.phase>
+            </properties>
+        </profile>
     </profiles>
     
     <build>

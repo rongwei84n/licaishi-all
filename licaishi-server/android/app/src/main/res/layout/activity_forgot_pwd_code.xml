@@ -19,12 +19,6 @@
         android:paddingRight="10dp">
 
         <TextView
-            android:textStyle="bold"
-            style="@style/text_large_style"
-            android:layout_marginTop="30dp"
-            android:text="@string/forgot_pwd_reset" />
-
-        <TextView
             style="@style/text_small_style"
             android:layout_marginTop="40dp"
             android:text="@string/phone" />
@@ -62,13 +56,5 @@
             android:layout_marginTop="15dp"
             app:has_delete="false"
             app:max_length="6" />
-
-        <TextView
-            android:id="@+id/tv_next"
-            style="@style/btn_common"
-            android:layout_marginTop="45dp"
-            android:text="@string/next_step" />
-
     </LinearLayout>
-
 </LinearLayout>

@@ -1,5 +1,9 @@
 package com.phicomm.smarthome.authservice.model.request;
 
+/**
+ * 修改密码 request model.
+ * @author huangrongwei
+ */
 public class PasswordRequestModel extends BaseRequestModel {
 
     private String newpassword;

@@ -1,12 +1,11 @@
 package com.phicomm.smarthome.authservice.service.impl;
 
-
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
-
 import com.phicomm.smarthome.authservice.dao.AccountMapper;
 import com.phicomm.smarthome.authservice.model.dao.AccountModel;
 import com.phicomm.smarthome.authservice.service.AccountService;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 @Service
 public class AccountImpl implements AccountService {
@@ -36,5 +35,15 @@ public class AccountImpl implements AccountService {
     @Override
     public AccountModel queryByUserPhone(String phone) {
         return mapper.queryByUserPhone(phone);
+    }
+
+    @Override
+    public AccountModel queryByUid(String uid) {
+        return mapper.queryByUid(uid);
+    }
+
+    @Override
+    public int updateAccount(AccountModel model) {
+        return mapper.updateAccount(model);
     }
 }

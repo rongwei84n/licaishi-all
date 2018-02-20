@@ -4,6 +4,8 @@ import com.alibaba.fastjson.JSON;
 import com.phicomm.smarthome.authservice.consts.Const;
 import com.phicomm.smarthome.authservice.model.common.PhiHomeBaseResponse;
 import com.phicomm.smarthome.authservice.model.common.PhicommAccountDetailModel;
+import com.phicomm.smarthome.authservice.model.dao.TokenModel;
+import com.phicomm.smarthome.authservice.service.TokenService;
 import com.phicomm.smarthome.authservice.util.MyResponseutils;
 import com.phicomm.smarthome.authservice.util.PhicommHttpsClient;
 import com.phicomm.smarthome.authservice.util.StringUtil;
@@ -13,6 +15,7 @@ import java.util.Map;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import org.springframework.beans.factory.annotation.Autowired;
 
 /**
  * Phihome Controller基类, 提供了一些返回的基本功能.
@@ -32,6 +35,9 @@ public abstract class SBaseController {
 
 //    @Autowired
 //    private EurekaClient discoveryClient;
+
+    @Autowired
+    protected TokenService tokenService;
 
     public static PhiHomeBaseResponse geResponse(Object result) {
         PhiHomeBaseResponse smartHomeResponseT = new PhiHomeBaseResponse();
@@ -60,6 +66,19 @@ public abstract class SBaseController {
         response.setCode(Const.STATUS_OK);
         response.setMessage(MyResponseutils.parseMsg(Const.STATUS_OK));
         return response;
+    }
+
+    protected String getUidByToken(String token) {
+        if (StringUtil.isNullOrEmpty(token)) {
+            return "";
+        }
+
+        TokenModel model = tokenService.getByToken(token);
+        if (model == null) {
+            return "";
+        } else {
+            return model.getUid();
+        }
     }
 
     protected Object getUIDByToken(String token) {

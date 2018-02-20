@@ -22,8 +22,7 @@ import butterknife.OnClick;
 /**
  * 忘记密码-设置新密码
  *
- * @author qisheng.lv
- * @date 2017/4/12
+ * @date 2018/02/19
  */
 public class ResetPwdActivity extends BaseActivity implements ILoadingView {
     @BindView(R.id.myet_pwd)

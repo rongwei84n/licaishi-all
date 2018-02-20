@@ -55,9 +55,9 @@ android {
 
         //线上环境
         buildConfigField "int", "build_number", buildNumber + ""
-        buildConfigField "String", "host_cloud_acount", "\"http://192.168.1.102:8094\""
+        buildConfigField "String", "host_cloud_acount", "\"http://47.97.100.240\""
         buildConfigField "String", "host_cloud_portrait", "\"https://portraitsym.phicomm.com\""
-        buildConfigField "String", "host_sz", "\"http://192.168.2.107\""
+        buildConfigField "String", "host_sz", "\"http://47.97.100.240\""
         buildConfigField "String", "mqtt_host", "\"home.phicomm.com\""
         buildConfigField "int", "mqtt_port", "61613"
         buildConfigField "boolean", "mqtt_ssl", "true"
@@ -108,7 +108,6 @@ android {
         szrd {
             applicationIdSuffix ".szrd"
             buildConfigField "String", "host_cloud_portrait", "\"http://114.141.173.53\""
-            buildConfigField "String", "host_sz", "\"http://192.168.2.107\""
             buildConfigField "String", "mqtt_host", "\"dev.home.phiwifi.com\""
             buildConfigField "boolean", "mqtt_ssl", "false"
         }
@@ -117,7 +116,6 @@ android {
         qa {
             applicationIdSuffix ".qa"
             buildConfigField "String", "host_cloud_portrait", "\"http://114.141.173.53\""
-            buildConfigField "String", "host_sz", "\"https://192.168.2.107\""
             buildConfigField "String", "mqtt_host", "\"sit.home.phicomm.com\""
         }
 

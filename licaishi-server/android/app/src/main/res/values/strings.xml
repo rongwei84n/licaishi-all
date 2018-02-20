@@ -71,8 +71,8 @@
     <string name="login_welcom_phihome">欢迎来到 PhiHome</string>
     <string name="forgot_pwd_reset">重置密码</string>
     <string name="forgot_pwd_reset_new">设置新密码</string>
-    <string name="forgot_pwd_reset_login">重置登录密码</string>
-    <string name="forgot_pwd_reset_success">密码设置成功</string>
+    <string name="forgot_pwd_reset_login">找回登录密码</string>
+    <string name="forgot_pwd_reset_success">恭喜您成功找回登录密码</string>
     <string name="check_phone_not_register">该手机号未注册</string>
     <string name="hint_click_next">同意理财师社区</string>
     <string name="user_proto">《用户协议》</string>

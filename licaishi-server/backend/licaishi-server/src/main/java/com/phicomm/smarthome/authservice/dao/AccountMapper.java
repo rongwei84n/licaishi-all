@@ -3,12 +3,13 @@ package com.phicomm.smarthome.authservice.dao;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
+import org.apache.ibatis.annotations.Update;
 
 import com.phicomm.smarthome.authservice.model.dao.AccountModel;
 import com.phicomm.smarthome.authservice.model.request.RegistRequestModel;
 
 /**
- * 产品表方法入口
+ * 产品表方法入口.
  * @author huangrongwei
  *
  */
@@ -43,6 +44,12 @@ public interface AccountMapper {
     @Select("select * from tbl_user where status=0 order by uid desc limit 1")
     AccountModel queryMaxUid();
 
+    @Select("select * from tbl_user where status=0 and uid=#{uid} limit 1")
+    AccountModel queryByUid(@Param("uid") String uid);
+
     @Select("select * from tbl_user where phone=#{phone} limit 1")
     AccountModel queryByUserPhone(@Param("phone") String phone);
+
+    @Update("update tbl_user set user_name = #{model.user_name}, real_name=#{model.real_name}, phone=#{model.phone}, passwd=#{model.passwd}, email=#{model.email}, sex=#{model.sex}, remark=#{model.remark}, role=#{model.role}, status=#{model.status}, create_time=#{model.create_time}, update_time=#{model.update_time} where uid=#{model.uid}")
+    int updateAccount(@Param("model") AccountModel model);
 }

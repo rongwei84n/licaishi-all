@@ -27,8 +27,8 @@ import butterknife.OnClick;
 /**
  * 忘记密码-验证码页面
  *
- * @author qisheng.lv
- * @date 2017/7/10
+ * @author rongwei.huang
+ * @date 2018/02/19
  */
 public class ForgotPwdCodeActivity extends BaseActivity implements ILoadingView {
     @BindView(R.id.myet_phone)
@@ -37,8 +37,6 @@ public class ForgotPwdCodeActivity extends BaseActivity implements ILoadingView 
     MyEditText mMyEtVerCode;
     @BindView(R.id.tv_get_vercode)
     TextView mTvGetVerCode;
-    @BindView(R.id.tv_next)
-    TextView mTvNext;
 
     private static final int REQUEST_CODE_REGISTER = 501;
     private String mPhone;
@@ -75,6 +73,7 @@ public class ForgotPwdCodeActivity extends BaseActivity implements ILoadingView 
     @Override
     public void afterInitView() {
         setPageTitle(R.string.forgot_pwd_reset_login);
+        showTvMenu(R.string.next_step);
         mHandler = new Handler();
         initPresenter();
         ViewUtils.linkage(mMyEtPhone.getEt(), 13, mMyEtVerCode.getEt(), 6, mTvNext);
@@ -154,17 +153,6 @@ public class ForgotPwdCodeActivity extends BaseActivity implements ILoadingView 
         doCheckPhone();
     }
 
-
-    @OnClick(R.id.tv_next)
-    public void tv_next() {
-        mPhone = mMyEtPhone.getContent();
-        mVerCode = mMyEtVerCode.getContent();
-        if (checkAllInput()) {
-            doCheckVerCode();
-        }
-//        gotoResetPwd();
-    }
-
     /**
      * 检查手机是否已注册
      */
@@ -180,16 +168,18 @@ public class ForgotPwdCodeActivity extends BaseActivity implements ILoadingView 
      * 弹出图形验证码
      */
     private void showDialog() {
-        mDialog = new VerifyDialog(this, mPhone, new VerifyDialog.VerifyCallBack() {
-            @Override
-            public void onGetVetCodeSuccess() {
-                mCodeTime = AppConstans.Common.REGISTER_CODE_TIME;
-                mHandler.postDelayed(mCodeTimeR, 0);
-                mDialog.dismiss();
-                mMyEtVerCode.requestFocus();
-            }
-        });
-        mDialog.show();
+//        mDialog = new VerifyDialog(this, mPhone, new VerifyDialog.VerifyCallBack() {
+//            @Override
+//            public void onGetVetCodeSuccess() {
+//                mCodeTime = AppConstans.Common.REGISTER_CODE_TIME;
+//                mHandler.postDelayed(mCodeTimeR, 0);
+//                mDialog.dismiss();
+//                mMyEtVerCode.requestFocus();
+//            }
+//        });
+//        mDialog.show();
+        //验证手机号码成功后，请求验证码
+        ToastUtil.show("验证码发送成功");
     }
 
     /**
@@ -263,5 +253,14 @@ public class ForgotPwdCodeActivity extends BaseActivity implements ILoadingView 
     @Override
     public void updateLoadingMessage(String message) {
         showLoading(message);
+    }
+
+    @Override
+    public void onTvMenuClick(TextView view) {
+        mPhone = mMyEtPhone.getContent();
+        mVerCode = mMyEtVerCode.getContent();
+        if (checkAllInput()) {
+            doCheckVerCode();
+        }
     }
 }
