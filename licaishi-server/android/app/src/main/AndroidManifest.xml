@@ -108,6 +108,7 @@
         <activity android:name=".zxing.CaptureActivity" />
         <activity android:name=".zxing.PreferencesActivity" />
         <activity android:name=".activity.JsBridgeActivity"
+            android:launchMode="singleTask"
             android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
