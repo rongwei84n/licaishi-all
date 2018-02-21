@@ -8,6 +8,7 @@ import android.text.TextUtils;
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.TypeReference;
 import com.auts.lcssv.activity.DevicePicActivity;
+import com.auts.lcssv.activity.LoginCloudActivity;
 import com.auts.lcssv.activity.RoomManageActivity;
 import com.auts.lcssv.bean.MqttCallback;
 import com.auts.lcssv.constants.AppConstans;
@@ -65,11 +66,13 @@ public class NativeModel {
                 case "phihome.room.manage":
                     intent = new Intent(context, RoomManageActivity.class);
                     break;
-
                 case "phihome.device.picture":
                     intent = new Intent(context, DevicePicActivity.class);
                     intent.putExtra("deviceId", deviceId);
                     intent.putExtra("picGid", jsData.getPageExtra());
+                    break;
+                case "lcs.account.login":
+                    intent = new Intent(context, LoginCloudActivity.class);
                     break;
 
                 default:
