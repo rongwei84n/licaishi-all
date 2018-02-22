@@ -18,7 +18,7 @@
 
     <TextView
         android:id="@+id/text"
-        android:text="a分递四方速递防守打法士大夫十大付"
+        android:text="测试h5地址"
         android:layout_width="match_parent"
         android:layout_height="30dp" />
     <EditText
@@ -30,6 +30,7 @@
         android:id="@+id/button11"
         android:text="button"
         android:layout_width="match_parent"
-        android:layout_height="60dp" />
+        android:layout_height="60dp"
+        android:visibility="gone"/>
 
 </LinearLayout>

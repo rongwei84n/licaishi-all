@@ -1,5 +1,7 @@
 package com.auts.lcssv.activity;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.PixelFormat;
@@ -9,9 +11,12 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.text.TextUtils;
 import android.util.Log;
+import android.view.LayoutInflater;
+import android.view.View;
 import android.view.ViewGroup;
+import android.widget.EditText;
 
-import com.alibaba.fastjson.JSON;
+import com.auts.lcssv.BuildConfig;
 import com.auts.lcssv.R;
 import com.auts.lcssv.base.BaseActivity;
 import com.auts.lcssv.bean.MqttCallback;
@@ -37,8 +42,6 @@ import com.tencent.smtt.sdk.WebSettings;
 import com.tencent.smtt.sdk.WebView;
 import com.tencent.smtt.sdk.WebViewClient;
 
-
-import org.greenrobot.eventbus.EventBus;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -80,9 +83,32 @@ public class JsBridgeActivity extends BaseActivity {
         mJavaBridge = new JavaBridge(this, mWebView);
         initWebView();
         getExtra();
-        loadUrl(mUrl);
+//        loadUrl(mUrl);
         mNativeModel = new NativeModel();
         initHandler();
+
+        if (BuildConfig.isDebug) {
+            AlertDialog.Builder dialog = new AlertDialog.Builder(this);
+            View customView = LayoutInflater.from(this).inflate(R.layout.activity_test, null);
+            final EditText etInputText = (EditText) customView.findViewById(R.id.inputtext);
+            dialog.setView(customView);
+
+            dialog.setPositiveButton("确定", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialogInterface, int i) {
+                    String url = etInputText.getText().toString();
+                    if (!TextUtils.isEmpty(url)) {
+                        Log.d("Sandy", url);
+                        mUrl = url;
+                    }
+                    loadUrl(mUrl);
+                }
+            });
+            dialog.setCancelable(false);
+            dialog.show();
+        } else {
+            loadUrl(mUrl);
+        }
     }
 
     public void getExtra() {
