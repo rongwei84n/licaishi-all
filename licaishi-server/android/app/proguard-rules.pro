@@ -94,10 +94,10 @@ public static final int *;
 #-ignorewarnings
 
 #==================JsBridge======================
--keep class com.phicomm.phihome.jsbridge.** { *; }
+-keep class com.auts.lcssv.jsbridge.** { *; }
 
 #==================bean======================
--keep class com.phicomm.phihome.bean.** { *; }
+-keep class com.auts.lcssv.bean.** { *; }
 
 #==================butterknife======================
 -keep class butterknife.** { *; }
@@ -130,7 +130,7 @@ public static final int *;
 -keepclassmembers class * {
    public <init> (org.json.JSONObject);
 }
--keep public class [com.phicomm.phihome].R$*{
+-keep public class [com.auts.lcssv].R$*{
     public static final int *;
 }
 -keep class com.umeng.commonsdk.** {*;}
@@ -287,4 +287,4 @@ public static final int *;
 -keep class cn.jiguang.** { *; }
 
 #==================viewhodler======================
--keep class com.phicomm.phihome.adapter.holder.** { *; }
+-keep class com.auts.lcssv.adapter.holder.** { *; }
