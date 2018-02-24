@@ -186,7 +186,7 @@ public class AccountController extends SBaseController {
         AccountModel acModel = accountService.queryByUserPhone(requestModel.getPhonenumber());
         if (acModel != null) {
             LOGGER.info("Already registed phone [{}]", requestModel.getPhonenumber());
-            return errorRegister(String.valueOf(Const.ErrorCode.Account.REGIST_ACCOUNT_EXISTS));
+//            return errorRegister(String.valueOf(Const.ErrorCode.Account.REGIST_ACCOUNT_EXISTS));
         }
 
         AccountModel model = new AccountModel();
