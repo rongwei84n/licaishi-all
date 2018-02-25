@@ -8,6 +8,8 @@ public interface Const {
 
     String DEFAULT_CHARSET = "utf-8";
 
+    String TOKEN_PREFIX = "Bearer";
+
     /**
      * header头部.
      */
@@ -46,6 +48,11 @@ public interface Const {
             int LOGIN_KICK_MULTI_LOGIN = 30;
             int LOGIN_PHONE_ERROR = 34;
             int LOGIN_ERROR = 50;
+
+            //token
+            int TOKEN_OK = 0;
+            int TOKEN_NEED_REFRESH = 1;
+            int TOKEN_INVILID = 2;
         }
     }
 }

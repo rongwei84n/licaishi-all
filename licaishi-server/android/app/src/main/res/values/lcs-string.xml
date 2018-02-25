@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="tv_nickname">姓名:</string>
+    <string name="tv_workstation_name">工作室名称:</string>
+    <string name="tv_change_passwd">修改登录密码</string>
+    <string name="tv_shequ">关于理财师社区</string>
+</resources>

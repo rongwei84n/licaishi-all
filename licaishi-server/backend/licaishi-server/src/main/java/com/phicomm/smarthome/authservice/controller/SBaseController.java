@@ -72,6 +72,7 @@ public abstract class SBaseController {
         if (StringUtil.isNullOrEmpty(token)) {
             return "";
         }
+        token = token.replace(Const.TOKEN_PREFIX, "").trim();
 
         TokenModel model = tokenService.getByToken(token);
         if (model == null) {

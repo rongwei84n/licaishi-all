@@ -8,6 +8,7 @@ import com.phicomm.smarthome.authservice.model.dao.TokenModel;
 import com.phicomm.smarthome.authservice.model.request.PasswordRequestModel;
 import com.phicomm.smarthome.authservice.model.request.RegistRequestModel;
 import com.phicomm.smarthome.authservice.model.response.AccountBaseResponseModel;
+import com.phicomm.smarthome.authservice.model.response.AccountDetailResponseModel;
 import com.phicomm.smarthome.authservice.model.response.AuthorizationCodeResponseCode;
 import com.phicomm.smarthome.authservice.model.response.LoginResponseModel;
 import com.phicomm.smarthome.authservice.model.response.PasswordResponseModel;
@@ -361,6 +362,46 @@ public class AccountController extends SBaseController {
         }
 
         AccountBaseResponseModel rsp = new AccountBaseResponseModel();
+        rsp.setError(String.valueOf(Const.ErrorCode.Account.OK));
+        return rsp;
+    }
+
+    /**
+     * 获取账户详情.
+     *
+     */
+    @RequestMapping(value = "/v1/accountDetail", method = RequestMethod.GET, produces = { "application/json" })
+    public AccountDetailResponseModel accountDetail(HttpServletRequest request) {
+        String token = request.getHeader(Const.AUTHORIZATION);
+        LOGGER.info("Get account detail token [{}]", token);
+
+//        token = "acs-1519122162777";
+        String uid = getUidByToken(token);
+        LOGGER.info("parsed uid [{}]", uid);
+        if (StringUtil.isNullOrEmpty(uid)) {
+            LOGGER.info("Parsed uid is null, return");
+            AccountDetailResponseModel rsp = new AccountDetailResponseModel();
+            rsp.setError(String.valueOf(Const.ErrorCode.Account.LOGIN_ERROR));
+            return rsp;
+        }
+
+        AccountModel model = null;
+        try {
+            model = accountService.queryByUid(uid);
+        } catch (Exception e) {
+            LOGGER.info("Query databasse error", e);
+            AccountDetailResponseModel rsp = new AccountDetailResponseModel();
+            rsp.setError(String.valueOf(Const.ErrorCode.Account.LOGIN_ERROR));
+            return rsp;
+        }
+        if (model == null) {
+            LOGGER.info("Account is not exists [{}]", uid);
+            AccountDetailResponseModel rsp = new AccountDetailResponseModel();
+            rsp.setError(String.valueOf(Const.ErrorCode.Account.LOGIN_ERROR));
+            return rsp;
+        }
+
+        AccountDetailResponseModel rsp = new AccountDetailResponseModel(model);
         rsp.setError(String.valueOf(Const.ErrorCode.Account.OK));
         return rsp;
     }

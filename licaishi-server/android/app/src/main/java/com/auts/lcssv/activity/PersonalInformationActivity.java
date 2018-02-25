@@ -52,9 +52,6 @@ import butterknife.OnClick;
 
 /**
  * 个人信息界面
- *
- * @author xiaolei.yang
- * @date 2017/7/19
  */
 public class PersonalInformationActivity extends BaseActivity implements GetPhotoBeforeListener, ILoadingView {
     @BindView(R.id.ll_head_portrait)
@@ -67,7 +64,7 @@ public class PersonalInformationActivity extends BaseActivity implements GetPhot
     @BindView(R.id.tv_mobile)
     TextView mTvMobile;
 
-    @BindView(R.id.tv_phone_number)
+    @BindView(R.id.tv_mobile_label)
     TextView mTvPhoneNumber;
 
     private UserInfoPresenter mUploadBasePresenter;
@@ -194,24 +191,6 @@ public class PersonalInformationActivity extends BaseActivity implements GetPhot
             if (TextUtils.isEmpty(imageUrl)) {
                 imageUrl = "";
             }
-//                    打印图片的url和缓存路径
-//            final String url = imageUrl;
-//            hasnew Thread(hasnew Runnable() {
-//                @Override
-//                public void run() {
-//                    Log.e("======imageUrl2", "run: " + url);
-//                    FutureTarget<File> future = Glide.with(PersonalInformationActivity.this)
-//                            .load(url)
-//                            .downloadOnly(100, 100);
-//                    try {
-//                        File cacheFile = future.get();
-//                        String path = cacheFile.getAbsolutePath();
-//                        Log.e("======path2", "run: " + path);
-//                    } catch (Exception e) {
-//                        e.printStackTrace();
-//                    }
-//                }
-//            }).start();
             LogUtils.error("=====imageUrl5==", imageUrl + "===");
             ImageLoader.getLoader(this)
                     .load(imageUrl)
@@ -275,11 +254,6 @@ public class PersonalInformationActivity extends BaseActivity implements GetPhot
             mTvMobile.setText(showPhoneNumber);
             mTvPhoneNumber.setText(TextUtils.isEmpty(mAccountDetailsBean.getNickname()) ? showPhoneNumber : mAccountDetailsBean.getNickname());
         }
-    }
-
-    @Override
-    protected void onSaveInstanceState(Bundle outState) {
-        super.onSaveInstanceState(outState);
     }
 
     @OnClick(R.id.ll_head_portrait)

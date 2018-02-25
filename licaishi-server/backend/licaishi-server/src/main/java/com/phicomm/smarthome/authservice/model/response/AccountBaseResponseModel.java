@@ -2,7 +2,7 @@ package com.phicomm.smarthome.authservice.model.response;
 
 public class AccountBaseResponseModel {
 
-    private String error;
+    protected String error;
 
     public String getError() {
         return error;

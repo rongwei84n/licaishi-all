@@ -47,4 +47,7 @@
 
     <dimen name="text_top3">35dp</dimen>
     <dimen name="image_top3">35dp</dimen>
+
+    <dimen name="listview_item_height">52dp</dimen>
+    <dimen name="listview_item_di">1dp</dimen>
 </resources>

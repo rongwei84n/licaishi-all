@@ -12,7 +12,7 @@ import com.phicomm.smarthome.authservice.model.dao.TokenModel;
  */
 public interface TokenMapper {
 
-    @Select("select * from tbl_tokens where token=#{token} and status=0 limit 1")
+    @Select("select * from tbl_tokens where access_token=#{token} and status=0 limit 1")
     TokenModel getByToken(@Param("token") String token);
 
     @Select("select * from tbl_tokens where uid=#{uid} and status=0 limit 1")
