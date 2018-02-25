@@ -61,11 +61,9 @@ public class PersonalInformationActivity extends BaseActivity implements GetPhot
     ImageView mIvHeadPortrait;
     @BindView(R.id.tv_nickname)
     TextView mTvNickname;
+
     @BindView(R.id.tv_mobile)
     TextView mTvMobile;
-
-    @BindView(R.id.tv_mobile_label)
-    TextView mTvPhoneNumber;
 
     private UserInfoPresenter mUploadBasePresenter;
     private CloudAccountPresenter mCloudAccountPresenter;
@@ -75,11 +73,6 @@ public class PersonalInformationActivity extends BaseActivity implements GetPhot
      * 手机号码的真实值
      */
     private String phoneNumber = "";
-    /**
-     * 显示出来中间四位隐藏的手机号码
-     */
-    private String showPhoneNumber = "";
-
 
     @Override
     public void initLayout(Bundle savedInstanceState) {
@@ -150,13 +143,8 @@ public class PersonalInformationActivity extends BaseActivity implements GetPhot
 
                     mTvNickname.setText(TextUtils.isEmpty(mAccountDetailsBean.getNickname()) ? getString(R.string.not_set) : mAccountDetailsBean.getNickname());
                     phoneNumber = TextUtils.isEmpty(mAccountDetailsBean.getPhonenumber()) ? "" : mAccountDetailsBean.getPhonenumber();
-                    if (phoneNumber.length() == 11) {
-                        StringBuilder builder = new StringBuilder(phoneNumber);
-                        showPhoneNumber = builder.replace(3, 7, "****").toString();
-                    }
-                    mTvMobile.setText(showPhoneNumber);
-                    mTvPhoneNumber.setText(TextUtils.isEmpty(mAccountDetailsBean.getNickname())
-                            ? showPhoneNumber : mAccountDetailsBean.getNickname());
+
+                    mTvMobile.setText(phoneNumber);
                 } else {
                     accountDetailError("0", null);
                 }
@@ -202,13 +190,8 @@ public class PersonalInformationActivity extends BaseActivity implements GetPhot
 
             mTvNickname.setText(TextUtils.isEmpty(mAccountDetailsBean.getNickname()) ? getString(R.string.not_set) : mAccountDetailsBean.getNickname());
             phoneNumber = TextUtils.isEmpty(mAccountDetailsBean.getPhonenumber()) ? "" : mAccountDetailsBean.getPhonenumber();
-            if (phoneNumber.length() == 11) {
-                StringBuilder builder = new StringBuilder(phoneNumber);
-                showPhoneNumber = builder.replace(3, 7, "****").toString();
-            }
-            mTvMobile.setText(showPhoneNumber);
-            mTvPhoneNumber.setText(TextUtils.isEmpty(mAccountDetailsBean.getNickname())
-                    ? showPhoneNumber : mAccountDetailsBean.getNickname());
+
+            mTvMobile.setText(phoneNumber);
         }
 
     }
@@ -235,7 +218,7 @@ public class PersonalInformationActivity extends BaseActivity implements GetPhot
                 mTvNickname.setText(R.string.not_set);
             } else {
                 mTvNickname.setText(mAccountDetailsBean.getNickname());
-                mTvPhoneNumber.setText(mAccountDetailsBean.getNickname());
+                mTvMobile.setText(mAccountDetailsBean.getNickname());
             }
         }
     }
@@ -247,12 +230,7 @@ public class PersonalInformationActivity extends BaseActivity implements GetPhot
 
             mTvNickname.setText(TextUtils.isEmpty(mAccountDetailsBean.getNickname()) ? getString(R.string.not_set) : mAccountDetailsBean.getNickname());
             phoneNumber = TextUtils.isEmpty(mAccountDetailsBean.getPhonenumber()) ? "" : mAccountDetailsBean.getPhonenumber();
-            if (phoneNumber.length() == 11) {
-                StringBuilder builder = new StringBuilder(phoneNumber);
-                showPhoneNumber = builder.replace(3, 7, "****").toString();
-            }
-            mTvMobile.setText(showPhoneNumber);
-            mTvPhoneNumber.setText(TextUtils.isEmpty(mAccountDetailsBean.getNickname()) ? showPhoneNumber : mAccountDetailsBean.getNickname());
+            mTvMobile.setText(phoneNumber);
         }
     }
 
