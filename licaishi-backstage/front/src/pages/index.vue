@@ -1,52 +1,175 @@
 <template>
-  <div class="index-wrap">
-    <div class="index-left">
-      <div class="index-left-block">
-        <h2>基础数据管理</h2>
-          <ul>
-            <li v-for="item in basicList">
-              <a :href="item.url">{{ item.name }}</a>
-            </li>
+  <div>
+    <div class="app-head">
+      <div class="app-head-inner">
+        <router-link :to="{path: '/'}">
+          <img src="../assets/logo.png">
+        </router-link>
+        <div class="head-nav">
+          <ul class="nav-list">
+            <li>登录</li>
+            <li class="nav-pile">|</li>
+            <li>注册</li>
+            <li class="nav-pile">|</li>
+            <li>关于</li>
           </ul>
-      </div>
-      <div class="index-left-block lastest-news">
-        <h2>统计分析</h2>
+        </div>
       </div>
     </div>
-    <div class="index-right">
-      <div class="index-board-list">
+    <div class="index-wrap">
+      <div class="index-left">
+        <div class="index-left-block">
+          <h2>基础数据管理</h2>
+          <ul>
+            <router-link v-for="item in basicList" :key="item.name" :to="{ path: item.path }" tag="li" active-class="active">
+              {{ item.name }}
+            </router-link>
+          </ul>
+        </div>
+        <div class="index-left-block lastest-news">
+          <h2>统计分析</h2>
+        </div>
       </div>
+      <div class="index-right">
+        <div class="index-board-list">
+          <keep-alive>
+            <router-view></router-view>
+          </keep-alive>
+        </div>
+      </div>
+    </div>
+    <div class="app-foot">
+      <p>© 2018 理财师管理后台</p>
     </div>
   </div>
 </template>
 
 <script>
-    export default {
-      created: function(){
-        this.$http.get('getList').then(function(data){
-          console.log(data);
-        },function(err){
-          console.log(err);
-        });
-      },
-      data() {
-        return {
-          basicList: [
-            {
-              name: '理财师管理',
-              url: ''
-            },
-            {
-              name: '订单管理',
-              url: ''
-            }
-          ]
-        }
+  export default {
+    name: "index",
+    data() {
+      return {
+        basicList: [
+          {
+            name: '理财师管理',
+            path: '/index/financermange'
+          },
+          {
+            name: '订单管理',
+            path: '/index/ordermanage'
+          }
+        ]
       }
     }
+  }
 </script>
 
-<style scoped>
+<style>
+  .app-head {
+    background: #363636;
+    color: #b2b2b2;
+    height: 90px;
+    line-height: 90px;
+    width: 100%;
+  }
+
+  .app-head-inner {
+    width: 1200px;
+    margin: 0 auto;
+  }
+
+  .app-head-inner img {
+    width: 100px;
+    margin-top: 10px;
+    float: left;
+  }
+
+  .head-nav {
+    float: right;
+  }
+
+  .head-nav ul {
+    overflow: hidden;
+  }
+
+  .head-nav li {
+    cursor: pointer;
+    float: left;
+  }
+
+  .nav-pile {
+    padding: 0 10px;
+  }
+
+  .app-foot {
+    text-align: center;
+    height: 80px;
+    width: 100%;
+    line-height: 80px;
+    background: #e3e4e8;
+    clear: both;
+    margin-top: 30px;
+  }
+
+  .container {
+    width: 1200px;
+    margin: 0 auto;
+  }
+
+  .hr {
+    height: 1px;
+    width: 100%;
+    background: #ddd;
+  }
+
+  .button {
+    background: #4fc08d;
+    color: #fff;
+    display: inline-block;
+    padding: 10px 20px;
+    cursor: pointer;
+  }
+
+  .button:hover {
+    background: #4fc08d;
+  }
+
+  .g-form {
+
+  }
+
+  .g-form-line {
+    padding: 15px 0;
+  }
+
+  .g-form-label {
+    width: 100px;
+    font-size: 16px;
+    display: inline-block;
+  }
+
+  .g-form-input {
+    display: inline-block;
+  }
+
+  .g-form-input input {
+    height: 30px;
+    width: 200px;
+    line-height: 30px;
+    vertical-align: middle;
+    padding: 0 10px;
+    border: 1px solid #ccc;
+  }
+
+  .g-form-btn {
+    padding-left: 100px;
+  }
+
+  .g-form-error {
+    color: red;
+    padding-left: 15px;
+  }
+
   .index-wrap {
     width: 1200px;
     margin: 0 auto;
@@ -79,11 +202,15 @@
     font-weight: bold;
     color: #222;
   }
-  .index-left-block ul {
-    padding: 10px 15px;
-  }
   .index-left-block li {
-    padding: 5px;
+    padding: 12px;
+    cursor: pointer;
+  }
+  .index-left-block li:hover {
+    background-color: #cccccc;
+  }
+  .active {
+    background-color: #cccccc;
   }
   .index-board-list {
     overflow: hidden;

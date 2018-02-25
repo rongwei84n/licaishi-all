@@ -34,6 +34,7 @@ public class FinancerController extends SBaseController {
      */
     @RequestMapping(value = "/v1/financerlist", method = RequestMethod.GET, produces = { "application/json" })
     public PhiHomeBaseResponse financerList(HttpServletRequest request) {
+    	System.out.println("请求进入");
         PhiHomeBaseResponse rspObj = new PhiHomeBaseResponse();
         String token = request.getHeader(Const.AUTHORIZATION);
         // 通过token获取账户uid
