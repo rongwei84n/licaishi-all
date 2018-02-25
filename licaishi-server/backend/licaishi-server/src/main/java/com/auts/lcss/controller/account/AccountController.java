@@ -40,10 +40,6 @@ public class AccountController extends SBaseController {
     public static String HTTP_HEAD_AUTHORIZATION = "Authorization";
     public static String HTTP_HEAD_CONTENT_TYPE = "Content-Type";
 
-    //找回密码，都是找回初始密码; 初始化还原的默认密码.
-    private static final String RAW_DEFAULT_PASSWORD = "lcs123";
-    private static final String MD5_RAW_DEFAULT_PASSWORD = EntryUtils.getMd5(RAW_DEFAULT_PASSWORD);
-
     @Autowired
     AccountService accountService;
 
