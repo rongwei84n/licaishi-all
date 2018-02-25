@@ -3,6 +3,7 @@ package com.auts.lcss.controller;
 import com.auts.lcss.consts.Const;
 import com.auts.lcss.model.common.PhiHomeBaseResponse;
 import com.auts.lcss.model.dao.HotProductModel;
+import com.auts.lcss.model.dao.ProductModel;
 import com.auts.lcss.service.ProductsService;
 
 import java.util.ArrayList;
@@ -48,25 +49,29 @@ public class ProductsController extends SBaseController {
             return (PhiHomeBaseResponse) object;
         }
         LOGGER.info("partialHotProducts uid [{}]", uid);
-
-//        List<ProductModel> hotProducts = productsService.queryHotProducts();
-        List<HotProductModel> hotProducts = new ArrayList<>();
-        for (int i = 0; i < 2; i++) {
-            HotProductModel model = new HotProductModel();
-            model.setId((long) i);
-            model.setName("赚钱" + i);
-            model.setTimeLimit("12个月");
-            model.setPic("www.baidu.com");
-            model.setField("基础设施");
-            model.setRebateP("0.05");
-            model.setProgress("0.59");
-            model.setIncomeP("0.09");
-            model.setType("综合资管");
-
-            hotProducts.add(model);
-        }
+        
+        List<ProductModel> hotProducts = productsService.queryHotProducts();
         rspObj.setResult(hotProducts);
         return successResponse(rspObj);
+
+//        List<ProductModel> hotProducts = productsService.queryHotProducts();
+//        List<HotProductModel> hotProducts = new ArrayList<>();
+//        for (int i = 0; i < 2; i++) {
+//            HotProductModel model = new HotProductModel();
+//            model.setId((long) i);
+//            model.setName("赚钱" + i);
+//            model.setTimeLimit("12个月");
+//            model.setPic("www.baidu.com");
+//            model.setField("基础设施");
+//            model.setRebateP("0.05");
+//            model.setProgress("0.59");
+//            model.setIncomeP("0.09");
+//            model.setType("综合资管");
+//
+//            hotProducts.add(model);
+//        }
+//        rspObj.setResult(hotProducts);
+//        return successResponse(rspObj);
     }
 
     /**

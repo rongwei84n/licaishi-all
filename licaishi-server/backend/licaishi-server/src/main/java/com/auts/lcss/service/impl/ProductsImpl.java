@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import com.auts.lcss.dao.ProductsMapper;
 import com.auts.lcss.model.dao.HotProductModel;
+import com.auts.lcss.model.dao.ProductModel;
 import com.auts.lcss.service.ProductsService;
 
 @Service
@@ -15,7 +16,7 @@ public class ProductsImpl implements ProductsService {
     ProductsMapper mapper;
 
     @Override
-    public List<HotProductModel> queryHotProducts() {
+    public List<ProductModel> queryHotProducts() {
         try {
             return mapper.queryHotProducts();
         } catch (Exception e) {
