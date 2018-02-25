@@ -104,26 +104,11 @@
             <version>${mysql-connector}</version>
         </dependency>
         
-        <!-- <dependency>
-            <groupId>org.springframework.cloud</groupId>
-            <artifactId>spring-cloud-starter-eureka</artifactId>
-        </dependency> -->
-        <!-- <dependency>
-            <groupId>org.springframework.cloud</groupId>
-            <artifactId>spring-cloud-starter-hystrix</artifactId>
-        </dependency> -->
-        
-        <!-- <dependency>
-            <groupId>com.phicomm.smarthome</groupId>
-            <artifactId>smarthome-common</artifactId>
-            <version>0.0.1-SNAPSHOT</version>
-        </dependency> -->
         <dependency>
             <groupId>com.alibaba</groupId>
             <artifactId>fastjson</artifactId>
             <version>1.2.31</version>
         </dependency>
-        
         
         <dependency>
             <groupId>org.apache.httpcomponents</groupId>
@@ -171,10 +156,6 @@
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-data-redis</artifactId>
-        </dependency>
-        <dependency>  
-            <groupId>org.springframework.cloud</groupId>  
-            <artifactId>spring-cloud-starter-hystrix</artifactId>  
         </dependency>
         <dependency>  
             <groupId>org.springframework.boot</groupId>  
@@ -250,35 +231,6 @@
                     </execution>
                 </executions>
             </plugin>
-            <!-- 配置静态代码检查包括checkStyle、findBugs、pmd -->
-            <!-- 配置checkStyle代码规范检查 -->
-             <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-checkstyle-plugin</artifactId>
-                <version>2.17</version>
-                <configuration>
-                    <configLocation>https://coding.net/u/lingyejun/p/JarWrapper/git/raw/master/checkstyle.xml</configLocation>
-                </configuration>
-            </plugin>
-            <!-- 配置findbugs对编译文件中可能出现的问题在运行前进行检查 -->
-             <plugin>
-                <groupId>org.codehaus.mojo</groupId>
-                <artifactId>findbugs-maven-plugin</artifactId>
-                <version>3.0.1</version>
-                <configuration>
-                    <threshold>High</threshold>
-                    <effort>Default</effort>
-                    <findbugsXmlOutput>true</findbugsXmlOutput>
-                    <findbugsXmlWithMessages>true</findbugsXmlWithMessages>
-                    <findbugsXmlOutputDirectory>target/site</findbugsXmlOutputDirectory>
-                </configuration>
-              </plugin>
-              <!-- 配置pmd对java源文件进行检查，检测出可以优化的代码 -->
-              <plugin>
-                    <groupId>org.apache.maven.plugins</groupId>
-                    <artifactId>maven-pmd-plugin</artifactId>
-                    <version>3.5</version>
-              </plugin>
         </plugins>
     </build>
 </project>
