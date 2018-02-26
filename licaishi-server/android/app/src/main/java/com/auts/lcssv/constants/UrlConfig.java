@@ -25,7 +25,7 @@ public interface UrlConfig {
         String GET_VER_CODE = URL_HOST + "/v1/verificationMsg"; //获取验证码
         //        String GET_VER_CODE = "https://account.phicomm.com" + "/v1/verificationMsg"; //获取验证码
         String CHECK_VER_CODE = URL_HOST + "/srv/v1/verifyVerificationCode"; //校验短信验证码
-        String REGISTER = URL_HOST + "/v1/account"; //注册账号
+        String REGISTER = URL_HOST + "/srv/v1/account"; //注册账号
         String OLD_ACCOUNT_VERIFICATION = URL_HOST + "/v1/oldAccountVerification"; //校验旧的手机号或邮箱号
         String REBIND = URL_HOST + "/v1/rebind"; //修改绑定关系
         String ACCOUNT_DETAIL = URL_HOST + "/srv/v1/accountDetail"; //获取用户云账户公共信息

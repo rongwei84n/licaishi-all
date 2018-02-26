@@ -33,6 +33,7 @@ public class AccountDetailResponseModel extends AccountBaseResponseModel {
         data.setUid(model.getUid());
         data.setZipcode("");
         data.setZone("");
+        data.setWorkstudio(model.getWorkstudio());
     }
 
     private String message;
@@ -75,6 +76,16 @@ public class AccountDetailResponseModel extends AccountBaseResponseModel {
         private String zipcode;
 
         private String zone;
+
+        private String workstudio;
+
+        public String getWorkstudio() {
+            return workstudio;
+        }
+
+        public void setWorkstudio(String workstudio) {
+            this.workstudio = workstudio;
+        }
 
         public String getAccountname() {
             return accountname;

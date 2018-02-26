@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.ActivityCompat;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -64,6 +65,9 @@ public class PersonalInformationActivity extends BaseActivity implements GetPhot
 
     @BindView(R.id.tv_mobile)
     TextView mTvMobile;
+
+    @BindView(R.id.tv_login_name)
+    TextView mTvLoginName;
 
     private UserInfoPresenter mUploadBasePresenter;
     private CloudAccountPresenter mCloudAccountPresenter;
@@ -127,6 +131,7 @@ public class PersonalInformationActivity extends BaseActivity implements GetPhot
 
             @Override
             public void accountDetailSuccess(AccountDetailsBean accountDetailsBean) {
+                Log.d("Sandy", "accountDetailsBean: " + accountDetailsBean);
                 if (accountDetailsBean != null) {
                     mAccountDetailsBean = accountDetailsBean;
 
@@ -144,6 +149,7 @@ public class PersonalInformationActivity extends BaseActivity implements GetPhot
                     mTvNickname.setText(TextUtils.isEmpty(mAccountDetailsBean.getNickname()) ? getString(R.string.not_set) : mAccountDetailsBean.getNickname());
                     phoneNumber = TextUtils.isEmpty(mAccountDetailsBean.getPhonenumber()) ? "" : mAccountDetailsBean.getPhonenumber();
 
+                    mTvLoginName.setText(phoneNumber);
                     mTvMobile.setText(phoneNumber);
                 } else {
                     accountDetailError("0", null);

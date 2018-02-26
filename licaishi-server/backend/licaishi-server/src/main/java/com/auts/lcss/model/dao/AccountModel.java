@@ -31,6 +31,8 @@ public class AccountModel {
 
     private long update_time;
 
+    private String workstudio;
+
     public String getUid() {
         return uid;
     }
@@ -127,10 +129,19 @@ public class AccountModel {
         this.update_time = update_time;
     }
 
+    public String getWorkstudio() {
+        return workstudio;
+    }
+
+    public void setWorkstudio(String workstudio) {
+        this.workstudio = workstudio;
+    }
+
     @Override
     public String toString() {
         return "AccountModel [uid=" + uid + ", user_name=" + user_name + ", real_name=" + real_name + ", phone=" + phone
                 + ", passwd=" + passwd + ", email=" + email + ", sex=" + sex + ", remark=" + remark + ", role=" + role
-                + ", status=" + status + ", create_time=" + create_time + ", update_time=" + update_time + "]";
+                + ", status=" + status + ", create_time=" + create_time + ", update_time=" + update_time
+                + ", workstudio=" + workstudio + "]";
     }
 }

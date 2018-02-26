@@ -5,7 +5,6 @@ import com.auts.lcss.controller.SBaseController;
 import com.auts.lcss.model.dao.AccountModel;
 import com.auts.lcss.model.dao.TokenModel;
 import com.auts.lcss.model.request.PasswordRequestModel;
-import com.auts.lcss.model.request.RegistRequestModel;
 import com.auts.lcss.model.response.AccountBaseResponseModel;
 import com.auts.lcss.model.response.AccountDetailResponseModel;
 import com.auts.lcss.model.response.AuthorizationCodeResponseCode;
@@ -162,39 +161,40 @@ public class AccountController extends SBaseController {
      * 注册账号.
      */
     @RequestMapping(value = "/v1/account", method = RequestMethod.POST, produces = { "application/json" })
-    public RegistResponseModel account(HttpServletRequest request, @RequestBody RegistRequestModel requestModel) {
-        LOGGER.info("regist request [{}]", requestModel);
+    public RegistResponseModel account(HttpServletRequest request,
+            @RequestParam(value = "password", required = false) String password,
+            @RequestParam(value = "phonenumber", required = true) String phonenumber,
+            @RequestParam(value = "registersource", required = false) String registersource,
+            @RequestParam(value = "verificationcode", required = true) String verificationcode) {
+        LOGGER.info("regist request password [{}] phonenumber[{}] registersource [{}] verificationcode [{}]",
+                password,
+                phonenumber,
+                registersource,
+                verificationcode);
 
-        if (requestModel == null) {
+        if (StringUtil.isNullOrEmpty(password) || StringUtil.isNullOrEmpty(phonenumber)
+                || StringUtil.isNullOrEmpty(verificationcode)) {
             LOGGER.info("Register with no params");
             return errorRegister(String.valueOf(Const.ErrorCode.REQUEST_NO_PARAS));
         }
 
-        if (StringUtil.isNullOrEmpty(requestModel.getPassword())
-                || StringUtil.isNullOrEmpty(requestModel.getPhonenumber())) {
-            LOGGER.info("No usename [{}] or password [{}]", requestModel.getUsername(), requestModel.getPassword());
-            return errorRegister(String.valueOf(Const.ErrorCode.REQUEST_NO_PARAS));
-        }
-
-        AccountModel acModel = accountService.queryByUserPhone(requestModel.getPhonenumber());
+        AccountModel acModel = accountService.queryByUserPhone(phonenumber);
         if (acModel != null) {
-            LOGGER.info("Already registed phone [{}]", requestModel.getPhonenumber());
+            LOGGER.info("Already registed phone [{}]", phonenumber);
 //            return errorRegister(String.valueOf(Const.ErrorCode.Account.REGIST_ACCOUNT_EXISTS));
         }
 
         AccountModel model = new AccountModel();
         model.setUid(String.valueOf(UidGenerater.gen()));
-        String userName = requestModel.getUsername();
-        if (userName == null) {
-            userName = "";
-        }
+        String userName = "";
         model.setUser_name(userName);
         //注册的时候，保存md5密码，任何人都无法知道密码，防止泄漏!md5无法解密
-        String md5PassWord = EntryUtils.getMd5(requestModel.getPassword());
-        model.setPasswd(md5PassWord);
+//        String md5PassWord = EntryUtils.getMd5(requestModel.getPassword());
+        model.setPasswd(password);
         model.setReal_name("");
-        model.setPhone(requestModel.getPhonenumber());
-        model.setEmail(requestModel.getMailaddress());
+        model.setPhone(phonenumber);
+        model.setEmail("");
+        model.setWorkstudio("");
         model.setSex(1);
         model.setRemark("测试注册接口");
         model.setRole(1);
