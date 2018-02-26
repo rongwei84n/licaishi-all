@@ -72,35 +72,28 @@
     line-height: 90px;
     width: 100%;
   }
-
   .app-head-inner {
     width: 1200px;
     margin: 0 auto;
   }
-
   .app-head-inner img {
     width: 100px;
     margin-top: 10px;
     float: left;
   }
-
   .head-nav {
     float: right;
   }
-
   .head-nav ul {
     overflow: hidden;
   }
-
   .head-nav li {
     cursor: pointer;
     float: left;
   }
-
   .nav-pile {
     padding: 0 10px;
   }
-
   .app-foot {
     text-align: center;
     height: 80px;
@@ -108,66 +101,7 @@
     line-height: 80px;
     background: #e3e4e8;
     clear: both;
-    margin-top: 30px;
-  }
-
-  .container {
-    width: 1200px;
-    margin: 0 auto;
-  }
-
-  .hr {
-    height: 1px;
-    width: 100%;
-    background: #ddd;
-  }
-
-  .button {
-    background: #4fc08d;
-    color: #fff;
-    display: inline-block;
-    padding: 10px 20px;
-    cursor: pointer;
-  }
-
-  .button:hover {
-    background: #4fc08d;
-  }
-
-  .g-form {
-
-  }
-
-  .g-form-line {
-    padding: 15px 0;
-  }
-
-  .g-form-label {
-    width: 100px;
-    font-size: 16px;
-    display: inline-block;
-  }
-
-  .g-form-input {
-    display: inline-block;
-  }
-
-  .g-form-input input {
-    height: 30px;
-    width: 200px;
-    line-height: 30px;
-    vertical-align: middle;
-    padding: 0 10px;
-    border: 1px solid #ccc;
-  }
-
-  .g-form-btn {
-    padding-left: 100px;
-  }
-
-  .g-form-error {
-    color: red;
-    padding-left: 15px;
+    margin-top: 10px;
   }
 
   .index-wrap {
@@ -177,30 +111,22 @@
   }
   .index-left {
     float: left;
-    width: 300px;
+    width: 250px;
     text-align: left;
   }
   .index-right {
     float: left;
-    width: 900px;
+    width: 950px;
   }
   .index-left-block {
     margin-top: 15px;
     background: #fff;
     box-shadow: 0 0 1px #ddd;
   }
-  .index-left-block .hr {
-    margin-bottom: 20px;
-  }
   .index-left-block h2 {
     background: #390804;
     color: #fff;
     padding: 10px 15px;
-  }
-  .index-left-block h3 {
-    padding: 0 15px 5px 15px;
-    font-weight: bold;
-    color: #222;
   }
   .index-left-block li {
     padding: 12px;
@@ -215,55 +141,28 @@
   .index-board-list {
     overflow: hidden;
   }
-  .index-board-item {
-    float: left;
-    width: 400px;
-    background: #fff;
-    box-shadow: 0 0 1px #ddd;
-    padding: 20px;
-    margin-right: 20px;
-    margin-bottom: 20px;
-  }
-  .index-board-item-inner {
-    min-height: 125px;
-    padding-left: 120px;
-  }
-  .index-board-car .index-board-item-inner{
-    background: url(../assets/images/1.png) no-repeat;
-  }
-  .index-board-loud .index-board-item-inner{
-    background: url(../assets/images/2.png) no-repeat;
-  }
-  .index-board-earth .index-board-item-inner{
-    background: url(../assets/images/3.png) no-repeat;
-  }
-  .index-board-hill .index-board-item-inner{
-    background: url(../assets/images/4.png) no-repeat;
-  }
-  .index-board-item h2 {
-    font-size: 18px;
-    font-weight: bold;
-    color: #000;
-    margin-bottom: 15px;
-  }
-  .line-last {
-    margin-right: 0;
-  }
-  .index-board-button {
-    margin-top: 20px;
-  }
   .lastest-news {
-    min-height: 512px;
+    min-height: 112px;
   }
-  .hot-tag {
-    background: red;
+  .mange-container {
+    background: #fff;
+    width:100%;
+    min-height:550px;
+    margin:15px;
+    padding:15px;
+  }
+  .data-table {
+    width:90%;
+  }
+  .data-table th {
+    background: #999;
     color: #fff;
+    padding:15px;
+    font-weight: bold;
+    border: 1px solid #f0f2f5;
   }
-  .new-item {
-    display: inline-block;
-    width: 230px;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    white-space: nowrap;
+  .data-table td {
+    border: 1px solid #f0f2f5;
+    padding: 15px;
   }
 </style>

@@ -7,6 +7,7 @@ import javax.servlet.http.HttpServletRequest;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
@@ -16,8 +17,8 @@ import com.auts.backstage.model.common.PhiHomeBaseResponse;
 import com.auts.backstage.model.dao.FinancerModel;
 import com.auts.backstage.service.FinancerService;
 
-
 @RestController
+@CrossOrigin
 public class FinancerController extends SBaseController {
 
 	private static final Logger LOGGER = LogManager.getLogger(FinancerController.class);
