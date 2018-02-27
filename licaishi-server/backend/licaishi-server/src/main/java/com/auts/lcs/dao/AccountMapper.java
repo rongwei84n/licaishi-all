@@ -49,6 +49,6 @@ public interface AccountMapper {
     @Select("select * from tbl_user where phone=#{phone} limit 1")
     AccountModel queryByUserPhone(@Param("phone") String phone);
 
-    @Update("update tbl_user set user_name = #{model.user_name}, real_name=#{model.real_name}, phone=#{model.phone}, passwd=#{model.passwd}, email=#{model.email}, sex=#{model.sex}, remark=#{model.remark}, role=#{model.role}, status=#{model.status}, create_time=#{model.create_time}, update_time=#{model.update_time} where uid=#{model.uid}")
+    @Update("update tbl_user set user_name = #{model.user_name}, real_name=#{model.real_name}, phone=#{model.phone}, passwd=#{model.passwd}, email=#{model.email}, sex=#{model.sex}, remark=#{model.remark}, role=#{model.role}, status=#{model.status}, create_time=#{model.create_time}, update_time=#{model.update_time}, workstudio=#{model.workstudio}, avtr=#{model.avtr} where uid=#{model.uid}")
     int updateAccount(@Param("model") AccountModel model);
 }

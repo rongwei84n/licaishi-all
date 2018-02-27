@@ -1,5 +1,25 @@
 package com.auts.lcs.controller.account;
 
+import com.alibaba.fastjson.JSON;
+import com.auts.lcs.consts.Const;
+import com.auts.lcs.controller.SBaseController;
+import com.auts.lcs.model.dao.AccountModel;
+import com.auts.lcs.model.dao.TokenModel;
+import com.auts.lcs.model.request.PasswordRequestModel;
+import com.auts.lcs.model.request.PropertyChangeRequestModel;
+import com.auts.lcs.model.response.AccountBaseResponseModel;
+import com.auts.lcs.model.response.AccountDetailResponseModel;
+import com.auts.lcs.model.response.AuthorizationCodeResponseCode;
+import com.auts.lcs.model.response.LoginResponseModel;
+import com.auts.lcs.model.response.PasswordResponseModel;
+import com.auts.lcs.model.response.PropertyChangeResponseModel;
+import com.auts.lcs.model.response.RegistResponseModel;
+import com.auts.lcs.service.AccountService;
+import com.auts.lcs.util.EntryUtils;
+import com.auts.lcs.util.RegexUtils;
+import com.auts.lcs.util.StringUtil;
+import com.auts.lcs.util.UidGenerater;
+
 import javax.servlet.http.HttpServletRequest;
 
 import org.apache.logging.log4j.LogManager;
@@ -10,23 +30,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
-
-import com.auts.lcs.consts.Const;
-import com.auts.lcs.controller.SBaseController;
-import com.auts.lcs.model.dao.AccountModel;
-import com.auts.lcs.model.dao.TokenModel;
-import com.auts.lcs.model.request.PasswordRequestModel;
-import com.auts.lcs.model.response.AccountBaseResponseModel;
-import com.auts.lcs.model.response.AccountDetailResponseModel;
-import com.auts.lcs.model.response.AuthorizationCodeResponseCode;
-import com.auts.lcs.model.response.LoginResponseModel;
-import com.auts.lcs.model.response.PasswordResponseModel;
-import com.auts.lcs.model.response.RegistResponseModel;
-import com.auts.lcs.service.AccountService;
-import com.auts.lcs.util.EntryUtils;
-import com.auts.lcs.util.RegexUtils;
-import com.auts.lcs.util.StringUtil;
-import com.auts.lcs.util.UidGenerater;
 
 /**
  * 账户相关的Controller.
@@ -396,6 +399,55 @@ public class AccountController extends SBaseController {
 
         AccountDetailResponseModel rsp = new AccountDetailResponseModel(model);
         rsp.setError(String.valueOf(Const.ErrorCode.Account.OK));
+        return rsp;
+    }
+
+    /**
+     * 修改账户公共属性.
+     */
+    @RequestMapping(value = "/v1/property", method = RequestMethod.POST, produces = { "application/json" })
+    public PropertyChangeResponseModel property(HttpServletRequest request,
+            @RequestParam(value = "data", required = true) String data) {
+        String token = request.getHeader(Const.AUTHORIZATION);
+        LOGGER.info("Property change request [{}] token [{}]", data, token);
+
+        String uid = getUidByToken(token);
+        LOGGER.info("parsed uid [{}]", uid);
+        if (StringUtil.isNullOrEmpty(uid)) {
+            LOGGER.info("Parsed uid is null, return");
+            PropertyChangeResponseModel rsp = new PropertyChangeResponseModel();
+            rsp.setError(String.valueOf(Const.ErrorCode.Account.LOGIN_ERROR));
+            return rsp;
+        }
+
+        AccountModel model = null;
+        try {
+            model = accountService.queryByUid(uid);
+        } catch (Exception e) {
+            LOGGER.info("Query databasse error", e);
+            PropertyChangeResponseModel rsp = new PropertyChangeResponseModel();
+            rsp.setError(String.valueOf(Const.ErrorCode.Account.LOGIN_ERROR));
+            return rsp;
+        }
+        if (model == null) {
+            LOGGER.info("Account is not exists [{}]", uid);
+            PropertyChangeResponseModel rsp = new PropertyChangeResponseModel();
+            rsp.setError(String.valueOf(Const.ErrorCode.Account.LOGIN_ERROR));
+            return rsp;
+        }
+
+        PropertyChangeRequestModel requestModel = JSON.parseObject(data, PropertyChangeRequestModel.class);
+
+        if (StringUtil.isNotEmpty(requestModel.getNickname())) {
+            model.setReal_name(requestModel.getNickname());
+        }
+        if (StringUtil.isNotEmpty(requestModel.getWorkstudio())) {
+            model.setWorkstudio(requestModel.getWorkstudio());
+        }
+        accountService.updateAccount(model);
+        PropertyChangeResponseModel rsp  = new PropertyChangeResponseModel();
+        rsp.setError(String.valueOf(Const.ErrorCode.Account.OK));
+        rsp.setToken_status(String.valueOf(Const.ErrorCode.Account.TOKEN_OK));
         return rsp;
     }
 }

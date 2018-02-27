@@ -2,8 +2,8 @@ import Vue from 'vue'
 import App from './App'
 import VueRouter from 'vue-router'
 import VueResource from 'vue-resource'
-import MintUI from 'mint-ui';
-import 'mint-ui/lib/style.css';
+import MintUI from 'mint-ui'
+import 'mint-ui/lib/style.css'
 
 import login from './components/login.vue'
 import index from './components/index.vue'
