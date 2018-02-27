@@ -1,4 +1,4 @@
-package com.auts.lcs.model.dao;
+package com.auts.lcs.model.dao.product;
 
 import java.util.Date;
 

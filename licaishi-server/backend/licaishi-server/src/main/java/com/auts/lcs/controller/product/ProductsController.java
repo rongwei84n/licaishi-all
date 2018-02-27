@@ -16,7 +16,8 @@ import com.auts.lcs.consts.Const;
 import com.auts.lcs.controller.SBaseController;
 import com.auts.lcs.model.common.PhiHomeBaseResponse;
 import com.auts.lcs.model.dao.HotProductModel;
-import com.auts.lcs.model.dao.ProductModel;
+import com.auts.lcs.model.dao.product.ProductModel;
+import com.auts.lcs.model.dao.product.ProfitRebateModel;
 import com.auts.lcs.service.ProductsService;
 
 /**
@@ -64,8 +65,12 @@ public class ProductsController extends SBaseController {
         PhiHomeBaseResponse rspObj = new PhiHomeBaseResponse();
         
         String recommendType = request.getParameter(Const.RECOMMEND_TYPE);
-        List<ProductModel> hotProducts = productsService.queryRecommendProducts(recommendType);
-        rspObj.setResult(hotProducts);
+        List<ProductModel> recommendProducts = productsService.queryRecommendProducts(recommendType);
+        for(ProductModel productModel : recommendProducts) {
+        	List<ProfitRebateModel> profitRebateList =  productsService.queryProfitRebateByPCode(productModel.getpCode());
+        }
+        
+        rspObj.setResult(null);
         return successResponse(rspObj);
     }
 }
