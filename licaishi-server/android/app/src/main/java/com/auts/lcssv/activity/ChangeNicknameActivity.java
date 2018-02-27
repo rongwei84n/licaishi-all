@@ -29,8 +29,6 @@ import butterknife.OnClick;
 /**
  * 更换昵称
  *
- * @author xiaolei.yang
- * @date 2017/7/24
  */
 
 public class ChangeNicknameActivity extends BaseActivity implements ILoadingView {
@@ -50,7 +48,7 @@ public class ChangeNicknameActivity extends BaseActivity implements ILoadingView
 
     @Override
     public void afterInitView() {
-        setPageTitle(R.string.set_nickname);
+        setPageTitle(R.string.tv_set_nickname);
         setTvMenuVisible(View.VISIBLE);
         showTvMenu(R.string.save);
         setTvMenuColor(R.color.text_oringe);

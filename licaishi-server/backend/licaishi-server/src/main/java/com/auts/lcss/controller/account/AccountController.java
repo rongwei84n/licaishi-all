@@ -1,15 +1,18 @@
 package com.auts.lcss.controller.account;
 
+import com.alibaba.fastjson.JSON;
 import com.auts.lcss.consts.Const;
 import com.auts.lcss.controller.SBaseController;
 import com.auts.lcss.model.dao.AccountModel;
 import com.auts.lcss.model.dao.TokenModel;
 import com.auts.lcss.model.request.PasswordRequestModel;
+import com.auts.lcss.model.request.PropertyChangeRequestModel;
 import com.auts.lcss.model.response.AccountBaseResponseModel;
 import com.auts.lcss.model.response.AccountDetailResponseModel;
 import com.auts.lcss.model.response.AuthorizationCodeResponseCode;
 import com.auts.lcss.model.response.LoginResponseModel;
 import com.auts.lcss.model.response.PasswordResponseModel;
+import com.auts.lcss.model.response.PropertyChangeResponseModel;
 import com.auts.lcss.model.response.RegistResponseModel;
 import com.auts.lcss.service.AccountService;
 import com.auts.lcss.util.EntryUtils;
@@ -396,6 +399,52 @@ public class AccountController extends SBaseController {
 
         AccountDetailResponseModel rsp = new AccountDetailResponseModel(model);
         rsp.setError(String.valueOf(Const.ErrorCode.Account.OK));
+        return rsp;
+    }
+
+    /**
+     * 修改账户公共属性.
+     */
+    @RequestMapping(value = "/v1/property", method = RequestMethod.POST, produces = { "application/json" })
+    public PropertyChangeResponseModel property(HttpServletRequest request,
+            @RequestParam(value = "data", required = true) String data) {
+        String token = request.getHeader(Const.AUTHORIZATION);
+        LOGGER.info("Property change request [{}] token [{}]", data, token);
+
+        String uid = getUidByToken(token);
+        LOGGER.info("parsed uid [{}]", uid);
+        if (StringUtil.isNullOrEmpty(uid)) {
+            LOGGER.info("Parsed uid is null, return");
+            PropertyChangeResponseModel rsp = new PropertyChangeResponseModel();
+            rsp.setError(String.valueOf(Const.ErrorCode.Account.LOGIN_ERROR));
+            return rsp;
+        }
+
+        AccountModel model = null;
+        try {
+            model = accountService.queryByUid(uid);
+        } catch (Exception e) {
+            LOGGER.info("Query databasse error", e);
+            PropertyChangeResponseModel rsp = new PropertyChangeResponseModel();
+            rsp.setError(String.valueOf(Const.ErrorCode.Account.LOGIN_ERROR));
+            return rsp;
+        }
+        if (model == null) {
+            LOGGER.info("Account is not exists [{}]", uid);
+            PropertyChangeResponseModel rsp = new PropertyChangeResponseModel();
+            rsp.setError(String.valueOf(Const.ErrorCode.Account.LOGIN_ERROR));
+            return rsp;
+        }
+
+        PropertyChangeRequestModel requestModel = JSON.parseObject(data, PropertyChangeRequestModel.class);
+
+        if (StringUtil.isNotEmpty(requestModel.getNickname())) {
+            model.setReal_name(requestModel.getNickname());
+        }
+        accountService.updateAccount(model);
+        PropertyChangeResponseModel rsp  = new PropertyChangeResponseModel();
+        rsp.setError(String.valueOf(Const.ErrorCode.Account.OK));
+        rsp.setToken_status(String.valueOf(Const.ErrorCode.Account.TOKEN_OK));
         return rsp;
     }
 }
