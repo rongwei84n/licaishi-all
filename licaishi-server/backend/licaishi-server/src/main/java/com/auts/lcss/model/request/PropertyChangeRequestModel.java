@@ -30,6 +30,8 @@ public class PropertyChangeRequestModel extends BaseRequestModel {
 
     private String zone;
 
+    private String workstudio;
+
     public String getAddress() {
         return address;
     }
@@ -118,10 +120,19 @@ public class PropertyChangeRequestModel extends BaseRequestModel {
         this.zone = zone;
     }
 
+    public String getWorkstudio() {
+        return workstudio;
+    }
+
+    public void setWorkstudio(String workstudio) {
+        this.workstudio = workstudio;
+    }
+
     @Override
     public String toString() {
-        return "Data [address=" + address + ", age=" + age + ", birthday=" + birthday + ", height=" + height
-                + ", job=" + job + ", nickname=" + nickname + ", realname=" + realname + ", sex=" + sex
-                + ", weight=" + weight + ", zipcode=" + zipcode + ", zone=" + zone + "]";
+        return "PropertyChangeRequestModel [address=" + address + ", age=" + age + ", birthday=" + birthday
+                + ", height=" + height + ", job=" + job + ", nickname=" + nickname + ", realname=" + realname + ", sex="
+                + sex + ", weight=" + weight + ", zipcode=" + zipcode + ", zone=" + zone + ", workstudio=" + workstudio
+                + "]";
     }
 }

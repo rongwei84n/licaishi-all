@@ -441,6 +441,9 @@ public class AccountController extends SBaseController {
         if (StringUtil.isNotEmpty(requestModel.getNickname())) {
             model.setReal_name(requestModel.getNickname());
         }
+        if (StringUtil.isNotEmpty(requestModel.getWorkstudio())) {
+            model.setWorkstudio(requestModel.getWorkstudio());
+        }
         accountService.updateAccount(model);
         PropertyChangeResponseModel rsp  = new PropertyChangeResponseModel();
         rsp.setError(String.valueOf(Const.ErrorCode.Account.OK));
