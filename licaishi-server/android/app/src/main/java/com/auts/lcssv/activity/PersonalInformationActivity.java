@@ -69,6 +69,9 @@ public class PersonalInformationActivity extends BaseActivity implements GetPhot
     @BindView(R.id.tv_login_name)
     TextView mTvLoginName;
 
+    @BindView(R.id.tv_workstation_name)
+    TextView mTvWorkstudioName;
+
     private UserInfoPresenter mUploadBasePresenter;
     private CloudAccountPresenter mCloudAccountPresenter;
 
@@ -151,6 +154,7 @@ public class PersonalInformationActivity extends BaseActivity implements GetPhot
 
                     mTvLoginName.setText(phoneNumber);
                     mTvMobile.setText(phoneNumber);
+                    mTvWorkstudioName.setText(accountDetailsBean.getWorkstudio());
                 } else {
                     accountDetailError("0", null);
                 }

@@ -33,6 +33,8 @@ public class AccountModel {
 
     private String workstudio;
 
+    private String avtr;//头像
+
     public String getUid() {
         return uid;
     }
@@ -137,11 +139,19 @@ public class AccountModel {
         this.workstudio = workstudio;
     }
 
+    public String getAvtr() {
+        return avtr;
+    }
+
+    public void setAvtr(String avtr) {
+        this.avtr = avtr;
+    }
+
     @Override
     public String toString() {
         return "AccountModel [uid=" + uid + ", user_name=" + user_name + ", real_name=" + real_name + ", phone=" + phone
                 + ", passwd=" + passwd + ", email=" + email + ", sex=" + sex + ", remark=" + remark + ", role=" + role
                 + ", status=" + status + ", create_time=" + create_time + ", update_time=" + update_time
-                + ", workstudio=" + workstudio + "]";
+                + ", workstudio=" + workstudio + ", avtr=" + avtr + "]";
     }
 }

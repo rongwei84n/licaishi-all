@@ -24,6 +24,7 @@ public class AccountDetailsBean implements Serializable {
     private String uid; //	用户id	如：1001
     private String zipcode; //	邮编	如：201600
     private String zone; //	区域	如：松江区
+    private String workstudio;
 
     public String getAccountname() {
         return accountname;
@@ -121,6 +122,14 @@ public class AccountDetailsBean implements Serializable {
         this.zone = zone;
     }
 
+    public String getWorkstudio() {
+        return workstudio;
+    }
+
+    public void setWorkstudio(String workstudio) {
+        this.workstudio = workstudio;
+    }
+
     @Override
     public String toString() {
         return "AccountDetailsBean{" +
@@ -136,6 +145,7 @@ public class AccountDetailsBean implements Serializable {
                 ", uid='" + uid + '\'' +
                 ", zipcode='" + zipcode + '\'' +
                 ", zone='" + zone + '\'' +
+                ", workstudio='" + workstudio + '\'' +
                 '}';
     }
 }

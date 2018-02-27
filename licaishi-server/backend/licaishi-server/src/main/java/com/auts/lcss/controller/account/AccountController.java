@@ -195,6 +195,7 @@ public class AccountController extends SBaseController {
         model.setPhone(phonenumber);
         model.setEmail("");
         model.setWorkstudio("");
+        model.setAvtr("");
         model.setSex(1);
         model.setRemark("测试注册接口");
         model.setRole(1);

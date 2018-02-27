@@ -22,7 +22,7 @@ public class AccountDetailResponseModel extends AccountBaseResponseModel {
         data.setAddress("");
         data.setAge("");
         data.setBirthday("");
-        data.setImg("http://pic.pp3.cn/uploads/201505/lthan3.jpg");
+        data.setImg(model.getAvtr());
         data.setJob("");
         data.setMailaddress(model.getEmail());
         data.setNickname(model.getReal_name());
