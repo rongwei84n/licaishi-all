@@ -10,6 +10,7 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.auts.lcssv.event.ChangeWorkstudioEvent;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.auts.lcssv.R;
 import com.auts.lcssv.base.BaseActivity;
@@ -228,7 +229,19 @@ public class PersonalInformationActivity extends BaseActivity implements GetPhot
                 mTvNickname.setText(R.string.not_set);
             } else {
                 mTvNickname.setText(mAccountDetailsBean.getNickname());
-                mTvMobile.setText(mAccountDetailsBean.getNickname());
+//                mTvMobile.setText(mAccountDetailsBean.getNickname());
+            }
+        }
+    }
+
+    @Subscribe
+    public void onEventMainThread(ChangeWorkstudioEvent event) {
+        if (mAccountDetailsBean != null) {
+            mAccountDetailsBean.setWorkstudio(event.getWorkstudio());
+            if (TextUtils.isEmpty(mAccountDetailsBean.getWorkstudio())) {
+                mTvWorkstudioName.setText(R.string.not_set);
+            } else {
+                mTvWorkstudioName.setText(mAccountDetailsBean.getWorkstudio());
             }
         }
     }
@@ -256,7 +269,6 @@ public class PersonalInformationActivity extends BaseActivity implements GetPhot
         if (mAccountDetailsBean != null) {
             intent.putExtra("nickname", mAccountDetailsBean.getNickname());
         }
-        UmengUtil.onEvent(this, UmengUtil.NICK_NAME_SAVE);
         startActivity(intent);
     }
 
@@ -281,6 +293,15 @@ public class PersonalInformationActivity extends BaseActivity implements GetPhot
                 logout();
             }
         }, null).show();
+    }
+
+    @OnClick(R.id.rl_workstation_name)
+    public void workstudioItemOnClick() {
+        Intent intent = new Intent(this, ChangeWorkstudioActivity.class);
+        if (mAccountDetailsBean != null) {
+            intent.putExtra("workstudio", mAccountDetailsBean.getWorkstudio());
+        }
+        startActivity(intent);
     }
 
     @Override

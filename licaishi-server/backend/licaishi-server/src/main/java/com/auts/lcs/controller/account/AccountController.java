@@ -5,7 +5,6 @@ import com.auts.lcs.consts.Const;
 import com.auts.lcs.controller.SBaseController;
 import com.auts.lcs.model.dao.AccountModel;
 import com.auts.lcs.model.dao.TokenModel;
-import com.auts.lcs.model.request.PasswordRequestModel;
 import com.auts.lcs.model.request.PropertyChangeRequestModel;
 import com.auts.lcs.model.response.AccountBaseResponseModel;
 import com.auts.lcs.model.response.AccountDetailResponseModel;
@@ -15,7 +14,6 @@ import com.auts.lcs.model.response.PasswordResponseModel;
 import com.auts.lcs.model.response.PropertyChangeResponseModel;
 import com.auts.lcs.model.response.RegistResponseModel;
 import com.auts.lcs.service.AccountService;
-import com.auts.lcs.util.EntryUtils;
 import com.auts.lcs.util.RegexUtils;
 import com.auts.lcs.util.StringUtil;
 import com.auts.lcs.util.UidGenerater;
@@ -25,7 +23,6 @@ import javax.servlet.http.HttpServletRequest;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -264,11 +261,12 @@ public class AccountController extends SBaseController {
      * 修改密码.
      */
     @RequestMapping(value = "/v1/password", method = RequestMethod.POST, produces = { "application/json" })
-    public PasswordResponseModel password(HttpServletRequest request, @RequestBody PasswordRequestModel requestModel) {
-        LOGGER.info("Modify password request [{}]", requestModel);
-        if (requestModel == null
-                || StringUtil.isNullOrEmpty(requestModel.getOldpassword())
-                || StringUtil.isNullOrEmpty(requestModel.getNewpassword())) {
+    public PasswordResponseModel password(HttpServletRequest request,
+            @RequestParam(value="oldpassword") String oldpassword,
+            @RequestParam(value="newpassword") String newpassword) {
+        LOGGER.info("Modify password request oldpassword [{}] newpassword [{}]", oldpassword, newpassword);
+        if (StringUtil.isNullOrEmpty(oldpassword)
+                || StringUtil.isNullOrEmpty(newpassword)) {
             LOGGER.info("Modify password paras is null");
             PasswordResponseModel rsp = new PasswordResponseModel();
             rsp.setError(String.valueOf(Const.ErrorCode.REQUEST_NO_PARAS));
@@ -285,8 +283,8 @@ public class AccountController extends SBaseController {
         }
 
         //check old password right or not.
-        String md5OldPassword = EntryUtils.getMd5(requestModel.getOldpassword());
-        String md5NewPassword = EntryUtils.getMd5(requestModel.getNewpassword());
+//        String md5OldPassword = EntryUtils.getMd5(requestModel.getOldpassword());
+//        String md5NewPassword = EntryUtils.getMd5(requestModel.getNewpassword());
         AccountModel accountModel = accountService.queryByUid(uid);
         if (accountModel == null) {
             LOGGER.info("Can't find uid [{}] for token [{}]", uid, token);
@@ -294,13 +292,13 @@ public class AccountController extends SBaseController {
             rsp.setError(String.valueOf(Const.ErrorCode.REQUEST_NO_PARAS));
             return rsp;
         }
-        if (!StringUtil.equals(md5OldPassword, accountModel.getPasswd())) {
-            LOGGER.info("Password not equal for md5Password [{}] uid [{}] for token [{}]", md5OldPassword, uid, token);
+        if (!StringUtil.equals(oldpassword, accountModel.getPasswd())) {
+            LOGGER.info("Password not equal for oldpassword [{}] uid [{}] for token [{}]", oldpassword, uid, token);
         }
 
         //modify password in database.
         accountModel.setUpdate_time(System.currentTimeMillis() / 1000);
-        accountModel.setPasswd(md5NewPassword);
+        accountModel.setPasswd(newpassword);
 
         accountService.updateAccount(accountModel);
 

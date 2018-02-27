@@ -86,6 +86,9 @@
             android:name=".activity.ChangeNicknameActivity"
             android:windowSoftInputMode="adjustPan|stateAlwaysVisible" />
         <activity
+            android:name=".activity.ChangeWorkstudioActivity"
+            android:windowSoftInputMode="adjustPan|stateAlwaysVisible" />
+        <activity
             android:name=".activity.ModifyPasswordActivity"
             android:windowSoftInputMode="adjustPan|stateAlwaysVisible" />
         <activity android:name=".activity.FactoryActivity" />

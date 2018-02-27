@@ -22,9 +22,9 @@ import org.springframework.context.annotation.PropertySources;
  *  理财师端入口.
  *  @author rongwei.huang
  */
-@SpringBootApplication(scanBasePackages = { "com.auts.lcss.**" })
+@SpringBootApplication(scanBasePackages = { "com.auts.lcs.**" })
 @PropertySources({ @PropertySource(value = "classpath:application.properties", ignoreResourceNotFound = true) })
-@MapperScan("com.auts.lcss.dao.**")
+@MapperScan("com.auts.lcs.dao.**")
 //@EnableCircuitBreaker
 //@EnableDiscoveryClient
 //@EnableEurekaClient
@@ -32,7 +32,7 @@ public class LicasishiServerMain {
     private static Logger logger = LogManager.getLogger(LicasishiServerMain.class);
 
     static {
-        ParserConfig.getGlobalInstance().addAccept("com.auts.lcss.model.");
+        ParserConfig.getGlobalInstance().addAccept("com.auts.lcs.model.");
     }
 
 //    /**
