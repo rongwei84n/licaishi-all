@@ -50,7 +50,7 @@ public class AccountController extends SBaseController {
     @Autowired
     AccountService accountService;
 
-    private static final String AVATAR_SAVE_PATH = "/";
+    private static final String AVATAR_SAVE_PATH = "/root/deploy/img/avatar/lcss";
 
     /**
      * 获取授权码.
@@ -467,7 +467,7 @@ public class AccountController extends SBaseController {
             @RequestParam(value = "imgBase64", required = false) String imgBase64,
             @RequestParam(value = "type", required = false) String type) {
         String token = request.getHeader(Const.AUTHORIZATION);
-        LOGGER.info("update avar base64 type [{}]", token);
+        LOGGER.info("update avar base64 token [{}] type [{}]", token, type);
 
         String uid = getUidByToken(token);
         LOGGER.info("parsed uid [{}]", uid);
@@ -493,8 +493,13 @@ public class AccountController extends SBaseController {
             rsp.setError(String.valueOf(Const.ErrorCode.Account.LOGIN_ERROR));
             return rsp;
         }
+        String oldFileStr = AVATAR_SAVE_PATH + "/" + model.getAvtr();
+        File oldFile = new File(oldFileStr);
+        if (oldFile.exists()) {
+            oldFile.delete();
+        }
 
-        model.setAvtr(savePic(imgBase64, type));
+        model.setAvtr(savePic(imgBase64, type, uid));
         accountService.updateAccount(model);
         PropertyChangeResponseModel rsp  = new PropertyChangeResponseModel();
         rsp.setError(String.valueOf(Const.ErrorCode.Account.OK));
@@ -502,12 +507,12 @@ public class AccountController extends SBaseController {
         return rsp;
     }
 
-    private String savePic(String imageString, String type) {
+    private String savePic(String imageString, String type, String uid) {
         byte[] buf = Base64Utils.decode(imageString);
         InputStream inputStream = new ByteArrayInputStream(buf);
 
         String dir = AVATAR_SAVE_PATH;
-        File file = new File(dir, System.currentTimeMillis() + ".jpg");
+        File file = new File(dir, uid + "-" + System.currentTimeMillis() + ".jpg");
         try {
             OutputStream os = new FileOutputStream(file);
             int bytesRead;
@@ -520,7 +525,6 @@ public class AccountController extends SBaseController {
         } catch (IOException e) {
             e.printStackTrace();
         }
-        String imageUrl = file.getAbsolutePath();
-        return imageUrl;
+        return file.getName();
     }
 }
