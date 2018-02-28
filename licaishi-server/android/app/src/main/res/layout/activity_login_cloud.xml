@@ -17,8 +17,10 @@
         android:paddingRight="10dp">
         
         <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="100dp"
+            android:layout_height="72dp"
+            android:layout_marginBottom="20dp"
+            android:layout_marginTop="20dp"
             android:layout_gravity="center_horizontal"
             android:src="@drawable/denglu"/>
 
@@ -26,7 +28,7 @@
             android:id="@+id/myet_user"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="15dp"
+            android:layout_marginTop="30dp"
             app:hint="@string/hint_login_user"
             app:input_type="1"
             app:is_phone="true"

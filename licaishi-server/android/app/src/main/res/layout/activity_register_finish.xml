@@ -11,12 +11,12 @@
 
     <ImageView
         android:id="@+id/iv_register_done"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="71dp"
+        android:layout_height="76dp"
         android:layout_gravity="center_horizontal"
         android:layout_marginBottom="28dp"
         android:layout_marginTop="45dp"
-        android:src="@drawable/logo" />
+        android:src="@drawable/denglu" />
 
     <TextView
         android:id="@+id/tv_info"

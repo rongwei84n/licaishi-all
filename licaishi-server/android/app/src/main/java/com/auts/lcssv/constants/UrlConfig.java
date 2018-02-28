@@ -36,7 +36,7 @@ public interface UrlConfig {
 
     interface CloudPortrait {
         String URL_HOST = BuildConfig.host_cloud_portrait;
-        String UPLOAD_BASE64 = URL_HOST + "/pic/uploadBase64"; //上传Base64字符串
+        String UPLOAD_BASE64 = URL_HOST + "/srv/v1/pic/uploadBase64"; //上传Base64字符串
         String AVATAR_URL = URL_HOST + "/pic/avatarUrl"; //获取头像url
     }
 

@@ -14,9 +14,17 @@ import com.auts.lcs.model.response.PasswordResponseModel;
 import com.auts.lcs.model.response.PropertyChangeResponseModel;
 import com.auts.lcs.model.response.RegistResponseModel;
 import com.auts.lcs.service.AccountService;
+import com.auts.lcs.util.Base64Utils;
 import com.auts.lcs.util.RegexUtils;
 import com.auts.lcs.util.StringUtil;
 import com.auts.lcs.util.UidGenerater;
+
+import java.io.ByteArrayInputStream;
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -41,6 +49,8 @@ public class AccountController extends SBaseController {
 
     @Autowired
     AccountService accountService;
+
+    private static final String AVATAR_SAVE_PATH = "/";
 
     /**
      * 获取授权码.
@@ -447,5 +457,70 @@ public class AccountController extends SBaseController {
         rsp.setError(String.valueOf(Const.ErrorCode.Account.OK));
         rsp.setToken_status(String.valueOf(Const.ErrorCode.Account.TOKEN_OK));
         return rsp;
+    }
+
+    /**
+     * 通过上传头像Base64值上传头像.
+     */
+    @RequestMapping(value = "/v1/pic/uploadBase64", method = RequestMethod.POST, produces = { "application/json" })
+    public PropertyChangeResponseModel uploadAvar(HttpServletRequest request,
+            @RequestParam(value = "imgBase64", required = false) String imgBase64,
+            @RequestParam(value = "type", required = false) String type) {
+        String token = request.getHeader(Const.AUTHORIZATION);
+        LOGGER.info("update avar base64 type [{}]", token);
+
+        String uid = getUidByToken(token);
+        LOGGER.info("parsed uid [{}]", uid);
+        if (StringUtil.isNullOrEmpty(uid)) {
+            LOGGER.info("Parsed uid is null, return");
+            PropertyChangeResponseModel rsp = new PropertyChangeResponseModel();
+            rsp.setError(String.valueOf(Const.ErrorCode.Account.LOGIN_ERROR));
+            return rsp;
+        }
+
+        AccountModel model = null;
+        try {
+            model = accountService.queryByUid(uid);
+        } catch (Exception e) {
+            LOGGER.info("Query databasse error", e);
+            PropertyChangeResponseModel rsp = new PropertyChangeResponseModel();
+            rsp.setError(String.valueOf(Const.ErrorCode.Account.LOGIN_ERROR));
+            return rsp;
+        }
+        if (model == null) {
+            LOGGER.info("Account is not exists [{}]", uid);
+            PropertyChangeResponseModel rsp = new PropertyChangeResponseModel();
+            rsp.setError(String.valueOf(Const.ErrorCode.Account.LOGIN_ERROR));
+            return rsp;
+        }
+
+        model.setAvtr(savePic(imgBase64, type));
+        accountService.updateAccount(model);
+        PropertyChangeResponseModel rsp  = new PropertyChangeResponseModel();
+        rsp.setError(String.valueOf(Const.ErrorCode.Account.OK));
+        rsp.setToken_status(String.valueOf(Const.ErrorCode.Account.TOKEN_OK));
+        return rsp;
+    }
+
+    private String savePic(String imageString, String type) {
+        byte[] buf = Base64Utils.decode(imageString);
+        InputStream inputStream = new ByteArrayInputStream(buf);
+
+        String dir = AVATAR_SAVE_PATH;
+        File file = new File(dir, System.currentTimeMillis() + ".jpg");
+        try {
+            OutputStream os = new FileOutputStream(file);
+            int bytesRead;
+            byte[] buffer = new byte[8192];
+            while ((bytesRead = inputStream.read(buffer, 0, 8192)) != -1) {
+                os.write(buffer, 0, bytesRead);
+            }
+            os.close();
+            inputStream.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        String imageUrl = file.getAbsolutePath();
+        return imageUrl;
     }
 }
