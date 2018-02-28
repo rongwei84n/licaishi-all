@@ -2,6 +2,7 @@ package com.auts.lcs.dao;
 
 import java.util.List;
 
+import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Result;
 import org.apache.ibatis.annotations.Results;
@@ -10,6 +11,14 @@ import org.apache.ibatis.annotations.Select;
 import com.auts.lcs.model.dao.order.OrderModel;
 
 public interface OrderMapper {
+	
+	@Insert("insert into tbl_order (id, order_no, amount, order_date, latest_pay_date, customer_name, customer_card_id, "
+			+ "customer_phone_num, product_id, product_code, product_type, product_name, commission_ratio, commission, "
+			+ "pay_status, photo_status,contract_status, create_time, update_time, create_user, update_user) "
+            + "values (#{or.id}, #{or.orderNo},#{or.amount},#{or.orderDate},#{or.latestPayDate},#{or.customerName},#{or.customerCardId}, "
+            + "#{or.customerPhoneNum}, #{or.productId},#{or.productCode},#{or.productType},#{or.productName},#{or.commissionRatio},#{or.commission}, "
+            + "#{or.payStatus}, #{or.photoStatus},#{or.contractStatus})")
+	int saveOrder(OrderModel or);
 
     /**
      */

@@ -9,4 +9,6 @@ public interface OrderService {
     List<OrderModel> queryOrders(int pageNo, int pageSize, String type);
     
     OrderModel queryOrderByOrderNo(String orderNo);
+    
+    int saveOrder(OrderModel om);
 }

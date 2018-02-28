@@ -24,5 +24,10 @@ public class OrderSerivceImpl implements OrderService {
 		return orderMapper.queryOrderByOrderNo(orderNo);
 	}
 
+	@Override
+	public int saveOrder(OrderModel om) {
+		return orderMapper.saveOrder(om);
+	}
+
 
 }

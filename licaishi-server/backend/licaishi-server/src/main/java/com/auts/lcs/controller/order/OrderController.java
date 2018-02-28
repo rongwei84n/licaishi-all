@@ -9,12 +9,14 @@ import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.auts.lcs.consts.Const;
 import com.auts.lcs.controller.SBaseController;
 import com.auts.lcs.model.common.PhiHomeBaseResponse;
 import com.auts.lcs.model.dao.order.OrderModel;
+import com.auts.lcs.model.response.RegistResponseModel;
 import com.auts.lcs.service.OrderService;
 
 /**
@@ -46,6 +48,26 @@ public class OrderController extends SBaseController {
         List<OrderModel> orders = orderService.queryOrders(1, 1, type);
         
         rspObj.setResult(orders);
+        return successResponse(rspObj);
+    }
+    
+    @RequestMapping(value = "/v1/order/createOrder", method = RequestMethod.POST, produces = { "application/json" })
+    public PhiHomeBaseResponse createOrder(HttpServletRequest request,
+    		@RequestParam(value = "pCode", required = false) String pCode,
+            @RequestParam(value = "pName", required = true) String pName,
+            @RequestParam(value = "amount", required = false) String amount,
+            @RequestParam(value = "orderDate", required = true) String orderDate) {
+        PhiHomeBaseResponse rspObj = new PhiHomeBaseResponse();
+        
+//        LOGGER.info("createOrder type [{}]", type);
+        
+        OrderModel om = new OrderModel();
+        int result = orderService.saveOrder(om);
+        if (result > 0) {
+        	
+        } else {
+//            return errorRegister(String.valueOf(Const.ErrorCode.Account.REGIST_ERROR));
+        }
         return successResponse(rspObj);
     }
 }
