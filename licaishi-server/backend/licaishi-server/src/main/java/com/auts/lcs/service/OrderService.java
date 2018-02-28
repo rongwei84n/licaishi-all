@@ -11,4 +11,6 @@ public interface OrderService {
     OrderModel queryOrderByOrderNo(String orderNo);
     
     int saveOrder(OrderModel om);
+    
+    int cancelOrder(String orderNo);
 }

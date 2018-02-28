@@ -70,4 +70,38 @@ public class OrderController extends SBaseController {
         }
         return successResponse(rspObj);
     }
+    
+    @RequestMapping(value = "/v1/order/cancelOrder", method = RequestMethod.POST, produces = { "application/json" })
+    public PhiHomeBaseResponse cancelOrder(HttpServletRequest request,
+    		@RequestParam(value = "orderNo", required = false) String orderNo) {
+        PhiHomeBaseResponse rspObj = new PhiHomeBaseResponse();
+        
+        LOGGER.info("cancelOrder type [{}]", orderNo);
+        
+        OrderModel om = new OrderModel();
+        int result = orderService.cancelOrder(orderNo);
+        if (result > 0) {
+        	
+        } else {
+//            return errorRegister(String.valueOf(Const.ErrorCode.Account.REGIST_ERROR));
+        }
+        return successResponse(rspObj);
+    }
+    
+    @RequestMapping(value = "/v1/order/uploadPayPhote", method = RequestMethod.POST, produces = { "application/json" })
+    public PhiHomeBaseResponse uploadPayPhote(HttpServletRequest request,
+    		@RequestParam(value = "orderNo", required = false) String orderNo) {
+        PhiHomeBaseResponse rspObj = new PhiHomeBaseResponse();
+        
+        LOGGER.info("cancelOrder type [{}]", orderNo);
+        
+        OrderModel om = new OrderModel();
+        int result = orderService.cancelOrder(orderNo);
+        if (result > 0) {
+        	
+        } else {
+//            return errorRegister(String.valueOf(Const.ErrorCode.Account.REGIST_ERROR));
+        }
+        return successResponse(rspObj);
+    }
 }

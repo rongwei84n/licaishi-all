@@ -7,6 +7,7 @@ import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Result;
 import org.apache.ibatis.annotations.Results;
 import org.apache.ibatis.annotations.Select;
+import org.apache.ibatis.annotations.Update;
 
 import com.auts.lcs.model.dao.order.OrderModel;
 
@@ -19,6 +20,9 @@ public interface OrderMapper {
             + "#{or.customerPhoneNum}, #{or.productId},#{or.productCode},#{or.productType},#{or.productName},#{or.commissionRatio},#{or.commission}, "
             + "#{or.payStatus}, #{or.photoStatus},#{or.contractStatus})")
 	int saveOrder(OrderModel or);
+	
+	@Update("update tbl_order set pay_status = 999, update_time= NOW() where order_no=#{orderNo}")
+	int cancelOrder(@Param("orderNo") String orderNo);
 
     /**
      */

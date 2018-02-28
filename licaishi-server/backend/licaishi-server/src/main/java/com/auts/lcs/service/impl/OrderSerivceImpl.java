@@ -29,5 +29,10 @@ public class OrderSerivceImpl implements OrderService {
 		return orderMapper.saveOrder(om);
 	}
 
+	@Override
+	public int cancelOrder(String orderNo) {
+		return orderMapper.cancelOrder(orderNo);
+	}
+
 
 }
