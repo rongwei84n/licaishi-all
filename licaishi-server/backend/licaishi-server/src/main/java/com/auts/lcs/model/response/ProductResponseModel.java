@@ -4,6 +4,7 @@ import java.util.Date;
 import java.util.List;
 
 import com.alibaba.fastjson.annotation.JSONField;
+import com.auts.lcs.model.dao.product.ProductAttachmentModel;
 import com.auts.lcs.model.dao.product.ProfitRebateModel;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
@@ -14,88 +15,152 @@ import com.fasterxml.jackson.annotation.JsonProperty;
  * @date 2018年2月27日
  */
 public class ProductResponseModel {
-	
+	@JSONField(name = "pCode")
+    @JsonProperty("pCode")
 	private String pCode;
+	@JSONField(name = "pShortName")
+    @JsonProperty("pShortName")
     private String pShortName;
+	@JSONField(name = "pFullName")
+    @JsonProperty("pFullName")
     private String pFullName;
+	@JSONField(name = "pType")
+    @JsonProperty("pType")
     private String pType;
+	@JSONField(name = "pExpectAnnualRevenue")
+    @JsonProperty("pExpectAnnualRevenue")
     private String pExpectAnnualRevenue;
+	@JSONField(name = "pSaleStatus")
+    @JsonProperty("pSaleStatus")
     private String pSaleStatus;
+	@JSONField(name = "pDulTime")
+    @JsonProperty("pDulTime")
     private String pDulTime;
+	@JSONField(name = "pSaleStartTime")
+    @JsonProperty("pSaleStartTime")
     private Date pSaleStartTime;
+	@JSONField(name = "pAllIssuingScale")
+    @JsonProperty("pAllIssuingScale")
     private String pAllIssuingScale;
+	@JSONField(name = "pMinAmount")
+    @JsonProperty("pMinAmount")
     private String pMinAmount;
+	@JSONField(name = "pPaymentInterestType")
+    @JsonProperty("pPaymentInterestType")
     private String pPaymentInterestType;
+	@JSONField(name = "pInvestType")
+    @JsonProperty("pInvestType")
     private String pInvestType;
+	@JSONField(name = "pSizeRatioType")
+    @JsonProperty("pSizeRatioType")
     private String pSizeRatioType;
+	@JSONField(name = "pInvestOwnerId")
+    @JsonProperty("pInvestOwnerId")
     private String pInvestOwnerId;
-    private List<ProfitRebateModel> profitRebateList;
+	@JSONField(name = "profitRebates")
+    @JsonProperty("profitRebates")
+    private List<ProfitRebateModel> profitRebates;
+	@JSONField(name = "ProductAttachments")
+    @JsonProperty("ProductAttachments")
+    private List<ProductAttachmentModel> ProductAttachments;
+	
+	public String getpCode() {
+		return pCode;
+	}
+	public void setpCode(String pCode) {
+		this.pCode = pCode;
+	}
+	public String getpShortName() {
+		return pShortName;
+	}
+	public void setpShortName(String pShortName) {
+		this.pShortName = pShortName;
+	}
+	public String getpFullName() {
+		return pFullName;
+	}
+	public void setpFullName(String pFullName) {
+		this.pFullName = pFullName;
+	}
+	public String getpType() {
+		return pType;
+	}
+	public void setpType(String pType) {
+		this.pType = pType;
+	}
+	public String getpExpectAnnualRevenue() {
+		return pExpectAnnualRevenue;
+	}
+	public void setpExpectAnnualRevenue(String pExpectAnnualRevenue) {
+		this.pExpectAnnualRevenue = pExpectAnnualRevenue;
+	}
+	public String getpSaleStatus() {
+		return pSaleStatus;
+	}
+	public void setpSaleStatus(String pSaleStatus) {
+		this.pSaleStatus = pSaleStatus;
+	}
+	public String getpDulTime() {
+		return pDulTime;
+	}
+	public void setpDulTime(String pDulTime) {
+		this.pDulTime = pDulTime;
+	}
+	public Date getpSaleStartTime() {
+		return pSaleStartTime;
+	}
+	public void setpSaleStartTime(Date pSaleStartTime) {
+		this.pSaleStartTime = pSaleStartTime;
+	}
+	public String getpAllIssuingScale() {
+		return pAllIssuingScale;
+	}
+	public void setpAllIssuingScale(String pAllIssuingScale) {
+		this.pAllIssuingScale = pAllIssuingScale;
+	}
+	public String getpMinAmount() {
+		return pMinAmount;
+	}
+	public void setpMinAmount(String pMinAmount) {
+		this.pMinAmount = pMinAmount;
+	}
+	public String getpPaymentInterestType() {
+		return pPaymentInterestType;
+	}
+	public void setpPaymentInterestType(String pPaymentInterestType) {
+		this.pPaymentInterestType = pPaymentInterestType;
+	}
+	public String getpInvestType() {
+		return pInvestType;
+	}
+	public void setpInvestType(String pInvestType) {
+		this.pInvestType = pInvestType;
+	}
+	public String getpSizeRatioType() {
+		return pSizeRatioType;
+	}
+	public void setpSizeRatioType(String pSizeRatioType) {
+		this.pSizeRatioType = pSizeRatioType;
+	}
+	public String getpInvestOwnerId() {
+		return pInvestOwnerId;
+	}
+	public void setpInvestOwnerId(String pInvestOwnerId) {
+		this.pInvestOwnerId = pInvestOwnerId;
+	}
+	public List<ProfitRebateModel> getProfitRebates() {
+		return profitRebates;
+	}
+	public void setProfitRebates(List<ProfitRebateModel> profitRebates) {
+		this.profitRebates = profitRebates;
+	}
+	public List<ProductAttachmentModel> getProductAttachments() {
+		return ProductAttachments;
+	}
+	public void setProductAttachments(List<ProductAttachmentModel> productAttachments) {
+		ProductAttachments = productAttachments;
+	}
+	
+	
 
-    @JSONField(name = "access_token")
-    @JsonProperty("access_token")
-    private String accessToken;
-
-    @JSONField(name = "access_token_expire")
-    @JsonProperty("access_token_expire")
-    private String accessTokenExpire;
-
-    private String error;
-
-    @JSONField(name = "refresh_token")
-    @JsonProperty("refresh_token")
-    private String refreshToken;
-
-    @JSONField(name = "refresh_token_expire")
-    @JsonProperty("refresh_token_expire")
-    private String refreshTokenExpire;
-
-    private String uid;
-
-    public String getAccessToken() {
-        return accessToken;
-    }
-
-    public void setAccessToken(String accessToken) {
-        this.accessToken = accessToken;
-    }
-
-    public String getAccessTokenExpire() {
-        return accessTokenExpire;
-    }
-
-    public void setAccessTokenExpire(String accessTokenExpire) {
-        this.accessTokenExpire = accessTokenExpire;
-    }
-
-    public String getError() {
-        return error;
-    }
-
-    public void setError(String error) {
-        this.error = error;
-    }
-
-    public String getRefreshToken() {
-        return refreshToken;
-    }
-
-    public void setRefreshToken(String refreshToken) {
-        this.refreshToken = refreshToken;
-    }
-
-    public String getRefreshTokenExpire() {
-        return refreshTokenExpire;
-    }
-
-    public void setRefreshTokenExpire(String refreshTokenExpire) {
-        this.refreshTokenExpire = refreshTokenExpire;
-    }
-
-    public String getUid() {
-        return uid;
-    }
-
-    public void setUid(String uid) {
-        this.uid = uid;
-    }
 }

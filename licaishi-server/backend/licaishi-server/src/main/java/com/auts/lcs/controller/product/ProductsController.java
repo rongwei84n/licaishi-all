@@ -7,6 +7,7 @@ import javax.servlet.http.HttpServletRequest;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -15,9 +16,10 @@ import org.springframework.web.bind.annotation.RestController;
 import com.auts.lcs.consts.Const;
 import com.auts.lcs.controller.SBaseController;
 import com.auts.lcs.model.common.PhiHomeBaseResponse;
-import com.auts.lcs.model.dao.HotProductModel;
+import com.auts.lcs.model.dao.product.ProductAttachmentModel;
 import com.auts.lcs.model.dao.product.ProductModel;
 import com.auts.lcs.model.dao.product.ProfitRebateModel;
+import com.auts.lcs.model.response.ProductResponseModel;
 import com.auts.lcs.service.ProductsService;
 
 /**
@@ -51,8 +53,20 @@ public class ProductsController extends SBaseController {
         
         LOGGER.info("queryProducts type [{}]", type);
         
-        List<ProductModel> hotProducts = productsService.queryProducts(Integer.parseInt(pageNo), Integer.parseInt(pageSize), type);
-        rspObj.setResult(hotProducts);
+        List<ProductResponseModel> productResponseList = new ArrayList<>();
+        List<ProductModel> products = productsService.queryProducts(Integer.parseInt(pageNo), Integer.parseInt(pageSize), type);
+        for(ProductModel productModel : products) {
+        	List<ProfitRebateModel> profitRebates =  productsService.queryProfitRebateByPCode(productModel.getpCode());
+        	List<ProductAttachmentModel> productAttachments = productsService.queryProductAttachmentByPCode(productModel.getpCode());
+        	
+        	ProductResponseModel productResponseModel = new ProductResponseModel();
+        	BeanUtils.copyProperties(productModel, productResponseModel);
+        	productResponseModel.setProfitRebates(profitRebates);
+        	productResponseModel.setProductAttachments(productAttachments);
+        	productResponseList.add(productResponseModel);
+        }
+        
+        rspObj.setResult(productResponseList);
         return successResponse(rspObj);
     }
 
@@ -61,16 +75,43 @@ public class ProductsController extends SBaseController {
      * recommendype： 1 推荐产品 2热门产品
      */
     @RequestMapping(value = "/v1/product/recommendProducts", method = RequestMethod.GET, produces = { "application/json" })
-    public PhiHomeBaseResponse allRecommendProducts(HttpServletRequest request) {
+    public PhiHomeBaseResponse queryRecommendProducts(HttpServletRequest request) {
         PhiHomeBaseResponse rspObj = new PhiHomeBaseResponse();
+        List<ProductResponseModel> productResponseList = new ArrayList<>();
         
         String recommendType = request.getParameter(Const.RECOMMEND_TYPE);
         List<ProductModel> recommendProducts = productsService.queryRecommendProducts(recommendType);
         for(ProductModel productModel : recommendProducts) {
-        	List<ProfitRebateModel> profitRebateList =  productsService.queryProfitRebateByPCode(productModel.getpCode());
+        	List<ProfitRebateModel> profitRebates =  productsService.queryProfitRebateByPCode(productModel.getpCode());
+        	List<ProductAttachmentModel> productAttachments = productsService.queryProductAttachmentByPCode(productModel.getpCode());
+        	
+        	ProductResponseModel productResponseModel = new ProductResponseModel();
+        	BeanUtils.copyProperties(productModel, productResponseModel);
+        	productResponseModel.setProfitRebates(profitRebates);
+        	productResponseModel.setProductAttachments(productAttachments);
+        	productResponseList.add(productResponseModel);
         }
         
-        rspObj.setResult(null);
+        rspObj.setResult(productResponseList);
+        return successResponse(rspObj);
+    }
+    
+    @RequestMapping(value = "/v1/product/productDetail", method = RequestMethod.GET, produces = { "application/json" })
+    public PhiHomeBaseResponse queryProductDetail(HttpServletRequest request) {
+        PhiHomeBaseResponse rspObj = new PhiHomeBaseResponse();
+        List<ProductResponseModel> productResponseList = new ArrayList<>();
+        
+        String pCode = request.getParameter(Const.P_CODE);
+        ProductModel productModel= productsService.queryProductDetail(pCode);
+    	List<ProfitRebateModel> profitRebates =  productsService.queryProfitRebateByPCode(pCode);
+    	List<ProductAttachmentModel> productAttachments = productsService.queryProductAttachmentByPCode(pCode);
+    	ProductResponseModel productResponseModel = new ProductResponseModel();
+    	BeanUtils.copyProperties(productModel, productResponseModel);
+    	productResponseModel.setProfitRebates(profitRebates);
+    	productResponseModel.setProductAttachments(productAttachments);
+    	productResponseList.add(productResponseModel);
+    	
+        rspObj.setResult(productResponseList);
         return successResponse(rspObj);
     }
 }

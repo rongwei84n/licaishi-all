@@ -20,6 +20,7 @@ public interface Const {
     String PAGE_NO = "pageNo";
     String PAGE_SIZE = "pageSize";
     String TYPE = "type";
+    String P_CODE= "pCode";
 
 
     String X_APP_INFO = "x-app-info";
