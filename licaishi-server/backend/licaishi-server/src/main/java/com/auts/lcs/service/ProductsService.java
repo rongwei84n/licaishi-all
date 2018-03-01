@@ -7,6 +7,10 @@ import com.auts.lcs.model.dao.product.ProductModel;
 import com.auts.lcs.model.dao.product.ProfitRebateModel;
 
 public interface ProductsService {
+	
+	int saveProducts(ProductModel productModel, List<ProfitRebateModel> profitRebates, List<ProductAttachmentModel> productAttachments);
+	
+	int updateProducts(ProductModel productModel);
 
     List<ProductModel> queryProducts(int pageNo, int pageSize, String type);
     

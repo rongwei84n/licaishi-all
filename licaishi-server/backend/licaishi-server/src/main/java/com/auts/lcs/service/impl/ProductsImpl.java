@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.auts.lcs.dao.ProductAttachmentMapper;
 import com.auts.lcs.dao.ProductsMapper;
@@ -14,6 +15,7 @@ import com.auts.lcs.model.dao.product.ProfitRebateModel;
 import com.auts.lcs.service.ProductsService;
 
 @Service
+@Transactional
 public class ProductsImpl implements ProductsService {
     @Autowired
     ProductsMapper productsMapper;
@@ -56,5 +58,39 @@ public class ProductsImpl implements ProductsService {
 	@Override
 	public int queryProductCountByPType(String type) {
 		return productsMapper.queryCountByPType(type);
+	}
+
+	@Override
+	public int saveProducts(ProductModel productModel, List<ProfitRebateModel> profitRebates, List<ProductAttachmentModel> productAttachments) {
+		int result = productsMapper.savaProduct(productModel);
+		if(result > 0) {
+			if(profitRebates!= null && !profitRebates.isEmpty()) {
+				saveProfitRebate(profitRebates);
+			}
+			if(productAttachments!= null && !productAttachments.isEmpty()) {
+				saveProductAttachment(productAttachments);
+			}
+			
+			return result;
+		}
+		return 0;
+	}
+	
+	private void saveProfitRebate(List<ProfitRebateModel> profitRebates) {
+		for(ProfitRebateModel pr : profitRebates) {
+			profitRebateMapper.savaProfitRebate(pr);
+		}
+	}
+
+	private void saveProductAttachment(List<ProductAttachmentModel> productAttachments){
+		for(ProductAttachmentModel pa : productAttachments) {
+			productAttachmentMapper.savaProductAttachment(pa);
+		}	
+	}
+	
+	@Override
+	public int updateProducts(ProductModel productModel) {
+		// TODO Auto-generated method stub
+		return 0;
 	}
 }

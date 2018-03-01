@@ -4,12 +4,14 @@ import java.math.BigDecimal;
 import java.util.Date;
 import java.util.List;
 
+import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Result;
 import org.apache.ibatis.annotations.Results;
 import org.apache.ibatis.annotations.Select;
 
 import com.auts.lcs.model.dao.product.ProductModel;
+import com.auts.lcs.model.dao.product.ProfitRebateModel;
 
 
 /**
@@ -18,6 +20,14 @@ import com.auts.lcs.model.dao.product.ProductModel;
  *
  */
 public interface ProductsMapper {
+	
+    @Insert("insert into Product (p_id, p_code, p_short_name,p_full_name,p_type,p_expect_annual_revenue,p_sale_status"
+    		+ "p_due_time, p_sale_date_start, p_all_issuing_scale, p_min_amount,p_payment_interest_type, "
+    		+" p_invest_type, p_size_ratio_type, p_invest_owner_id) "
+            + "values (#{pm.id}, #{pm.pCode},#{pm.pShortName}, #{pm.pFullName},#{pm.pType},#{pm.pExpectAnnualRevenue},#{pm.pSaleStatus},"
+            + "#{pm.pDulTime}, #{pm.pSaleStartTime},#{pm.pAllIssuingScale},#{pm.pMinAmount}, #{pm.pPaymentInterestType},"
+            +" #{pm.pInvestType}, #{pm.pSizeRatioType},#{pm.pInvestOwnerId})")
+    int savaProduct(ProductModel pm);
 	
 	@Select("select count(*) num from Product where pType= #{type} limit 1")
     int queryCountByPType(@Param("type") String type);

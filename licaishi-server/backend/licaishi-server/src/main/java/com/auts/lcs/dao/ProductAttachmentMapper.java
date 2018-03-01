@@ -2,6 +2,7 @@ package com.auts.lcs.dao;
 
 import java.util.List;
 
+import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Result;
 import org.apache.ibatis.annotations.Results;
@@ -21,4 +22,10 @@ public interface ProductAttachmentMapper {
     	@Result(property = "paFileUploadTime", column = "pa_file_upload_time")
     })
     List<ProductAttachmentModel> queryProductAttachmentByPCode(@Param("pCode") String pCode);
+    
+    @Insert("insert into ProductAttachment (pa_id, pa_product_code, pa_file_name,"
+    		+ "pa_file_path, pa_file_type, pa_file_upload_time) "
+            + "values (#{pa.id}, #{pa.paProductCode},#{pa.paFileName}, "
+            + "#{pa.paFilePath}, #{pa.paFileType},#{pa.paFileUploadTime})")
+    int savaProductAttachment(ProductAttachmentModel pa); 
 }
