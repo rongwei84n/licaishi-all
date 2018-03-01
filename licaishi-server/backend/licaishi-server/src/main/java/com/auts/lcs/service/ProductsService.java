@@ -10,6 +10,8 @@ public interface ProductsService {
 
     List<ProductModel> queryProducts(int pageNo, int pageSize, String type);
     
+    int queryProductCountByPType(String type);
+    
     ProductModel queryProductDetail(String pCode);
     
     List<ProductModel> queryRecommendProducts(String recommendype);

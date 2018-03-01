@@ -19,6 +19,9 @@ import com.auts.lcs.model.dao.product.ProductModel;
  */
 public interface ProductsMapper {
 	
+	@Select("select count(*) num from Product where pType= #{type} limit 1")
+    int queryCountByPType(@Param("type") String type);
+	
     @Select("select * from Product where p_code=#{pCode} limit 1")
     @Results({
     	@Result(property = "id", column = "p_id"), @Result(property = "pCode", column = "p_code"),
@@ -34,7 +37,7 @@ public interface ProductsMapper {
 
     /**
      */
-    @Select("select * from Product where p_id= 1 limit 1")
+    @Select("select * from Product where pType= #{type} limit #{startIndex} #{pageSize}")
     @Results({
     	@Result(property = "id", column = "p_id"), @Result(property = "pCode", column = "p_code"),
     	@Result(property = "pShortName", column = "p_short_name"), @Result(property = "pFullName", column = "p_full_name"),
@@ -45,7 +48,7 @@ public interface ProductsMapper {
     	@Result(property = "pInvestType", column = "p_invest_type"), @Result(property = "pSizeRatioType", column = "p_size_ratio_type"),
     	@Result(property = "pInvestOwnerId", column = "p_invest_owner_id")
     })
-    List<ProductModel> queryProducts(int pageNo, int pageSize, String type);
+    List<ProductModel> queryProducts(@Param("startIndex")int startIndex, @Param("pageSize")int pageSize, @Param("type")String type);
     
     @Select("select * from Product where 1= 1 limit 4")
     @Results({

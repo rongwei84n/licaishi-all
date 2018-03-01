@@ -19,6 +19,8 @@ import com.auts.lcs.model.common.PhiHomeBaseResponse;
 import com.auts.lcs.model.dao.product.ProductAttachmentModel;
 import com.auts.lcs.model.dao.product.ProductModel;
 import com.auts.lcs.model.dao.product.ProfitRebateModel;
+import com.auts.lcs.model.response.Data;
+import com.auts.lcs.model.response.Pager;
 import com.auts.lcs.model.response.ProductResponseModel;
 import com.auts.lcs.service.ProductsService;
 
@@ -47,29 +49,41 @@ public class ProductsController extends SBaseController {
     @RequestMapping(value = "/v1/product/list", method = RequestMethod.GET, produces = { "application/json" })
     public PhiHomeBaseResponse queryProducts(HttpServletRequest request) {
         PhiHomeBaseResponse rspObj = new PhiHomeBaseResponse();
+        Pager pager = null;
         String pageNo = request.getParameter(Const.PAGE_NO);
         String pageSize = request.getParameter(Const.PAGE_SIZE);
         String type = request.getParameter(Const.TYPE);
         
         LOGGER.info("queryProducts type [{}]", type);
         
+        int totalCount = productsService.queryProductCountByPType(type);
         List<ProductResponseModel> productResponseList = new ArrayList<>();
         List<ProductModel> products = productsService.queryProducts(Integer.parseInt(pageNo), Integer.parseInt(pageSize), type);
-        for(ProductModel productModel : products) {
-        	List<ProfitRebateModel> profitRebates =  productsService.queryProfitRebateByPCode(productModel.getpCode());
-        	List<ProductAttachmentModel> productAttachments = productsService.queryProductAttachmentByPCode(productModel.getpCode());
-        	
-        	ProductResponseModel productResponseModel = new ProductResponseModel();
-        	BeanUtils.copyProperties(productModel, productResponseModel);
-        	productResponseModel.setProfitRebates(profitRebates);
-        	productResponseModel.setProductAttachments(productAttachments);
-        	productResponseList.add(productResponseModel);
+        if(products!=null && !products.isEmpty()) {
+        	for(ProductModel productModel : products) {
+            	List<ProfitRebateModel> profitRebates =  productsService.queryProfitRebateByPCode(productModel.getpCode());
+            	List<ProductAttachmentModel> productAttachments = productsService.queryProductAttachmentByPCode(productModel.getpCode());
+            	
+            	ProductResponseModel productResponseModel = new ProductResponseModel();
+            	BeanUtils.copyProperties(productModel, productResponseModel);
+            	productResponseModel.setProfitRebates(profitRebates);
+            	productResponseModel.setProductAttachments(productAttachments);
+            	productResponseList.add(productResponseModel);
+            }
+        	//分页
+        	pager = genernatePager(Integer.parseInt(pageNo), Integer.parseInt(pageSize), totalCount, products.size());
         }
         
-        rspObj.setResult(productResponseList);
+        
+        Data<ProductResponseModel> data = new Data<ProductResponseModel>();
+        data.setList(productResponseList);
+        data.setPager(pager);
+        
+        rspObj.setResult(data);
         return successResponse(rspObj);
     }
 
+    
     /**
      * 首页查询推荐产品和热门产品
      * recommendype： 1 推荐产品 2热门产品
@@ -92,7 +106,9 @@ public class ProductsController extends SBaseController {
         	productResponseList.add(productResponseModel);
         }
         
-        rspObj.setResult(productResponseList);
+        Data<ProductResponseModel> data = new Data<ProductResponseModel>();
+        data.setList(productResponseList);
+        rspObj.setResult(data);
         return successResponse(rspObj);
     }
     
@@ -111,7 +127,9 @@ public class ProductsController extends SBaseController {
     	productResponseModel.setProductAttachments(productAttachments);
     	productResponseList.add(productResponseModel);
     	
-        rspObj.setResult(productResponseList);
+    	Data<ProductResponseModel> data = new Data<ProductResponseModel>();
+        data.setList(productResponseList);
+        rspObj.setResult(data);
         return successResponse(rspObj);
     }
 }

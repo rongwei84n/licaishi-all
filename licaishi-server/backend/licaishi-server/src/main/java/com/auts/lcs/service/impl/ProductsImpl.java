@@ -25,7 +25,8 @@ public class ProductsImpl implements ProductsService {
     @Override
     public List<ProductModel> queryProducts(int pageNo, int pageSize, String type) {
         try {
-            return productsMapper.queryProducts(pageNo, pageSize, type);
+        	int startIndex = (pageNo - 1) * pageSize;
+            return productsMapper.queryProducts(startIndex, pageSize, type);
         } catch (Exception e) {
             e.printStackTrace();
             return null;
@@ -50,5 +51,10 @@ public class ProductsImpl implements ProductsService {
 	@Override
 	public ProductModel queryProductDetail(String pCode) {
 		return productsMapper.queryProductByPCode(pCode);
+	}
+
+	@Override
+	public int queryProductCountByPType(String type) {
+		return productsMapper.queryCountByPType(type);
 	}
 }

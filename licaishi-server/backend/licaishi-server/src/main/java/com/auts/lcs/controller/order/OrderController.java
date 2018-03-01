@@ -36,6 +36,11 @@ public class OrderController extends SBaseController {
     @Autowired
     OrderService orderService;
 
+    /**
+     * 订单查询
+     * @param request
+     * @return
+     */
     @RequestMapping(value = "/v1/order/list", method = RequestMethod.GET, produces = { "application/json" })
     public PhiHomeBaseResponse queryOrders(HttpServletRequest request) {
         PhiHomeBaseResponse rspObj = new PhiHomeBaseResponse();
