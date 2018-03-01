@@ -2,7 +2,9 @@ package com.auts.lcs.model.response;
 
 import com.alibaba.fastjson.annotation.JSONField;
 import com.auts.lcs.consts.Const;
+import com.auts.lcs.controller.account.AccountController;
 import com.auts.lcs.model.dao.AccountModel;
+import com.auts.lcs.util.StringUtil;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 /**
@@ -20,9 +22,13 @@ public class AccountDetailResponseModel extends AccountBaseResponseModel {
         data = new Data();
         data.setAccountname(model.getPhone());
         data.setAddress("");
+        if (StringUtil.isNullOrEmpty(model.getAvtr())) {
+            data.setImg("");
+        } else {
+            data.setImg(AccountController.AVATAR_URL_PREFIX + model.getAvtr());
+        }
         data.setAge("");
         data.setBirthday("");
-        data.setImg(model.getAvtr());
         data.setJob("");
         data.setMailaddress(model.getEmail());
         data.setNickname(model.getReal_name());
