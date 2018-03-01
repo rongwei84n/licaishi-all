@@ -14,6 +14,13 @@ public interface Const {
      * header头部.
      */
     String AUTHORIZATION = "Authorization";
+    
+    //产品类参数
+    String RECOMMEND_TYPE = "recommendType";
+    String PAGE_NO = "pageNo";
+    String PAGE_SIZE = "pageSize";
+    String TYPE = "type";
+    String P_CODE= "pCode";
 
 
     String X_APP_INFO = "x-app-info";
