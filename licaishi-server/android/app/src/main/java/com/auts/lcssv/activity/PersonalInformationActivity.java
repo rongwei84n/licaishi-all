@@ -4,11 +4,13 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.ActivityCompat;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.auts.lcssv.event.ChangeWorkstudioEvent;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.auts.lcssv.R;
 import com.auts.lcssv.base.BaseActivity;
@@ -64,6 +66,12 @@ public class PersonalInformationActivity extends BaseActivity implements GetPhot
 
     @BindView(R.id.tv_mobile)
     TextView mTvMobile;
+
+    @BindView(R.id.tv_login_name)
+    TextView mTvLoginName;
+
+    @BindView(R.id.tv_workstation_name)
+    TextView mTvWorkstudioName;
 
     private UserInfoPresenter mUploadBasePresenter;
     private CloudAccountPresenter mCloudAccountPresenter;
@@ -127,6 +135,7 @@ public class PersonalInformationActivity extends BaseActivity implements GetPhot
 
             @Override
             public void accountDetailSuccess(AccountDetailsBean accountDetailsBean) {
+                Log.d("Sandy", "accountDetailsBean: " + accountDetailsBean);
                 if (accountDetailsBean != null) {
                     mAccountDetailsBean = accountDetailsBean;
 
@@ -144,7 +153,9 @@ public class PersonalInformationActivity extends BaseActivity implements GetPhot
                     mTvNickname.setText(TextUtils.isEmpty(mAccountDetailsBean.getNickname()) ? getString(R.string.not_set) : mAccountDetailsBean.getNickname());
                     phoneNumber = TextUtils.isEmpty(mAccountDetailsBean.getPhonenumber()) ? "" : mAccountDetailsBean.getPhonenumber();
 
+                    mTvLoginName.setText(phoneNumber);
                     mTvMobile.setText(phoneNumber);
+                    mTvWorkstudioName.setText(accountDetailsBean.getWorkstudio());
                 } else {
                     accountDetailError("0", null);
                 }
@@ -218,7 +229,19 @@ public class PersonalInformationActivity extends BaseActivity implements GetPhot
                 mTvNickname.setText(R.string.not_set);
             } else {
                 mTvNickname.setText(mAccountDetailsBean.getNickname());
-                mTvMobile.setText(mAccountDetailsBean.getNickname());
+//                mTvMobile.setText(mAccountDetailsBean.getNickname());
+            }
+        }
+    }
+
+    @Subscribe
+    public void onEventMainThread(ChangeWorkstudioEvent event) {
+        if (mAccountDetailsBean != null) {
+            mAccountDetailsBean.setWorkstudio(event.getWorkstudio());
+            if (TextUtils.isEmpty(mAccountDetailsBean.getWorkstudio())) {
+                mTvWorkstudioName.setText(R.string.not_set);
+            } else {
+                mTvWorkstudioName.setText(mAccountDetailsBean.getWorkstudio());
             }
         }
     }
@@ -246,7 +269,6 @@ public class PersonalInformationActivity extends BaseActivity implements GetPhot
         if (mAccountDetailsBean != null) {
             intent.putExtra("nickname", mAccountDetailsBean.getNickname());
         }
-        UmengUtil.onEvent(this, UmengUtil.NICK_NAME_SAVE);
         startActivity(intent);
     }
 
@@ -271,6 +293,15 @@ public class PersonalInformationActivity extends BaseActivity implements GetPhot
                 logout();
             }
         }, null).show();
+    }
+
+    @OnClick(R.id.rl_workstation_name)
+    public void workstudioItemOnClick() {
+        Intent intent = new Intent(this, ChangeWorkstudioActivity.class);
+        if (mAccountDetailsBean != null) {
+            intent.putExtra("workstudio", mAccountDetailsBean.getWorkstudio());
+        }
+        startActivity(intent);
     }
 
     @Override

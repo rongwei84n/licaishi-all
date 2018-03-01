@@ -25,18 +25,18 @@ public interface UrlConfig {
         String GET_VER_CODE = URL_HOST + "/v1/verificationMsg"; //获取验证码
         //        String GET_VER_CODE = "https://account.phicomm.com" + "/v1/verificationMsg"; //获取验证码
         String CHECK_VER_CODE = URL_HOST + "/srv/v1/verifyVerificationCode"; //校验短信验证码
-        String REGISTER = URL_HOST + "/v1/account"; //注册账号
+        String REGISTER = URL_HOST + "/srv/v1/account"; //注册账号
         String OLD_ACCOUNT_VERIFICATION = URL_HOST + "/v1/oldAccountVerification"; //校验旧的手机号或邮箱号
         String REBIND = URL_HOST + "/v1/rebind"; //修改绑定关系
         String ACCOUNT_DETAIL = URL_HOST + "/srv/v1/accountDetail"; //获取用户云账户公共信息
-        String PROPERTY = URL_HOST + "/v1/property"; //修改用户云账户公共信息
-        String PASSWORD = URL_HOST + "/v1/password"; //修改密码
+        String PROPERTY = URL_HOST + "/srv/v1/property"; //修改用户云账户公共信息
+        String PASSWORD = URL_HOST + "/srv/v1/password"; //修改密码
         String FORGOT_PWD = URL_HOST + "/srv/v1/forgetpassword"; //忘记密码重新设置
     }
 
     interface CloudPortrait {
         String URL_HOST = BuildConfig.host_cloud_portrait;
-        String UPLOAD_BASE64 = URL_HOST + "/pic/uploadBase64"; //上传Base64字符串
+        String UPLOAD_BASE64 = URL_HOST + "/srv/v1/pic/uploadBase64"; //上传Base64字符串
         String AVATAR_URL = URL_HOST + "/pic/avatarUrl"; //获取头像url
     }
 

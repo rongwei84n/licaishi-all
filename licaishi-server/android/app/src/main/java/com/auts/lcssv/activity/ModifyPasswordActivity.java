@@ -23,9 +23,6 @@ import butterknife.OnClick;
 
 /**
  * 修改密码界面
- *
- * @author xiaolei.yang
- * @date 2017/7/24
  */
 
 public class ModifyPasswordActivity extends BaseActivity implements ILoadingView {

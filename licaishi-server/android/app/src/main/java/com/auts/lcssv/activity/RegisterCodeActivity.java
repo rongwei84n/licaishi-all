@@ -178,6 +178,7 @@ public class RegisterCodeActivity extends BaseActivity implements ILoadingView {
 
             @Override
             public void onCheckVerCodeSuccess() {
+                mPresenter.register(mMyPassword.getContent(), mMyEtPhone.getContent(), mMyEtVerCode.getContent());
                 hideLoading();
                 gotoRegister();
             }
@@ -272,7 +273,7 @@ public class RegisterCodeActivity extends BaseActivity implements ILoadingView {
 
 
     /**
-     * 进入设置密码页面
+     * 进入注册成功页面
      */
     private void gotoRegister() {
         Intent intent = new Intent(this, RegisterFinishActivity.class);

@@ -5,4 +5,7 @@
     <string name="tv_change_passwd">修改登录密码</string>
     <string name="tv_shequ">关于理财师社区</string>
     <string name="tv_phone">手机号:</string>
+
+    <string name="tv_set_nickname">修改姓名</string>
+    <string name="tv_set_workstudio">修改工作室名称</string>
 </resources>
