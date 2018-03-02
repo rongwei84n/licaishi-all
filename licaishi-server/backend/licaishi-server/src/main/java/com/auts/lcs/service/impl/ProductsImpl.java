@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.util.StringUtils;
 
 import com.auts.lcs.dao.ProductAttachmentMapper;
 import com.auts.lcs.dao.ProductsMapper;
@@ -28,7 +29,10 @@ public class ProductsImpl implements ProductsService {
     public List<ProductModel> queryProducts(int pageNo, int pageSize, String type) {
         try {
         	int startIndex = (pageNo - 1) * pageSize;
-            return productsMapper.queryProducts(startIndex, pageSize, type);
+        	if(StringUtils.isEmpty(type)) {
+        		return productsMapper.queryAllProducts(startIndex, pageSize);
+        	}
+            return productsMapper.queryProductsByType(startIndex, pageSize, type);
         } catch (Exception e) {
             e.printStackTrace();
             return null;
@@ -57,6 +61,9 @@ public class ProductsImpl implements ProductsService {
 
 	@Override
 	public int queryProductCountByPType(String type) {
+		if(StringUtils.isEmpty(type)) {
+			return productsMapper.queryAllCount();
+		}
 		return productsMapper.queryCountByPType(type);
 	}
 
