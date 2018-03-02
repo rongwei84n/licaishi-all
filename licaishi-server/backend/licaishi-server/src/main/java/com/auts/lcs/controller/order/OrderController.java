@@ -16,6 +16,9 @@ import com.auts.lcs.consts.Const;
 import com.auts.lcs.controller.SBaseController;
 import com.auts.lcs.model.common.PhiHomeBaseResponse;
 import com.auts.lcs.model.dao.order.OrderModel;
+import com.auts.lcs.model.response.Data;
+import com.auts.lcs.model.response.Pager;
+import com.auts.lcs.model.response.ProductResponseModel;
 import com.auts.lcs.model.response.RegistResponseModel;
 import com.auts.lcs.service.OrderService;
 
@@ -47,15 +50,35 @@ public class OrderController extends SBaseController {
         String pageNo = request.getParameter(Const.PAGE_NO);
         String pageSize = request.getParameter(Const.PAGE_SIZE);
         String type = request.getParameter(Const.TYPE);
+        Pager pager = null;
         
         LOGGER.info("queryOrders type [{}]", type);
+        String token = request.getHeader(Const.AUTHORIZATION);
+        LOGGER.info("queryOrders toekn [{}]", token);
+        String uid = getUidByToken(token);
+        int totalCount = orderService.queryOrderCountByStatus(type, uid);
+        List<OrderModel> orders = orderService.queryOrders(Integer.parseInt(pageNo), Integer.parseInt(pageSize), type, uid);
+        if(orders !=null && !orders.isEmpty()) {
+        	//分页
+        	pager = genernatePager(Integer.parseInt(pageNo), Integer.parseInt(pageSize), totalCount, orders.size());
+        }
         
-        List<OrderModel> orders = orderService.queryOrders(1, 1, type);
-        
-        rspObj.setResult(orders);
+        Data<OrderModel> data = new Data<OrderModel>();
+        data.setList(orders);
+        data.setPager(pager);
+        rspObj.setResult(data);
         return successResponse(rspObj);
     }
     
+    /**
+     * 预约产品
+     * @param request
+     * @param pCode
+     * @param pName
+     * @param amount
+     * @param orderDate
+     * @return
+     */
     @RequestMapping(value = "/v1/order/createOrder", method = RequestMethod.POST, produces = { "application/json" })
     public PhiHomeBaseResponse createOrder(HttpServletRequest request,
     		@RequestParam(value = "pCode", required = false) String pCode,
@@ -64,18 +87,25 @@ public class OrderController extends SBaseController {
             @RequestParam(value = "orderDate", required = true) String orderDate) {
         PhiHomeBaseResponse rspObj = new PhiHomeBaseResponse();
         
-//        LOGGER.info("createOrder type [{}]", type);
+        LOGGER.info("createOrder pCode [{}]", pCode);
         
         OrderModel om = new OrderModel();
+        //todo 产品额度够不够
         int result = orderService.saveOrder(om);
-        if (result > 0) {
-        	
-        } else {
-//            return errorRegister(String.valueOf(Const.ErrorCode.Account.REGIST_ERROR));
+        if (result < 1) {
+        	return errorResponse(100);
         }
+        
         return successResponse(rspObj);
     }
     
+    /**
+     * 取消订单
+     * 
+     * @param request
+     * @param orderNo
+     * @return
+     */
     @RequestMapping(value = "/v1/order/cancelOrder", method = RequestMethod.POST, produces = { "application/json" })
     public PhiHomeBaseResponse cancelOrder(HttpServletRequest request,
     		@RequestParam(value = "orderNo", required = false) String orderNo) {
@@ -93,6 +123,12 @@ public class OrderController extends SBaseController {
         return successResponse(rspObj);
     }
     
+    /**
+     * 上传支付凭证
+     * @param request
+     * @param orderNo
+     * @return
+     */
     @RequestMapping(value = "/v1/order/uploadPayPhote", method = RequestMethod.POST, produces = { "application/json" })
     public PhiHomeBaseResponse uploadPayPhote(HttpServletRequest request,
     		@RequestParam(value = "orderNo", required = false) String orderNo) {

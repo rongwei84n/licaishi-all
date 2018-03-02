@@ -5,10 +5,12 @@ import java.util.Date;
 import java.util.List;
 
 import org.apache.ibatis.annotations.Insert;
+import org.apache.ibatis.annotations.Options;
 import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Result;
 import org.apache.ibatis.annotations.Results;
 import org.apache.ibatis.annotations.Select;
+import org.apache.ibatis.annotations.UpdateProvider;
 
 import com.auts.lcs.model.dao.product.ProductModel;
 import com.auts.lcs.model.dao.product.ProfitRebateModel;
@@ -27,9 +29,14 @@ public interface ProductsMapper {
             + "values (#{pm.id}, #{pm.pCode},#{pm.pShortName}, #{pm.pFullName},#{pm.pType},#{pm.pExpectAnnualRevenue},#{pm.pSaleStatus},"
             + "#{pm.pDulTime}, #{pm.pSaleStartTime},#{pm.pAllIssuingScale},#{pm.pMinAmount}, #{pm.pPaymentInterestType},"
             +" #{pm.pInvestType}, #{pm.pSizeRatioType},#{pm.pInvestOwnerId})")
+    @Options(useGeneratedKeys = true, keyProperty = "p_id") 
     int savaProduct(ProductModel pm);
-	
-	@Select("select count(*) num from Product where pType= #{type} limit 1")
+    
+    @UpdateProvider(type = ProductSqlProvider.class, method = "updateSql")
+    int updateProduct(@Param("product") ProductModel pm);
+    
+    @Select("<script>select count(*) num from Product where <if test=\"type !=null \">p_type = #{type} </if> </script>")
+//	@Select("select count(*) num from Product where p_type= #{type} limit 1")
     int queryCountByPType(@Param("type") String type);
 	
     @Select("select * from Product where p_code=#{pCode} limit 1")

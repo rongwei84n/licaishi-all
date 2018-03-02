@@ -42,7 +42,7 @@ public class ProductsController extends SBaseController {
 
     /**
      * 查询产品列表
-     * type 02：集合信托  03集合资管 04债权基金 05股权基金 06阳光私募
+     * type 01：集合信托  02集合资管 03债权基金 04股权基金 05阳光私募
      * @param request
      * @return
      */
@@ -73,8 +73,7 @@ public class ProductsController extends SBaseController {
         	//分页
         	pager = genernatePager(Integer.parseInt(pageNo), Integer.parseInt(pageSize), totalCount, products.size());
         }
-        
-        
+
         Data<ProductResponseModel> data = new Data<ProductResponseModel>();
         data.setList(productResponseList);
         data.setPager(pager);
