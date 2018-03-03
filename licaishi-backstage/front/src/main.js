@@ -10,7 +10,7 @@ import "babel-polyfill";
 
 Vue.use(ElementUI);
 
-axios.defaults.baseURL = 'http://127.0.0.1:7074/v1';
+axios.defaults.baseURL = 'http://47.97.100.240:7074/v1';
 axios.defaults.transformRequest = [function(data) {
   return qs.stringify(data)
 }];
