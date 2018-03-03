@@ -1,50 +1,22 @@
-// The Vue build version to load with the `import` command
-// (runtime-only or standalone) has been set in webpack.base.conf with an alias.
-import Vue from 'vue'
-import VueRouter from 'vue-router'
-import VueResource from 'vue-resource'
-import Layout from './components/layout'
+import Vue from 'vue';
+import App from './App';
+import router from './router';
+import axios from 'axios';
+import qs from 'qs';
+import ElementUI from 'element-ui';
+import 'element-ui/lib/theme-chalk/index.css';    // 默认主题
+// import '../static/css/theme-green/index.css';       // 浅绿色主题
+import "babel-polyfill";
 
-import LoginPage from './pages/login'
-import IndexPage from './pages/index'
-import FinancerM from './pages/financermange'
-import OrderM from './pages/ordermange'
+Vue.use(ElementUI);
 
-Vue.use(VueRouter)
-Vue.use(VueResource)
+axios.defaults.baseURL = 'http://127.0.0.1:7074/v1';
+axios.defaults.transformRequest = [function(data) {
+  return qs.stringify(data)
+}];
+Vue.prototype.$axios = axios;
 
-let router = new VueRouter({
-  mode: 'history',
-  routes: [
-    {
-      path: '/',
-      component: LoginPage
-    },
-    {
-      path: '/login',
-      component: LoginPage
-    },
-    {
-      path: '/index',
-      component: IndexPage,
-      children: [
-        {
-          path: 'financermange',
-          component:FinancerM
-        },
-        {
-          path: 'ordermanage',
-          component: OrderM
-        }
-      ]
-    }
-  ]
-})
-
-/* eslint-disable no-new */
 new Vue({
-  el: '#app',
   router,
-  components: { Layout },
-  template: '<Layout/>'
-})
+  render: h => h(App)
+}).$mount('#app');

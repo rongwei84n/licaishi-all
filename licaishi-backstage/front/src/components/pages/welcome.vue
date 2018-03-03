@@ -1,10 +1,10 @@
 <template>
-  <div>登录页面</div>
+    <div>欢迎使用理财师后台管理系统</div>
 </template>
 
 <script>
     export default {
-
+        name: "welcome"
     }
 </script>
 
