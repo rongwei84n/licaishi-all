@@ -5,6 +5,8 @@ import com.auts.lcs.consts.Const;
 import com.auts.lcs.model.common.PhiHomeBaseResponse;
 import com.auts.lcs.model.common.PhicommAccountDetailModel;
 import com.auts.lcs.model.dao.TokenModel;
+import com.auts.lcs.model.response.Pager;
+import com.auts.lcs.page.Page;
 import com.auts.lcs.service.TokenService;
 import com.auts.lcs.util.MyResponseutils;
 import com.auts.lcs.util.PhicommHttpsClient;
@@ -153,6 +155,25 @@ public abstract class SBaseController {
             logger.error("get phicomm account error: ", e);
         }
         return null;
+    }
+    
+    protected Pager genernatePager(int pageNo, int pageSize, int totalCount, int pageCount) {
+    	Pager pager = new Pager(pageNo, pageSize, pageCount, totalCount);
+    	Page page = getPage(pageNo, pageSize, totalCount);
+    	pager.setHasNaxtPage(page.isHasNextPage());
+    	pager.setHasPrePage(page.isHasPrePage());
+    	pager.setPrePage(page.getPrePage());
+    	if(page.isHasNextPage()) {
+    		pager.setNextPage(page.getNextPage());
+    	}
+    	pager.setStartIndex((pageNo - 1) * pageSize);
+    	
+    	return pager;
+    }
+    
+    private Page getPage(int pageNo, int pageSize, int totalCount) {
+    	Page page = new Page(pageNo, pageSize, totalCount);
+    	return page;
     }
 
 }

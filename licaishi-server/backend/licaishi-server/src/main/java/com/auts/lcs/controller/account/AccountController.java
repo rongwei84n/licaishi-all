@@ -52,6 +52,8 @@ public class AccountController extends SBaseController {
 
     private static final String AVATAR_SAVE_PATH = "/root/deploy/img/avatar/lcss";
 
+    public static final String AVATAR_URL_PREFIX = "http://47.97.100.240/avatar/v1/";
+
     /**
      * 获取授权码.
      */

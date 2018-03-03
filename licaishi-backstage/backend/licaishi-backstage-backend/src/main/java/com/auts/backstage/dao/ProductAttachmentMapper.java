@@ -1,4 +1,4 @@
-package com.auts.lcs.dao;
+package com.auts.backstage.dao;
 
 import java.util.List;
 
@@ -8,7 +8,7 @@ import org.apache.ibatis.annotations.Result;
 import org.apache.ibatis.annotations.Results;
 import org.apache.ibatis.annotations.Select;
 
-import com.auts.lcs.model.dao.product.ProductAttachmentModel;
+import com.auts.backstage.model.dao.product.ProductAttachmentModel;
 
 public interface ProductAttachmentMapper {
 

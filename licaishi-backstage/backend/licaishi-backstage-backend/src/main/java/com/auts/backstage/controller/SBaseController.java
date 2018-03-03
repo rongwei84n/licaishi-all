@@ -16,6 +16,8 @@ import com.auts.backstage.service.TokenService;
 import com.auts.backstage.util.MyResponseutils;
 import com.auts.backstage.util.PhicommHttpsClient;
 import com.auts.backstage.util.StringUtil;
+import com.auts.backstage.model.response.Pager;
+import com.auts.backstage.page.Page;
 
 /**
  * Phihome Controller基类, 提供了一些返回的基本功能.
@@ -154,5 +156,23 @@ public abstract class SBaseController {
         }
         return null;
     }
-
+    
+    protected Pager genernatePager(int pageNo, int pageSize, int totalCount, int pageCount) {
+    	Pager pager = new Pager(pageNo, pageSize, pageCount, totalCount);
+    	Page page = getPage(pageNo, pageSize, totalCount);
+    	pager.setHasNaxtPage(page.isHasNextPage());
+    	pager.setHasPrePage(page.isHasPrePage());
+    	pager.setPrePage(page.getPrePage());
+    	if(page.isHasNextPage()) {
+    		pager.setNextPage(page.getNextPage());
+    	}
+    	pager.setStartIndex((pageNo - 1) * pageSize);
+    	
+    	return pager;
+    }
+    
+    private Page getPage(int pageNo, int pageSize, int totalCount) {
+    	Page page = new Page(pageNo, pageSize, totalCount);
+    	return page;
+    }
 }

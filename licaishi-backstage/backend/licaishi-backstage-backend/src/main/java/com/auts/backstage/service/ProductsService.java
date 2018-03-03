@@ -1,10 +1,10 @@
-package com.auts.lcs.service;
+package com.auts.backstage.service;
 
 import java.util.List;
 
-import com.auts.lcs.model.dao.product.ProductAttachmentModel;
-import com.auts.lcs.model.dao.product.ProductModel;
-import com.auts.lcs.model.dao.product.ProfitRebateModel;
+import com.auts.backstage.model.dao.product.ProductAttachmentModel;
+import com.auts.backstage.model.dao.product.ProductModel;
+import com.auts.backstage.model.dao.product.ProfitRebateModel;
 
 public interface ProductsService {
 	

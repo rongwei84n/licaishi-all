@@ -1,19 +1,18 @@
-package com.auts.lcs.service.impl;
+package com.auts.backstage.service.impl;
 
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import org.springframework.util.StringUtils;
 
-import com.auts.lcs.dao.ProductAttachmentMapper;
-import com.auts.lcs.dao.ProductsMapper;
-import com.auts.lcs.dao.ProfitRebateMapper;
-import com.auts.lcs.model.dao.product.ProductAttachmentModel;
-import com.auts.lcs.model.dao.product.ProductModel;
-import com.auts.lcs.model.dao.product.ProfitRebateModel;
-import com.auts.lcs.service.ProductsService;
+import com.auts.backstage.dao.ProductAttachmentMapper;
+import com.auts.backstage.dao.ProductsMapper;
+import com.auts.backstage.dao.ProfitRebateMapper;
+import com.auts.backstage.model.dao.product.ProductAttachmentModel;
+import com.auts.backstage.model.dao.product.ProductModel;
+import com.auts.backstage.model.dao.product.ProfitRebateModel;
+import com.auts.backstage.service.ProductsService;
 
 @Service
 @Transactional
@@ -29,10 +28,7 @@ public class ProductsImpl implements ProductsService {
     public List<ProductModel> queryProducts(int pageNo, int pageSize, String type) {
         try {
         	int startIndex = (pageNo - 1) * pageSize;
-        	if(StringUtils.isEmpty(type)) {
-        		return productsMapper.queryAllProducts(startIndex, pageSize);
-        	}
-            return productsMapper.queryProductsByType(startIndex, pageSize, type);
+            return productsMapper.queryProducts(startIndex, pageSize, type);
         } catch (Exception e) {
             e.printStackTrace();
             return null;
@@ -61,9 +57,6 @@ public class ProductsImpl implements ProductsService {
 
 	@Override
 	public int queryProductCountByPType(String type) {
-		if(StringUtils.isEmpty(type)) {
-			return productsMapper.queryAllCount();
-		}
 		return productsMapper.queryCountByPType(type);
 	}
 

@@ -1,9 +1,9 @@
-package com.auts.lcs.model.dao.order;
+package com.auts.backstage.model.dao.order;
 
 import java.math.BigDecimal;
 import java.util.Date;
 
-import com.auts.lcs.model.common.BaseDaoModel;
+import com.auts.backstage.model.common.BaseDaoModel;
 
 public class OrderModel extends BaseDaoModel {
 
@@ -23,7 +23,6 @@ public class OrderModel extends BaseDaoModel {
     private String payStatus;
     private String photoStatus;
     private String contractStatus;
-    private String uid;//
     
 	public String getOrderNo() {
 		return orderNo;
@@ -120,11 +119,5 @@ public class OrderModel extends BaseDaoModel {
 	}
 	public void setContractStatus(String contractStatus) {
 		this.contractStatus = contractStatus;
-	}
-	public String getUid() {
-		return uid;
-	}
-	public void setUid(String uid) {
-		this.uid = uid;
 	}
 }

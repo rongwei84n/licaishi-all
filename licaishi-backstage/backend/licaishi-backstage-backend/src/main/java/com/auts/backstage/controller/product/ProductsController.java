@@ -1,4 +1,4 @@
-package com.auts.lcs.controller.product;
+package com.auts.backstage.controller.product;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -13,16 +13,16 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.auts.lcs.consts.Const;
-import com.auts.lcs.controller.SBaseController;
-import com.auts.lcs.model.common.PhiHomeBaseResponse;
-import com.auts.lcs.model.dao.product.ProductAttachmentModel;
-import com.auts.lcs.model.dao.product.ProductModel;
-import com.auts.lcs.model.dao.product.ProfitRebateModel;
-import com.auts.lcs.model.response.Data;
-import com.auts.lcs.model.response.Pager;
-import com.auts.lcs.model.response.ProductResponseModel;
-import com.auts.lcs.service.ProductsService;
+import com.auts.backstage.consts.Const;
+import com.auts.backstage.controller.SBaseController;
+import com.auts.backstage.model.common.PhiHomeBaseResponse;
+import com.auts.backstage.model.dao.product.ProductAttachmentModel;
+import com.auts.backstage.model.dao.product.ProductModel;
+import com.auts.backstage.model.dao.product.ProfitRebateModel;
+import com.auts.backstage.model.response.Data;
+import com.auts.backstage.model.response.Pager;
+import com.auts.backstage.model.response.ProductResponseModel;
+import com.auts.backstage.service.ProductsService;
 
 /**
  * 产品模块
@@ -42,7 +42,7 @@ public class ProductsController extends SBaseController {
 
     /**
      * 查询产品列表
-     * type 01：集合信托  02集合资管 03债权基金 04股权基金 05阳光私募
+     * type 02：集合信托  03集合资管 04债权基金 05股权基金 06阳光私募
      * @param request
      * @return
      */
@@ -73,7 +73,8 @@ public class ProductsController extends SBaseController {
         	//分页
         	pager = genernatePager(Integer.parseInt(pageNo), Integer.parseInt(pageSize), totalCount, products.size());
         }
-
+        
+        
         Data<ProductResponseModel> data = new Data<ProductResponseModel>();
         data.setList(productResponseList);
         data.setPager(pager);
