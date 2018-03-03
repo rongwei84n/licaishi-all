@@ -68,7 +68,7 @@
   .user-info .user-logo{
     position: absolute;
     left:0;
-    top:15px;
+    top:-12px;
     width:40px;
     height:40px;
     border-radius: 50%;
