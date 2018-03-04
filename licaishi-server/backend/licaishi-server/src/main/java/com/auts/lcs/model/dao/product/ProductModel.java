@@ -1,5 +1,6 @@
 package com.auts.lcs.model.dao.product;
 
+import java.math.BigDecimal;
 import java.util.Date;
 
 import com.alibaba.fastjson.annotation.JSONField;
@@ -16,14 +17,113 @@ public class ProductModel extends BaseDaoModel {
     private String pSaleStatus;
     private String pDulTime;
     private Date pSaleStartTime;
-    private String pAllIssuingScale;
-    private String pMinAmount;
+    private BigDecimal pAllIssuingScale;
+    private BigDecimal pMinAmount;
     private String pPaymentInterestType;
     private String pInvestType;
     private String pSizeRatioType;
     private String pInvestOwnerId;
+    private BigDecimal pIssuingScale;
+    private BigDecimal pExpectSaleAmount;
+    private BigDecimal pAllSubscriptionAmount;
+    private String pRecruitmentSummary;
+    private String pCpys;
+    private String pMjzh;
+    private String pFxkz;
+    private String pHkly;
+    private String pZjyt;
+    private String pRrzf;
+    private String pDbf;
 
-    public String getpCode() {
+    public BigDecimal getpIssuingScale() {
+		return pIssuingScale;
+	}
+
+	public void setpIssuingScale(BigDecimal pIssuingScale) {
+		this.pIssuingScale = pIssuingScale;
+	}
+
+	public BigDecimal getpExpectSaleAmount() {
+		return pExpectSaleAmount;
+	}
+
+	public void setpExpectSaleAmount(BigDecimal pExpectSaleAmount) {
+		this.pExpectSaleAmount = pExpectSaleAmount;
+	}
+
+	public BigDecimal getpAllSubscriptionAmount() {
+		return pAllSubscriptionAmount;
+	}
+
+	public void setpAllSubscriptionAmount(BigDecimal pAllSubscriptionAmount) {
+		this.pAllSubscriptionAmount = pAllSubscriptionAmount;
+	}
+
+	public String getpRecruitmentSummary() {
+		return pRecruitmentSummary;
+	}
+
+	public void setpRecruitmentSummary(String pRecruitmentSummary) {
+		this.pRecruitmentSummary = pRecruitmentSummary;
+	}
+
+	public String getpCpys() {
+		return pCpys;
+	}
+
+	public void setpCpys(String pCpys) {
+		this.pCpys = pCpys;
+	}
+
+	public String getpMjzh() {
+		return pMjzh;
+	}
+
+	public void setpMjzh(String pMjzh) {
+		this.pMjzh = pMjzh;
+	}
+
+	public String getpFxkz() {
+		return pFxkz;
+	}
+
+	public void setpFxkz(String pFxkz) {
+		this.pFxkz = pFxkz;
+	}
+
+	public String getpHkly() {
+		return pHkly;
+	}
+
+	public void setpHkly(String pHkly) {
+		this.pHkly = pHkly;
+	}
+
+	public String getpZjyt() {
+		return pZjyt;
+	}
+
+	public void setpZjyt(String pZjyt) {
+		this.pZjyt = pZjyt;
+	}
+
+	public String getpRrzf() {
+		return pRrzf;
+	}
+
+	public void setpRrzf(String pRrzf) {
+		this.pRrzf = pRrzf;
+	}
+
+	public String getpDbf() {
+		return pDbf;
+	}
+
+	public void setpDbf(String pDbf) {
+		this.pDbf = pDbf;
+	}
+
+	public String getpCode() {
 		return pCode;
 	}
 
@@ -87,19 +187,19 @@ public class ProductModel extends BaseDaoModel {
 		this.pSaleStartTime = pSaleStartTime;
 	}
 
-	public String getpAllIssuingScale() {
+	public BigDecimal getpAllIssuingScale() {
 		return pAllIssuingScale;
 	}
 
-	public void setpAllIssuingScale(String pAllIssuingScale) {
+	public void setpAllIssuingScale(BigDecimal pAllIssuingScale) {
 		this.pAllIssuingScale = pAllIssuingScale;
 	}
 
-	public String getpMinAmount() {
+	public BigDecimal getpMinAmount() {
 		return pMinAmount;
 	}
 
-	public void setpMinAmount(String pMinAmount) {
+	public void setpMinAmount(BigDecimal pMinAmount) {
 		this.pMinAmount = pMinAmount;
 	}
 

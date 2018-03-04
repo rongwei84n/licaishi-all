@@ -21,6 +21,7 @@ import com.auts.lcs.model.dao.product.ProductModel;
 import com.auts.lcs.model.dao.product.ProfitRebateModel;
 import com.auts.lcs.model.response.Data;
 import com.auts.lcs.model.response.Pager;
+import com.auts.lcs.model.response.ProductDetailResponseModel;
 import com.auts.lcs.model.response.ProductResponseModel;
 import com.auts.lcs.service.ProductsService;
 
@@ -62,12 +63,11 @@ public class ProductsController extends SBaseController {
         if(products!=null && !products.isEmpty()) {
         	for(ProductModel productModel : products) {
             	List<ProfitRebateModel> profitRebates =  productsService.queryProfitRebateByPCode(productModel.getpCode());
-            	List<ProductAttachmentModel> productAttachments = productsService.queryProductAttachmentByPCode(productModel.getpCode());
+//            	List<ProductAttachmentModel> productAttachments = productsService.queryProductAttachmentByPCode(productModel.getpCode());
             	
             	ProductResponseModel productResponseModel = new ProductResponseModel();
             	BeanUtils.copyProperties(productModel, productResponseModel);
             	productResponseModel.setProfitRebates(profitRebates);
-            	productResponseModel.setProductAttachments(productAttachments);
             	productResponseList.add(productResponseModel);
             }
         	//分页
@@ -95,40 +95,31 @@ public class ProductsController extends SBaseController {
         String recommendType = request.getParameter(Const.RECOMMEND_TYPE);
         List<ProductModel> recommendProducts = productsService.queryRecommendProducts(recommendType);
         for(ProductModel productModel : recommendProducts) {
-        	List<ProfitRebateModel> profitRebates =  productsService.queryProfitRebateByPCode(productModel.getpCode());
-        	List<ProductAttachmentModel> productAttachments = productsService.queryProductAttachmentByPCode(productModel.getpCode());
-        	
+        	List<ProfitRebateModel> profitRebates =  productsService.queryProfitRebateByPCode(productModel.getpCode());       	
         	ProductResponseModel productResponseModel = new ProductResponseModel();
         	BeanUtils.copyProperties(productModel, productResponseModel);
         	productResponseModel.setProfitRebates(profitRebates);
-        	productResponseModel.setProductAttachments(productAttachments);
         	productResponseList.add(productResponseModel);
         }
         
-        Data<ProductResponseModel> data = new Data<ProductResponseModel>();
-        data.setList(productResponseList);
-        rspObj.setResult(data);
+        rspObj.setResult(productResponseList);
         return successResponse(rspObj);
     }
     
     @RequestMapping(value = "/v1/product/productDetail", method = RequestMethod.GET, produces = { "application/json" })
     public PhiHomeBaseResponse queryProductDetail(HttpServletRequest request) {
         PhiHomeBaseResponse rspObj = new PhiHomeBaseResponse();
-        List<ProductResponseModel> productResponseList = new ArrayList<>();
         
         String pCode = request.getParameter(Const.P_CODE);
         ProductModel productModel= productsService.queryProductDetail(pCode);
     	List<ProfitRebateModel> profitRebates =  productsService.queryProfitRebateByPCode(pCode);
     	List<ProductAttachmentModel> productAttachments = productsService.queryProductAttachmentByPCode(pCode);
-    	ProductResponseModel productResponseModel = new ProductResponseModel();
+    	ProductDetailResponseModel productResponseModel = new ProductDetailResponseModel();
     	BeanUtils.copyProperties(productModel, productResponseModel);
     	productResponseModel.setProfitRebates(profitRebates);
     	productResponseModel.setProductAttachments(productAttachments);
-    	productResponseList.add(productResponseModel);
     	
-    	Data<ProductResponseModel> data = new Data<ProductResponseModel>();
-        data.setList(productResponseList);
-        rspObj.setResult(data);
+        rspObj.setResult(productResponseModel);
         return successResponse(rspObj);
     }
 }

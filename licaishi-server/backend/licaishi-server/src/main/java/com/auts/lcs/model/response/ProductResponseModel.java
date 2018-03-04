@@ -1,10 +1,10 @@
 package com.auts.lcs.model.response;
 
+import java.math.BigDecimal;
 import java.util.Date;
 import java.util.List;
 
 import com.alibaba.fastjson.annotation.JSONField;
-import com.auts.lcs.model.dao.product.ProductAttachmentModel;
 import com.auts.lcs.model.dao.product.ProfitRebateModel;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
@@ -41,10 +41,10 @@ public class ProductResponseModel {
     private Date pSaleStartTime;
 	@JSONField(name = "pAllIssuingScale")
     @JsonProperty("pAllIssuingScale")
-    private String pAllIssuingScale;
+    private BigDecimal pAllIssuingScale;
 	@JSONField(name = "pMinAmount")
     @JsonProperty("pMinAmount")
-    private String pMinAmount;
+    private BigDecimal pMinAmount;
 	@JSONField(name = "pPaymentInterestType")
     @JsonProperty("pPaymentInterestType")
     private String pPaymentInterestType;
@@ -60,10 +60,28 @@ public class ProductResponseModel {
 	@JSONField(name = "profitRebates")
     @JsonProperty("profitRebates")
     private List<ProfitRebateModel> profitRebates;
-	@JSONField(name = "ProductAttachments")
-    @JsonProperty("ProductAttachments")
-    private List<ProductAttachmentModel> ProductAttachments;
+    private BigDecimal pIssuingScale;
+    private BigDecimal pExpectSaleAmount;
+    private BigDecimal pAllSubscriptionAmount;
 	
+	public BigDecimal getpIssuingScale() {
+		return pIssuingScale;
+	}
+	public void setpIssuingScale(BigDecimal pIssuingScale) {
+		this.pIssuingScale = pIssuingScale;
+	}
+	public BigDecimal getpExpectSaleAmount() {
+		return pExpectSaleAmount;
+	}
+	public void setpExpectSaleAmount(BigDecimal pExpectSaleAmount) {
+		this.pExpectSaleAmount = pExpectSaleAmount;
+	}
+	public BigDecimal getpAllSubscriptionAmount() {
+		return pAllSubscriptionAmount;
+	}
+	public void setpAllSubscriptionAmount(BigDecimal pAllSubscriptionAmount) {
+		this.pAllSubscriptionAmount = pAllSubscriptionAmount;
+	}
 	public String getpCode() {
 		return pCode;
 	}
@@ -112,16 +130,16 @@ public class ProductResponseModel {
 	public void setpSaleStartTime(Date pSaleStartTime) {
 		this.pSaleStartTime = pSaleStartTime;
 	}
-	public String getpAllIssuingScale() {
+	public BigDecimal getpAllIssuingScale() {
 		return pAllIssuingScale;
 	}
-	public void setpAllIssuingScale(String pAllIssuingScale) {
+	public void setpAllIssuingScale(BigDecimal pAllIssuingScale) {
 		this.pAllIssuingScale = pAllIssuingScale;
 	}
-	public String getpMinAmount() {
+	public BigDecimal getpMinAmount() {
 		return pMinAmount;
 	}
-	public void setpMinAmount(String pMinAmount) {
+	public void setpMinAmount(BigDecimal pMinAmount) {
 		this.pMinAmount = pMinAmount;
 	}
 	public String getpPaymentInterestType() {
@@ -154,13 +172,4 @@ public class ProductResponseModel {
 	public void setProfitRebates(List<ProfitRebateModel> profitRebates) {
 		this.profitRebates = profitRebates;
 	}
-	public List<ProductAttachmentModel> getProductAttachments() {
-		return ProductAttachments;
-	}
-	public void setProductAttachments(List<ProductAttachmentModel> productAttachments) {
-		ProductAttachments = productAttachments;
-	}
-	
-	
-
 }
