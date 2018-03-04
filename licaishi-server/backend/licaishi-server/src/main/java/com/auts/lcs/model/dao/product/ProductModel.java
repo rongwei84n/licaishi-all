@@ -17,15 +17,15 @@ public class ProductModel extends BaseDaoModel {
     private String pSaleStatus;
     private String pDulTime;
     private Date pSaleStartTime;
-    private BigDecimal pAllIssuingScale;
-    private BigDecimal pMinAmount;
+    private String pAllIssuingScale;
+    private String pMinAmount;
     private String pPaymentInterestType;
     private String pInvestType;
     private String pSizeRatioType;
     private String pInvestOwnerId;
-    private BigDecimal pIssuingScale;
-    private BigDecimal pExpectSaleAmount;
-    private BigDecimal pAllSubscriptionAmount;
+    private String pIssuingScale;
+    private String pExpectSaleAmount;
+    private String pAllSubscriptionAmount;
     private String pRecruitmentSummary;
     private String pCpys;
     private String pMjzh;
@@ -35,31 +35,31 @@ public class ProductModel extends BaseDaoModel {
     private String pRrzf;
     private String pDbf;
 
-    public BigDecimal getpIssuingScale() {
-		return pIssuingScale;
-	}
+	public String getpIssuingScale() {
+        return pIssuingScale;
+    }
 
-	public void setpIssuingScale(BigDecimal pIssuingScale) {
-		this.pIssuingScale = pIssuingScale;
-	}
+    public void setpIssuingScale(String pIssuingScale) {
+        this.pIssuingScale = pIssuingScale;
+    }
 
-	public BigDecimal getpExpectSaleAmount() {
-		return pExpectSaleAmount;
-	}
+	public String getpExpectSaleAmount() {
+        return pExpectSaleAmount;
+    }
 
-	public void setpExpectSaleAmount(BigDecimal pExpectSaleAmount) {
-		this.pExpectSaleAmount = pExpectSaleAmount;
-	}
+    public void setpExpectSaleAmount(String pExpectSaleAmount) {
+        this.pExpectSaleAmount = pExpectSaleAmount;
+    }
 
-	public BigDecimal getpAllSubscriptionAmount() {
-		return pAllSubscriptionAmount;
-	}
+    public String getpAllSubscriptionAmount() {
+        return pAllSubscriptionAmount;
+    }
 
-	public void setpAllSubscriptionAmount(BigDecimal pAllSubscriptionAmount) {
-		this.pAllSubscriptionAmount = pAllSubscriptionAmount;
-	}
+    public void setpAllSubscriptionAmount(String pAllSubscriptionAmount) {
+        this.pAllSubscriptionAmount = pAllSubscriptionAmount;
+    }
 
-	public String getpRecruitmentSummary() {
+    public String getpRecruitmentSummary() {
 		return pRecruitmentSummary;
 	}
 
@@ -187,23 +187,23 @@ public class ProductModel extends BaseDaoModel {
 		this.pSaleStartTime = pSaleStartTime;
 	}
 
-	public BigDecimal getpAllIssuingScale() {
-		return pAllIssuingScale;
-	}
+	public String getpAllIssuingScale() {
+        return pAllIssuingScale;
+    }
 
-	public void setpAllIssuingScale(BigDecimal pAllIssuingScale) {
-		this.pAllIssuingScale = pAllIssuingScale;
-	}
+    public void setpAllIssuingScale(String pAllIssuingScale) {
+        this.pAllIssuingScale = pAllIssuingScale;
+    }
 
-	public BigDecimal getpMinAmount() {
-		return pMinAmount;
-	}
+	public String getpMinAmount() {
+        return pMinAmount;
+    }
 
-	public void setpMinAmount(BigDecimal pMinAmount) {
-		this.pMinAmount = pMinAmount;
-	}
+    public void setpMinAmount(String pMinAmount) {
+        this.pMinAmount = pMinAmount;
+    }
 
-	public String getpPaymentInterestType() {
+    public String getpPaymentInterestType() {
 		return pPaymentInterestType;
 	}
 

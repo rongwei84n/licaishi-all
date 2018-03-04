@@ -357,17 +357,10 @@ public class JsBridgeActivity extends BaseActivity {
         mJavaBridge.registerHandler("netRequest", new JavaBridge.JavaHandler() {
             @Override
             public void handle(JSData jsData, final JavaBridge.JsCallback jsCallback) {
-                Log.d("sandy", "netRequest");
                 mNativeModel.netRequest(jsData, mJavaBridge, jsCallback, new NativeModel.NetCallback() {
                     @Override
                     public void onResponse(int errorCode, String errorMesssage, String netResponse) {
-                        JavaCallback javaCallback = new JavaCallback();
-                        javaCallback.setErrorCode(errorCode);
-                        javaCallback.setErrorMsg(errorMesssage);
-                        if (!TextUtils.isEmpty(netResponse)) {
-                            javaCallback.setNetResponse(netResponse);
-                        }
-                        mJavaBridge.callbackSuccess(jsCallback, javaCallback);
+                        mJavaBridge.callbackSuccess(jsCallback, netResponse);
                     }
                 });
             }

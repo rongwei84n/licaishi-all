@@ -10,7 +10,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 /**
  * 产品接口返回数据JSON
- * 
+ *
  * @author li.bing
  * @date 2018年2月27日
  */
@@ -41,10 +41,10 @@ public class ProductResponseModel {
     private Date pSaleStartTime;
 	@JSONField(name = "pAllIssuingScale")
     @JsonProperty("pAllIssuingScale")
-    private BigDecimal pAllIssuingScale;
+    private String pAllIssuingScale;
 	@JSONField(name = "pMinAmount")
     @JsonProperty("pMinAmount")
-    private BigDecimal pMinAmount;
+    private String pMinAmount;
 	@JSONField(name = "pPaymentInterestType")
     @JsonProperty("pPaymentInterestType")
     private String pPaymentInterestType;
@@ -60,29 +60,30 @@ public class ProductResponseModel {
 	@JSONField(name = "profitRebates")
     @JsonProperty("profitRebates")
     private List<ProfitRebateModel> profitRebates;
-    private BigDecimal pIssuingScale;
-    private BigDecimal pExpectSaleAmount;
-    private BigDecimal pAllSubscriptionAmount;
-	
-	public BigDecimal getpIssuingScale() {
-		return pIssuingScale;
-	}
-	public void setpIssuingScale(BigDecimal pIssuingScale) {
-		this.pIssuingScale = pIssuingScale;
-	}
-	public BigDecimal getpExpectSaleAmount() {
-		return pExpectSaleAmount;
-	}
-	public void setpExpectSaleAmount(BigDecimal pExpectSaleAmount) {
-		this.pExpectSaleAmount = pExpectSaleAmount;
-	}
-	public BigDecimal getpAllSubscriptionAmount() {
-		return pAllSubscriptionAmount;
-	}
-	public void setpAllSubscriptionAmount(BigDecimal pAllSubscriptionAmount) {
-		this.pAllSubscriptionAmount = pAllSubscriptionAmount;
-	}
-	public String getpCode() {
+    private String pIssuingScale;
+    private String pExpectSaleAmount;
+    private String pAllSubscriptionAmount;
+
+	public String getpIssuingScale() {
+        return pIssuingScale;
+    }
+    public void setpIssuingScale(String pIssuingScale) {
+        this.pIssuingScale = pIssuingScale;
+    }
+
+	public String getpExpectSaleAmount() {
+        return pExpectSaleAmount;
+    }
+    public void setpExpectSaleAmount(String pExpectSaleAmount) {
+        this.pExpectSaleAmount = pExpectSaleAmount;
+    }
+    public String getpAllSubscriptionAmount() {
+        return pAllSubscriptionAmount;
+    }
+    public void setpAllSubscriptionAmount(String pAllSubscriptionAmount) {
+        this.pAllSubscriptionAmount = pAllSubscriptionAmount;
+    }
+    public String getpCode() {
 		return pCode;
 	}
 	public void setpCode(String pCode) {
@@ -130,19 +131,21 @@ public class ProductResponseModel {
 	public void setpSaleStartTime(Date pSaleStartTime) {
 		this.pSaleStartTime = pSaleStartTime;
 	}
-	public BigDecimal getpAllIssuingScale() {
-		return pAllIssuingScale;
-	}
-	public void setpAllIssuingScale(BigDecimal pAllIssuingScale) {
-		this.pAllIssuingScale = pAllIssuingScale;
-	}
-	public BigDecimal getpMinAmount() {
-		return pMinAmount;
-	}
-	public void setpMinAmount(BigDecimal pMinAmount) {
-		this.pMinAmount = pMinAmount;
-	}
-	public String getpPaymentInterestType() {
+
+	public String getpAllIssuingScale() {
+        return pAllIssuingScale;
+    }
+    public void setpAllIssuingScale(String pAllIssuingScale) {
+        this.pAllIssuingScale = pAllIssuingScale;
+    }
+
+	public String getpMinAmount() {
+        return pMinAmount;
+    }
+    public void setpMinAmount(String pMinAmount) {
+        this.pMinAmount = pMinAmount;
+    }
+    public String getpPaymentInterestType() {
 		return pPaymentInterestType;
 	}
 	public void setpPaymentInterestType(String pPaymentInterestType) {

@@ -9,6 +9,7 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
@@ -27,9 +28,10 @@ import com.auts.lcs.service.ProductsService;
 
 /**
  * 产品模块
- * 
+ *
  * @author rongwei.huang
  */
+@CrossOrigin
 @RestController
 public class ProductsController extends SBaseController {
     private static final Logger LOGGER = LogManager.getLogger(ProductsController.class);
@@ -54,9 +56,9 @@ public class ProductsController extends SBaseController {
         String pageNo = request.getParameter(Const.PAGE_NO);
         String pageSize = request.getParameter(Const.PAGE_SIZE);
         String type = request.getParameter(Const.TYPE);
-        
+
         LOGGER.info("queryProducts type [{}]", type);
-        
+
         int totalCount = productsService.queryProductCountByPType(type);
         List<ProductResponseModel> productResponseList = new ArrayList<>();
         List<ProductModel> products = productsService.queryProducts(Integer.parseInt(pageNo), Integer.parseInt(pageSize), type);
@@ -64,7 +66,7 @@ public class ProductsController extends SBaseController {
         	for(ProductModel productModel : products) {
             	List<ProfitRebateModel> profitRebates =  productsService.queryProfitRebateByPCode(productModel.getpCode());
 //            	List<ProductAttachmentModel> productAttachments = productsService.queryProductAttachmentByPCode(productModel.getpCode());
-            	
+
             	ProductResponseModel productResponseModel = new ProductResponseModel();
             	BeanUtils.copyProperties(productModel, productResponseModel);
             	productResponseModel.setProfitRebates(profitRebates);
@@ -77,39 +79,40 @@ public class ProductsController extends SBaseController {
         Data<ProductResponseModel> data = new Data<ProductResponseModel>();
         data.setList(productResponseList);
         data.setPager(pager);
-        
+
         rspObj.setResult(data);
         return successResponse(rspObj);
     }
 
-    
+
     /**
      * 首页查询推荐产品和热门产品
      * recommendype： 1 推荐产品 2热门产品
      */
+    @CrossOrigin
     @RequestMapping(value = "/v1/product/recommendProducts", method = RequestMethod.GET, produces = { "application/json" })
     public PhiHomeBaseResponse queryRecommendProducts(HttpServletRequest request) {
         PhiHomeBaseResponse rspObj = new PhiHomeBaseResponse();
         List<ProductResponseModel> productResponseList = new ArrayList<>();
-        
+
         String recommendType = request.getParameter(Const.RECOMMEND_TYPE);
         List<ProductModel> recommendProducts = productsService.queryRecommendProducts(recommendType);
         for(ProductModel productModel : recommendProducts) {
-        	List<ProfitRebateModel> profitRebates =  productsService.queryProfitRebateByPCode(productModel.getpCode());       	
+        	List<ProfitRebateModel> profitRebates =  productsService.queryProfitRebateByPCode(productModel.getpCode());
         	ProductResponseModel productResponseModel = new ProductResponseModel();
         	BeanUtils.copyProperties(productModel, productResponseModel);
         	productResponseModel.setProfitRebates(profitRebates);
         	productResponseList.add(productResponseModel);
         }
-        
+
         rspObj.setResult(productResponseList);
         return successResponse(rspObj);
     }
-    
+
     @RequestMapping(value = "/v1/product/productDetail", method = RequestMethod.GET, produces = { "application/json" })
     public PhiHomeBaseResponse queryProductDetail(HttpServletRequest request) {
         PhiHomeBaseResponse rspObj = new PhiHomeBaseResponse();
-        
+
         String pCode = request.getParameter(Const.P_CODE);
         ProductModel productModel= productsService.queryProductDetail(pCode);
     	List<ProfitRebateModel> profitRebates =  productsService.queryProfitRebateByPCode(pCode);
@@ -118,7 +121,7 @@ public class ProductsController extends SBaseController {
     	BeanUtils.copyProperties(productModel, productResponseModel);
     	productResponseModel.setProfitRebates(profitRebates);
     	productResponseModel.setProductAttachments(productAttachments);
-    	
+
         rspObj.setResult(productResponseModel);
         return successResponse(rspObj);
     }
