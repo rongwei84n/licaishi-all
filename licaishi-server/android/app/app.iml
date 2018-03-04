@@ -8,11 +8,11 @@
     </facet>
     <facet type="android" name="Android">
       <configuration>
-        <option name="SELECTED_BUILD_VARIANT" value="XIMIKDebug" />
-        <option name="ASSEMBLE_TASK_NAME" value="assembleXIMIKDebug" />
-        <option name="COMPILE_JAVA_TASK_NAME" value="compileXIMIKDebugSources" />
+        <option name="SELECTED_BUILD_VARIANT" value="ALSTGDebug" />
+        <option name="ASSEMBLE_TASK_NAME" value="assembleALSTGDebug" />
+        <option name="COMPILE_JAVA_TASK_NAME" value="compileALSTGDebugSources" />
         <afterSyncTasks>
-          <task>generateXIMIKDebugSources</task>
+          <task>generateALSTGDebugSources</task>
         </afterSyncTasks>
         <option name="ALLOW_USER_CONFIGURATION" value="false" />
         <option name="MANIFEST_FILE_RELATIVE_PATH" value="/src/main/AndroidManifest.xml" />
@@ -23,59 +23,59 @@
     </facet>
   </component>
   <component name="NewModuleRootManager" LANGUAGE_LEVEL="JDK_1_7">
-    <output url="file://$MODULE_DIR$/build/intermediates/classes/XIMIK/debug" />
-    <output-test url="file://$MODULE_DIR$/build/intermediates/classes/test/XIMIK/debug" />
+    <output url="file://$MODULE_DIR$/build/intermediates/classes/ALSTG/debug" />
+    <output-test url="file://$MODULE_DIR$/build/intermediates/classes/test/ALSTG/debug" />
     <exclude-output />
     <content url="file://$MODULE_DIR$">
-      <sourceFolder url="file://$MODULE_DIR$/build/generated/source/r/XIMIK/debug" isTestSource="false" generated="true" />
-      <sourceFolder url="file://$MODULE_DIR$/build/generated/source/aidl/XIMIK/debug" isTestSource="false" generated="true" />
-      <sourceFolder url="file://$MODULE_DIR$/build/generated/source/buildConfig/XIMIK/debug" isTestSource="false" generated="true" />
-      <sourceFolder url="file://$MODULE_DIR$/build/generated/source/rs/XIMIK/debug" isTestSource="false" generated="true" />
-      <sourceFolder url="file://$MODULE_DIR$/build/generated/source/apt/XIMIK/debug" isTestSource="false" generated="true" />
-      <sourceFolder url="file://$MODULE_DIR$/build/generated/res/rs/XIMIK/debug" type="java-resource" />
-      <sourceFolder url="file://$MODULE_DIR$/build/generated/res/resValues/XIMIK/debug" type="java-resource" />
-      <sourceFolder url="file://$MODULE_DIR$/src/XIMIKDebug/res" type="java-resource" />
-      <sourceFolder url="file://$MODULE_DIR$/src/XIMIKDebug/resources" type="java-resource" />
-      <sourceFolder url="file://$MODULE_DIR$/src/XIMIKDebug/assets" type="java-resource" />
-      <sourceFolder url="file://$MODULE_DIR$/src/XIMIKDebug/aidl" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/src/XIMIKDebug/java" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/src/XIMIKDebug/rs" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/src/XIMIKDebug/shaders" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/build/generated/source/r/androidTest/XIMIK/debug" isTestSource="true" generated="true" />
-      <sourceFolder url="file://$MODULE_DIR$/build/generated/source/aidl/androidTest/XIMIK/debug" isTestSource="true" generated="true" />
-      <sourceFolder url="file://$MODULE_DIR$/build/generated/source/buildConfig/androidTest/XIMIK/debug" isTestSource="true" generated="true" />
-      <sourceFolder url="file://$MODULE_DIR$/build/generated/source/rs/androidTest/XIMIK/debug" isTestSource="true" generated="true" />
-      <sourceFolder url="file://$MODULE_DIR$/build/generated/source/apt/androidTest/XIMIK/debug" isTestSource="true" generated="true" />
-      <sourceFolder url="file://$MODULE_DIR$/build/generated/res/rs/androidTest/XIMIK/debug" type="java-test-resource" />
-      <sourceFolder url="file://$MODULE_DIR$/build/generated/res/resValues/androidTest/XIMIK/debug" type="java-test-resource" />
-      <sourceFolder url="file://$MODULE_DIR$/src/testXIMIKDebug/res" type="java-test-resource" />
-      <sourceFolder url="file://$MODULE_DIR$/src/testXIMIKDebug/resources" type="java-test-resource" />
-      <sourceFolder url="file://$MODULE_DIR$/src/testXIMIKDebug/assets" type="java-test-resource" />
-      <sourceFolder url="file://$MODULE_DIR$/src/testXIMIKDebug/aidl" isTestSource="true" />
-      <sourceFolder url="file://$MODULE_DIR$/src/testXIMIKDebug/java" isTestSource="true" />
-      <sourceFolder url="file://$MODULE_DIR$/src/testXIMIKDebug/rs" isTestSource="true" />
-      <sourceFolder url="file://$MODULE_DIR$/src/testXIMIKDebug/shaders" isTestSource="true" />
-      <sourceFolder url="file://$MODULE_DIR$/src/XIMIK/res" type="java-resource" />
-      <sourceFolder url="file://$MODULE_DIR$/src/XIMIK/resources" type="java-resource" />
-      <sourceFolder url="file://$MODULE_DIR$/src/XIMIK/assets" type="java-resource" />
-      <sourceFolder url="file://$MODULE_DIR$/src/XIMIK/aidl" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/src/XIMIK/java" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/src/XIMIK/rs" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/src/XIMIK/shaders" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/src/androidTestXIMIK/res" type="java-test-resource" />
-      <sourceFolder url="file://$MODULE_DIR$/src/androidTestXIMIK/resources" type="java-test-resource" />
-      <sourceFolder url="file://$MODULE_DIR$/src/androidTestXIMIK/assets" type="java-test-resource" />
-      <sourceFolder url="file://$MODULE_DIR$/src/androidTestXIMIK/aidl" isTestSource="true" />
-      <sourceFolder url="file://$MODULE_DIR$/src/androidTestXIMIK/java" isTestSource="true" />
-      <sourceFolder url="file://$MODULE_DIR$/src/androidTestXIMIK/rs" isTestSource="true" />
-      <sourceFolder url="file://$MODULE_DIR$/src/androidTestXIMIK/shaders" isTestSource="true" />
-      <sourceFolder url="file://$MODULE_DIR$/src/testXIMIK/res" type="java-test-resource" />
-      <sourceFolder url="file://$MODULE_DIR$/src/testXIMIK/resources" type="java-test-resource" />
-      <sourceFolder url="file://$MODULE_DIR$/src/testXIMIK/assets" type="java-test-resource" />
-      <sourceFolder url="file://$MODULE_DIR$/src/testXIMIK/aidl" isTestSource="true" />
-      <sourceFolder url="file://$MODULE_DIR$/src/testXIMIK/java" isTestSource="true" />
-      <sourceFolder url="file://$MODULE_DIR$/src/testXIMIK/rs" isTestSource="true" />
-      <sourceFolder url="file://$MODULE_DIR$/src/testXIMIK/shaders" isTestSource="true" />
+      <sourceFolder url="file://$MODULE_DIR$/build/generated/source/r/ALSTG/debug" isTestSource="false" generated="true" />
+      <sourceFolder url="file://$MODULE_DIR$/build/generated/source/aidl/ALSTG/debug" isTestSource="false" generated="true" />
+      <sourceFolder url="file://$MODULE_DIR$/build/generated/source/buildConfig/ALSTG/debug" isTestSource="false" generated="true" />
+      <sourceFolder url="file://$MODULE_DIR$/build/generated/source/rs/ALSTG/debug" isTestSource="false" generated="true" />
+      <sourceFolder url="file://$MODULE_DIR$/build/generated/source/apt/ALSTG/debug" isTestSource="false" generated="true" />
+      <sourceFolder url="file://$MODULE_DIR$/build/generated/res/rs/ALSTG/debug" type="java-resource" />
+      <sourceFolder url="file://$MODULE_DIR$/build/generated/res/resValues/ALSTG/debug" type="java-resource" />
+      <sourceFolder url="file://$MODULE_DIR$/src/ALSTGDebug/res" type="java-resource" />
+      <sourceFolder url="file://$MODULE_DIR$/src/ALSTGDebug/resources" type="java-resource" />
+      <sourceFolder url="file://$MODULE_DIR$/src/ALSTGDebug/assets" type="java-resource" />
+      <sourceFolder url="file://$MODULE_DIR$/src/ALSTGDebug/aidl" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/src/ALSTGDebug/java" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/src/ALSTGDebug/rs" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/src/ALSTGDebug/shaders" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/build/generated/source/r/androidTest/ALSTG/debug" isTestSource="true" generated="true" />
+      <sourceFolder url="file://$MODULE_DIR$/build/generated/source/aidl/androidTest/ALSTG/debug" isTestSource="true" generated="true" />
+      <sourceFolder url="file://$MODULE_DIR$/build/generated/source/buildConfig/androidTest/ALSTG/debug" isTestSource="true" generated="true" />
+      <sourceFolder url="file://$MODULE_DIR$/build/generated/source/rs/androidTest/ALSTG/debug" isTestSource="true" generated="true" />
+      <sourceFolder url="file://$MODULE_DIR$/build/generated/source/apt/androidTest/ALSTG/debug" isTestSource="true" generated="true" />
+      <sourceFolder url="file://$MODULE_DIR$/build/generated/res/rs/androidTest/ALSTG/debug" type="java-test-resource" />
+      <sourceFolder url="file://$MODULE_DIR$/build/generated/res/resValues/androidTest/ALSTG/debug" type="java-test-resource" />
+      <sourceFolder url="file://$MODULE_DIR$/src/testALSTGDebug/res" type="java-test-resource" />
+      <sourceFolder url="file://$MODULE_DIR$/src/testALSTGDebug/resources" type="java-test-resource" />
+      <sourceFolder url="file://$MODULE_DIR$/src/testALSTGDebug/assets" type="java-test-resource" />
+      <sourceFolder url="file://$MODULE_DIR$/src/testALSTGDebug/aidl" isTestSource="true" />
+      <sourceFolder url="file://$MODULE_DIR$/src/testALSTGDebug/java" isTestSource="true" />
+      <sourceFolder url="file://$MODULE_DIR$/src/testALSTGDebug/rs" isTestSource="true" />
+      <sourceFolder url="file://$MODULE_DIR$/src/testALSTGDebug/shaders" isTestSource="true" />
+      <sourceFolder url="file://$MODULE_DIR$/src/ALSTG/res" type="java-resource" />
+      <sourceFolder url="file://$MODULE_DIR$/src/ALSTG/resources" type="java-resource" />
+      <sourceFolder url="file://$MODULE_DIR$/src/ALSTG/assets" type="java-resource" />
+      <sourceFolder url="file://$MODULE_DIR$/src/ALSTG/aidl" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/src/ALSTG/java" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/src/ALSTG/rs" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/src/ALSTG/shaders" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/src/androidTestALSTG/res" type="java-test-resource" />
+      <sourceFolder url="file://$MODULE_DIR$/src/androidTestALSTG/resources" type="java-test-resource" />
+      <sourceFolder url="file://$MODULE_DIR$/src/androidTestALSTG/assets" type="java-test-resource" />
+      <sourceFolder url="file://$MODULE_DIR$/src/androidTestALSTG/aidl" isTestSource="true" />
+      <sourceFolder url="file://$MODULE_DIR$/src/androidTestALSTG/java" isTestSource="true" />
+      <sourceFolder url="file://$MODULE_DIR$/src/androidTestALSTG/rs" isTestSource="true" />
+      <sourceFolder url="file://$MODULE_DIR$/src/androidTestALSTG/shaders" isTestSource="true" />
+      <sourceFolder url="file://$MODULE_DIR$/src/testALSTG/res" type="java-test-resource" />
+      <sourceFolder url="file://$MODULE_DIR$/src/testALSTG/resources" type="java-test-resource" />
+      <sourceFolder url="file://$MODULE_DIR$/src/testALSTG/assets" type="java-test-resource" />
+      <sourceFolder url="file://$MODULE_DIR$/src/testALSTG/aidl" isTestSource="true" />
+      <sourceFolder url="file://$MODULE_DIR$/src/testALSTG/java" isTestSource="true" />
+      <sourceFolder url="file://$MODULE_DIR$/src/testALSTG/rs" isTestSource="true" />
+      <sourceFolder url="file://$MODULE_DIR$/src/testALSTG/shaders" isTestSource="true" />
       <sourceFolder url="file://$MODULE_DIR$/src/debug/res" type="java-resource" />
       <sourceFolder url="file://$MODULE_DIR$/src/debug/resources" type="java-resource" />
       <sourceFolder url="file://$MODULE_DIR$/src/debug/assets" type="java-resource" />
@@ -111,30 +111,19 @@
       <sourceFolder url="file://$MODULE_DIR$/src/androidTest/java" isTestSource="true" />
       <sourceFolder url="file://$MODULE_DIR$/src/androidTest/rs" isTestSource="true" />
       <sourceFolder url="file://$MODULE_DIR$/src/androidTest/shaders" isTestSource="true" />
-      <excludeFolder url="file://$MODULE_DIR$/build/.DS_Store" />
-      <excludeFolder url="file://$MODULE_DIR$/build/intermediates/.DS_Store" />
       <excludeFolder url="file://$MODULE_DIR$/build/intermediates/assets" />
       <excludeFolder url="file://$MODULE_DIR$/build/intermediates/blame" />
-      <excludeFolder url="file://$MODULE_DIR$/build/intermediates/builds" />
       <excludeFolder url="file://$MODULE_DIR$/build/intermediates/classes" />
       <excludeFolder url="file://$MODULE_DIR$/build/intermediates/incremental" />
-      <excludeFolder url="file://$MODULE_DIR$/build/intermediates/incremental-classes" />
-      <excludeFolder url="file://$MODULE_DIR$/build/intermediates/incremental-runtime-classes" />
       <excludeFolder url="file://$MODULE_DIR$/build/intermediates/incremental-safeguard" />
-      <excludeFolder url="file://$MODULE_DIR$/build/intermediates/incremental-verifier" />
-      <excludeFolder url="file://$MODULE_DIR$/build/intermediates/instant-run-resources" />
-      <excludeFolder url="file://$MODULE_DIR$/build/intermediates/instant-run-support" />
       <excludeFolder url="file://$MODULE_DIR$/build/intermediates/jniLibs" />
       <excludeFolder url="file://$MODULE_DIR$/build/intermediates/manifests" />
       <excludeFolder url="file://$MODULE_DIR$/build/intermediates/multi-dex" />
       <excludeFolder url="file://$MODULE_DIR$/build/intermediates/pre-dexed" />
       <excludeFolder url="file://$MODULE_DIR$/build/intermediates/proguard-rules" />
-      <excludeFolder url="file://$MODULE_DIR$/build/intermediates/reload-dex" />
       <excludeFolder url="file://$MODULE_DIR$/build/intermediates/res" />
-      <excludeFolder url="file://$MODULE_DIR$/build/intermediates/restart-dex" />
       <excludeFolder url="file://$MODULE_DIR$/build/intermediates/rs" />
       <excludeFolder url="file://$MODULE_DIR$/build/intermediates/shaders" />
-      <excludeFolder url="file://$MODULE_DIR$/build/intermediates/split-apk" />
       <excludeFolder url="file://$MODULE_DIR$/build/intermediates/symbols" />
       <excludeFolder url="file://$MODULE_DIR$/build/intermediates/transforms" />
       <excludeFolder url="file://$MODULE_DIR$/build/outputs" />

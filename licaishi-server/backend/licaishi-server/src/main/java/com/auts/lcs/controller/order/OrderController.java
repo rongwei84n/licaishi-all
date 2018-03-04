@@ -18,13 +18,11 @@ import com.auts.lcs.model.common.PhiHomeBaseResponse;
 import com.auts.lcs.model.dao.order.OrderModel;
 import com.auts.lcs.model.response.Data;
 import com.auts.lcs.model.response.Pager;
-import com.auts.lcs.model.response.ProductResponseModel;
-import com.auts.lcs.model.response.RegistResponseModel;
 import com.auts.lcs.service.OrderService;
 
 /**
  * 订单管理API入口
- * 
+ *
  * @author libing
  *
  */
@@ -51,7 +49,7 @@ public class OrderController extends SBaseController {
         String pageSize = request.getParameter(Const.PAGE_SIZE);
         String type = request.getParameter(Const.TYPE);
         Pager pager = null;
-        
+
         LOGGER.info("queryOrders type [{}]", type);
         String token = request.getHeader(Const.AUTHORIZATION);
         LOGGER.info("queryOrders toekn [{}]", token);
@@ -62,14 +60,14 @@ public class OrderController extends SBaseController {
         	//分页
         	pager = genernatePager(Integer.parseInt(pageNo), Integer.parseInt(pageSize), totalCount, orders.size());
         }
-        
+
         Data<OrderModel> data = new Data<OrderModel>();
         data.setList(orders);
         data.setPager(pager);
         rspObj.setResult(data);
         return successResponse(rspObj);
     }
-    
+
     /**
      * 预约产品
      * @param request
@@ -86,22 +84,22 @@ public class OrderController extends SBaseController {
             @RequestParam(value = "amount", required = false) String amount,
             @RequestParam(value = "orderDate", required = true) String orderDate) {
         PhiHomeBaseResponse rspObj = new PhiHomeBaseResponse();
-        
+
         LOGGER.info("createOrder pCode [{}]", pCode);
-        
+
         OrderModel om = new OrderModel();
         //todo 产品额度够不够
         int result = orderService.saveOrder(om);
         if (result < 1) {
         	return errorResponse(100);
         }
-        
+
         return successResponse(rspObj);
     }
-    
+
     /**
      * 取消订单
-     * 
+     *
      * @param request
      * @param orderNo
      * @return
@@ -110,19 +108,19 @@ public class OrderController extends SBaseController {
     public PhiHomeBaseResponse cancelOrder(HttpServletRequest request,
     		@RequestParam(value = "orderNo", required = false) String orderNo) {
         PhiHomeBaseResponse rspObj = new PhiHomeBaseResponse();
-        
+
         LOGGER.info("cancelOrder type [{}]", orderNo);
-        
+
         OrderModel om = new OrderModel();
         int result = orderService.cancelOrder(orderNo);
         if (result > 0) {
-        	
+
         } else {
 //            return errorRegister(String.valueOf(Const.ErrorCode.Account.REGIST_ERROR));
         }
         return successResponse(rspObj);
     }
-    
+
     /**
      * 上传支付凭证
      * @param request
@@ -133,13 +131,13 @@ public class OrderController extends SBaseController {
     public PhiHomeBaseResponse uploadPayPhote(HttpServletRequest request,
     		@RequestParam(value = "orderNo", required = false) String orderNo) {
         PhiHomeBaseResponse rspObj = new PhiHomeBaseResponse();
-        
+
         LOGGER.info("cancelOrder type [{}]", orderNo);
-        
+
         OrderModel om = new OrderModel();
         int result = orderService.cancelOrder(orderNo);
         if (result > 0) {
-        	
+
         } else {
 //            return errorRegister(String.valueOf(Const.ErrorCode.Account.REGIST_ERROR));
         }

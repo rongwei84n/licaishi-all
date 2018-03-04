@@ -115,8 +115,8 @@ public class AccountController extends SBaseController {
 
         String acsToken = "acs-" + System.currentTimeMillis();
         String rfsToken = "rfs token " + System.currentTimeMillis();
-        long acsTokenExpire = 10000;
-        long rfsTokenExpire = 100000;
+        long acsTokenExpire = 23328000;
+        long rfsTokenExpire = 23328000;
         //登录的时候生成access token,存入tbl_tokens数据库，以便后续使用
         TokenModel tokenModel = tokenService.getByUid(accountMode.getUid());
         if (tokenModel == null) {
