@@ -19,64 +19,19 @@
       <el-table :data="productList" v-loading="listLoading" style="width: 100%" border ref="multipleTable"
                 @selection-change="handleSelectionChange">
         <el-table-column type="selection" width="40"></el-table-column>
-        <el-table-column type="expand">
-          <template slot-scope="props">
-            <el-form label-position="left" inline class="detail-in-table">
-              <el-form-item label="产品简称">
-                <span>{{ props.row.name }}</span>
-              </el-form-item>
-              <el-form-item label="产品全称">
-                <span>{{ props.row.fullName }}</span>
-              </el-form-item>
-              <el-form-item label="类型">
-                <span>{{ props.row.type}}</span>
-              </el-form-item>
-              <el-form-item label="预期年化收益">
-                <span>{{ props.row.expectAnnualRevenue }}</span>
-              </el-form-item>
-              <el-form-item label="募集规模">
-                <span>{{ props.row.allIssuingScale }}</span>
-              </el-form-item>
-              <el-form-item label="投资期限">
-                <span>{{ props.row.dueTime }}</span>
-              </el-form-item>
-              <el-form-item label="状态">
-                <span>{{ props.row.saleStatus }}</span>
-              </el-form-item>
-              <el-form-item label="状态1">
-                <span>{{ props.row.saleStatus1 }}</span>
-              </el-form-item>
-              <el-form-item label="状态2">
-                <span>{{ props.row.saleStatus2 }}</span>
-              </el-form-item>
-              <el-form-item label="状态3">
-                <span>{{ props.row.saleStatus3 }}</span>
-              </el-form-item>
-              <el-form-item label="状态4">
-                <span>{{ props.row.saleStatus4 }}</span>
-              </el-form-item>
-              <el-form-item label="状态5">
-                <span>{{ props.row.saleStatus5 }}</span>
-              </el-form-item>
-              <el-form-item label="状态6">
-                <span>{{ props.row.saleStatus6 }}</span>
-              </el-form-item>
-            </el-form>
-          </template>
-        </el-table-column>
         <el-table-column prop="uid" label="uid" width="70"></el-table-column>
-        <el-table-column prop="name" label="产品编号" width="70"></el-table-column>
-        <el-table-column prop="name" label="产品简称" width="150"></el-table-column>
-        <el-table-column prop="fullName" label="产品全称" width="250"></el-table-column>
-        <el-table-column prop="type" label="类型" width="70" ></el-table-column>
-        <el-table-column prop="expectAnnualRevenue" label="预期年化收益" width="70"></el-table-column>
-        <el-table-column prop="allIssuingScale" label="募集规模" width="70"></el-table-column>
-        <el-table-column prop="dueTime" label="投资期限" width="70"></el-table-column>
-        <el-table-column prop="saleStatus" label="产品状态" width="70"></el-table-column>
-        <el-table-column prop="saleStatus1" label="产品状态" width="70"></el-table-column>
-        <el-table-column prop="saleStatus2" label="产品状态" width="70"></el-table-column>
-        <el-table-column prop="saleStatus3" label="产品状态" width="70"></el-table-column>
-        <el-table-column prop="saleStatus4" label="产品状态" width="70"></el-table-column>
+        <el-table-column prop="pCode" label="产品编号" width="70"></el-table-column>
+        <el-table-column prop="pShortName" label="产品简称" width="150"></el-table-column>
+        <el-table-column prop="pFullName" label="产品全称" width="250"></el-table-column>
+        <el-table-column prop="pType" label="类型" width="70" ></el-table-column>
+        <el-table-column prop="pExpectAnnualRevenue" label="预期年化收益" width="70"></el-table-column>
+        <el-table-column prop="pAllIssuingScale" label="募集规模" width="70"></el-table-column>
+        <el-table-column prop="pDulTime" label="投资期限" width="70"></el-table-column>
+        <el-table-column prop="pSaleStatus" label="产品状态" width="70"></el-table-column>
+        <el-table-column prop="pSaleStartTime" label="发行日期" width="70"></el-table-column>
+        <el-table-column prop="pPaymentInterestType" label="付息方式" width="70"></el-table-column>
+        <el-table-column prop="pInvestType" label="投资领域" width="70"></el-table-column>
+        <el-table-column prop="pSizeRatioType" label="大小配比" width="70"></el-table-column>
         <el-table-column prop="saleStatus5" label="产品状态" width="70"></el-table-column>
         <el-table-column prop="saleStatus6" label="产品状态" width="70"></el-table-column>
         <el-table-column label="操作">
@@ -104,11 +59,11 @@
       <!--新增界面-->
       <el-dialog title="新增" :visible.sync="addFormVisible" :close-on-click-modal="false">
         <el-form :model="addForm" label-width="100px" :rules="formRules" ref="addForm">
-          <el-form-item label="产品简称" prop="shortName">
-            <el-input v-model="addForm.shortName"></el-input>
+          <el-form-item label="产品简称" prop="pShortName">
+            <el-input v-model="addForm.pShortName"></el-input>
           </el-form-item>
-          <el-form-item label="产品全称" prop="fullName">
-            <el-input v-model="addForm.fullName"></el-input>
+          <el-form-item label="产品全称" prop="pFullName">
+            <el-input v-model="addForm.pFullName"></el-input>
           </el-form-item>
           <el-form-item label="产品类型" prop="pType">
             <el-select v-model="addForm.pType" placeholder="请选择产品类型">
@@ -116,17 +71,17 @@
               <el-option label="集合资管" value="02"></el-option>
             </el-select>
           </el-form-item>
-          <el-form-item label="募集规模" prop="allIssuingScale">
-            <el-input v-model="addForm.allIssuingScale"></el-input>
+          <el-form-item label="募集规模" prop="pAllIssuingScale">
+            <el-input v-model="addForm.pAllIssuingScale"></el-input>
           </el-form-item>
-          <el-form-item label="投资期限" prop="dueTime">
-            <el-input v-model="addForm.dueTime"></el-input>
+          <el-form-item label="投资期限" prop="pDulTime">
+            <el-input v-model="addForm.pDulTime"></el-input>
           </el-form-item>
           <el-form-item label="预期年化收益" prop="expectAnnualRevenue">
-            <el-input v-model="addForm.expectAnnualRevenue"></el-input>
+            <el-input v-model="addForm.pExpectAnnualRevenue"></el-input>
           </el-form-item>
-          <el-form-item label="投资领域" prop="investTpye">
-            <el-select v-model="addForm.investTpye" placeholder="请选择投资领域">
+          <el-form-item label="投资领域" prop="pInvestType">
+            <el-select v-model="addForm.pInvestType" placeholder="请选择投资领域">
               <el-option label="房地产类" value="01"></el-option>
               <el-option label="金融市场" value="02"></el-option>
               <el-option label="基础设施" value="03"></el-option>
@@ -135,8 +90,8 @@
               <el-option label="其他" value="00"></el-option>
             </el-select>
           </el-form-item>
-          <el-form-item label="付息方式" prop="paymentInterestType">
-            <el-select v-model="addForm.paymentInterestType" placeholder="请选择付息方式">
+          <el-form-item label="付息方式" prop="pPaymentInterestType">
+            <el-select v-model="addForm.pPaymentInterestType" placeholder="请选择付息方式">
               <el-option label="按月付息" value="01"></el-option>
               <el-option label="按季付息" value="02"></el-option>
               <el-option label="按半年付息" value="03"></el-option>
@@ -144,12 +99,12 @@
               <el-option label="到期付本息" value="05"></el-option>
             </el-select>
           </el-form-item>
-          <el-form-item label="发行日期">
+          <el-form-item label="发行日期" prop="pSaleStartTime">
             <el-date-picker type="date" value-format="yyyy-MM-dd" placeholder="选择日期"
-                            v-model="addForm.saleDate"></el-date-picker>
+                            v-model="addForm.pSaleStartTime"></el-date-picker>
           </el-form-item>
-          <el-form-item label="大小配比" prop="sizeRatioType">
-            <el-select v-model="addForm.sizeRatioType" placeholder="请选择大小配比类型">
+          <el-form-item label="大小配比" prop="pSizeRatioType">
+            <el-select v-model="addForm.pSizeRatioType" placeholder="请选择大小配比类型">
               <el-option label="小额畅打" value="01"></el-option>
               <el-option label="已配出小额" value="02"></el-option>
               <el-option label="严格配比" value="03"></el-option>
@@ -164,6 +119,9 @@
           </el-form-item>
           <el-form-item label="期望销售金额" prop="expectSaleAmount">
             <el-input v-model="addForm.expectSaleAmount"></el-input>
+          </el-form-item>
+          <el-form-item label="产品状态" prop="pSaleStatus">
+            <el-input v-model="addForm.pSaleStatus"></el-input>
           </el-form-item>
           <el-form-item label="备注" prop="summary">
             <el-input type="textarea" v-model="addForm.summary"></el-input>
@@ -215,12 +173,25 @@
           addLoading: false,
           //新增界面数据
           addForm: {
-            name: '',
-            phone: '',
-            sex: -1,
-            birthday: '',
-            email: '',
-            address: ''
+            pShortName: '',
+            pFullName: '',
+            pType: '',
+            pExpectAnnualRevenue: '',
+            pAllIssuingScale: '',
+            pDulTime: '',
+            pPaymentInterestType: '',
+            pInvestType: '',
+            pSizeRatioType: '',
+            pIssuingScale:'',
+            pMinAmount:'',
+            pRecruitmentSummary: '',
+            pCpys: '',
+            pMjzh: '',
+            pFxkz: '',
+            pHkly: '',
+            pRrzf: '',
+            pDbf: '',
+            pZjyt: ''
           },
 
         }
@@ -273,6 +244,45 @@
             birthday: '',
             address: ''
           }
+        },
+
+        addSubmit() {
+          this.$refs.addForm.validate((valid) => {
+            if (valid) {
+              this.$confirm('确认提交吗？', '提示', {
+                confirmButtonText: '确定',
+                cancelButtonText: '取消',
+                type: 'warning'
+              }).then(() => {
+                this.addLoading = true;
+                this.$axios.post('/financer/addfinancer', this.addForm).then((res) => {
+                  this.addLoading = false;
+                  if (res.data.status == 200) {
+                    this.$message({
+                      type: 'success',
+                      message: '新增成功!'
+                    });
+                    this.$refs['addForm'].resetFields();
+                    this.addFormVisible = false;
+                    this.handleSearch();
+                  } else {
+                    this.$message({
+                      showClose: true,
+                      message: res.data.message,
+                      type: 'error'
+                    });
+                  }
+                }).catch((res) => {
+                  this.addLoading = false;
+                  this.$message({
+                    showClose: true,
+                    message: '访问服务器异常',
+                    type: 'warning'
+                  });
+                });
+              });
+            }
+          });
         },
 
       }
