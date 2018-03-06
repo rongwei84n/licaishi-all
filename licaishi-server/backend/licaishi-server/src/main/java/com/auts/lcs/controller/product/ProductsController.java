@@ -12,6 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.auts.lcs.consts.Const;
@@ -50,14 +51,14 @@ public class ProductsController extends SBaseController {
      * @return
      */
     @RequestMapping(value = "/v1/product/list", method = RequestMethod.GET, produces = { "application/json" })
-    public PhiHomeBaseResponse queryProducts(HttpServletRequest request) {
+    public PhiHomeBaseResponse queryProducts(HttpServletRequest request,
+            @RequestParam(value = "pageNo", required = false) String pageNo,
+            @RequestParam(value = "pageSize", required = true) String pageSize,
+            @RequestParam(value = "type", required = false) String type) {
         PhiHomeBaseResponse rspObj = new PhiHomeBaseResponse();
         Pager pager = null;
-        String pageNo = request.getParameter(Const.PAGE_NO);
-        String pageSize = request.getParameter(Const.PAGE_SIZE);
-        String type = request.getParameter(Const.TYPE);
 
-        LOGGER.info("queryProducts type [{}]", type);
+        LOGGER.info("queryProducts pageNo [{}] pageSize [{}] type [{}]", pageNo, pageSize, type);
 
         int totalCount = productsService.queryProductCountByPType(type);
         List<ProductResponseModel> productResponseList = new ArrayList<>();
