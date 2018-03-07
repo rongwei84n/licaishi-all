@@ -10,8 +10,15 @@ public class ProfitRebateModel extends BaseDaoModel {
     private BigDecimal prStartAmount; //起购开始金额
     private BigDecimal prEndAmount; //起购最大金额
     private String prAmountDisplay; //描述
-    private String prExpectSnnualRevenue; //预计年化收益
-    private String prCommission; //佣金比例
+    private String prExpectAnnualRevenue; //预计年化收益
+    
+    public String getPrExpectAnnualRevenue() {
+		return prExpectAnnualRevenue;
+	}
+	public void setPrExpectAnnualRevenue(String prExpectAnnualRevenue) {
+		this.prExpectAnnualRevenue = prExpectAnnualRevenue;
+	}
+	private String prCommission; //佣金比例
     
 	public String getPrProductCode() {
 		return prProductCode;
@@ -36,12 +43,6 @@ public class ProfitRebateModel extends BaseDaoModel {
 	}
 	public void setPrAmountDisplay(String prAmountDisplay) {
 		this.prAmountDisplay = prAmountDisplay;
-	}
-	public String getPrExpectSnnualRevenue() {
-		return prExpectSnnualRevenue;
-	}
-	public void setPrExpectSnnualRevenue(String prExpectSnnualRevenue) {
-		this.prExpectSnnualRevenue = prExpectSnnualRevenue;
 	}
 	public String getPrCommission() {
 		return prCommission;

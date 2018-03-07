@@ -51,11 +51,12 @@ public interface OrderMapper {
 
     @Select("<script>select * from tbl_order "
 //    		+ "where  <if test=\"uid !=null \">uid = #{uid} </if>"
+    		+ "<where>"
 			+ "<if test='payStatus !=null '>"
-			+ " where pay_status = #{payStatus} "
+			+ " pay_status = #{payStatus} "
 			+ "</if> "
 			+ "limit #{startIndex}, #{pageSize}"
-			+ "</script>")
+			+ "</where></script>")
 //    @Select("select * from tbl_order")
     @Results({
     	@Result(property = "id", column = "id"), @Result(property = "orderNo", column = "order_no"),

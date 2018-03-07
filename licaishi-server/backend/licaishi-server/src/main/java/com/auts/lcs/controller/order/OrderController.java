@@ -47,11 +47,11 @@ public class OrderController extends SBaseController {
     @RequestMapping(value = "/v1/order/list", method = RequestMethod.GET, produces = { "application/json" })
     public PhiHomeBaseResponse queryOrders(HttpServletRequest request) {
         PhiHomeBaseResponse rspObj = new PhiHomeBaseResponse();
+        Pager pager = null;
         String pageNo = request.getParameter(Const.PAGE_NO);
         String pageSize = request.getParameter(Const.PAGE_SIZE);
         String type = request.getParameter(Const.TYPE);
-        Pager pager = null;
-
+                     
         LOGGER.info("queryOrders type [{}]", type);
         String token = request.getHeader(Const.AUTHORIZATION);
         LOGGER.info("queryOrders toekn [{}]", token);

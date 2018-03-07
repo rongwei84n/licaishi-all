@@ -12,7 +12,9 @@ public interface ProductsService {
 	
 	int updateProducts(ProductModel productModel);
 
-    List<ProductModel> queryProducts(int pageNo, int pageSize, String type);
+    List<ProductModel> queryProducts(int pageNo, int pageSize, String type,
+    		String pInvestType, String pPaymentInterestType, String pSizeRatioType, 
+    		String minimumAmount, String dueTime, String annualRevenue, String saleStatus);
     
     int queryProductCountByPType(String type);
     

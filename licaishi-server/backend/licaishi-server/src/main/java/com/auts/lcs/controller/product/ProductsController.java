@@ -54,7 +54,14 @@ public class ProductsController extends SBaseController {
     public PhiHomeBaseResponse queryProducts(HttpServletRequest request,
             @RequestParam(value = "pageNo", required = false) String pageNo,
             @RequestParam(value = "pageSize", required = true) String pageSize,
-            @RequestParam(value = "type", required = false) String type) {
+            @RequestParam(value = "type", required = false) String type,
+            @RequestParam(value = "pInvestType", required = false) String pInvestType, //01：房地产类 02：金融市场 03：基础设施 04：资金池 05：工商企业 99：其他
+            @RequestParam(value = "pPaymentInterestType", required = false) String pPaymentInterestType,//01：按月付息 02：按季付息 03：按半年付息 04：按年付息 05 到期付本息
+            @RequestParam(value = "pSizeRatioType", required = false) String pSizeRatioType,//01：小额畅打 02：已配出小额 03：严格配比 04：全大额
+            @RequestParam(value = "minimumAmount", required = false) String minimumAmount,// 500000；1000000；2000000；3000000
+            @RequestParam(value = "dueTime", required = false) String dueTime,//产品期限      01；02；03；04；05
+            @RequestParam(value = "annualRevenue", required = false) String annualRevenue,//预期收益     01；02；03；04；05；06
+            @RequestParam(value = "saleStatus", required = false) String saleStatus) {//募集状态    01：预热中 02：募集中 03：募集结束 04：产品成立
         PhiHomeBaseResponse rspObj = new PhiHomeBaseResponse();
         Pager pager = null;
 
@@ -62,7 +69,8 @@ public class ProductsController extends SBaseController {
 
         int totalCount = productsService.queryProductCountByPType(type);
         List<ProductResponseModel> productResponseList = new ArrayList<>();
-        List<ProductModel> products = productsService.queryProducts(Integer.parseInt(pageNo), Integer.parseInt(pageSize), type);
+        List<ProductModel> products = productsService.queryProducts(Integer.parseInt(pageNo), Integer.parseInt(pageSize), type,
+        		pInvestType, pPaymentInterestType, pSizeRatioType, minimumAmount, dueTime, annualRevenue, saleStatus);
         if(products!=null && !products.isEmpty()) {
         	for(ProductModel productModel : products) {
             	List<ProfitRebateModel> profitRebates =  productsService.queryProfitRebateByPCode(productModel.getpCode());
@@ -71,6 +79,7 @@ public class ProductsController extends SBaseController {
             	ProductResponseModel productResponseModel = new ProductResponseModel();
             	BeanUtils.copyProperties(productModel, productResponseModel);
             	productResponseModel.setProfitRebates(profitRebates);
+            	convertProductResponse(productResponseModel, productModel);
             	productResponseList.add(productResponseModel);
             }
         	//分页
@@ -85,6 +94,22 @@ public class ProductsController extends SBaseController {
         return successResponse(rspObj);
     }
 
+    private void convertProductResponse(ProductResponseModel productResponseModel, ProductModel productModel) {
+    	//设置最高预计收益率
+    	List<ProfitRebateModel> profitRebates = productResponseModel.getProfitRebates();
+    	if(profitRebates != null && profitRebates.size() > 0) {
+    		double maxAnnualRevenue = 0;
+    		for(ProfitRebateModel prm : profitRebates) {
+    			String annualRevenue = prm.getPrExpectAnnualRevenue();
+    			double annualRevenueTmp =  Double.parseDouble(annualRevenue.replaceAll("%", ""));
+    			if(annualRevenueTmp > maxAnnualRevenue) {
+    				maxAnnualRevenue = annualRevenueTmp;
+    			}
+    		}
+    		productResponseModel.setpExpectAnnualRevenue(maxAnnualRevenue + "%");
+    	}
+    	
+    }
 
     /**
      * 首页查询推荐产品和热门产品

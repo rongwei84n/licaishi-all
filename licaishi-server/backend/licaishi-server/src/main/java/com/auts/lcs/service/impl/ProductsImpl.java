@@ -26,7 +26,9 @@ public class ProductsImpl implements ProductsService {
     ProductAttachmentMapper productAttachmentMapper;
 
     @Override
-    public List<ProductModel> queryProducts(int pageNo, int pageSize, String type) {
+    public List<ProductModel> queryProducts(int pageNo, int pageSize, String type,
+    		String pInvestType, String pPaymentInterestType, String pSizeRatioType, 
+    		String minimumAmount, String dueTime, String annualRevenue, String saleStatus) {
         try {
         	int startIndex = (pageNo - 1) * pageSize;
         	if(StringUtils.isEmpty(type)) {

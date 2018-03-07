@@ -9,6 +9,7 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
@@ -30,6 +31,7 @@ import com.auts.backstage.service.ProductsService;
  * @author rongwei.huang
  */
 @RestController
+@CrossOrigin
 public class ProductsController extends SBaseController {
     private static final Logger LOGGER = LogManager.getLogger(ProductsController.class);
 
