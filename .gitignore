@@ -3,3 +3,4 @@ licaishi-server/android/build
 licaishi-server/android/app/build
 licaishi-server/android/.gradle
 licaishi-server/android/.idea
+app.iml

@@ -16,6 +16,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
 
+import com.alibaba.fastjson.JSON;
 import com.auts.lcssv.BuildConfig;
 import com.auts.lcssv.R;
 import com.auts.lcssv.base.BaseActivity;
@@ -348,7 +349,7 @@ public class JsBridgeActivity extends BaseActivity {
                 String netType = mNativeModel.getNetType();
                 JavaCallback javaCallback = new JavaCallback(0, "success");
                 javaCallback.setNetType(netType);
-                mJavaBridge.callbackSuccess(jsCallback, javaCallback);
+                mJavaBridge.callbackSuccess(jsCallback, JSON.toJSONString(javaCallback));
             }
         });
 
@@ -370,7 +371,8 @@ public class JsBridgeActivity extends BaseActivity {
             @Override
             public void handle(JSData jsData, final JavaBridge.JsCallback jsCallback) {
                 mNativeModel.openDownload(JsBridgeActivity.this, jsData);
-                mJavaBridge.callbackSuccess(jsCallback, new JavaCallback(0, "success"));
+                JavaCallback callback = new JavaCallback(0, "success");
+                mJavaBridge.callbackSuccess(jsCallback, JSON.toJSONString(callback));
             }
         });
 
@@ -468,7 +470,7 @@ public class JsBridgeActivity extends BaseActivity {
             int result = resultCode == RESULT_OK ? 1 : 0;
             JavaCallback openPageJcb = new JavaCallback(0, "success");
             openPageJcb.setHasChange(result);
-            mJavaBridge.callbackSuccess(mOpenPageCallback, openPageJcb);
+            mJavaBridge.callbackSuccess(mOpenPageCallback, JSON.toJSONString(openPageJcb));
         }
     }
 
