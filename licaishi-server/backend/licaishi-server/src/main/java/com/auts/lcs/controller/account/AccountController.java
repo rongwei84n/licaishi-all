@@ -317,6 +317,8 @@ public class AccountController extends SBaseController {
         accountService.updateAccount(accountModel);
 
         PasswordResponseModel rsp = new PasswordResponseModel();
+        rsp.setError(String.valueOf(Const.ErrorCode.Account.OK));
+        rsp.setTokenStatus(String.valueOf(Const.ErrorCode.Account.TOKEN_OK));
         return rsp;
     }
 
