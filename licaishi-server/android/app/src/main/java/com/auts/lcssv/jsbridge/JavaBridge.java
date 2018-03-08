@@ -237,12 +237,21 @@ public class JavaBridge implements Serializable {
         }
     }
 
-    public void callbackSuccess(JsCallback jsCallback, JavaCallback javaCallback) {
-        if (javaCallback == null) {
-            javaCallback = new JavaCallback();
-        }
+//    public void callbackSuccess(JsCallback jsCallback, JavaCallback javaCallback) {
+//        if (javaCallback == null) {
+//            javaCallback = new JavaCallback();
+//        }
+//        try {
+//            jsCallback.callback(JSON.toJSONString(javaCallback));
+//        } catch (Exception e) {
+//            e.printStackTrace();
+//        }
+//
+//    }
+
+    public void callbackSuccess(JsCallback jsCallback, String netResponse) {
         try {
-            jsCallback.callback(JSON.toJSONString(javaCallback));
+            jsCallback.callback(netResponse);
         } catch (Exception e) {
             e.printStackTrace();
         }

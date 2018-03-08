@@ -1,5 +1,6 @@
 package com.auts.lcs.model.dao.product;
 
+import java.math.BigDecimal;
 import java.util.Date;
 
 import com.alibaba.fastjson.annotation.JSONField;
@@ -22,8 +23,107 @@ public class ProductModel extends BaseDaoModel {
     private String pInvestType;
     private String pSizeRatioType;
     private String pInvestOwnerId;
+    private String pIssuingScale;
+    private String pExpectSaleAmount;
+    private String pAllSubscriptionAmount;
+    private String pRecruitmentSummary;
+    private String pCpys;
+    private String pMjzh;
+    private String pFxkz;
+    private String pHkly;
+    private String pZjyt;
+    private String pRrzf;
+    private String pDbf;
 
-    public String getpCode() {
+	public String getpIssuingScale() {
+        return pIssuingScale;
+    }
+
+    public void setpIssuingScale(String pIssuingScale) {
+        this.pIssuingScale = pIssuingScale;
+    }
+
+	public String getpExpectSaleAmount() {
+        return pExpectSaleAmount;
+    }
+
+    public void setpExpectSaleAmount(String pExpectSaleAmount) {
+        this.pExpectSaleAmount = pExpectSaleAmount;
+    }
+
+    public String getpAllSubscriptionAmount() {
+        return pAllSubscriptionAmount;
+    }
+
+    public void setpAllSubscriptionAmount(String pAllSubscriptionAmount) {
+        this.pAllSubscriptionAmount = pAllSubscriptionAmount;
+    }
+
+    public String getpRecruitmentSummary() {
+		return pRecruitmentSummary;
+	}
+
+	public void setpRecruitmentSummary(String pRecruitmentSummary) {
+		this.pRecruitmentSummary = pRecruitmentSummary;
+	}
+
+	public String getpCpys() {
+		return pCpys;
+	}
+
+	public void setpCpys(String pCpys) {
+		this.pCpys = pCpys;
+	}
+
+	public String getpMjzh() {
+		return pMjzh;
+	}
+
+	public void setpMjzh(String pMjzh) {
+		this.pMjzh = pMjzh;
+	}
+
+	public String getpFxkz() {
+		return pFxkz;
+	}
+
+	public void setpFxkz(String pFxkz) {
+		this.pFxkz = pFxkz;
+	}
+
+	public String getpHkly() {
+		return pHkly;
+	}
+
+	public void setpHkly(String pHkly) {
+		this.pHkly = pHkly;
+	}
+
+	public String getpZjyt() {
+		return pZjyt;
+	}
+
+	public void setpZjyt(String pZjyt) {
+		this.pZjyt = pZjyt;
+	}
+
+	public String getpRrzf() {
+		return pRrzf;
+	}
+
+	public void setpRrzf(String pRrzf) {
+		this.pRrzf = pRrzf;
+	}
+
+	public String getpDbf() {
+		return pDbf;
+	}
+
+	public void setpDbf(String pDbf) {
+		this.pDbf = pDbf;
+	}
+
+	public String getpCode() {
 		return pCode;
 	}
 
@@ -88,22 +188,22 @@ public class ProductModel extends BaseDaoModel {
 	}
 
 	public String getpAllIssuingScale() {
-		return pAllIssuingScale;
-	}
+        return pAllIssuingScale;
+    }
 
-	public void setpAllIssuingScale(String pAllIssuingScale) {
-		this.pAllIssuingScale = pAllIssuingScale;
-	}
+    public void setpAllIssuingScale(String pAllIssuingScale) {
+        this.pAllIssuingScale = pAllIssuingScale;
+    }
 
 	public String getpMinAmount() {
-		return pMinAmount;
-	}
+        return pMinAmount;
+    }
 
-	public void setpMinAmount(String pMinAmount) {
-		this.pMinAmount = pMinAmount;
-	}
+    public void setpMinAmount(String pMinAmount) {
+        this.pMinAmount = pMinAmount;
+    }
 
-	public String getpPaymentInterestType() {
+    public String getpPaymentInterestType() {
 		return pPaymentInterestType;
 	}
 

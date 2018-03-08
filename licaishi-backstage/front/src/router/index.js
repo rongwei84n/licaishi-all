@@ -22,8 +22,16 @@ export default new Router({
           component: resolve => require(['../components/pages/lcsmanage.vue'], resolve)
         },
         {
-          path: 'promanage',
-          component: resolve => require(['../components/pages/promanage.vue'], resolve)
+          path: 'product/trust',
+          component: resolve => require(['../components/pages/product/Trust.vue'], resolve)
+        },
+        {
+          path: 'product/debtfund',
+          component: resolve => require(['../components/pages/product/DebtFund.vue'], resolve)
+        },
+        {
+          path: 'product/assets',
+          component: resolve => require(['../components/pages/product/AssetsManagement.vue'], resolve)
         },
         {
           path: 'ordermanage',

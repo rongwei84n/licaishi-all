@@ -31,8 +31,22 @@
           },
           {
             icon: 'el-icon-goods',
-            index: '/home/promanage',
-            title: '产品管理'
+            index: '5',
+            title: '产品管理',
+            subs: [
+              {
+                index: '/home/product/trust',
+                title: '集合信托'
+              },
+              {
+                index: '/home/product/assets',
+                title: '集合资管'
+              },
+              {
+                index: '/home/product/debtfund',
+                title: '债权基金'
+              }
+            ]
           },
           {
             icon: 'el-icon-news',

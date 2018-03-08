@@ -1,11 +1,11 @@
 package com.auts.lcs.model.response;
 
+import java.math.BigDecimal;
 import java.util.Date;
 import java.util.List;
 
-import com.alibaba.fastjson.annotation.JSONField;
+import com.auts.lcs.model.dao.product.ProductAttachmentModel;
 import com.auts.lcs.model.dao.product.ProfitRebateModel;
-import com.fasterxml.jackson.annotation.JsonProperty;
 
 /**
  * 产品接口返回数据JSON
@@ -29,73 +29,180 @@ public class ProductDetailResponseModel {
     private String pInvestType;
     private String pSizeRatioType;
     private String pInvestOwnerId;
-    private List<ProfitRebateModel> profitRebateList;
-
-    @JSONField(name = "access_token")
-    @JsonProperty("access_token")
-    private String accessToken;
-
-    @JSONField(name = "access_token_expire")
-    @JsonProperty("access_token_expire")
-    private String accessTokenExpire;
-
-    private String error;
-
-    @JSONField(name = "refresh_token")
-    @JsonProperty("refresh_token")
-    private String refreshToken;
-
-    @JSONField(name = "refresh_token_expire")
-    @JsonProperty("refresh_token_expire")
-    private String refreshTokenExpire;
-
-    private String uid;
-
-    public String getAccessToken() {
-        return accessToken;
-    }
-
-    public void setAccessToken(String accessToken) {
-        this.accessToken = accessToken;
-    }
-
-    public String getAccessTokenExpire() {
-        return accessTokenExpire;
-    }
-
-    public void setAccessTokenExpire(String accessTokenExpire) {
-        this.accessTokenExpire = accessTokenExpire;
-    }
-
-    public String getError() {
-        return error;
-    }
-
-    public void setError(String error) {
-        this.error = error;
-    }
-
-    public String getRefreshToken() {
-        return refreshToken;
-    }
-
-    public void setRefreshToken(String refreshToken) {
-        this.refreshToken = refreshToken;
-    }
-
-    public String getRefreshTokenExpire() {
-        return refreshTokenExpire;
-    }
-
-    public void setRefreshTokenExpire(String refreshTokenExpire) {
-        this.refreshTokenExpire = refreshTokenExpire;
-    }
-
-    public String getUid() {
-        return uid;
-    }
-
-    public void setUid(String uid) {
-        this.uid = uid;
-    }
+    private BigDecimal pIssuingScale;
+    private BigDecimal pExpectSaleAmount;
+    private BigDecimal pAllSubscriptionAmount;
+    private String pRecruitmentSummary;
+    private String pCpys;
+    private String pMjzh;
+    private String pFxkz;
+    private String pHkly;
+    private String pZjyt;
+    private String pRrzf;
+    private String pDbf;
+    private List<ProfitRebateModel> profitRebates;
+    private List<ProductAttachmentModel> productAttachments;
+    
+	public List<ProductAttachmentModel> getProductAttachments() {
+		return productAttachments;
+	}
+	public void setProductAttachments(List<ProductAttachmentModel> productAttachments) {
+		this.productAttachments = productAttachments;
+	}
+	public String getpCode() {
+		return pCode;
+	}
+	public void setpCode(String pCode) {
+		this.pCode = pCode;
+	}
+	public String getpShortName() {
+		return pShortName;
+	}
+	public void setpShortName(String pShortName) {
+		this.pShortName = pShortName;
+	}
+	public String getpFullName() {
+		return pFullName;
+	}
+	public void setpFullName(String pFullName) {
+		this.pFullName = pFullName;
+	}
+	public String getpType() {
+		return pType;
+	}
+	public void setpType(String pType) {
+		this.pType = pType;
+	}
+	public String getpExpectAnnualRevenue() {
+		return pExpectAnnualRevenue;
+	}
+	public void setpExpectAnnualRevenue(String pExpectAnnualRevenue) {
+		this.pExpectAnnualRevenue = pExpectAnnualRevenue;
+	}
+	public String getpSaleStatus() {
+		return pSaleStatus;
+	}
+	public void setpSaleStatus(String pSaleStatus) {
+		this.pSaleStatus = pSaleStatus;
+	}
+	public String getpDulTime() {
+		return pDulTime;
+	}
+	public void setpDulTime(String pDulTime) {
+		this.pDulTime = pDulTime;
+	}
+	public Date getpSaleStartTime() {
+		return pSaleStartTime;
+	}
+	public void setpSaleStartTime(Date pSaleStartTime) {
+		this.pSaleStartTime = pSaleStartTime;
+	}
+	public String getpAllIssuingScale() {
+		return pAllIssuingScale;
+	}
+	public void setpAllIssuingScale(String pAllIssuingScale) {
+		this.pAllIssuingScale = pAllIssuingScale;
+	}
+	public String getpMinAmount() {
+		return pMinAmount;
+	}
+	public void setpMinAmount(String pMinAmount) {
+		this.pMinAmount = pMinAmount;
+	}
+	public String getpPaymentInterestType() {
+		return pPaymentInterestType;
+	}
+	public void setpPaymentInterestType(String pPaymentInterestType) {
+		this.pPaymentInterestType = pPaymentInterestType;
+	}
+	public String getpInvestType() {
+		return pInvestType;
+	}
+	public void setpInvestType(String pInvestType) {
+		this.pInvestType = pInvestType;
+	}
+	public String getpSizeRatioType() {
+		return pSizeRatioType;
+	}
+	public void setpSizeRatioType(String pSizeRatioType) {
+		this.pSizeRatioType = pSizeRatioType;
+	}
+	public String getpInvestOwnerId() {
+		return pInvestOwnerId;
+	}
+	public void setpInvestOwnerId(String pInvestOwnerId) {
+		this.pInvestOwnerId = pInvestOwnerId;
+	}
+	public BigDecimal getpIssuingScale() {
+		return pIssuingScale;
+	}
+	public void setpIssuingScale(BigDecimal pIssuingScale) {
+		this.pIssuingScale = pIssuingScale;
+	}
+	public BigDecimal getpExpectSaleAmount() {
+		return pExpectSaleAmount;
+	}
+	public void setpExpectSaleAmount(BigDecimal pExpectSaleAmount) {
+		this.pExpectSaleAmount = pExpectSaleAmount;
+	}
+	public BigDecimal getpAllSubscriptionAmount() {
+		return pAllSubscriptionAmount;
+	}
+	public void setpAllSubscriptionAmount(BigDecimal pAllSubscriptionAmount) {
+		this.pAllSubscriptionAmount = pAllSubscriptionAmount;
+	}
+	public String getpRecruitmentSummary() {
+		return pRecruitmentSummary;
+	}
+	public void setpRecruitmentSummary(String pRecruitmentSummary) {
+		this.pRecruitmentSummary = pRecruitmentSummary;
+	}
+	public String getpCpys() {
+		return pCpys;
+	}
+	public void setpCpys(String pCpys) {
+		this.pCpys = pCpys;
+	}
+	public String getpMjzh() {
+		return pMjzh;
+	}
+	public void setpMjzh(String pMjzh) {
+		this.pMjzh = pMjzh;
+	}
+	public String getpFxkz() {
+		return pFxkz;
+	}
+	public void setpFxkz(String pFxkz) {
+		this.pFxkz = pFxkz;
+	}
+	public String getpHkly() {
+		return pHkly;
+	}
+	public void setpHkly(String pHkly) {
+		this.pHkly = pHkly;
+	}
+	public String getpZjyt() {
+		return pZjyt;
+	}
+	public void setpZjyt(String pZjyt) {
+		this.pZjyt = pZjyt;
+	}
+	public String getpRrzf() {
+		return pRrzf;
+	}
+	public void setpRrzf(String pRrzf) {
+		this.pRrzf = pRrzf;
+	}
+	public String getpDbf() {
+		return pDbf;
+	}
+	public void setpDbf(String pDbf) {
+		this.pDbf = pDbf;
+	}
+	public List<ProfitRebateModel> getProfitRebates() {
+		return profitRebates;
+	}
+	public void setProfitRebates(List<ProfitRebateModel> profitRebates) {
+		this.profitRebates = profitRebates;
+	}
 }

@@ -5,6 +5,7 @@ import javax.servlet.http.HttpServletRequest;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
@@ -18,10 +19,11 @@ import com.auts.lcs.service.OrderService;
 
 /**
  * 用户相关功能
- * 
+ *
  * @author li.bing
  */
 @RestController
+@CrossOrigin
 public class UserController extends SBaseController {
     private static final Logger LOGGER = LogManager.getLogger(UserController.class);
 
@@ -41,12 +43,12 @@ public class UserController extends SBaseController {
     @RequestMapping(value = "/v1/user/allInfoCount", method = RequestMethod.GET, produces = { "application/json" })
     public PhiHomeBaseResponse queryAllInfoCount(HttpServletRequest request) {
         PhiHomeBaseResponse rspObj = new PhiHomeBaseResponse();
-        AllInfoCountResponse allInfoCount = new AllInfoCountResponse(); 
+        AllInfoCountResponse allInfoCount = new AllInfoCountResponse();
         LOGGER.info("queryAllInfoCount type [{}]");
         String token = request.getHeader(Const.AUTHORIZATION);
         LOGGER.info("queryOrders toekn [{}]", token);
         String uid = getUidByToken(token);
-        
+
         //计算佣金 todo ....
         int totalCount = orderService.queryOrderCountByStatus(null, uid);
         int wpTotalCount = orderService.queryOrderCountByStatus(OrderStatus.WP.getValue(), uid);

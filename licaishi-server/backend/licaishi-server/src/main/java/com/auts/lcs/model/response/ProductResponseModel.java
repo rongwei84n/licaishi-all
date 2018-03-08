@@ -4,13 +4,12 @@ import java.util.Date;
 import java.util.List;
 
 import com.alibaba.fastjson.annotation.JSONField;
-import com.auts.lcs.model.dao.product.ProductAttachmentModel;
 import com.auts.lcs.model.dao.product.ProfitRebateModel;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 /**
  * 产品接口返回数据JSON
- * 
+ *
  * @author li.bing
  * @date 2018年2月27日
  */
@@ -60,11 +59,30 @@ public class ProductResponseModel {
 	@JSONField(name = "profitRebates")
     @JsonProperty("profitRebates")
     private List<ProfitRebateModel> profitRebates;
-	@JSONField(name = "ProductAttachments")
-    @JsonProperty("ProductAttachments")
-    private List<ProductAttachmentModel> ProductAttachments;
-	
-	public String getpCode() {
+    private String pIssuingScale;
+    private String pExpectSaleAmount;
+    private String pAllSubscriptionAmount;
+
+	public String getpIssuingScale() {
+        return pIssuingScale;
+    }
+    public void setpIssuingScale(String pIssuingScale) {
+        this.pIssuingScale = pIssuingScale;
+    }
+
+	public String getpExpectSaleAmount() {
+        return pExpectSaleAmount;
+    }
+    public void setpExpectSaleAmount(String pExpectSaleAmount) {
+        this.pExpectSaleAmount = pExpectSaleAmount;
+    }
+    public String getpAllSubscriptionAmount() {
+        return pAllSubscriptionAmount;
+    }
+    public void setpAllSubscriptionAmount(String pAllSubscriptionAmount) {
+        this.pAllSubscriptionAmount = pAllSubscriptionAmount;
+    }
+    public String getpCode() {
 		return pCode;
 	}
 	public void setpCode(String pCode) {
@@ -112,19 +130,21 @@ public class ProductResponseModel {
 	public void setpSaleStartTime(Date pSaleStartTime) {
 		this.pSaleStartTime = pSaleStartTime;
 	}
+
 	public String getpAllIssuingScale() {
-		return pAllIssuingScale;
-	}
-	public void setpAllIssuingScale(String pAllIssuingScale) {
-		this.pAllIssuingScale = pAllIssuingScale;
-	}
+        return pAllIssuingScale;
+    }
+    public void setpAllIssuingScale(String pAllIssuingScale) {
+        this.pAllIssuingScale = pAllIssuingScale;
+    }
+
 	public String getpMinAmount() {
-		return pMinAmount;
-	}
-	public void setpMinAmount(String pMinAmount) {
-		this.pMinAmount = pMinAmount;
-	}
-	public String getpPaymentInterestType() {
+        return pMinAmount;
+    }
+    public void setpMinAmount(String pMinAmount) {
+        this.pMinAmount = pMinAmount;
+    }
+    public String getpPaymentInterestType() {
 		return pPaymentInterestType;
 	}
 	public void setpPaymentInterestType(String pPaymentInterestType) {
@@ -154,13 +174,4 @@ public class ProductResponseModel {
 	public void setProfitRebates(List<ProfitRebateModel> profitRebates) {
 		this.profitRebates = profitRebates;
 	}
-	public List<ProductAttachmentModel> getProductAttachments() {
-		return ProductAttachments;
-	}
-	public void setProductAttachments(List<ProductAttachmentModel> productAttachments) {
-		ProductAttachments = productAttachments;
-	}
-	
-	
-
 }

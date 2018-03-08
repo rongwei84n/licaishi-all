@@ -25,8 +25,14 @@ public interface OrderMapper {
 	@Update("update tbl_order set pay_status = 999, update_time= NOW() where order_no=#{orderNo}")
 	int cancelOrder(@Param("orderNo") String orderNo);
 
-//    @Select("<script>select count(*) num from tbl_order where uid = #{uid} <if test=\"payStatus !=null \">pay_status = #{payStatus} </if> </script>")
-	@Select("select count(*) num from Product where pType= #{payStatus} limit 1")
+    @Select("<script>"
+    		+ "select count(*) num from tbl_order "
+//    		+ "where uid = #{uid} "
+    		+ "<if test='payStatus !=null '>"
+    		+ " where pay_status = #{payStatus} "
+    		+ "</if> "
+    		+ "</script>")
+//	@Select("select count(*) num from tbl_order where pType= #{payStatus} limit 1")
     int queryOrderCountByStatus(@Param("payStatus") String payStatus, @Param("uid") String uid);
     
     @Select("select * from tbl_order where order_no=#{orderNo} limit 1")
@@ -43,8 +49,15 @@ public interface OrderMapper {
     })
     OrderModel queryOrderByOrderNo(@Param("orderNo") String orderNo);
 
-//    @Select("<script>select * from tbl_order where  <if test=\"uid !=null \">uid = #{uid} </if> <if test=\"payStatus !=null \">pay_status = #{payStatus} </if> limit #{startIndex} #{pageSize}")
-    @Select("select * from tbl_order")
+    @Select("<script>select * from tbl_order "
+//    		+ "where  <if test=\"uid !=null \">uid = #{uid} </if>"
+    		+ "<where>"
+			+ "<if test='payStatus !=null '>"
+			+ " pay_status = #{payStatus} "
+			+ "</if> "
+			+ "limit #{startIndex}, #{pageSize}"
+			+ "</where></script>")
+//    @Select("select * from tbl_order")
     @Results({
     	@Result(property = "id", column = "id"), @Result(property = "orderNo", column = "order_no"),
     	@Result(property = "amount", column = "amount"), @Result(property = "orderDate", column = "order_date"),
