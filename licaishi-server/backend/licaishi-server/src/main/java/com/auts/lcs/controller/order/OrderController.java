@@ -82,9 +82,14 @@ public class OrderController extends SBaseController {
     @RequestMapping(value = "/v1/order/createOrder", method = RequestMethod.POST, produces = { "application/json" })
     public PhiHomeBaseResponse createOrder(HttpServletRequest request,
     		@RequestParam(value = "pCode", required = false) String pCode,
-            @RequestParam(value = "pName", required = true) String pName,
+            @RequestParam(value = "pName", required = false) String pName,
+            @RequestParam(value = "userId", required = false) String userId,
+            @RequestParam(value = "userName", required = false) String userName,
+            @RequestParam(value = "cardId", required = false) String cardId,
+            @RequestParam(value = "phoneNo", required = false) String phoneNo,
             @RequestParam(value = "amount", required = false) String amount,
-            @RequestParam(value = "orderDate", required = true) String orderDate) {
+            @RequestParam(value = "lastPayDate", required = false) String lastPayDate,
+            @RequestParam(value = "note", required = false) String note) {
         PhiHomeBaseResponse rspObj = new PhiHomeBaseResponse();
 
         LOGGER.info("createOrder pCode [{}]", pCode);
