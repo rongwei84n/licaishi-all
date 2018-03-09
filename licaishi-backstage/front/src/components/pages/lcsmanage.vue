@@ -9,7 +9,7 @@
 
     <div class="handle-box">
       <el-input v-model="nameSearch" placeholder="理财师姓名" class="handle-input"></el-input>
-      <el-button type="primary" icon="el-icon-search" @click="handleSearch">搜索</el-button>
+      <el-button type="primary" icon="el-icon-search" @click="handleSearch">检索</el-button>
       <el-button type="primary" icon="el-icon-plus" @click="handleAdd">新增</el-button>
       <el-button type="danger" icon="el-icon-close" :disabled="this.multipleSelection.length===0" class="handle-del"
                  @click="batchRemove">批量删除
@@ -217,11 +217,8 @@
           if (res.data.status == 200) {
             this.total = res.data.result.total;
             this.lcsList = res.data.result.dataList;
-          } else {
-            self.errorText = res.data.message;
           }
         }).catch((res) => {
-          self.errorText = '访问服务器异常';
           console.log(res);
         });
       },
@@ -388,31 +385,5 @@
 </script>
 
 <style scoped>
-  .handle-box {
-    margin-bottom: 20px;
-  }
 
-  .handle-select {
-    width: 120px;
-  }
-
-  .handle-input {
-    width: 300px;
-    display: inline-block;
-  }
-
-  .detail-in-table {
-    font-size: 0;
-  }
-
-  .detail-in-table label {
-    width: 90px;
-    color: #99a9bf;
-  }
-
-  .detail-in-table .el-form-item {
-    margin-right: 0;
-    margin-bottom: 0;
-    width: 50%;
-  }
 </style>

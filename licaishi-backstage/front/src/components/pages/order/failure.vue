@@ -1,10 +1,10 @@
 <template>
-    <div>订单管理</div>
+    <div>已失败</div>
 </template>
 
 <script>
     export default {
-        name: "ordermanage"
+        name: "failure"
     }
 </script>
 

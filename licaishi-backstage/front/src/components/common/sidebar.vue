@@ -50,8 +50,26 @@
           },
           {
             icon: 'el-icon-news',
-            index: '/home/ordermanage',
-            title: '订单管理'
+            index: '3',
+            title: '订单管理',
+            subs: [
+              {
+                index: '/home/order/unpay',
+                title: '待打款'
+              },
+              {
+                index: '/home/order/unsettle',
+                title: '待结佣'
+              },
+              {
+                index: '/home/order/settled',
+                title: '已结佣'
+              },
+              {
+                index: '/home/order/failure',
+                title: '已失败'
+              }
+            ]
           },
           {
             icon: 'el-icon-menu',

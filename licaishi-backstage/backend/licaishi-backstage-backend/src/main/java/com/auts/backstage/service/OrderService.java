@@ -1,16 +1,10 @@
 package com.auts.backstage.service;
 
-import java.util.List;
-
-import com.auts.backstage.model.dao.order.OrderModel;
+import com.auts.backstage.model.common.PageInfo;
 
 public interface OrderService {
 
-    List<OrderModel> queryOrders(int pageNo, int pageSize, String type);
-    
-    OrderModel queryOrderByOrderNo(String orderNo);
-    
-    int saveOrder(OrderModel om);
-    
-    int cancelOrder(String orderNo);
+	int cancelOrder(String orderNo);
+
+	PageInfo queryOrders(String status, String startDate, String endDate, int pageNumber, int pageSize);
 }

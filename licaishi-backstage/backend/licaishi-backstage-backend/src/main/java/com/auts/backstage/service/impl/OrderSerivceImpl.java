@@ -6,8 +6,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.auts.backstage.dao.OrderMapper;
+import com.auts.backstage.model.common.PageInfo;
 import com.auts.backstage.model.dao.order.OrderModel;
 import com.auts.backstage.service.OrderService;
+import com.github.pagehelper.PageHelper;
 
 @Service
 public class OrderSerivceImpl implements OrderService {
@@ -15,24 +17,21 @@ public class OrderSerivceImpl implements OrderService {
 	OrderMapper orderMapper;
 
 	@Override
-	public List<OrderModel> queryOrders(int pageNo, int pageSize, String type) {
-		return orderMapper.queryOrders(pageNo, pageSize, type);
-	}
-
-	@Override
-	public OrderModel queryOrderByOrderNo(String orderNo) {
-		return orderMapper.queryOrderByOrderNo(orderNo);
-	}
-
-	@Override
-	public int saveOrder(OrderModel om) {
-		return orderMapper.saveOrder(om);
+	public PageInfo queryOrders(String status, String startDate, String endDate, int pageNumber, int pageSize) {
+		PageHelper.startPage(pageNumber, pageSize);
+		List<OrderModel> list = orderMapper.queryOrders(status, startDate, endDate);
+		int total = orderMapper.queryOrdersCnt(status, startDate, endDate);
+		PageInfo pageInfo = new PageInfo();
+		pageInfo.setPageNumber(pageNumber);
+		pageInfo.setPageSize(pageSize);
+		pageInfo.setDataList(list);
+		pageInfo.setTotal(total);
+		return pageInfo;
 	}
 
 	@Override
 	public int cancelOrder(String orderNo) {
 		return orderMapper.cancelOrder(orderNo);
 	}
-
 
 }

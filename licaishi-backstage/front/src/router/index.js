@@ -34,8 +34,20 @@ export default new Router({
           component: resolve => require(['../components/pages/product/AssetsManagement.vue'], resolve)
         },
         {
-          path: 'ordermanage',
-          component: resolve => require(['../components/pages/ordermanage.vue'], resolve)
+          path: 'order/unpay',
+          component: resolve => require(['../components/pages/order/unpay.vue'], resolve)
+        },
+        {
+          path: 'order/unsettle',
+          component: resolve => require(['../components/pages/order/unsettle.vue'], resolve)
+        },
+        {
+          path: 'order/settled',
+          component: resolve => require(['../components/pages/order/settled.vue'], resolve)
+        },
+        {
+          path: 'order/failure',
+          component: resolve => require(['../components/pages/order/failure.vue'], resolve)
         }
       ]
     },
