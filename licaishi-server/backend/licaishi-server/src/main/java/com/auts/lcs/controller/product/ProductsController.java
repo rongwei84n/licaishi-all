@@ -94,19 +94,32 @@ public class ProductsController extends SBaseController {
         return successResponse(rspObj);
     }
 
+    /**
+     * 封装接口转换数据 收益率，佣金比例等等
+     * @param productResponseModel
+     * @param productModel
+     */
     private void convertProductResponse(ProductResponseModel productResponseModel, ProductModel productModel) {
     	//设置最高预计收益率
     	List<ProfitRebateModel> profitRebates = productResponseModel.getProfitRebates();
     	if(profitRebates != null && profitRebates.size() > 0) {
     		double maxAnnualRevenue = 0;
+    		double maxCommission = 0;
     		for(ProfitRebateModel prm : profitRebates) {
     			String annualRevenue = prm.getPrExpectAnnualRevenue();
     			double annualRevenueTmp =  Double.parseDouble(annualRevenue.replaceAll("%", ""));
     			if(annualRevenueTmp > maxAnnualRevenue) {
     				maxAnnualRevenue = annualRevenueTmp;
     			}
+    			
+    			String prCommission = prm.getPrCommission();
+    			double prCommissionTmp =  Double.parseDouble(prCommission.replaceAll("%", ""));
+    			if(prCommissionTmp > maxCommission) {
+    				maxCommission = prCommissionTmp;
+    			}
     		}
     		productResponseModel.setpExpectAnnualRevenue(maxAnnualRevenue + "%");
+    		productResponseModel.setpCommission(maxCommission + "%");
     	}
     	
     }
@@ -128,6 +141,7 @@ public class ProductsController extends SBaseController {
         	ProductResponseModel productResponseModel = new ProductResponseModel();
         	BeanUtils.copyProperties(productModel, productResponseModel);
         	productResponseModel.setProfitRebates(profitRebates);
+        	convertProductResponse(productResponseModel, productModel);
         	productResponseList.add(productResponseModel);
         }
 
@@ -147,8 +161,34 @@ public class ProductsController extends SBaseController {
     	BeanUtils.copyProperties(productModel, productResponseModel);
     	productResponseModel.setProfitRebates(profitRebates);
     	productResponseModel.setProductAttachments(productAttachments);
+    	convertProductDetailResponse(productResponseModel, productModel);
 
         rspObj.setResult(productResponseModel);
         return successResponse(rspObj);
+    }
+    
+    private void convertProductDetailResponse(ProductDetailResponseModel productResponseModel, ProductModel productModel) {
+    	//设置最高预计收益率
+    	List<ProfitRebateModel> profitRebates = productResponseModel.getProfitRebates();
+    	if(profitRebates != null && profitRebates.size() > 0) {
+    		double maxAnnualRevenue = 0;
+    		double maxCommission = 0;
+    		for(ProfitRebateModel prm : profitRebates) {
+    			String annualRevenue = prm.getPrExpectAnnualRevenue();
+    			double annualRevenueTmp =  Double.parseDouble(annualRevenue.replaceAll("%", ""));
+    			if(annualRevenueTmp > maxAnnualRevenue) {
+    				maxAnnualRevenue = annualRevenueTmp;
+    			}
+    			
+    			String prCommission = prm.getPrCommission();
+    			double prCommissionTmp =  Double.parseDouble(prCommission.replaceAll("%", ""));
+    			if(prCommissionTmp > maxCommission) {
+    				maxCommission = prCommissionTmp;
+    			}
+    		}
+    		productResponseModel.setpExpectAnnualRevenue(maxAnnualRevenue + "%");
+    		productResponseModel.setpCommission(maxCommission + "%");
+    	}
+    	
     }
 }
