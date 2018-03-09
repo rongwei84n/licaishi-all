@@ -62,7 +62,14 @@ public class ProductResponseModel {
     private String pIssuingScale;
     private String pExpectSaleAmount;
     private String pAllSubscriptionAmount;
+    private String pCommission; //佣金比例
 
+	public String getpCommission() {
+		return pCommission;
+	}
+	public void setpCommission(String pCommission) {
+		this.pCommission = pCommission;
+	}
 	public String getpIssuingScale() {
         return pIssuingScale;
     }
