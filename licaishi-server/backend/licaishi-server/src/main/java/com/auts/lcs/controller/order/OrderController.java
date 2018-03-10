@@ -84,6 +84,25 @@ public class OrderController extends SBaseController {
         return successResponse(rspObj);
     }
 
+    @RequestMapping(value = "/v1/order/orderDetail", method = RequestMethod.GET, produces = { "application/json" })
+    public PhiHomeBaseResponse queryOrderDetail(HttpServletRequest request,
+    		@RequestParam(value = "orderNo", required = true) String orderNo) {
+        PhiHomeBaseResponse rspObj = new PhiHomeBaseResponse();
+        OrderResponseDto orderResponseDto = new OrderResponseDto();
+                   
+        LOGGER.info("queryOrderDetail orderNo [{}]", orderNo);
+        
+        OrderModel orderModel = orderService.queryOrderByOrderNo(orderNo);
+        if(orderModel !=null) {
+    		BeanUtils.copyProperties(orderModel, orderResponseDto);
+    		//查询产品简称
+    		orderResponseDto.setProductShortName("大通阳明 1222 号");
+    		orderResponseDto.setCustomerName("李冰帅哥");
+        }
+        rspObj.setResult(orderResponseDto);
+        return successResponse(rspObj);
+    }
+    
     /**
      * 预约产品
      * @param request
