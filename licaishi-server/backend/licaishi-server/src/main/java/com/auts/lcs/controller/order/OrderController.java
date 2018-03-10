@@ -1,11 +1,15 @@
 package com.auts.lcs.controller.order;
 
+import java.math.BigDecimal;
+import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -18,6 +22,7 @@ import com.auts.lcs.controller.SBaseController;
 import com.auts.lcs.model.common.PhiHomeBaseResponse;
 import com.auts.lcs.model.dao.order.OrderModel;
 import com.auts.lcs.model.response.Data;
+import com.auts.lcs.model.response.OrderResponseDto;
 import com.auts.lcs.model.response.Pager;
 import com.auts.lcs.service.OrderService;
 
@@ -57,14 +62,23 @@ public class OrderController extends SBaseController {
         LOGGER.info("queryOrders toekn [{}]", token);
         String uid = getUidByToken(token);
         int totalCount = orderService.queryOrderCountByStatus(type, uid);
+        List<OrderResponseDto> orderResponseDtoList = new ArrayList<>();
         List<OrderModel> orders = orderService.queryOrders(Integer.parseInt(pageNo), Integer.parseInt(pageSize), type, uid);
         if(orders !=null && !orders.isEmpty()) {
+        	for(OrderModel orderModel : orders) {
+        		OrderResponseDto orderResponseDto = new OrderResponseDto();
+        		BeanUtils.copyProperties(orderModel, orderResponseDto);
+        		//查询产品简称
+        		orderResponseDto.setProductShortName("大通阳明 1222 号");
+        		orderResponseDto.setCustomerName("李冰帅哥");
+        		orderResponseDtoList.add(orderResponseDto);
+        	}
         	//分页
         	pager = genernatePager(Integer.parseInt(pageNo), Integer.parseInt(pageSize), totalCount, orders.size());
         }
 
-        Data<OrderModel> data = new Data<OrderModel>();
-        data.setList(orders);
+        Data<OrderResponseDto> data = new Data<OrderResponseDto>();
+        data.setList(orderResponseDtoList);
         data.setPager(pager);
         rspObj.setResult(data);
         return successResponse(rspObj);
@@ -81,20 +95,20 @@ public class OrderController extends SBaseController {
      */
     @RequestMapping(value = "/v1/order/createOrder", method = RequestMethod.POST, produces = { "application/json" })
     public PhiHomeBaseResponse createOrder(HttpServletRequest request,
-    		@RequestParam(value = "pCode", required = false) String pCode,
-            @RequestParam(value = "pName", required = false) String pName,
-            @RequestParam(value = "userId", required = false) String userId,
-            @RequestParam(value = "userName", required = false) String userName,
-            @RequestParam(value = "cardId", required = false) String cardId,
-            @RequestParam(value = "phoneNo", required = false) String phoneNo,
-            @RequestParam(value = "amount", required = false) String amount,
-            @RequestParam(value = "lastPayDate", required = false) String lastPayDate,
+    		@RequestParam(value = "productId", required = true) String productId,
+            @RequestParam(value = "userId", required = true) String userId,
+            @RequestParam(value = "userName", required = true) String userName,
+            @RequestParam(value = "cardId", required = true) String cardId,
+            @RequestParam(value = "amount", required = true) String amount,
+            @RequestParam(value = "lastPayDate", required = true) String lastPayDate,
+            @RequestParam(value = "issuingBank", required = true) String issuingBank,
+            @RequestParam(value = "bankCardNo", required = true) String bankCardNo,
             @RequestParam(value = "note", required = false) String note) {
         PhiHomeBaseResponse rspObj = new PhiHomeBaseResponse();
 
-        LOGGER.info("createOrder pCode [{}]", pCode);
+        LOGGER.info("预约订单接口 start pCode, userId [{}]", productId, userId);
 
-        OrderModel om = new OrderModel();
+        OrderModel om = generateOrder(productId, userId, cardId,amount,lastPayDate, issuingBank, bankCardNo);
         //todo 产品额度够不够
         int result = orderService.saveOrder(om);
         if (result < 1) {
@@ -102,6 +116,28 @@ public class OrderController extends SBaseController {
         }
 
         return successResponse(rspObj);
+    }
+    
+    private OrderModel generateOrder(String productId, String userId, String cardId, String amount, String lastPayDate,
+    		String issuingBank, String bankCardNo) {
+    	OrderModel om = new OrderModel();
+    	om.setOrderNo(generateOrderNo());
+    	om.setAmount(new BigDecimal(amount));
+    	om.setOrderDate(new Date());
+//    	om.setLatestPayDate();
+//    	om.setFinancerUid(financerUid);
+    	om.setCustomerUid(userId);
+    	om.setProductId(productId);
+//    	om.setCommission(commission);
+//    	om.setComRatio(comRatio);
+//    	om.setProRatio(proRatio);
+//    	om.setProfit(profit);
+//    	om.setStatus(status);
+    	om.setVoucherStatus("0");
+    	om.setContractStatus("0");
+    	om.setIssueBank(issuingBank);
+    	om.setCardNo(bankCardNo);  	
+    	return om;
     }
 
     /**
@@ -116,14 +152,11 @@ public class OrderController extends SBaseController {
     		@RequestParam(value = "orderNo", required = false) String orderNo) {
         PhiHomeBaseResponse rspObj = new PhiHomeBaseResponse();
 
-        LOGGER.info("cancelOrder type [{}]", orderNo);
+        LOGGER.info("cancelOrder orderNo [{}]", orderNo);
 
-        OrderModel om = new OrderModel();
         int result = orderService.cancelOrder(orderNo);
-        if (result > 0) {
-
-        } else {
-//            return errorRegister(String.valueOf(Const.ErrorCode.Account.REGIST_ERROR));
+        if (result < 1) {
+        	return errorResponse(100);
         }
         return successResponse(rspObj);
     }

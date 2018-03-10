@@ -14,38 +14,39 @@ import com.auts.lcs.model.dao.order.OrderModel;
 public interface OrderMapper {
 	
 	//create_time, update_time, create_user, update_user
-	@Insert("insert into tbl_order (id, order_no, amount, order_date, latest_pay_date, customer_name, customer_card_id, "
-			+ "customer_phone_num, product_id, product_code, product_type, product_name, commission_ratio, commission, "
-			+ "pay_status, photo_status,contract_status, uid) "
-            + "values (#{or.id}, #{or.orderNo},#{or.amount},#{or.orderDate},#{or.latestPayDate},#{or.customerName},#{or.customerCardId}, "
-            + "#{or.customerPhoneNum}, #{or.productId},#{or.productCode},#{or.productType},#{or.productName},#{or.commissionRatio},#{or.commission}, "
-            + "#{or.payStatus}, #{or.photoStatus},#{or.contractStatus},#{or.uid})")
+	@Insert("insert into tbl_order (uid, order_no, amount, order_date, latest_pay_date, financer_uid, customer_uid, "
+			+ "product_id, commission_ratio, commission,profit_ratio,profit, "
+			+ "status, voucher_status,voucher_path,contract_status, issuing_bank,card_no,create_time, update_time,) "
+            + "values (#{or.id}, #{or.orderNo},#{or.amount},#{or.orderDate},#{or.latestPayDate},#{or.financerUid},#{or.customerUid}, "
+            + "#{or.productId},#{or.comRatio},#{or.commission}, #{or.proRatio},#{or.profit},"
+            + "#{or.status}, #{or.voucherStatus},#{or.voucherPath},#{or.contractStatus},#{or.issueBank},#{or.cardNo}, sysdate(), sysdate())")
 	int saveOrder(OrderModel or);
 	
-	@Update("update tbl_order set pay_status = 999, update_time= NOW() where order_no=#{orderNo}")
+	@Update("update tbl_order set status = 999, update_time= NOW() where order_no=#{orderNo}")
 	int cancelOrder(@Param("orderNo") String orderNo);
 
-//    @Select("<script>"
-//    		+ "select count(*) num from tbl_order "
-//    		+ "<where>"
-//    		+ "<if test='payStatus !=null '>"
-//    		+ "  pay_status = #{payStatus} "
-//    		+ "</if> "
-//    		+ "</where></script>")
-	@Select("select count(*) num from tbl_order where pay_status= #{payStatus} limit 1")
-    int queryOrderCountByStatus(@Param("payStatus") String payStatus, @Param("uid") String uid);
+    @Select("<script>"
+    		+ "select count(*) num from tbl_order "
+    		+ "<where>"
+    		+ "<if test='status !=null '>"
+    		+ "  status = #{status} "
+    		+ "</if> "
+    		+ "</where></script>")
+//	@Select("select count(*) num from tbl_order where status= #{status} limit 1")
+    int queryOrderCountByStatus(@Param("status") String status, @Param("uid") String uid);
     
     @Select("select * from tbl_order where order_no=#{orderNo} limit 1")
     @Results({
-    	@Result(property = "id", column = "id"), @Result(property = "orderNo", column = "order_no"),
+    	@Result(property = "id", column = "uid"), @Result(property = "orderNo", column = "order_no"),
     	@Result(property = "amount", column = "amount"), @Result(property = "orderDate", column = "order_date"),
-    	@Result(property = "latestPayDate", column = "latest_pay_date"), @Result(property = "customerName", column = "customer_name"),
-    	@Result(property = "customerCardId", column = "customer_card_id"), @Result(property = "customerPhoneNum", column = "customer_phone_num"),
-    	@Result(property = "productId", column = "product_id"), @Result(property = "productCode", column = "product_code"),
-    	@Result(property = "productType", column = "product_type"), @Result(property = "productName", column = "product_name"),
-    	@Result(property = "commissionRatio", column = "commission_ratio"), @Result(property = "commission", column = "commission"),
-    	@Result(property = "payStatus", column = "pay_status"), @Result(property = "photoStatus", column = "photo_status"),
-		@Result(property = "contractStatus", column = "contract_status")
+    	@Result(property = "latestPayDate", column = "latest_pay_date"), @Result(property = "financerUid", column = "financer_uid"),
+    	@Result(property = "customerUid", column = "customer_uid"), @Result(property = "productId", column = "product_id"), 
+    	@Result(property = "comRatio", column = "commission_ratio"), @Result(property = "commission", column = "commission"),
+    	@Result(property = "proRatio", column = "profit_ratio"), @Result(property = "profit", column = "profit"),
+    	@Result(property = "status", column = "status"), @Result(property = "voucherStatus", column = "voucher_status"),
+    	@Result(property = "voucherPath", column = "voucher_path"), @Result(property = "contractStatus", column = "contract_status"),
+    	@Result(property = "issueBank", column = "issuing_bank"), @Result(property = "cardNo", column = "card_no"),
+    	@Result(property = "createTime", column = "create_time"), @Result(property = "updateTime", column = "update_time")
     })
     OrderModel queryOrderByOrderNo(@Param("orderNo") String orderNo);
 
@@ -59,15 +60,16 @@ public interface OrderMapper {
 //			+ "</where></script>")
     @Select("select * from tbl_order")
     @Results({
-    	@Result(property = "id", column = "id"), @Result(property = "orderNo", column = "order_no"),
+    	@Result(property = "id", column = "uid"), @Result(property = "orderNo", column = "order_no"),
     	@Result(property = "amount", column = "amount"), @Result(property = "orderDate", column = "order_date"),
-    	@Result(property = "latestPayDate", column = "latest_pay_date"), @Result(property = "customerName", column = "customer_name"),
-    	@Result(property = "customerCardId", column = "customer_card_id"), @Result(property = "customerPhoneNum", column = "customer_phone_num"),
-    	@Result(property = "productId", column = "product_id"), @Result(property = "productCode", column = "product_code"),
-    	@Result(property = "productType", column = "product_type"), @Result(property = "productName", column = "product_name"),
-    	@Result(property = "commissionRatio", column = "commission_ratio"), @Result(property = "commission", column = "commission"),
-    	@Result(property = "payStatus", column = "pay_status"), @Result(property = "photoStatus", column = "photo_status"),
-		@Result(property = "contractStatus", column = "contract_status")
+    	@Result(property = "latestPayDate", column = "latest_pay_date"), @Result(property = "financerUid", column = "financer_uid"),
+    	@Result(property = "customerUid", column = "customer_uid"), @Result(property = "productId", column = "product_id"), 
+    	@Result(property = "comRatio", column = "commission_ratio"), @Result(property = "commission", column = "commission"),
+    	@Result(property = "proRatio", column = "profit_ratio"), @Result(property = "profit", column = "profit"),
+    	@Result(property = "status", column = "status"), @Result(property = "voucherStatus", column = "voucher_status"),
+    	@Result(property = "voucherPath", column = "voucher_path"), @Result(property = "contractStatus", column = "contract_status"),
+    	@Result(property = "issueBank", column = "issuing_bank"), @Result(property = "cardNo", column = "card_no"),
+    	@Result(property = "createTime", column = "create_time"), @Result(property = "updateTime", column = "update_time")
     })
     List<OrderModel> queryOrders(@Param("startIndex") int startIndex, @Param("pageSize") int pageSize, @Param("payStatus") String status, @Param("uid") String uid);
    
