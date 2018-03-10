@@ -48,19 +48,47 @@ public class OrderController extends SBaseController {
         return successResponse(rspObj);
     }
     
-    @RequestMapping(value = "/v1/order/cancelOrder", method = RequestMethod.POST, produces = { "application/json" })
-    public PhiHomeBaseResponse cancelOrder(HttpServletRequest request,
-    		@RequestParam(value = "orderNo", required = false) String orderNo) {
+    /**
+     * 完成打款
+     */
+    @RequestMapping(value = "/v1/order/ordersettle", method = RequestMethod.POST, produces = { "application/json" })
+    public PhiHomeBaseResponse orderSettle(HttpServletRequest request,
+    		@RequestParam(value = "uid", required = true) String uid) {
         PhiHomeBaseResponse rspObj = new PhiHomeBaseResponse();
-        
-        LOGGER.info("cancelOrder type [{}]", orderNo);
-        
-        int result = orderService.cancelOrder(orderNo);
-        if (result > 0) {
-        	
-        } else {
-//            return errorRegister(String.valueOf(Const.ErrorCode.Account.REGIST_ERROR));
-        }
+        orderService.orderSettle(uid);
+        return successResponse(rspObj);
+    }
+    
+    /**
+     * 订单失败
+     */
+    @RequestMapping(value = "/v1/order/orderfailure", method = RequestMethod.POST, produces = { "application/json" })
+    public PhiHomeBaseResponse orderFailure(HttpServletRequest request,
+    		@RequestParam(value = "uid", required = true) String uid) {
+        PhiHomeBaseResponse rspObj = new PhiHomeBaseResponse();
+        orderService.orderFailure(uid);
+        return successResponse(rspObj);
+    }
+    
+    /**
+     * 完成合同
+     */
+    @RequestMapping(value = "/v1/order/ordercontract", method = RequestMethod.POST, produces = { "application/json" })
+    public PhiHomeBaseResponse orderContract(HttpServletRequest request,
+    		@RequestParam(value = "uid", required = true) String uid) {
+        PhiHomeBaseResponse rspObj = new PhiHomeBaseResponse();
+        orderService.orderContract(uid);
+        return successResponse(rspObj);
+    }
+    
+    /**
+     * 完成结佣
+     */
+    @RequestMapping(value = "/v1/order/ordersettled", method = RequestMethod.POST, produces = { "application/json" })
+    public PhiHomeBaseResponse orderSettled(HttpServletRequest request,
+    		@RequestParam(value = "uid", required = true) String uid) {
+        PhiHomeBaseResponse rspObj = new PhiHomeBaseResponse();
+        orderService.orderSettled(uid);
         return successResponse(rspObj);
     }
     

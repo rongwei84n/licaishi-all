@@ -13,12 +13,8 @@ public class OrderModel extends BaseDaoModel {
 	private int uid;
     private String orderNo;
     private BigDecimal amount;
-    @JsonFormat(timezone = "GMT+8", pattern = "yyyy-MM-dd HH:mm:ss")
-	@DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
-    private Date orderDate;
-    @JsonFormat(timezone = "GMT+8", pattern = "yyyy-MM-dd HH:mm:ss")
-	@DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
-    private Date latestPayDate;
+    private String orderDate;
+    private String latestPayDate;
     private String financerUid;
     private String financer;
     private String financerTel;
@@ -37,6 +33,8 @@ public class OrderModel extends BaseDaoModel {
     private String contractStatus;//合同状态
     private String voucherStatus;//凭证状态
     private String voucherPath;//凭证路径
+    private String issuingBank;//发卡银行
+    private String cardNo;//银行卡号
     @JsonFormat(timezone = "GMT+8", pattern = "yyyy-MM-dd HH:mm:ss")
 	@DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
 	private Date createtime;
@@ -62,17 +60,11 @@ public class OrderModel extends BaseDaoModel {
 	public void setAmount(BigDecimal amount) {
 		this.amount = amount;
 	}
-	public Date getOrderDate() {
+	public String getOrderDate() {
 		return orderDate;
 	}
-	public void setOrderDate(Date orderDate) {
+	public void setOrderDate(String orderDate) {
 		this.orderDate = orderDate;
-	}
-	public Date getLatestPayDate() {
-		return latestPayDate;
-	}
-	public void setLatestPayDate(Date latestPayDate) {
-		this.latestPayDate = latestPayDate;
 	}
 	public String getFinancer() {
 		return financer;
@@ -193,6 +185,24 @@ public class OrderModel extends BaseDaoModel {
 	}
 	public void setProductId(String productId) {
 		this.productId = productId;
+	}
+	public String getIssuingBank() {
+		return issuingBank;
+	}
+	public void setIssuingBank(String issuingBank) {
+		this.issuingBank = issuingBank;
+	}
+	public String getCardNo() {
+		return cardNo;
+	}
+	public void setCardNo(String cardNo) {
+		this.cardNo = cardNo;
+	}
+	public String getLatestPayDate() {
+		return latestPayDate;
+	}
+	public void setLatestPayDate(String latestPayDate) {
+		this.latestPayDate = latestPayDate;
 	}
     
 }

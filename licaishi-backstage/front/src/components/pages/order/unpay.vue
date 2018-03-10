@@ -8,8 +8,8 @@
     </div>
 
     <div class="handle-box">
-      <el-date-picker v-model="startDate" type="date" placeholder="开始日期"></el-date-picker>
-      <el-date-picker v-model="endDate" type="date" placeholder="结束日期"></el-date-picker>
+      <el-date-picker v-model="startDate" type="date" value-format="yyyy-MM-dd" placeholder="开始日期"></el-date-picker>
+      <el-date-picker v-model="endDate" type="date" value-format="yyyy-MM-dd" placeholder="结束日期"></el-date-picker>
       <el-button type="primary" icon="el-icon-search" @click="handleSearch">检索</el-button>
     </div>
 
@@ -26,7 +26,7 @@
             <el-form-item label="订单日期">
               <span>{{ props.row.orderDate}}</span>
             </el-form-item>
-            <el-form-item label="最迟打款日期">
+            <el-form-item label="最迟打款日">
               <span>{{ props.row.latestPayDate }}</span>
             </el-form-item>
             <el-form-item label="理财师">
@@ -59,6 +59,12 @@
             <el-form-item label="收益">
               <span>{{ props.row.profit }}</span>
             </el-form-item>
+            <el-form-item label="发卡银行">
+              <span>{{ props.row.issuingBank }}</span>
+            </el-form-item>
+            <el-form-item label="银行卡号">
+              <span>{{ props.row.cardNo }}</span>
+            </el-form-item>
             <el-form-item label="合同">
               <span>{{ props.row.contractStatus }}</span>
             </el-form-item>
@@ -73,11 +79,10 @@
           </el-form>
         </template>
       </el-table-column>
-      <el-table-column prop="orderNo" label="编号" width="80"></el-table-column>
+      <el-table-column prop="orderNo" label="编号" width="100"></el-table-column>
       <el-table-column prop="amount" label="金额" width="60"></el-table-column>
       <el-table-column prop="orderDate" label="订单日期" width="100"></el-table-column>
-      <el-table-column prop="latestPayDate" label="最迟打款日" width="100"></el-table-column>
-      <el-table-column prop="proShortNam" label="产品" width="120"></el-table-column>
+      <el-table-column prop="proShortNam" label="产品" width="80"></el-table-column>
       <el-table-column prop="financer" label="理财师" width="80"></el-table-column>
       <el-table-column prop="customer" label="客户" width="80"></el-table-column>
       <el-table-column prop="commission" label="佣金" width="60"></el-table-column>
@@ -134,7 +139,9 @@
           this.handleSearch();
         },
         handleSearch() {
+          this.listLoading = true;
           this.$axios.get('/order/orderlist', {params: {status: '110', startDate: this.startDate, endDate: this.endDate, pageNumber: this.pageNumber, pageSize: this.pageSize}}).then((res) => {
+            this.listLoading = false;
             if (res.data.status == 200) {
               this.total = res.data.result.total;
               this.orderList = res.data.result.dataList;
@@ -144,8 +151,58 @@
           });
         },
         handleSettle(index, row) {
+          this.$confirm('确认该订单已付款?', '提示', {
+            type: 'warning'
+          }).then(() => {
+            this.$axios.post('/order/ordersettle', {uid: row.uid}).then((res) => {
+              if (res.data.status == 200) {
+                this.$message({
+                  type: 'success',
+                  message: '操作成功!'
+                });
+                this.handleSearch();
+              } else {
+                this.$message({
+                  showClose: true,
+                  message: res.data.message,
+                  type: 'error'
+                });
+              }
+            }).catch((res) => {
+              this.$message({
+                showClose: true,
+                message: '访问服务器异常',
+                type: 'warning'
+              });
+            });
+          });
         },
         handleFailure(index, row) {
+          this.$confirm('确认该订单失败?', '提示', {
+            type: 'warning'
+          }).then(() => {
+            this.$axios.post('/order/orderfailure', {uid: row.uid}).then((res) => {
+              if (res.data.status == 200) {
+                this.$message({
+                  type: 'success',
+                  message: '操作成功!'
+                });
+                this.handleSearch();
+              } else {
+                this.$message({
+                  showClose: true,
+                  message: res.data.message,
+                  type: 'error'
+                });
+              }
+            }).catch((res) => {
+              this.$message({
+                showClose: true,
+                message: '访问服务器异常',
+                type: 'warning'
+              });
+            });
+          });
         }
       }
     }

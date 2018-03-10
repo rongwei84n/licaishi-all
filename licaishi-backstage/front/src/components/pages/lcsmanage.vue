@@ -355,7 +355,6 @@
         }).then(() => {
           this.listLoading = true;
           this.$axios.post('/financer/delfinancer', {uid: row.uid}).then((res) => {
-            console.log(res);
             this.listLoading = false;
             if (res.data.status == 200) {
               this.$message({

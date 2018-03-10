@@ -12,11 +12,8 @@ import com.auts.backstage.model.dao.order.OrderModel;
 
 public interface OrderMapper {
 	
-	@Update("update tbl_order set pay_status = 999, update_time= NOW() where order_no=#{orderNo}")
-	int cancelOrder(@Param("orderNo") String orderNo);
-
     @Select("<script>"
-    	+ "SELECT"
+    	+ "SELECT "
     		+ "a.*,"
     		+ "c.name financer,"
     		+ "c.phone financer_tel,"
@@ -27,25 +24,18 @@ public interface OrderMapper {
     		+ "e.i_full_name inst"
     	+ " FROM "
     		+ "tbl_order a "
-    		+ "LEFT JOIN tbl_financer c ON a.financer_uid = c.uid "
-    		+ "LEFT JOIN tbl_customer d ON a.customer_uid = d.uid "
+    		+ "LEFT JOIN tbl_financer c ON c.uid = a.financer_uid "
+    		+ "LEFT JOIN tbl_customer d ON d.uid = a.customer_uid "
     		+ "LEFT JOIN "
-    			+ "(SELECT "
-    			+ "aa.p_id,"
-    			+ "aa.p_short_name,"
-    			+ "aa.p_full_name,"
-    			+ "bb.i_full_name "
-    			+ "FROM "
-    			+ "Product aa,"
-    			+ "Institution bb "
-    			+ "WHERE aa.p_invest_owner_id = bb.i_id) e "
-    		+ "ON a.product_id = e.p_id "
+    			+ "(SELECT aa.p_id,aa.p_short_name,aa.p_full_name,bb.i_full_name "
+    			+ "FROM Product aa,Institution bb WHERE aa.p_invest_owner_id = bb.i_id) e "
+    		+ "ON e.p_id = a.product_id "
     	+ "WHERE a.status = #{status} "
     	+ "<if test='startDate != null'>"
-		+ 	" and str_to_date(#{startDate},'%Y-%m-%d %H:%i:%s') &lt;= a.order_date "
+		+ 	" and #{startDate} &lt;= a.order_date "
 		+ "</if>"
 		+ "<if test='endDate != null'>"
-		+ 	" and str_to_date(#{endDate},'%Y-%m-%d %H:%i:%s') &gt; a.order_date "
+		+ 	" and #{endDate} &gt;= a.order_date "
 		+ "</if>"
     	+ "</script>")
     @Results({
@@ -57,6 +47,7 @@ public interface OrderMapper {
     	@Result(property = "proRatio", column = "profit_ratio"),@Result(property = "profit", column = "profit"),
     	@Result(property = "status", column = "status"),@Result(property = "voucherStatus", column = "voucher_status"),
     	@Result(property = "voucherPath", column = "voucher_path"),@Result(property = "contractStatus", column = "contract_status"),
+    	@Result(property = "issuingBank", column = "issuing_bank"),@Result(property = "cardNo", column = "card_no"),
     	@Result(property = "createtime", column = "create_time"),@Result(property = "updatetime", column = "update_time"),
     	@Result(property = "financer", column = "financer"),@Result(property = "financerTel", column = "financer_tel"),
     	@Result(property = "customer", column = "customer"),@Result(property = "customerTel", column = "customer_tel"),
@@ -69,12 +60,24 @@ public interface OrderMapper {
         	+ "SELECT count(*) FROM tbl_order a "
         	+ "WHERE a.status = #{status} "
         	+ "<if test='startDate != null'>"
-    		+ 	" and str_to_date(#{startDate},'%Y-%m-%d %H:%i:%s') &lt;= a.order_date "
+    		+ 	" and #{startDate} &lt;= a.order_date "
     		+ "</if>"
     		+ "<if test='endDate != null'>"
-    		+ 	" and str_to_date(#{endDate},'%Y-%m-%d %H:%i:%s') &gt; a.order_date "
+    		+ 	" and #{endDate} &gt;= a.order_date "
     		+ "</if>"
         	+ "</script>")
-	int queryOrdersCnt(String status, String startDate, String endDate);
+	int queryOrdersCnt(@Param("status") String status, @Param("startDate") String startDate, @Param("endDate") String endDate);
+
+    @Update("update tbl_order set status = '120', update_time= NOW() where uid=#{uid}")
+	void orderSettle(@Param("uid") String uid);
+
+    @Update("update tbl_order set status = '999', update_time= NOW() where uid=#{uid}")
+	void orderFailure(@Param("uid") String uid);
+
+    @Update("update tbl_order set contract_status = '1', update_time= NOW() where uid=#{uid}")
+	void orderContract(String uid);
+
+    @Update("update tbl_order set status = '130', update_time= NOW() where uid=#{uid}")
+	void orderSettled(String uid);
    
 }

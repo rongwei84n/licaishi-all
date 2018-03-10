@@ -30,8 +30,23 @@ public class OrderSerivceImpl implements OrderService {
 	}
 
 	@Override
-	public int cancelOrder(String orderNo) {
-		return orderMapper.cancelOrder(orderNo);
+	public void orderSettle(String uid) {
+		orderMapper.orderSettle(uid);
+	}
+
+	@Override
+	public void orderFailure(String uid) {
+		orderMapper.orderFailure(uid);
+	}
+
+	@Override
+	public void orderContract(String uid) {
+		orderMapper.orderContract(uid);
+	}
+
+	@Override
+	public void orderSettled(String uid) {
+		orderMapper.orderSettled(uid);
 	}
 
 }
