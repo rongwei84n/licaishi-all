@@ -1,4 +1,4 @@
-package com.auts.lcs.model.dao.order;
+package com.auts.lcs.model.response;
 
 import java.math.BigDecimal;
 import java.util.Date;
@@ -8,7 +8,7 @@ import org.springframework.format.annotation.DateTimeFormat;
 import com.auts.lcs.model.common.BaseDaoModel;
 import com.fasterxml.jackson.annotation.JsonFormat;
 
-public class OrderModel extends BaseDaoModel {
+public class OrderResponseDto extends BaseDaoModel {
 
     private String orderNo;
     private BigDecimal amount;
@@ -20,8 +20,10 @@ public class OrderModel extends BaseDaoModel {
     private Date latestPayDate;
     private String financerUid;
     private String customerUid;
+    private String customerName;//客户姓名
     private String productId;
-    private String comRatio;//佣金比率
+    private String productShortName; //产品简称
+	private String comRatio;//佣金比率
     private BigDecimal commission;//佣金
     private String proRatio;//收益比率
     private BigDecimal profit;//收益
@@ -151,5 +153,17 @@ public class OrderModel extends BaseDaoModel {
 	}
 	public void setCardNo(String cardNo) {
 		this.cardNo = cardNo;
+	}
+    public String getCustomerName() {
+		return customerName;
+	}
+	public void setCustomerName(String customerName) {
+		this.customerName = customerName;
+	}
+	public String getProductShortName() {
+		return productShortName;
+	}
+	public void setProductShortName(String productShortName) {
+		this.productShortName = productShortName;
 	}
 }
