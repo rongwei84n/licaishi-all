@@ -14,10 +14,10 @@ import com.auts.lcs.model.dao.order.OrderModel;
 public interface OrderMapper {
 	
 	//create_time, update_time, create_user, update_user
-	@Insert("insert into tbl_order (uid, order_no, amount, order_date, latest_pay_date, financer_uid, customer_uid, "
+	@Insert("insert into tbl_order (order_no, amount, order_date, latest_pay_date, financer_uid, customer_uid, "
 			+ "product_id, commission_ratio, commission,profit_ratio,profit, "
 			+ "status, voucher_status,voucher_path,contract_status, issuing_bank,card_no,create_time, update_time,) "
-            + "values (#{or.id}, #{or.orderNo},#{or.amount},#{or.orderDate},#{or.latestPayDate},#{or.financerUid},#{or.customerUid}, "
+            + "values (#{or.orderNo},#{or.amount},#{or.orderDate},#{or.latestPayDate},#{or.financerUid},#{or.customerUid}, "
             + "#{or.productId},#{or.comRatio},#{or.commission}, #{or.proRatio},#{or.profit},"
             + "#{or.status}, #{or.voucherStatus},#{or.voucherPath},#{or.contractStatus},#{or.issueBank},#{or.cardNo}, sysdate(), sysdate())")
 	int saveOrder(OrderModel or);

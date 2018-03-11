@@ -133,7 +133,7 @@ public class OrderController extends SBaseController {
         LOGGER.info("queryOrders toekn [{}]", token);
         String uid = getUidByToken(token);
         //通过理财师的uid找到理财师表里的UID
-        String financerUid = "7";
+        String financerUid = "10";
         OrderModel om = generateOrder(productId, userId, financerUid, cardId,amount,lastPayDate, comRatio, proRatio,issuingBank, bankCardNo);
         //todo 产品额度够不够
         int result = orderService.saveOrder(om);
@@ -152,7 +152,7 @@ public class OrderController extends SBaseController {
     	om.setOrderDate(new Date());
     	om.setLatestPayDate(new Date());
     	om.setFinancerUid(financerUid);
-    	om.setCustomerUid(userId);
+    	om.setCustomerUid("2");
     	om.setProductId(productId);
 //    	om.setCommission(commission);
     	om.setComRatio(comRatio);
