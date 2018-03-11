@@ -9,7 +9,6 @@ import android.widget.RadioButton;
 import com.auts.lcssv.R;
 import com.auts.lcssv.adapter.MainVpAdapter;
 import com.auts.lcssv.base.BaseFragmentActivity;
-import com.auts.lcssv.fragment.SceneFragment;
 import com.auts.lcssv.manager.UpdateManager;
 import com.auts.lcssv.service.CommonService;
 import com.auts.lcssv.util.AppInfoUtils;
@@ -146,10 +145,6 @@ public class MainActivity extends BaseFragmentActivity {
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        if (resultCode == SceneEditActivity.RESULTCODE) {
-            SceneFragment fragment = (SceneFragment) mAdapter.getItem(1);
-            fragment.setUserVisibleHint(true);
-        }
     }
 
     public MainVpAdapter getmAdapter() {

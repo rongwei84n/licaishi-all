@@ -7,7 +7,6 @@ import android.util.SparseArray;
 
 import com.auts.lcssv.fragment.DeviceFragment;
 import com.auts.lcssv.fragment.MineFragment;
-import com.auts.lcssv.fragment.SceneFragment;
 
 /**
  *
@@ -31,7 +30,7 @@ public class MainVpAdapter extends FragmentPagerAdapter {
         if (position == 0) {
             fragment = new DeviceFragment();
         } else if (position == 1) {
-            fragment = new SceneFragment();
+//            fragment = new SceneFragment();
         } else {
             fragment = new MineFragment();
         }

@@ -51,10 +51,6 @@ public class DeviceListAdapter extends BasePullUpDownAdapter<DeviceDetail, BaseV
                 .listener(new RequestListener<String, GlideDrawable>() {
                     @Override
                     public boolean onException(Exception e, String model, Target<GlideDrawable> target, boolean isFirstResource) {
-                        ImageLoader.getLoader(mContext)
-                                .load(R.drawable.default_room)
-                                .transform(new CenterCrop(mContext), new GlideRoundTransform(mContext, 7))
-                                .into((ImageView) holder.getView(R.id.iv_bg));
                         return true;
                     }
 
