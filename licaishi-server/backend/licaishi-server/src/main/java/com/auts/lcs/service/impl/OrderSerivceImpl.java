@@ -55,5 +55,22 @@ public class OrderSerivceImpl implements OrderService {
 		return orderMapper.queryOrderCountByCustomerId(customerId);
 	}
 
+	@Override
+	public int queryOrderCountByFinancerId(String financerId) {
+		return orderMapper.queryOrderCountByFinancerId(financerId);
+				
+	}
+
+	@Override
+	public List<OrderModel> queryOrdersByFinancerId(int pageNo, int pageSize, String financerId) {
+		int startIndex = (pageNo - 1) * pageSize;
+		return orderMapper.queryOrdersByFinancerId(startIndex, pageSize, financerId);
+	}
+
+	@Override
+	public String queryCommissinByFinancerId(String financerId, List<String> statusList) {
+		return orderMapper.queryCommissinByFinancerId(financerId, statusList);
+	}
+
 
 }

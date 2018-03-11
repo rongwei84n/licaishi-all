@@ -10,6 +10,10 @@ public interface OrderService {
     
     List<OrderModel> queryOrdersByCustomerId(int pageNo, int pageSize, String customerId);
     
+    List<OrderModel> queryOrdersByFinancerId(int pageNo, int pageSize, String financerId);
+    
+    public String queryCommissinByFinancerId(String financerId, List<String> statusList);
+    
     OrderModel queryOrderByOrderNo(String orderNo);
     
     int saveOrder(OrderModel om);
@@ -19,4 +23,6 @@ public interface OrderService {
     int queryOrderCountByStatus(String status, String uid);
     
     int queryOrderCountByCustomerId(String customerId);
+    
+    int queryOrderCountByFinancerId(String financerId);
 }

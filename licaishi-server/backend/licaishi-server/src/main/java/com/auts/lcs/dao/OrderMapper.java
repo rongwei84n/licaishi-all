@@ -38,6 +38,10 @@ public interface OrderMapper {
     
 	@Select("select count(*) num from tbl_order where customer_uid= #{customerId} limit 1")
     int queryOrderCountByCustomerId(@Param("customerId") String customerId);
+	
+	//理财师只有待结佣和已结佣的交易才能有佣金
+	@Select("select count(*) num from tbl_order where financer_uid= #{financerId}  and status in ('02','03') limit 1")
+    int queryOrderCountByFinancerId(@Param("financerId") String financerId);
     
     @Select("select * from tbl_order where order_no=#{orderNo} limit 1")
     @Results({
@@ -91,5 +95,27 @@ public interface OrderMapper {
     	@Result(property = "createTime", column = "create_time"), @Result(property = "updateTime", column = "update_time")
     })
     List<OrderModel> queryOrdersByCustomerId(@Param("startIndex") int startIndex, @Param("pageSize") int pageSize, @Param("customerId") String customerId);
+    
+    @Select("select * from tbl_order where financer_uid= #{financerId}  and status in ('02','03')")
+    @Results({
+    	@Result(property = "id", column = "uid"), @Result(property = "orderNo", column = "order_no"),
+    	@Result(property = "amount", column = "amount"), @Result(property = "orderDate", column = "order_date"),
+    	@Result(property = "latestPayDate", column = "latest_pay_date"), @Result(property = "financerUid", column = "financer_uid"),
+    	@Result(property = "customerUid", column = "customer_uid"), @Result(property = "productId", column = "product_id"), 
+    	@Result(property = "comRatio", column = "commission_ratio"), @Result(property = "commission", column = "commission"),
+    	@Result(property = "proRatio", column = "profit_ratio"), @Result(property = "profit", column = "profit"),
+    	@Result(property = "status", column = "status"), @Result(property = "voucherStatus", column = "voucher_status"),
+    	@Result(property = "voucherPath", column = "voucher_path"), @Result(property = "contractStatus", column = "contract_status"),
+    	@Result(property = "issueBank", column = "issuing_bank"), @Result(property = "cardNo", column = "card_no"),
+    	@Result(property = "createTime", column = "create_time"), @Result(property = "updateTime", column = "update_time")
+    })
+    List<OrderModel> queryOrdersByFinancerId(@Param("startIndex") int startIndex, @Param("pageSize") int pageSize, @Param("financerId") String financerId);
+   
+    //计算
+	@Select("<script>"
+			+ "select sum(commission) commisson from tbl_order where financer_uid= #{financerId} and status in "
+			+ "<foreach item='item' index='index' collection='statusList' open='(' separator=',' close=')'>" + "#{item}"
+			+ "</foreach>" + "</script>")
+    String queryCommissinByFinancerId(@Param("financerId") String financerId, @Param("statusList") List<String> statusList);
    
 }
