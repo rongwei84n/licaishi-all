@@ -198,10 +198,21 @@ public class JsBridgeActivity extends BaseActivity {
 
     @Override
     public void onGoback() {
-        if (mWebView != null && mWebView.canGoBack()) {
+//        if (mWebView != null && mWebView.canGoBack()) {
 //            WebBackForwardList historys = mWebView.copyBackForwardList();
-            if (mPageIndex > 0) {
-                mPageIndex --;
+//            if (mPageIndex > 0) {
+//                mPageIndex --;
+//                mWebView.goBack();
+//                mJavaBridge.callHandler("nativeBack");
+//            } else {
+//                super.onGoback();
+//            }
+//        } else {
+//            super.onGoback();
+//        }
+        if (mWebView != null && mWebView.canGoBack()) {
+            WebBackForwardList historys = mWebView.copyBackForwardList();
+            if (historys != null && historys.getSize() > 1) {
                 mWebView.goBack();
                 mJavaBridge.callHandler("nativeBack");
             } else {
