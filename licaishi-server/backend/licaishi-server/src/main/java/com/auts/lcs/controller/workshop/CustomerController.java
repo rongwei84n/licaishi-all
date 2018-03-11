@@ -19,10 +19,12 @@ import com.auts.lcs.consts.Const;
 import com.auts.lcs.controller.SBaseController;
 import com.auts.lcs.model.common.PhiHomeBaseResponse;
 import com.auts.lcs.model.dao.CustomerModel;
+import com.auts.lcs.model.dao.order.OrderModel;
 import com.auts.lcs.model.enums.OrderStatus;
 import com.auts.lcs.model.response.AllInfoCountResponse;
 import com.auts.lcs.model.response.CustomerResponseDto;
 import com.auts.lcs.model.response.Data;
+import com.auts.lcs.model.response.OrderResponseDto;
 import com.auts.lcs.model.response.Pager;
 import com.auts.lcs.service.CustomerService;
 import com.auts.lcs.service.OrderService;
@@ -47,9 +49,16 @@ public class CustomerController extends SBaseController {
     @Autowired
     CustomerService customerService;
 
+    /**
+     * 查询我的客户列表
+     * @param request
+     * @param pageNo
+     * @param pageSize
+     * @return
+     */
     @RequestMapping(value = "/v1/workshop/queryMyCustomers", method = RequestMethod.GET, produces = { "application/json" })
     public PhiHomeBaseResponse queryMyCustomers(HttpServletRequest request,
-    		@RequestParam(value = "pageNo", required = false) String pageNo,
+    		@RequestParam(value = "pageNo", required = true) String pageNo,
             @RequestParam(value = "pageSize", required = true) String pageSize) {
         PhiHomeBaseResponse rspObj = new PhiHomeBaseResponse();
         Pager pager = null;
@@ -94,6 +103,46 @@ public class CustomerController extends SBaseController {
 //        allInfoCount.getStatusMap().put("ALL", totalCount);
 //        rspObj.setResult(allInfoCount);
 //        return successResponse(rspObj);
+    }
+    
+    /**
+     * 根据客户ID查询客户所有订单
+     * @param request
+     * @return
+     */
+    @RequestMapping(value = "/v1/workshop/queryOrdersByCustomerId", method = RequestMethod.GET, produces = { "application/json" })
+    public PhiHomeBaseResponse queryOrdersByCustomerId(HttpServletRequest request,
+    		@RequestParam(value = "pageNo", required = true) String pageNo,
+            @RequestParam(value = "pageSize", required = true) String pageSize,
+            @RequestParam(value = "customerId", required = true) String customerId) {
+        PhiHomeBaseResponse rspObj = new PhiHomeBaseResponse();
+        Pager pager = null;
+                     
+        LOGGER.info("queryOrdersByCustomerId customerId [{}]", customerId);
+        String token = request.getHeader(Const.AUTHORIZATION);
+        LOGGER.info("queryOrdersByCustomerId toekn [{}]", token);
+        String uid = getUidByToken(token);
+        int totalCount = orderService.queryOrderCountByCustomerId(customerId);
+        List<OrderResponseDto> orderResponseDtoList = new ArrayList<>();
+        List<OrderModel> orders = orderService.queryOrdersByCustomerId(Integer.parseInt(pageNo), Integer.parseInt(pageSize), customerId);
+        if(orders !=null && !orders.isEmpty()) {
+        	for(OrderModel orderModel : orders) {
+        		OrderResponseDto orderResponseDto = new OrderResponseDto();
+        		BeanUtils.copyProperties(orderModel, orderResponseDto);
+        		//查询产品简称
+        		orderResponseDto.setProductShortName("大通阳明 1222 号");
+        		orderResponseDto.setCustomerName("李冰帅哥");
+        		orderResponseDtoList.add(orderResponseDto);
+        	}
+        	//分页
+        	pager = genernatePager(Integer.parseInt(pageNo), Integer.parseInt(pageSize), totalCount, orders.size());
+        }
+
+        Data<OrderResponseDto> data = new Data<OrderResponseDto>();
+        data.setList(orderResponseDtoList);
+        data.setPager(pager);
+        rspObj.setResult(data);
+        return successResponse(rspObj);
     }
     
 //    /**

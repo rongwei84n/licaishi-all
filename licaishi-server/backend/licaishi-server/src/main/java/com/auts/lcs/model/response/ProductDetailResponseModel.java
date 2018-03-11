@@ -14,7 +14,7 @@ import com.auts.lcs.model.dao.product.ProfitRebateModel;
  * @date 2018年2月27日
  */
 public class ProductDetailResponseModel {
-	
+	private String pId;
 	private String pCode;
     private String pShortName;
     private String pFullName;
@@ -29,7 +29,8 @@ public class ProductDetailResponseModel {
     private String pInvestType;
     private String pSizeRatioType;
     private String pInvestOwnerId;
-    private BigDecimal pIssuingScale;
+    private String pInvestName;
+	private BigDecimal pIssuingScale;
     private BigDecimal pExpectSaleAmount;
     private BigDecimal pAllSubscriptionAmount;
     private String pRecruitmentSummary;
@@ -211,5 +212,17 @@ public class ProductDetailResponseModel {
 	}
 	public void setProfitRebates(List<ProfitRebateModel> profitRebates) {
 		this.profitRebates = profitRebates;
+	}
+    public String getpId() {
+		return pId;
+	}
+	public void setpId(String pId) {
+		this.pId = pId;
+	}
+	public String getpInvestName() {
+		return pInvestName;
+	}
+	public void setpInvestName(String pInvestName) {
+		this.pInvestName = pInvestName;
 	}
 }

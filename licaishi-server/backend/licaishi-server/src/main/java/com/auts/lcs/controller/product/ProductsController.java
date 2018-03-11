@@ -52,7 +52,7 @@ public class ProductsController extends SBaseController {
      */
     @RequestMapping(value = "/v1/product/list", method = RequestMethod.GET, produces = { "application/json" })
     public PhiHomeBaseResponse queryProducts(HttpServletRequest request,
-            @RequestParam(value = "pageNo", required = false) String pageNo,
+            @RequestParam(value = "pageNo", required = true) String pageNo,
             @RequestParam(value = "pageSize", required = true) String pageSize,
             @RequestParam(value = "type", required = false) String type,
             @RequestParam(value = "pInvestType", required = false) String pInvestType, //01：房地产类 02：金融市场 03：基础设施 04：资金池 05：工商企业 99：其他
@@ -61,7 +61,9 @@ public class ProductsController extends SBaseController {
             @RequestParam(value = "minimumAmount", required = false) String minimumAmount,// 500000；1000000；2000000；3000000
             @RequestParam(value = "dueTime", required = false) String dueTime,//产品期限      01；02；03；04；05
             @RequestParam(value = "annualRevenue", required = false) String annualRevenue,//预期收益     01；02；03；04；05；06
-            @RequestParam(value = "saleStatus", required = false) String saleStatus) {//募集状态    01：预热中 02：募集中 03：募集结束 04：产品成立
+            @RequestParam(value = "saleStatus", required = false) String saleStatus,//募集状态    01：预热中 02：募集中 03：募集结束 
+            @RequestParam(value = "pRabateProfitParameter", required = false) String pRabateProfitParameter,
+            @RequestParam(value = "pAnnualRevenueExpectParameter", required = false) String pAnnualRevenueExpectParameter) {
         PhiHomeBaseResponse rspObj = new PhiHomeBaseResponse();
         Pager pager = null;
 
@@ -168,6 +170,9 @@ public class ProductsController extends SBaseController {
     }
     
     private void convertProductDetailResponse(ProductDetailResponseModel productResponseModel, ProductModel productModel) {
+    	productResponseModel.setpId(productModel.getId()+"");
+    	//TODO查询机构简称
+    	productResponseModel.setpInvestName("上海信托");
     	//设置最高预计收益率
     	List<ProfitRebateModel> profitRebates = productResponseModel.getProfitRebates();
     	if(profitRebates != null && profitRebates.size() > 0) {

@@ -8,6 +8,8 @@ public interface OrderService {
 
     List<OrderModel> queryOrders(int pageNo, int pageSize, String type, String uid);
     
+    List<OrderModel> queryOrdersByCustomerId(int pageNo, int pageSize, String customerId);
+    
     OrderModel queryOrderByOrderNo(String orderNo);
     
     int saveOrder(OrderModel om);
@@ -15,4 +17,6 @@ public interface OrderService {
     int cancelOrder(String orderNo);
     
     int queryOrderCountByStatus(String status, String uid);
+    
+    int queryOrderCountByCustomerId(String customerId);
 }
