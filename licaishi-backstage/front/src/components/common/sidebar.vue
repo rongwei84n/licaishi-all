@@ -70,21 +70,6 @@
                 title: '已失败'
               }
             ]
-          },
-          {
-            icon: 'el-icon-menu',
-            index: '2',
-            title: '统计分析',
-            subs: [
-              {
-                index: '',
-                title: '基础表格'
-              },
-              {
-                index: '',
-                title: 'Vue表格组件'
-              }
-            ]
           }
         ]
       }

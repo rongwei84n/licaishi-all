@@ -14,7 +14,7 @@ public interface FinancerMapper {
 	
 	@Select("<script>"
 			+ "select * from tbl_financer "
-			+ "<if test='nameSearch != null'>"
+			+ "<if test='nameSearch != \"\"'>"
 			+ 	"where name like concat('%',#{nameSearch},'%')"
 			+ "</if>"
 			+ "order by uid"
@@ -42,7 +42,7 @@ public interface FinancerMapper {
 
 	@Select("<script>"
 			+ "select count(*) from tbl_financer "
-			+ "<if test='nameSearch != null'>"
+			+ "<if test='nameSearch != \"\"'>"
 			+ 	"where name like concat('%',#{nameSearch},'%')"
 			+ "</if>"
 			+ "order by uid"

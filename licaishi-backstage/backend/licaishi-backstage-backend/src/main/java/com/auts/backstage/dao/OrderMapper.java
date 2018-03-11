@@ -31,10 +31,10 @@ public interface OrderMapper {
     			+ "FROM Product aa,Institution bb WHERE aa.p_invest_owner_id = bb.i_id) e "
     		+ "ON e.p_id = a.product_id "
     	+ "WHERE a.status = #{status} "
-    	+ "<if test='startDate != null'>"
+    	+ "<if test='startDate != \"\"'>"
 		+ 	" and #{startDate} &lt;= a.order_date "
 		+ "</if>"
-		+ "<if test='endDate != null'>"
+		+ "<if test='endDate != \"\"'>"
 		+ 	" and #{endDate} &gt;= a.order_date "
 		+ "</if>"
     	+ "</script>")
@@ -59,25 +59,25 @@ public interface OrderMapper {
     @Select("<script>"
         	+ "SELECT count(*) FROM tbl_order a "
         	+ "WHERE a.status = #{status} "
-        	+ "<if test='startDate != null'>"
+        	+ "<if test='startDate != \"\"'>"
     		+ 	" and #{startDate} &lt;= a.order_date "
     		+ "</if>"
-    		+ "<if test='endDate != null'>"
+    		+ "<if test='endDate != \"\"'>"
     		+ 	" and #{endDate} &gt;= a.order_date "
     		+ "</if>"
         	+ "</script>")
 	int queryOrdersCnt(@Param("status") String status, @Param("startDate") String startDate, @Param("endDate") String endDate);
 
-    @Update("update tbl_order set status = '120', update_time= NOW() where uid=#{uid}")
+    @Update("update tbl_order set status = '02', update_time= NOW() where uid=#{uid}")
 	void orderSettle(@Param("uid") String uid);
 
-    @Update("update tbl_order set status = '999', update_time= NOW() where uid=#{uid}")
+    @Update("update tbl_order set status = '99', update_time= NOW() where uid=#{uid}")
 	void orderFailure(@Param("uid") String uid);
 
     @Update("update tbl_order set contract_status = '1', update_time= NOW() where uid=#{uid}")
 	void orderContract(String uid);
 
-    @Update("update tbl_order set status = '130', update_time= NOW() where uid=#{uid}")
+    @Update("update tbl_order set status = '03', update_time= NOW() where uid=#{uid}")
 	void orderSettled(String uid);
    
 }

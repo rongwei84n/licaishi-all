@@ -66,11 +66,13 @@
               <span>{{ props.row.cardNo }}</span>
             </el-form-item>
             <el-form-item label="合同">
-              <span>{{ props.row.contractStatus }}</span>
+              <span>{{ props.row.contractStatus | formatContractStatus}}</span>
             </el-form-item>
             <el-form-item label="凭证">
-              <span v-if="voucherStatus === '1' ">
-                <img src=""/>
+              <span v-if="props.row.voucherStatus == 1">
+                <a :href="remoteImgURL + props.row.voucherPath" target="_blank">
+                  <img :src="remoteImgURL + props.row.voucherPath" style="width:80px;"/>
+                </a>
               </span>
               <span v-else>
                 未上传
@@ -87,8 +89,8 @@
       <el-table-column prop="customer" label="客户" width="100"></el-table-column>
       <el-table-column prop="commission" label="佣金" width="100"></el-table-column>
       <el-table-column prop="profit" label="收益" width="100"></el-table-column>
-      <el-table-column prop="voucherStatus" label="凭证" width="60"></el-table-column>
-      <el-table-column prop="contractStatus" label="合同" width="60"></el-table-column>
+      <el-table-column prop="voucherStatus" label="凭证" width="60" :formatter="formatVoucherStatus"></el-table-column>
+      <el-table-column prop="contractStatus" label="合同" width="60" :formatter="formatContractStatus"></el-table-column>
     </el-table>
 
     <!--分页-->
@@ -123,7 +125,18 @@
     mounted: function () {
       this.handleSearch();
     },
+    filters: {
+      formatContractStatus: function (row, column) {
+        return row.contractStatus == 1 ? '是' : '否';
+      }
+    },
     methods: {
+      formatVoucherStatus: function (row, column) {
+        return row.voucherStatus == 1 ? '是' : '否';
+      },
+      formatContractStatus: function (row, column) {
+        return row.contractStatus == 1 ? '是' : '否';
+      },
       handleSizeChange(val) {
         this.pageSize = val;
         this.handleSearch();
@@ -134,7 +147,7 @@
       },
       handleSearch() {
         this.listLoading = true;
-        this.$axios.get('/order/orderlist', {params: {status: '130', startDate: this.startDate, endDate: this.endDate, pageNumber: this.pageNumber, pageSize: this.pageSize}}).then((res) => {
+        this.$axios.get('/order/orderlist', {params: {status: '03', startDate: this.startDate, endDate: this.endDate, pageNumber: this.pageNumber, pageSize: this.pageSize}}).then((res) => {
           this.listLoading = false;
           if (res.data.status == 200) {
             this.total = res.data.result.total;

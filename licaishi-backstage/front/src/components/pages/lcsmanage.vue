@@ -49,7 +49,7 @@
       <el-table-column prop="uid" label="uid" width="70"></el-table-column>
       <el-table-column prop="name" label="姓名" width="150"></el-table-column>
       <el-table-column prop="phone" label="电话" width="150"></el-table-column>
-      <el-table-column prop="sex" label="性别" width="100" :formatter="formatSex" sortable></el-table-column>
+      <el-table-column prop="sex" label="性别" width="100" :formatter="formatSex"></el-table-column>
       <el-table-column prop="email" label="电子邮箱" width="150"></el-table-column>
       <el-table-column label="操作">
         <template slot-scope="scope">
