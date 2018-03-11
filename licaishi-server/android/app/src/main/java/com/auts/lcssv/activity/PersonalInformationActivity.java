@@ -210,9 +210,11 @@ public class PersonalInformationActivity extends BaseActivity implements GetPhot
     private void logout() {
         stopService(new Intent(this, CommonService.class));
         AccountManager.getInstance().clearRefreshToken();
+        AccountManager.getInstance().clearAccessToken();;
         String phone = AccountManager.getInstance().getLoginPhone();
-        AppManager.getAppManager().finishAllActivity();
-        startActivity(new Intent(this, LoginCloudActivity.class).putExtra("register_phone", phone));
+//        AppManager.getAppManager().finishAllActivity();
+        finish();
+//        startActivity(new Intent(this, LoginCloudActivity.class).putExtra("register_phone", phone));
     }
 
     @Override

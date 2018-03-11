@@ -115,6 +115,10 @@ public class AccountManager {
         saveValue(AppConstans.Sp.REFRESH_TOKEN, "");
     }
 
+    public void clearAccessToken() {
+        saveValue(AppConstans.Sp.ACCESS_TOKEN, "");
+    }
+
     //参数请写在AppConstans.CountdownTimeKey中，避免重复
     public void saveCountdownTime(int left, @Nullable String key) {
         SpfUtils.put(key, System.currentTimeMillis() / 1000 + "-" + left);
