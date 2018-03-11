@@ -95,7 +95,7 @@ public class MainActivity extends BaseFragmentActivity {
      */
     private void togglePage(int position) {
         toggleRb(getResources().getDrawable(R.drawable.tag_device), mRbDevice, getResources().getColor(R.color.text));
-        toggleRb(getResources().getDrawable(R.drawable.tag_scene), mRbScene, getResources().getColor(R.color.text));
+//        toggleRb(getResources().getDrawable(R.drawable.tag_scene), mRbScene, getResources().getColor(R.color.text));
         toggleRb(getResources().getDrawable(R.drawable.tag_mine), mRbMine, getResources().getColor(R.color.text));
 
 //        if (position == 0) {
