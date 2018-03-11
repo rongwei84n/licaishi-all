@@ -10,13 +10,10 @@ import com.alibaba.fastjson.TypeReference;
 import com.auts.lcssv.activity.DevicePicActivity;
 import com.auts.lcssv.activity.LoginCloudActivity;
 import com.auts.lcssv.activity.PersonalInformationActivity;
-import com.auts.lcssv.activity.RoomManageActivity;
-import com.auts.lcssv.bean.MqttCallback;
 import com.auts.lcssv.constants.AppConstans;
 import com.auts.lcssv.net.callback.SynCallback;
 import com.auts.lcssv.net.engine.OkHttpUtil;
 import com.auts.lcssv.net.request.BaseRequest;
-import com.auts.lcssv.util.Base64Utils;
 import com.auts.lcssv.util.IntentUtils;
 import com.auts.lcssv.util.LogUtils;
 import com.auts.lcssv.util.NetworkUtils;
@@ -64,9 +61,6 @@ public class NativeModel {
         try {
             Intent intent = null;
             switch (jsData.getPageName()) {
-                case "phihome.room.manage":
-                    intent = new Intent(context, RoomManageActivity.class);
-                    break;
                 case "phihome.device.picture":
                     intent = new Intent(context, DevicePicActivity.class);
                     intent.putExtra("deviceId", deviceId);

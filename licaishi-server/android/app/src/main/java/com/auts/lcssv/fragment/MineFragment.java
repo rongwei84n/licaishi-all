@@ -12,7 +12,6 @@ import android.widget.TextView;
 
 import com.auts.lcssv.R;
 import com.auts.lcssv.activity.AboutActivity;
-import com.auts.lcssv.activity.HouseManageActivity;
 import com.auts.lcssv.activity.MessageActivity;
 import com.auts.lcssv.activity.PersonalInformationActivity;
 import com.auts.lcssv.base.BaseFragment;
@@ -218,12 +217,6 @@ public class MineFragment extends BaseFragment implements ILoadingView {
         ActivityCompat.startActivity(getActivity(), intent, options.toBundle());
     }
 
-    @OnClick(R.id.rl_home_manage)
-    public void rl_home_manage() {
-        Intent intent = new Intent(getActivity(), HouseManageActivity.class);
-        startActivityForResult(intent, REQUESTCODE);
-    }
-
     @OnClick(R.id.rl_about)
     public void ll_about() {
         Intent intent = new Intent(getActivity(), AboutActivity.class);
@@ -240,9 +233,6 @@ public class MineFragment extends BaseFragment implements ILoadingView {
         super.onActivityResult(requestCode, resultCode, data);
         if (resultCode == MessageActivity.RESULTCODE) {
             mRedDot.setVisibility(View.INVISIBLE);
-        }
-        if (resultCode == HouseManageActivity.RESULTCODE) {
-            mTvHomeName.setText(SpfUtils.get(AppConstans.Sp.SELECTED_HOUSE, "我的家").toString());
         }
     }
 

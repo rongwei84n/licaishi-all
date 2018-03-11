@@ -99,13 +99,13 @@ public class MainActivity extends BaseFragmentActivity {
         toggleRb(getResources().getDrawable(R.drawable.tag_scene), mRbScene, getResources().getColor(R.color.text));
         toggleRb(getResources().getDrawable(R.drawable.tag_mine), mRbMine, getResources().getColor(R.color.text));
 
-        if (position == 0) {
-            toggleRb(getResources().getDrawable(R.drawable.tag_device_selected), mRbDevice, getResources().getColor(R.color.text_oringe));
-        } else if (position == 1) {
-            toggleRb(getResources().getDrawable(R.drawable.tag_scene_selected), mRbScene, getResources().getColor(R.color.text_oringe));
-        } else {
-            toggleRb(getResources().getDrawable(R.drawable.tag_mine_selected), mRbMine, getResources().getColor(R.color.text_oringe));
-        }
+//        if (position == 0) {
+//            toggleRb(getResources().getDrawable(R.drawable.tag_device_selected), mRbDevice, getResources().getColor(R.color.text_oringe));
+//        } else if (position == 1) {
+//            toggleRb(getResources().getDrawable(R.drawable.tag_scene_selected), mRbScene, getResources().getColor(R.color.text_oringe));
+//        } else {
+//            toggleRb(getResources().getDrawable(R.drawable.tag_mine_selected), mRbMine, getResources().getColor(R.color.text_oringe));
+//        }
     }
 
     @Override
