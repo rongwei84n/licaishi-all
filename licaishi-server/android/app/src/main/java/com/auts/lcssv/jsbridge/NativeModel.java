@@ -7,7 +7,6 @@ import android.text.TextUtils;
 
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.TypeReference;
-import com.auts.lcssv.activity.DevicePicActivity;
 import com.auts.lcssv.activity.LoginCloudActivity;
 import com.auts.lcssv.activity.PersonalInformationActivity;
 import com.auts.lcssv.constants.AppConstans;
@@ -61,11 +60,6 @@ public class NativeModel {
         try {
             Intent intent = null;
             switch (jsData.getPageName()) {
-                case "phihome.device.picture":
-                    intent = new Intent(context, DevicePicActivity.class);
-                    intent.putExtra("deviceId", deviceId);
-                    intent.putExtra("picGid", jsData.getPageExtra());
-                    break;
                 case "lcs.account.login":
                     intent = new Intent(context, LoginCloudActivity.class);
                     break;
