@@ -21,6 +21,7 @@ import com.auts.lcs.consts.Const;
 import com.auts.lcs.controller.SBaseController;
 import com.auts.lcs.model.common.PhiHomeBaseResponse;
 import com.auts.lcs.model.dao.order.OrderModel;
+import com.auts.lcs.model.enums.OrderStatus;
 import com.auts.lcs.model.response.Data;
 import com.auts.lcs.model.response.OrderResponseDto;
 import com.auts.lcs.model.response.Pager;
@@ -120,14 +121,20 @@ public class OrderController extends SBaseController {
             @RequestParam(value = "cardId", required = true) String cardId,
             @RequestParam(value = "amount", required = true) String amount,
             @RequestParam(value = "lastPayDate", required = true) String lastPayDate,
+            @RequestParam(value = "comRatio", required = true) String comRatio,
+            @RequestParam(value = "proRatio", required = true) String proRatio,
             @RequestParam(value = "issuingBank", required = true) String issuingBank,
             @RequestParam(value = "bankCardNo", required = true) String bankCardNo,
             @RequestParam(value = "note", required = false) String note) {
         PhiHomeBaseResponse rspObj = new PhiHomeBaseResponse();
 
         LOGGER.info("预约订单接口 start pCode, userId [{}]", productId, userId);
-
-        OrderModel om = generateOrder(productId, userId, cardId,amount,lastPayDate, issuingBank, bankCardNo);
+        String token = request.getHeader(Const.AUTHORIZATION);
+        LOGGER.info("queryOrders toekn [{}]", token);
+        String uid = getUidByToken(token);
+        //通过理财师的uid找到理财师表里的UID
+        String financerUid = "7";
+        OrderModel om = generateOrder(productId, userId, financerUid, cardId,amount,lastPayDate, comRatio, proRatio,issuingBank, bankCardNo);
         //todo 产品额度够不够
         int result = orderService.saveOrder(om);
         if (result < 1) {
@@ -137,21 +144,21 @@ public class OrderController extends SBaseController {
         return successResponse(rspObj);
     }
     
-    private OrderModel generateOrder(String productId, String userId, String cardId, String amount, String lastPayDate,
-    		String issuingBank, String bankCardNo) {
+    private OrderModel generateOrder(String productId, String userId, String financerUid, String cardId, String amount, String lastPayDate,
+    		String comRatio, String proRatio, String issuingBank, String bankCardNo) {
     	OrderModel om = new OrderModel();
     	om.setOrderNo(generateOrderNo());
     	om.setAmount(new BigDecimal(amount));
     	om.setOrderDate(new Date());
-//    	om.setLatestPayDate();
-//    	om.setFinancerUid(financerUid);
+    	om.setLatestPayDate(new Date());
+    	om.setFinancerUid(financerUid);
     	om.setCustomerUid(userId);
     	om.setProductId(productId);
 //    	om.setCommission(commission);
-//    	om.setComRatio(comRatio);
-//    	om.setProRatio(proRatio);
+    	om.setComRatio(comRatio);
+    	om.setProRatio(proRatio);
 //    	om.setProfit(profit);
-//    	om.setStatus(status);
+    	om.setStatus(OrderStatus.WP.getValue());
     	om.setVoucherStatus("0");
     	om.setContractStatus("0");
     	om.setIssueBank(issuingBank);
