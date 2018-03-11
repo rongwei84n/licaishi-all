@@ -51,7 +51,7 @@ public class MyAnimationView extends View {
         ballRadius = context.getResources().getDimension(R.dimen.ball_radius);
 
         dashedCircleBitmap = BitmapFactory.decodeResource(context.getResources(), R.drawable.dashed_circle_for_two);
-        deviceBitmap = BitmapFactory.decodeResource(context.getResources(), R.drawable.icon_animation_device);
+//        deviceBitmap = BitmapFactory.decodeResource(context.getResources(), R.drawable.icon_animation_device);
         phoneBitmap = BitmapFactory.decodeResource(context.getResources(), R.drawable.icon_animation_phone);
         ballBitmap = BitmapFactory.decodeResource(context.getResources(), R.drawable.icon_animation_ball);
 

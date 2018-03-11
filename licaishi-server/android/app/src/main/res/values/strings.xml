@@ -170,7 +170,7 @@
     <string name="get_head_portrait_fail">获取头像失败，请稍后再试</string>
     <string name="get_person_info_fail">获取个人信息失败，请稍后再试</string>
 
-    <string name="are_you_sure_to_exit">退出后将无法控制设备，无法接收消息提醒，确定要退出吗？</string>
+    <string name="are_you_sure_to_exit">确定要退出吗？</string>
 
 
     <!-- zxing -->

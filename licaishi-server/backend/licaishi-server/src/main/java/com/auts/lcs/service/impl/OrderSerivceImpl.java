@@ -44,5 +44,16 @@ public class OrderSerivceImpl implements OrderService {
 		return orderMapper.queryOrderCountByStatus(status, uid);
 	}
 
+	@Override
+	public List<OrderModel> queryOrdersByCustomerId(int pageNo, int pageSize, String customerId) {
+		int startIndex = (pageNo - 1) * pageSize;
+		return orderMapper.queryOrdersByCustomerId(startIndex, pageSize, customerId);
+	}
+
+	@Override
+	public int queryOrderCountByCustomerId(String customerId) {
+		return orderMapper.queryOrderCountByCustomerId(customerId);
+	}
+
 
 }

@@ -43,7 +43,6 @@
             android:layout_weight="1"
             android:button="@null"
             android:drawablePadding="5dp"
-            android:drawableTop="@drawable/tag_scene"
             android:gravity="center"
             android:text="@string/scene"
             android:textColor="@color/text"

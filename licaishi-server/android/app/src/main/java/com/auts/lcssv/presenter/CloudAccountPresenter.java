@@ -117,7 +117,7 @@ public class CloudAccountPresenter extends BasePresenter {
                 }
 
                 //上传RegistrationID
-                upLoadRegistrationId(JPushInterface.getRegistrationID(PhApplication.getAppContext()));
+//                upLoadRegistrationId(JPushInterface.getRegistrationID(PhApplication.getAppContext()));
             }
 
         });

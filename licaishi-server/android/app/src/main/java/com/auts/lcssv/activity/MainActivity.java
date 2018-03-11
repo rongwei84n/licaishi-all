@@ -9,7 +9,6 @@ import android.widget.RadioButton;
 import com.auts.lcssv.R;
 import com.auts.lcssv.adapter.MainVpAdapter;
 import com.auts.lcssv.base.BaseFragmentActivity;
-import com.auts.lcssv.fragment.SceneFragment;
 import com.auts.lcssv.manager.UpdateManager;
 import com.auts.lcssv.service.CommonService;
 import com.auts.lcssv.util.AppInfoUtils;
@@ -96,16 +95,16 @@ public class MainActivity extends BaseFragmentActivity {
      */
     private void togglePage(int position) {
         toggleRb(getResources().getDrawable(R.drawable.tag_device), mRbDevice, getResources().getColor(R.color.text));
-        toggleRb(getResources().getDrawable(R.drawable.tag_scene), mRbScene, getResources().getColor(R.color.text));
+//        toggleRb(getResources().getDrawable(R.drawable.tag_scene), mRbScene, getResources().getColor(R.color.text));
         toggleRb(getResources().getDrawable(R.drawable.tag_mine), mRbMine, getResources().getColor(R.color.text));
 
-        if (position == 0) {
-            toggleRb(getResources().getDrawable(R.drawable.tag_device_selected), mRbDevice, getResources().getColor(R.color.text_oringe));
-        } else if (position == 1) {
-            toggleRb(getResources().getDrawable(R.drawable.tag_scene_selected), mRbScene, getResources().getColor(R.color.text_oringe));
-        } else {
-            toggleRb(getResources().getDrawable(R.drawable.tag_mine_selected), mRbMine, getResources().getColor(R.color.text_oringe));
-        }
+//        if (position == 0) {
+//            toggleRb(getResources().getDrawable(R.drawable.tag_device_selected), mRbDevice, getResources().getColor(R.color.text_oringe));
+//        } else if (position == 1) {
+//            toggleRb(getResources().getDrawable(R.drawable.tag_scene_selected), mRbScene, getResources().getColor(R.color.text_oringe));
+//        } else {
+//            toggleRb(getResources().getDrawable(R.drawable.tag_mine_selected), mRbMine, getResources().getColor(R.color.text_oringe));
+//        }
     }
 
     @Override
@@ -146,10 +145,6 @@ public class MainActivity extends BaseFragmentActivity {
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        if (resultCode == SceneEditActivity.RESULTCODE) {
-            SceneFragment fragment = (SceneFragment) mAdapter.getItem(1);
-            fragment.setUserVisibleHint(true);
-        }
     }
 
     public MainVpAdapter getmAdapter() {
