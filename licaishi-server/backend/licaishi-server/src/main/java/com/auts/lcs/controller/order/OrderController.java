@@ -63,8 +63,8 @@ public class OrderController extends SBaseController {
         String pageNo = request.getParameter(Const.PAGE_NO);
         String pageSize = request.getParameter(Const.PAGE_SIZE);
         String type = request.getParameter(Const.TYPE);
-                     
-        LOGGER.info("queryOrders type [{}]", type);
+
+        LOGGER.info("queryOrders pageNo [{}] pageSize [{}] type [{}]", pageNo, pageSize, type);
         String token = request.getHeader(Const.AUTHORIZATION);
         LOGGER.info("queryOrders toekn [{}]", token);
         String uid = getUidByToken(token);
@@ -96,9 +96,9 @@ public class OrderController extends SBaseController {
     		@RequestParam(value = "orderNo", required = true) String orderNo) {
         PhiHomeBaseResponse rspObj = new PhiHomeBaseResponse();
         OrderResponseDto orderResponseDto = new OrderResponseDto();
-                   
+
         LOGGER.info("queryOrderDetail orderNo [{}]", orderNo);
-        
+
         OrderModel orderModel = orderService.queryOrderByOrderNo(orderNo);
         if(orderModel !=null) {
     		BeanUtils.copyProperties(orderModel, orderResponseDto);
@@ -109,7 +109,7 @@ public class OrderController extends SBaseController {
         rspObj.setResult(orderResponseDto);
         return successResponse(rspObj);
     }
-    
+
     /**
      * 预约产品
      * @param request
@@ -149,7 +149,7 @@ public class OrderController extends SBaseController {
 
         return successResponse(rspObj);
     }
-    
+
     /**
      * 查询我的客户列表
      * @param request
@@ -168,7 +168,7 @@ public class OrderController extends SBaseController {
         List<CustomerListResponseDto> customerResponseDtoList = new ArrayList<>();
         if(customers!=null && !customers.isEmpty()) {
         	for(CustomerModel customerModel : customers) {
-        		
+
         		CustomerListResponseDto customerResponseDto = new CustomerListResponseDto();
             	BeanUtils.copyProperties(customerModel, customerResponseDto);
             	customerResponseDtoList.add(customerResponseDto);
@@ -181,7 +181,7 @@ public class OrderController extends SBaseController {
         rspObj.setResult(data);
         return successResponse(rspObj);
     }
-    
+
     private OrderModel generateOrder(String productId, String customerId, String financerUid, String cardId, String amount, String lastPayDate,
     		String comRatio, String proRatio, String issuingBank, String bankCardNo) {
     	OrderModel om = new OrderModel();
@@ -203,7 +203,7 @@ public class OrderController extends SBaseController {
     	om.setVoucherStatus("0");
     	om.setContractStatus("0");
     	om.setIssueBank(issuingBank);
-    	om.setCardNo(bankCardNo);  	
+    	om.setCardNo(bankCardNo);
     	return om;
     }
 
