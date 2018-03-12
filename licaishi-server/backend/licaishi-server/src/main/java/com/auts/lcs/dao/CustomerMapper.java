@@ -27,7 +27,18 @@ public interface CustomerMapper {
     	@Result(property = "sex", column = "sex"),@Result(property = "birthday", column = "birthday")
     })
     List<CustomerModel> queryCustomerByFUID(@Param("startIndex")int startIndex, @Param("pageSize")int pageSize, @Param("financerId") String financerId);
-
+	
+	@Select("select * from tbl_customer where financerId = #{financerId}")
+    @Results({
+    	@Result(property = "uid", column = "uid"), @Result(property = "userId", column = "userId"),
+    	@Result(property = "financerId", column = "financerId"),
+    	@Result(property = "name", column = "name"), @Result(property = "email", column = "email"),
+    	@Result(property = "address", column = "address"), @Result(property = "createtime", column = "createtime"),
+    	@Result(property = "updatetime", column = "updatetime"), @Result(property = "phone", column = "phone"),
+    	@Result(property = "sex", column = "sex"),@Result(property = "birthday", column = "birthday")
+    })
+    List<CustomerModel> queryCustomerForOrder(@Param("financerId") String financerId);
+	
 	@Insert("insert into tbl_customer (userId,name,phone,email,address,sex,birthday, createtime,updatetime,financerId) values "
 			+ "(#{customer.userId},#{customer.name},#{customer.phone},#{customer.email},#{customer.address},"
 			+ "#{customer.sex},#{customer.birthday},#{customer.createtime},#{customer.updatetime},#{customer.financerId})")

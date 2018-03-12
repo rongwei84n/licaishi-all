@@ -20,11 +20,15 @@ import org.springframework.web.bind.annotation.RestController;
 import com.auts.lcs.consts.Const;
 import com.auts.lcs.controller.SBaseController;
 import com.auts.lcs.model.common.PhiHomeBaseResponse;
+import com.auts.lcs.model.dao.CustomerModel;
 import com.auts.lcs.model.dao.order.OrderModel;
 import com.auts.lcs.model.enums.OrderStatus;
+import com.auts.lcs.model.response.CustomerListResponseDto;
+import com.auts.lcs.model.response.CustomerResponseDto;
 import com.auts.lcs.model.response.Data;
 import com.auts.lcs.model.response.OrderResponseDto;
 import com.auts.lcs.model.response.Pager;
+import com.auts.lcs.service.CustomerService;
 import com.auts.lcs.service.OrderService;
 
 /**
@@ -44,6 +48,8 @@ public class OrderController extends SBaseController {
 
     @Autowired
     OrderService orderService;
+    @Autowired
+    CustomerService customerService;
 
     /**
      * 订单查询
@@ -144,20 +150,55 @@ public class OrderController extends SBaseController {
         return successResponse(rspObj);
     }
     
+    /**
+     * 查询我的客户列表
+     * @param request
+     * @return
+     */
+    @RequestMapping(value = "/v1/order/queryCustomersForOrder", method = RequestMethod.GET, produces = { "application/json" })
+    public PhiHomeBaseResponse queryMyCustomers(HttpServletRequest request) {
+        PhiHomeBaseResponse rspObj = new PhiHomeBaseResponse();
+        LOGGER.info("queryCustomersForOrder start [{}]");
+        String token = request.getHeader(Const.AUTHORIZATION);
+        LOGGER.info("queryCustomersForOrder toekn [{}]", token);
+        String uid = getUidByToken(token);
+
+        String financerId = "10";
+        List<CustomerModel> customers = customerService.queryCustomerForOrder(financerId);
+        List<CustomerListResponseDto> customerResponseDtoList = new ArrayList<>();
+        if(customers!=null && !customers.isEmpty()) {
+        	for(CustomerModel customerModel : customers) {
+        		
+        		CustomerListResponseDto customerResponseDto = new CustomerListResponseDto();
+            	BeanUtils.copyProperties(customerModel, customerResponseDto);
+            	customerResponseDtoList.add(customerResponseDto);
+            }
+        }
+
+        Data<CustomerListResponseDto> data = new Data<CustomerListResponseDto>();
+        data.setList(customerResponseDtoList);
+
+        rspObj.setResult(data);
+        return successResponse(rspObj);
+    }
+    
     private OrderModel generateOrder(String productId, String customerId, String financerUid, String cardId, String amount, String lastPayDate,
     		String comRatio, String proRatio, String issuingBank, String bankCardNo) {
     	OrderModel om = new OrderModel();
     	om.setOrderNo(generateOrderNo());
-    	om.setAmount(new BigDecimal(amount));
+    	BigDecimal amountBD = new BigDecimal(amount);
+    	om.setAmount(amountBD);
     	om.setOrderDate(new Date());
     	om.setLatestPayDate(new Date());
     	om.setFinancerUid(financerUid);
-    	om.setCustomerUid("2");
+    	om.setCustomerUid(customerId);
     	om.setProductId(productId);
-//    	om.setCommission(commission);
     	om.setComRatio(comRatio);
+    	BigDecimal commission = amountBD.multiply(new BigDecimal(comRatio.replace("%", ""))).divide(new BigDecimal(100));
+    	om.setCommission(commission);
     	om.setProRatio(proRatio);
-//    	om.setProfit(profit);
+    	BigDecimal profit = amountBD.multiply(new BigDecimal(proRatio.replace("%", ""))).divide(new BigDecimal(100));
+    	om.setProfit(profit);
     	om.setStatus(OrderStatus.WP.getValue());
     	om.setVoucherStatus("0");
     	om.setContractStatus("0");

@@ -20,7 +20,7 @@ public interface OrderMapper {
             + "values (#{or.orderNo},#{or.amount},#{or.orderDate},#{or.latestPayDate},#{or.financerUid},#{or.customerUid}, "
             + "#{or.productId},#{or.comRatio},#{or.commission}, #{or.proRatio},#{or.profit},"
             + "#{or.status}, #{or.voucherStatus},#{or.voucherPath},#{or.contractStatus},#{or.issueBank},#{or.cardNo}, sysdate(), sysdate())")
-	int saveOrder(OrderModel or);
+	int saveOrder(@Param("or") OrderModel or);
 	
 	@Update("update tbl_order set status = 999, update_time= NOW() where order_no=#{orderNo}")
 	int cancelOrder(@Param("orderNo") String orderNo);
