@@ -40,6 +40,9 @@ class ResetPasswordViewController: UITableViewController, InstanceFromStoryBoard
         super.viewDidLoad()
 
         gainCodeButton.isEnabled = false
+        if let phoneNumber = phoneNumber {
+            gainCodeButton.isEnabled = phoneNumber.countForChineseString() >= 11
+        }
         
         phoneTextField.text = phoneNumber
         phoneTextFieldDelegate.shouldChangeCallback = { [weak self] (textField, range, string) in
