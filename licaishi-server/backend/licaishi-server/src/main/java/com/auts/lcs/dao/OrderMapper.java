@@ -58,15 +58,15 @@ public interface OrderMapper {
     })
     OrderModel queryOrderByOrderNo(@Param("orderNo") String orderNo);
 
-//    @Select("<script>select * from tbl_order "
-////    		+ "where  <if test=\"uid !=null \">uid = #{uid} </if>"
-//    		+ "<where>"
-//			+ "<if test='payStatus !=null '>"
-//			+ " pay_status = #{payStatus} "
-//			+ "</if> "
-//			+ "limit #{startIndex}, #{pageSize}"
-//			+ "</where></script>")
-    @Select("select * from tbl_order")
+    @Select("<script>"
+    		+ "select * from tbl_order "
+    		+ " where financer_uid = 10 "
+			+ "<if test='status !=null '>"
+			+ " and status = #{status} "
+			+ "</if> "
+			+ " limit #{startIndex}, #{pageSize}"
+			+ "</script>")
+//    @Select("select * from tbl_order")
     @Results({
     	@Result(property = "id", column = "uid"), @Result(property = "orderNo", column = "order_no"),
     	@Result(property = "amount", column = "amount"), @Result(property = "orderDate", column = "order_date"),
@@ -79,7 +79,7 @@ public interface OrderMapper {
     	@Result(property = "issueBank", column = "issuing_bank"), @Result(property = "cardNo", column = "card_no"),
     	@Result(property = "createTime", column = "create_time"), @Result(property = "updateTime", column = "update_time")
     })
-    List<OrderModel> queryOrders(@Param("startIndex") int startIndex, @Param("pageSize") int pageSize, @Param("payStatus") String status, @Param("uid") String uid);
+    List<OrderModel> queryOrders(@Param("startIndex") int startIndex, @Param("pageSize") int pageSize, @Param("status") String status, @Param("uid") String uid);
    
     @Select("select * from tbl_order where customer_uid= #{customerId}")
     @Results({

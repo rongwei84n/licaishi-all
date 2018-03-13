@@ -17,4 +17,6 @@ public interface CustomerService {
 	void delCustomer(String uid);
 
 	void editCustomer(CustomerModel customer);
+	
+	CustomerModel queryCustomerByUid(String uid);
 }

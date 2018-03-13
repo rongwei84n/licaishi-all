@@ -30,6 +30,7 @@ import com.auts.lcs.model.response.OrderResponseDto;
 import com.auts.lcs.model.response.Pager;
 import com.auts.lcs.service.CustomerService;
 import com.auts.lcs.service.OrderService;
+import com.auts.lcs.service.ProductsService;
 
 /**
  * 订单管理API入口
@@ -50,6 +51,8 @@ public class OrderController extends SBaseController {
     OrderService orderService;
     @Autowired
     CustomerService customerService;
+    @Autowired
+    ProductsService productsService;
 
     /**
      * 订单查询
@@ -57,31 +60,32 @@ public class OrderController extends SBaseController {
      * @return
      */
     @RequestMapping(value = "/v1/order/list", method = RequestMethod.GET, produces = { "application/json" })
-    public PhiHomeBaseResponse queryOrders(HttpServletRequest request) {
+    public PhiHomeBaseResponse queryOrders(HttpServletRequest request,
+    		@RequestParam(value = "pageNo", required = true) Integer pageNo,
+    		@RequestParam(value = "pageSize", required = true) Integer pageSize,
+    		@RequestParam(value = "status", required = true) String status) {
         PhiHomeBaseResponse rspObj = new PhiHomeBaseResponse();
         Pager pager = null;
-        String pageNo = request.getParameter(Const.PAGE_NO);
-        String pageSize = request.getParameter(Const.PAGE_SIZE);
-        String type = request.getParameter(Const.TYPE);
                      
-        LOGGER.info("queryOrders type [{}]", type);
+        LOGGER.info("queryOrders status [{}]", status);
         String token = request.getHeader(Const.AUTHORIZATION);
         LOGGER.info("queryOrders toekn [{}]", token);
         String uid = getUidByToken(token);
-        int totalCount = orderService.queryOrderCountByStatus(type, uid);
+        //uid 查找理财师的uid
+        int totalCount = orderService.queryOrderCountByStatus(status, uid);
         List<OrderResponseDto> orderResponseDtoList = new ArrayList<>();
-        List<OrderModel> orders = orderService.queryOrders(Integer.parseInt(pageNo), Integer.parseInt(pageSize), type, uid);
+        List<OrderModel> orders = orderService.queryOrders(pageNo, pageSize, status, uid);
         if(orders !=null && !orders.isEmpty()) {
         	for(OrderModel orderModel : orders) {
         		OrderResponseDto orderResponseDto = new OrderResponseDto();
         		BeanUtils.copyProperties(orderModel, orderResponseDto);
         		//查询产品简称
-        		orderResponseDto.setProductShortName("大通阳明 1222 号");
-        		orderResponseDto.setCustomerName("李冰帅哥");
+        		orderResponseDto.setProductShortName(productsService.queryProductByPid(orderModel.getProductId()).getpShortName());
+        		orderResponseDto.setCustomerName(customerService.queryCustomerByUid(orderModel.getCustomerUid()).getName());
         		orderResponseDtoList.add(orderResponseDto);
         	}
         	//分页
-        	pager = genernatePager(Integer.parseInt(pageNo), Integer.parseInt(pageSize), totalCount, orders.size());
+        	pager = genernatePager(pageNo, pageSize, totalCount, orders.size());
         }
 
         Data<OrderResponseDto> data = new Data<OrderResponseDto>();
@@ -103,8 +107,8 @@ public class OrderController extends SBaseController {
         if(orderModel !=null) {
     		BeanUtils.copyProperties(orderModel, orderResponseDto);
     		//查询产品简称
-    		orderResponseDto.setProductShortName("大通阳明 1222 号");
-    		orderResponseDto.setCustomerName("李冰帅哥");
+    		orderResponseDto.setProductShortName(productsService.queryProductByPid(orderModel.getProductId()).getpShortName());
+    		orderResponseDto.setCustomerName(customerService.queryCustomerByUid(orderModel.getCustomerUid()).getName());
         }
         rspObj.setResult(orderResponseDto);
         return successResponse(rspObj);

@@ -102,4 +102,9 @@ public class ProductsImpl implements ProductsService {
 		// TODO Auto-generated method stub
 		return 0;
 	}
+
+	@Override
+	public ProductModel queryProductByPid(String pid) {
+		return productsMapper.queryProductByPid(pid);
+	}
 }

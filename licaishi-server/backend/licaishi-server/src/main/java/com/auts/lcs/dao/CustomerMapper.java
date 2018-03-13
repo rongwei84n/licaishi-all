@@ -28,6 +28,17 @@ public interface CustomerMapper {
     })
     List<CustomerModel> queryCustomerByFUID(@Param("startIndex")int startIndex, @Param("pageSize")int pageSize, @Param("financerId") String financerId);
 	
+	@Select("select * from tbl_customer where uid = #{uid}")
+    @Results({
+    	@Result(property = "uid", column = "uid"), @Result(property = "userId", column = "userId"),
+    	@Result(property = "financerId", column = "financerId"),
+    	@Result(property = "name", column = "name"), @Result(property = "email", column = "email"),
+    	@Result(property = "address", column = "address"), @Result(property = "createtime", column = "createtime"),
+    	@Result(property = "updatetime", column = "updatetime"), @Result(property = "phone", column = "phone"),
+    	@Result(property = "sex", column = "sex"),@Result(property = "birthday", column = "birthday")
+    })
+	CustomerModel queryCustomerByUid(@Param("uid") String uid);
+	
 	@Select("select * from tbl_customer where financerId = #{financerId}")
     @Results({
     	@Result(property = "uid", column = "uid"), @Result(property = "userId", column = "userId"),
