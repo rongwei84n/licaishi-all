@@ -1,20 +1,26 @@
 package com.auts.backstage.model.dao.product;
 
 import java.util.Date;
+import java.util.List;
+
+import org.springframework.format.annotation.DateTimeFormat;
 
 import com.alibaba.fastjson.annotation.JSONField;
 import com.auts.backstage.model.common.BaseDaoModel;
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 public class ProductModel extends BaseDaoModel {
 
-    private String pCode;
+	private String pCode;
     private String pShortName;
     private String pFullName;
     private String pType;
     private String pExpectAnnualRevenue;
     private String pSaleStatus;
     private String pDulTime;
+	@JsonFormat(timezone = "GMT+8", pattern = "yyyy-MM-dd")
+	@DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date pSaleStartTime;
     private String pAllIssuingScale;
     private String pMinAmount;
@@ -22,8 +28,130 @@ public class ProductModel extends BaseDaoModel {
     private String pInvestType;
     private String pSizeRatioType;
     private String pInvestOwnerId;
+    private String pAllSubscriptionAmount;
+    private String pRecruitmentSummary;
+    private int latestPayNum; //最迟打款天数
+	private String pCpys;
+    private String pMjzh;
+    private String pFxkz;
+    private String pHkly;
+    private String pZjyt;
+    private String pRzf;
+    private String pDbf;
+	@JsonFormat(timezone = "GMT+8", pattern = "yyyy-MM-dd HH:mm:ss")
+	@DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+    private Date createTime;
+	@JsonFormat(timezone = "GMT+8", pattern = "yyyy-MM-dd HH:mm:ss")
+	@DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+    private Date updateTime;
+	private List<ProfitRebateModel> profitRebates;
+	private List<ProductAttachmentModel> productAttachments;
 
-    public String getpCode() {
+	public List<ProfitRebateModel> getProfitRebates() {
+		return profitRebates;
+	}
+
+	public void setProfitRebates(List<ProfitRebateModel> profitRebates) {
+		this.profitRebates = profitRebates;
+	}
+
+	public List<ProductAttachmentModel> getProductAttachments() {
+		return productAttachments;
+	}
+
+	public void setProductAttachments(List<ProductAttachmentModel> productAttachments) {
+		this.productAttachments = productAttachments;
+	}
+
+	public Date getCreateTime() {
+		return createTime;
+	}
+
+	public void setCreateTime(Date createTime) {
+		this.createTime = createTime;
+	}
+
+	public Date getUpdateTime() {
+		return updateTime;
+	}
+
+	public void setUpdateTime(Date updateTime) {
+		this.updateTime = updateTime;
+	}
+
+    public String getpAllSubscriptionAmount() {
+        return pAllSubscriptionAmount;
+    }
+
+    public void setpAllSubscriptionAmount(String pAllSubscriptionAmount) {
+        this.pAllSubscriptionAmount = pAllSubscriptionAmount;
+    }
+
+    public String getpRecruitmentSummary() {
+		return pRecruitmentSummary;
+	}
+
+	public void setpRecruitmentSummary(String pRecruitmentSummary) {
+		this.pRecruitmentSummary = pRecruitmentSummary;
+	}
+
+	public String getpCpys() {
+		return pCpys;
+	}
+
+	public void setpCpys(String pCpys) {
+		this.pCpys = pCpys;
+	}
+
+	public String getpMjzh() {
+		return pMjzh;
+	}
+
+	public void setpMjzh(String pMjzh) {
+		this.pMjzh = pMjzh;
+	}
+
+	public String getpFxkz() {
+		return pFxkz;
+	}
+
+	public void setpFxkz(String pFxkz) {
+		this.pFxkz = pFxkz;
+	}
+
+	public String getpHkly() {
+		return pHkly;
+	}
+
+	public void setpHkly(String pHkly) {
+		this.pHkly = pHkly;
+	}
+
+	public String getpZjyt() {
+		return pZjyt;
+	}
+
+	public void setpZjyt(String pZjyt) {
+		this.pZjyt = pZjyt;
+	}
+
+	public String getpRzf() {
+		return pRzf;
+	}
+
+	public void setpRzf(String pRzf) {
+		this.pRzf = pRzf;
+	}
+
+	public String getpDbf() {
+		return pDbf;
+	}
+
+	public void setpDbf(String pDbf) {
+		this.pDbf = pDbf;
+	}
+
+	public String getpCode() {
 		return pCode;
 	}
 
@@ -88,22 +216,22 @@ public class ProductModel extends BaseDaoModel {
 	}
 
 	public String getpAllIssuingScale() {
-		return pAllIssuingScale;
-	}
+        return pAllIssuingScale;
+    }
 
-	public void setpAllIssuingScale(String pAllIssuingScale) {
-		this.pAllIssuingScale = pAllIssuingScale;
-	}
+    public void setpAllIssuingScale(String pAllIssuingScale) {
+        this.pAllIssuingScale = pAllIssuingScale;
+    }
 
 	public String getpMinAmount() {
-		return pMinAmount;
-	}
+        return pMinAmount;
+    }
 
-	public void setpMinAmount(String pMinAmount) {
-		this.pMinAmount = pMinAmount;
-	}
+    public void setpMinAmount(String pMinAmount) {
+        this.pMinAmount = pMinAmount;
+    }
 
-	public String getpPaymentInterestType() {
+    public String getpPaymentInterestType() {
 		return pPaymentInterestType;
 	}
 
@@ -134,16 +262,11 @@ public class ProductModel extends BaseDaoModel {
 	public void setpInvestOwnerId(String pInvestOwnerId) {
 		this.pInvestOwnerId = pInvestOwnerId;
 	}
+    public int getLatestPayNum() {
+		return latestPayNum;
+	}
 
-	@JsonProperty("time_limit")
-    @JSONField(name = "time_limit")
-    private String timeLimit;
-
-    public String getTimeLimit() {
-        return timeLimit;
-    }
-
-    public void setTimeLimit(String timeLimit) {
-        this.timeLimit = timeLimit;
-    }
+	public void setLatestPayNum(int latestPayNum) {
+		this.latestPayNum = latestPayNum;
+	}
 }

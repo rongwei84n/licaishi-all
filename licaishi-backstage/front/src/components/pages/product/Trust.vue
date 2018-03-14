@@ -8,18 +8,18 @@
       </div>
 
       <div class="handle-box">
-        <el-input v-model="nameSearch" placeholder="产品简称" class="handle-input"></el-input>
+        <el-input v-model="pType" placeholder="产品简称" class="handle-input"></el-input>
         <el-button type="primary" icon="el-icon-search" @click="handleSearch">搜索</el-button>
         <el-button type="primary" icon="el-icon-plus" @click="handleAdd">新增</el-button>
-        <el-button type="danger" icon="el-icon-close" :disabled="this.multipleSelection.length===0" class="handle-del"
-                   @click="batchRemove">批量删除
-        </el-button>
+        <!--<el-button type="danger" icon="el-icon-close" :disabled="this.multipleSelection.length===0" class="handle-del"-->
+                   <!--@click="batchRemove">批量删除-->
+        <!--</el-button>-->
       </div>
-
-      <el-table :data="productList" v-loading="listLoading" style="width: 100%" border ref="multipleTable"
+      <!--border ref="multipleTable"-->
+      <el-table :data="productList" v-loading="listLoading" style="width: 100%" border
                 @selection-change="handleSelectionChange">
-        <el-table-column type="selection" width="40"></el-table-column>
-        <el-table-column prop="uid" label="uid" width="70"></el-table-column>
+        <!--<el-table-column type="selection" width="40"></el-table-column>-->
+        <el-table-column prop="id" label="uid" width="70"></el-table-column>
         <el-table-column prop="pCode" label="产品编号" width="70"></el-table-column>
         <el-table-column prop="pShortName" label="产品简称" width="150"></el-table-column>
         <el-table-column prop="pFullName" label="产品全称" width="250"></el-table-column>
@@ -80,6 +80,13 @@
           <el-form-item label="预期年化收益" prop="expectAnnualRevenue">
             <el-input v-model="addForm.pExpectAnnualRevenue"></el-input>
           </el-form-item>
+          <el-form-item label="产品销售状态" prop="pSaleStatus">
+            <el-select v-model="addForm.pSaleStatus" placeholder="请选择产品销售状态">
+              <el-option label="预热中" value="01"></el-option>
+              <el-option label="募集中" value="02"></el-option>
+              <el-option label="募集结束" value="03"></el-option>
+            </el-select>
+          </el-form-item>
           <el-form-item label="投资领域" prop="pInvestType">
             <el-select v-model="addForm.pInvestType" placeholder="请选择投资领域">
               <el-option label="房地产类" value="01"></el-option>
@@ -103,6 +110,9 @@
             <el-date-picker type="date" value-format="yyyy-MM-dd" placeholder="选择日期"
                             v-model="addForm.pSaleStartTime"></el-date-picker>
           </el-form-item>
+          <el-form-item label="发行机构" prop="pInvestOwnerId">
+            <el-input v-model="addForm.pInvestOwnerId"></el-input>
+          </el-form-item>
           <el-form-item label="大小配比" prop="pSizeRatioType">
             <el-select v-model="addForm.pSizeRatioType" placeholder="请选择大小配比类型">
               <el-option label="小额畅打" value="01"></el-option>
@@ -111,41 +121,35 @@
               <el-option label="全大额" value="04"></el-option>
             </el-select>
           </el-form-item>
-          <el-form-item label="最低投资金额" prop="minAmount">
-            <el-input v-model="addForm.minAmount"></el-input>
+          <el-form-item label="最低投资金额" prop="pMinAmount">
+            <el-input v-model="addForm.pMinAmount"></el-input>
           </el-form-item>
-          <el-form-item label="发行金额" prop="issuingScale">
-            <el-input v-model="addForm.expectSaleAmount"></el-input>
+          <el-form-item label="最迟打款天数" prop="latestPayNum">
+            <el-input v-model="addForm.latestPayNum"></el-input>
           </el-form-item>
-          <el-form-item label="期望销售金额" prop="expectSaleAmount">
-            <el-input v-model="addForm.expectSaleAmount"></el-input>
+          <el-form-item label="备注" prop="pRecruitmentSummary">
+            <el-input type="textarea" v-model="addForm.pRecruitmentSummary"></el-input>
           </el-form-item>
-          <el-form-item label="产品状态" prop="pSaleStatus">
-            <el-input v-model="addForm.pSaleStatus"></el-input>
+          <el-form-item label="产品优势" prop="pCpys">
+            <el-input type="textarea" v-model="addForm.pCpys"></el-input>
           </el-form-item>
-          <el-form-item label="备注" prop="summary">
-            <el-input type="textarea" v-model="addForm.summary"></el-input>
+          <el-form-item label="募集账号" prop="pMjzh">
+            <el-input type="textarea" v-model="addForm.pMjzh"></el-input>
           </el-form-item>
-          <el-form-item label="备注" prop="summary">
-            <el-input type="textarea" v-model="addForm.summary"></el-input>
+          <el-form-item label="风险控制" prop="pFxkz">
+            <el-input type="textarea" v-model="addForm.pFxkz"></el-input>
           </el-form-item>
-          <el-form-item label="产品优势" prop="summary">
-            <el-input type="textarea" v-model="addForm.summary"></el-input>
+          <el-form-item label="还款来源" prop="pHkly">
+            <el-input type="textarea" v-model="addForm.pHkly"></el-input>
           </el-form-item>
-          <el-form-item label="募集账号" prop="summary">
-            <el-input type="textarea" v-model="addForm.summary"></el-input>
+          <el-form-item label="资金用途" prop="pZjyt">
+            <el-input type="textarea" v-model="addForm.pZjyt"></el-input>
           </el-form-item>
-          <el-form-item label="风险控制" prop="summary">
-            <el-input type="textarea" v-model="addForm.summary"></el-input>
+          <el-form-item label="融资方" prop="pRzf">
+            <el-input type="textarea" v-model="addForm.pRzf"></el-input>
           </el-form-item>
-          <el-form-item label="还款来源" prop="summary">
-            <el-input type="textarea" v-model="addForm.summary"></el-input>
-          </el-form-item>
-          <el-form-item label="资金用途" prop="summary">
-            <el-input type="textarea" v-model="addForm.summary"></el-input>
-          </el-form-item>
-          <el-form-item label="融资方" prop="summary">
-            <el-input type="textarea" v-model="addForm.summary"></el-input>
+          <el-form-item label="担保方" prop="pDbf">
+            <el-input type="textarea" v-model="addForm.pDbf"></el-input>
           </el-form-item>
         </el-form>
         <div slot="footer" class="dialog-footer">
@@ -160,7 +164,7 @@
     export default {
       data() {
         return {
-          nameSearch: '',
+          pType: '01',
           productList: [],
           multipleSelection: [],//列表选中列
           listLoading: false,
@@ -178,18 +182,21 @@
             pType: '',
             pExpectAnnualRevenue: '',
             pAllIssuingScale: '',
+            pMinAmount:'',
+            pSaleStatus:'',
             pDulTime: '',
+            pSaleStartTime:'',
             pPaymentInterestType: '',
             pInvestType: '',
             pSizeRatioType: '',
-            pIssuingScale:'',
-            pMinAmount:'',
-            pRecruitmentSummary: '',
+            pInvestOwnerId:'',
+            pAllSubscriptionAmount: '',
+            pRecruitmentSummary:'',
             pCpys: '',
             pMjzh: '',
             pFxkz: '',
             pHkly: '',
-            pRrzf: '',
+            pRzf: '',
             pDbf: '',
             pZjyt: ''
           },
@@ -214,9 +221,9 @@
           this.handleSearch();
         },
         handleSearch() {
-          this.$axios.get('/financer/financerlist', {
+          this.$axios.get('/product/list', {
             params: {
-              nameSearch: this.nameSearch,
+              pType: this.pType,
               pageNumber: this.pageNumber,
               pageSize: this.pageSize
             }
@@ -255,7 +262,7 @@
                 type: 'warning'
               }).then(() => {
                 this.addLoading = true;
-                this.$axios.post('/financer/addfinancer', this.addForm).then((res) => {
+                this.$axios.post('/product/addProduct', this.addForm).then((res) => {
                   this.addLoading = false;
                   if (res.data.status == 200) {
                     this.$message({
@@ -290,32 +297,32 @@
 </script>
 
 <style scoped>
-  .handle-box {
-    margin-bottom: 20px;
-  }
+  /*.handle-box {*/
+    /*margin-bottom: 20px;*/
+  /*}*/
 
-  .handle-select {
-    width: 120px;
-  }
+  /*.handle-select {*/
+    /*width: 120px;*/
+  /*}*/
 
-  .handle-input {
-    width: 300px;
-    display: inline-block;
-  }
+  /*.handle-input {*/
+    /*width: 300px;*/
+    /*display: inline-block;*/
+  /*}*/
 
-  .detail-in-table {
-    font-size: 0;
-  }
+  /*.detail-in-table {*/
+    /*font-size: 0;*/
+  /*}*/
 
-  .detail-in-table label {
-    width: 90px;
-    color: #99a9bf;
-  }
+  /*.detail-in-table label {*/
+    /*width: 90px;*/
+    /*color: #99a9bf;*/
+  /*}*/
 
-  .detail-in-table .el-form-item {
-    margin-right: 0;
-    margin-bottom: 0;
-    width: 50%;
-  }
+  /*.detail-in-table .el-form-item {*/
+    /*margin-right: 0;*/
+    /*margin-bottom: 0;*/
+    /*width: 50%;*/
+  /*}*/
 
 </style>
