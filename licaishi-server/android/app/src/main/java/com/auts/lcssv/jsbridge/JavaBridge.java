@@ -105,10 +105,10 @@ public class JavaBridge implements Serializable {
     }
 
     private void callbackJs(String callbackIdJs, String data) {
-        Map<String, String> message = new HashMap<>();
-        message.put("responseId", callbackIdJs);
-        message.put("responseData", data);
-        _dispatchMessage(message);
+//        Map<String, String> message = new HashMap<>();
+//        message.put("responseId", callbackIdJs);
+//        message.put("responseData", data);
+        _dispatchMessage(data);
     }
 
 
@@ -136,6 +136,10 @@ public class JavaBridge implements Serializable {
 
     private void _dispatchMessage(Map<String, String> message) {
         String messageJSON = new JSONObject(message).toString();
+        _dispatchMessage(messageJSON);
+    }
+
+    private void _dispatchMessage(String messageJSON) {
         LogUtils.jsBridge("java call js: " + messageJSON);
         final String javascriptCommand = String.format("javascript:WebViewJavascriptBridge._handleMessageFromJava('%s');", doubleEscapeString(messageJSON));
         LogUtils.debug("_dispatchMessage: " + javascriptCommand);
