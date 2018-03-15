@@ -23,8 +23,6 @@ public class ProductModel extends BaseDaoModel {
     private String pInvestType;
     private String pSizeRatioType;
     private String pInvestOwnerId;
-    private String pIssuingScale;
-    private String pExpectSaleAmount;
     private String pAllSubscriptionAmount;
     private String pRecruitmentSummary;
     private String pCpys;
@@ -32,24 +30,26 @@ public class ProductModel extends BaseDaoModel {
     private String pFxkz;
     private String pHkly;
     private String pZjyt;
-    private String pRrzf;
+    private String pRzf;
     private String pDbf;
+    private Date createTime;
+    private Date updateTime;
 
-	public String getpIssuingScale() {
-        return pIssuingScale;
-    }
+	public Date getCreateTime() {
+		return createTime;
+	}
 
-    public void setpIssuingScale(String pIssuingScale) {
-        this.pIssuingScale = pIssuingScale;
-    }
+	public void setCreateTime(Date createTime) {
+		this.createTime = createTime;
+	}
 
-	public String getpExpectSaleAmount() {
-        return pExpectSaleAmount;
-    }
+	public Date getUpdateTime() {
+		return updateTime;
+	}
 
-    public void setpExpectSaleAmount(String pExpectSaleAmount) {
-        this.pExpectSaleAmount = pExpectSaleAmount;
-    }
+	public void setUpdateTime(Date updateTime) {
+		this.updateTime = updateTime;
+	}
 
     public String getpAllSubscriptionAmount() {
         return pAllSubscriptionAmount;
@@ -107,12 +107,12 @@ public class ProductModel extends BaseDaoModel {
 		this.pZjyt = pZjyt;
 	}
 
-	public String getpRrzf() {
-		return pRrzf;
+	public String getpRzf() {
+		return pRzf;
 	}
 
-	public void setpRrzf(String pRrzf) {
-		this.pRrzf = pRrzf;
+	public void setpRzf(String pRzf) {
+		this.pRzf = pRzf;
 	}
 
 	public String getpDbf() {
@@ -234,16 +234,4 @@ public class ProductModel extends BaseDaoModel {
 	public void setpInvestOwnerId(String pInvestOwnerId) {
 		this.pInvestOwnerId = pInvestOwnerId;
 	}
-
-	@JsonProperty("time_limit")
-    @JSONField(name = "time_limit")
-    private String timeLimit;
-
-    public String getTimeLimit() {
-        return timeLimit;
-    }
-
-    public void setTimeLimit(String timeLimit) {
-        this.timeLimit = timeLimit;
-    }
 }

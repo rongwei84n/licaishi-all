@@ -16,9 +16,13 @@ public class OrderSerivceImpl implements OrderService {
 	OrderMapper orderMapper;
 
 	@Override
-	public List<OrderModel> queryOrders(int pageNo, int pageSize, String type, String uid) {
+	public List<OrderModel> queryOrders(int pageNo, int pageSize, String status, String uid) {
 		int startIndex = (pageNo - 1) * pageSize;
-		return orderMapper.queryOrders(startIndex, pageSize, type, uid);
+		//00 01 02 03 99
+		if("00".equals(status)) {
+			status = null;
+		}
+		return orderMapper.queryOrders(startIndex, pageSize, status, uid);
 	}
 
 	@Override
@@ -38,7 +42,8 @@ public class OrderSerivceImpl implements OrderService {
 
 	@Override
 	public int queryOrderCountByStatus(String status, String uid) {
-		if(StringUtils.isEmpty(status)) {
+		//00 01 02 03 99
+		if("00".equals(status)) {
 			status = null;
 		}
 		return orderMapper.queryOrderCountByStatus(status, uid);
@@ -53,6 +58,23 @@ public class OrderSerivceImpl implements OrderService {
 	@Override
 	public int queryOrderCountByCustomerId(String customerId) {
 		return orderMapper.queryOrderCountByCustomerId(customerId);
+	}
+
+	@Override
+	public int queryOrderCountByFinancerId(String financerId) {
+		return orderMapper.queryOrderCountByFinancerId(financerId);
+				
+	}
+
+	@Override
+	public List<OrderModel> queryOrdersByFinancerId(int pageNo, int pageSize, String financerId) {
+		int startIndex = (pageNo - 1) * pageSize;
+		return orderMapper.queryOrdersByFinancerId(startIndex, pageSize, financerId);
+	}
+
+	@Override
+	public String queryCommissinByFinancerId(String financerId, List<String> statusList) {
+		return orderMapper.queryCommissinByFinancerId(financerId, statusList);
 	}
 
 

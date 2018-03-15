@@ -20,6 +20,8 @@ public interface ProductsService {
     
     ProductModel queryProductDetail(String pCode);
     
+    ProductModel queryProductByPid(String pid);
+    
     List<ProductModel> queryRecommendProducts(String recommendype);
     
     List<ProfitRebateModel> queryProfitRebateByPCode(String pCode);

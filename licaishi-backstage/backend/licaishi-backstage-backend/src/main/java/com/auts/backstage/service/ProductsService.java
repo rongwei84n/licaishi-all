@@ -2,17 +2,18 @@ package com.auts.backstage.service;
 
 import java.util.List;
 
+import com.auts.backstage.model.common.PageInfo;
 import com.auts.backstage.model.dao.product.ProductAttachmentModel;
 import com.auts.backstage.model.dao.product.ProductModel;
 import com.auts.backstage.model.dao.product.ProfitRebateModel;
 
 public interface ProductsService {
 	
-	int saveProducts(ProductModel productModel, List<ProfitRebateModel> profitRebates, List<ProductAttachmentModel> productAttachments);
+	int addProduct(ProductModel productModel);
 	
 	int updateProducts(ProductModel productModel);
 
-    List<ProductModel> queryProducts(int pageNo, int pageSize, String type);
+	PageInfo queryProductList(int pageNo, int pageSize, String pType);
     
     int queryProductCountByPType(String type);
     

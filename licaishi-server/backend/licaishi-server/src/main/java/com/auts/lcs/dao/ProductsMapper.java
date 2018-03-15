@@ -56,6 +56,24 @@ public interface ProductsMapper {
     	@Result(property = "pRrzf", column = "p_rzf"), @Result(property = "pDbf", column = "p_dbf")
     })
     ProductModel queryProductByPCode(@Param("pCode") String pCode);
+    
+    @Select("select * from Product where p_id=#{pid} limit 1")
+    @Results({
+    	@Result(property = "id", column = "p_id"), @Result(property = "pCode", column = "p_code"),
+    	@Result(property = "pShortName", column = "p_short_name"), @Result(property = "pFullName", column = "p_full_name"),
+    	@Result(property = "pType", column = "p_type"), @Result(property = "pExpectAnnualRevenue", column = "p_expect_annual_revenue"),
+    	@Result(property = "pSaleStatus", column = "p_sale_status"), @Result(property = "pDulTime", column = "p_due_time"),
+    	@Result(property = "pSaleStartTime", column = "p_sale_date_start"), @Result(property = "pAllIssuingScale", column = "p_all_issuing_scale"),
+    	@Result(property = "pMinAmount", column = "p_min_amount"), @Result(property = "pPaymentInterestType", column = "p_payment_interest_type"),
+    	@Result(property = "pInvestType", column = "p_invest_type"), @Result(property = "pSizeRatioType", column = "p_size_ratio_type"),
+    	@Result(property = "pInvestOwnerId", column = "p_invest_owner_id"), @Result(property = "pIssuingScale", column = "p_issuing_scale"),
+    	@Result(property = "pExpectSaleAmount", column = "p_expect_sale_amount"), @Result(property = "pAllSubscriptionAmount", column = "p_all_subscription_amount"),
+    	@Result(property = "pRecruitmentSummary", column = "p_recruitment_summary"), @Result(property = "pCpys", column = "p_cpys"),
+    	@Result(property = "pMjzh", column = "p_mjzh"), @Result(property = "pFxkz", column = "p_fxkz"),
+    	@Result(property = "pHkly", column = "p_hkly"), @Result(property = "pZjyt", column = "p_zjyt"),
+    	@Result(property = "pRrzf", column = "p_rzf"), @Result(property = "pDbf", column = "p_dbf")
+    })
+    ProductModel queryProductByPid(@Param("pid") String pid);
 
     /**
      */

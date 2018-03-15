@@ -20,12 +20,17 @@ import org.springframework.web.bind.annotation.RestController;
 import com.auts.lcs.consts.Const;
 import com.auts.lcs.controller.SBaseController;
 import com.auts.lcs.model.common.PhiHomeBaseResponse;
+import com.auts.lcs.model.dao.CustomerModel;
 import com.auts.lcs.model.dao.order.OrderModel;
 import com.auts.lcs.model.enums.OrderStatus;
+import com.auts.lcs.model.response.CustomerListResponseDto;
+import com.auts.lcs.model.response.CustomerResponseDto;
 import com.auts.lcs.model.response.Data;
 import com.auts.lcs.model.response.OrderResponseDto;
 import com.auts.lcs.model.response.Pager;
+import com.auts.lcs.service.CustomerService;
 import com.auts.lcs.service.OrderService;
+import com.auts.lcs.service.ProductsService;
 
 /**
  * 订单管理API入口
@@ -44,6 +49,10 @@ public class OrderController extends SBaseController {
 
     @Autowired
     OrderService orderService;
+    @Autowired
+    CustomerService customerService;
+    @Autowired
+    ProductsService productsService;
 
     /**
      * 订单查询
@@ -51,31 +60,32 @@ public class OrderController extends SBaseController {
      * @return
      */
     @RequestMapping(value = "/v1/order/list", method = RequestMethod.GET, produces = { "application/json" })
-    public PhiHomeBaseResponse queryOrders(HttpServletRequest request) {
+    public PhiHomeBaseResponse queryOrders(HttpServletRequest request,
+    		@RequestParam(value = "pageNo", required = true) Integer pageNo,
+    		@RequestParam(value = "pageSize", required = true) Integer pageSize,
+    		@RequestParam(value = "status", required = true) String status) {
         PhiHomeBaseResponse rspObj = new PhiHomeBaseResponse();
         Pager pager = null;
-        String pageNo = request.getParameter(Const.PAGE_NO);
-        String pageSize = request.getParameter(Const.PAGE_SIZE);
-        String type = request.getParameter(Const.TYPE);
-                     
-        LOGGER.info("queryOrders type [{}]", type);
+
+        LOGGER.info("queryOrders pageNo [{}] pageSize [{}] status [{}]", pageNo, pageSize, status);
         String token = request.getHeader(Const.AUTHORIZATION);
         LOGGER.info("queryOrders toekn [{}]", token);
         String uid = getUidByToken(token);
-        int totalCount = orderService.queryOrderCountByStatus(type, uid);
+        //uid 查找理财师的uid
+        int totalCount = orderService.queryOrderCountByStatus(status, uid);
         List<OrderResponseDto> orderResponseDtoList = new ArrayList<>();
-        List<OrderModel> orders = orderService.queryOrders(Integer.parseInt(pageNo), Integer.parseInt(pageSize), type, uid);
+        List<OrderModel> orders = orderService.queryOrders(pageNo, pageSize, status, uid);
         if(orders !=null && !orders.isEmpty()) {
         	for(OrderModel orderModel : orders) {
         		OrderResponseDto orderResponseDto = new OrderResponseDto();
         		BeanUtils.copyProperties(orderModel, orderResponseDto);
         		//查询产品简称
-        		orderResponseDto.setProductShortName("大通阳明 1222 号");
-        		orderResponseDto.setCustomerName("李冰帅哥");
+        		orderResponseDto.setProductShortName(productsService.queryProductByPid(orderModel.getProductId()).getpShortName());
+        		orderResponseDto.setCustomerName(customerService.queryCustomerByUid(orderModel.getCustomerUid()).getName());
         		orderResponseDtoList.add(orderResponseDto);
         	}
         	//分页
-        	pager = genernatePager(Integer.parseInt(pageNo), Integer.parseInt(pageSize), totalCount, orders.size());
+        	pager = genernatePager(pageNo, pageSize, totalCount, orders.size());
         }
 
         Data<OrderResponseDto> data = new Data<OrderResponseDto>();
@@ -90,20 +100,20 @@ public class OrderController extends SBaseController {
     		@RequestParam(value = "orderNo", required = true) String orderNo) {
         PhiHomeBaseResponse rspObj = new PhiHomeBaseResponse();
         OrderResponseDto orderResponseDto = new OrderResponseDto();
-                   
+
         LOGGER.info("queryOrderDetail orderNo [{}]", orderNo);
-        
+
         OrderModel orderModel = orderService.queryOrderByOrderNo(orderNo);
         if(orderModel !=null) {
     		BeanUtils.copyProperties(orderModel, orderResponseDto);
     		//查询产品简称
-    		orderResponseDto.setProductShortName("大通阳明 1222 号");
-    		orderResponseDto.setCustomerName("李冰帅哥");
+    		orderResponseDto.setProductShortName(productsService.queryProductByPid(orderModel.getProductId()).getpShortName());
+    		orderResponseDto.setCustomerName(customerService.queryCustomerByUid(orderModel.getCustomerUid()).getName());
         }
         rspObj.setResult(orderResponseDto);
         return successResponse(rspObj);
     }
-    
+
     /**
      * 预约产品
      * @param request
@@ -143,26 +153,61 @@ public class OrderController extends SBaseController {
 
         return successResponse(rspObj);
     }
-    
+
+    /**
+     * 查询我的客户列表
+     * @param request
+     * @return
+     */
+    @RequestMapping(value = "/v1/order/queryCustomersForOrder", method = RequestMethod.GET, produces = { "application/json" })
+    public PhiHomeBaseResponse queryMyCustomers(HttpServletRequest request) {
+        PhiHomeBaseResponse rspObj = new PhiHomeBaseResponse();
+        LOGGER.info("queryCustomersForOrder start [{}]");
+        String token = request.getHeader(Const.AUTHORIZATION);
+        LOGGER.info("queryCustomersForOrder toekn [{}]", token);
+        String uid = getUidByToken(token);
+
+        String financerId = "10";
+        List<CustomerModel> customers = customerService.queryCustomerForOrder(financerId);
+        List<CustomerListResponseDto> customerResponseDtoList = new ArrayList<>();
+        if(customers!=null && !customers.isEmpty()) {
+        	for(CustomerModel customerModel : customers) {
+
+        		CustomerListResponseDto customerResponseDto = new CustomerListResponseDto();
+            	BeanUtils.copyProperties(customerModel, customerResponseDto);
+            	customerResponseDtoList.add(customerResponseDto);
+            }
+        }
+
+        Data<CustomerListResponseDto> data = new Data<CustomerListResponseDto>();
+        data.setList(customerResponseDtoList);
+
+        rspObj.setResult(data);
+        return successResponse(rspObj);
+    }
+
     private OrderModel generateOrder(String productId, String customerId, String financerUid, String cardId, String amount, String lastPayDate,
     		String comRatio, String proRatio, String issuingBank, String bankCardNo) {
     	OrderModel om = new OrderModel();
     	om.setOrderNo(generateOrderNo());
-    	om.setAmount(new BigDecimal(amount));
+    	BigDecimal amountBD = new BigDecimal(amount);
+    	om.setAmount(amountBD);
     	om.setOrderDate(new Date());
     	om.setLatestPayDate(new Date());
     	om.setFinancerUid(financerUid);
-    	om.setCustomerUid("2");
+    	om.setCustomerUid(customerId);
     	om.setProductId(productId);
-//    	om.setCommission(commission);
     	om.setComRatio(comRatio);
+    	BigDecimal commission = amountBD.multiply(new BigDecimal(comRatio.replace("%", ""))).divide(new BigDecimal(100));
+    	om.setCommission(commission);
     	om.setProRatio(proRatio);
-//    	om.setProfit(profit);
+    	BigDecimal profit = amountBD.multiply(new BigDecimal(proRatio.replace("%", ""))).divide(new BigDecimal(100));
+    	om.setProfit(profit);
     	om.setStatus(OrderStatus.WP.getValue());
     	om.setVoucherStatus("0");
     	om.setContractStatus("0");
     	om.setIssueBank(issuingBank);
-    	om.setCardNo(bankCardNo);  	
+    	om.setCardNo(bankCardNo);
     	return om;
     }
 

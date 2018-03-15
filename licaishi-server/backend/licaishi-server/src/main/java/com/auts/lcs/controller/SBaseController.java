@@ -182,7 +182,7 @@ public abstract class SBaseController {
     //orderCode=20180228151534729942
     protected String generateOrderNo() {
     	SimpleDateFormat df = new SimpleDateFormat("yyyyMMddHHmmssSSS");//设置日期格式
-    	String orderNo = String.format("{0}{1}", df.format(new Date()), new Random().nextInt(100));//订单编号
+    	String orderNo = String.format("%s%s", df.format(new Date()), new Random().nextInt(100));//订单编号
     	
     	return orderNo; 	
     }

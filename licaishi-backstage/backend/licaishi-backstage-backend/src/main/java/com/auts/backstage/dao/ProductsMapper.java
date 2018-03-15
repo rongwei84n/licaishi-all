@@ -21,16 +21,18 @@ import com.auts.backstage.model.dao.product.ProfitRebateModel;
  */
 public interface ProductsMapper {
 	
-    @Insert("insert into Product (p_id, p_code, p_short_name,p_full_name,p_type,p_expect_annual_revenue,p_sale_status"
+    @Insert("insert into Product (p_code, p_short_name,p_full_name,p_type,p_expect_annual_revenue,p_sale_status,"
     		+ "p_due_time, p_sale_date_start, p_all_issuing_scale, p_min_amount,p_payment_interest_type, "
-    		+" p_invest_type, p_size_ratio_type, p_invest_owner_id) "
-            + "values (#{pm.id}, #{pm.pCode},#{pm.pShortName}, #{pm.pFullName},#{pm.pType},#{pm.pExpectAnnualRevenue},#{pm.pSaleStatus},"
+    		+" p_invest_type, p_size_ratio_type, p_invest_owner_id,p_recruitment_summary, p_all_subscription_amount,p_latest_Pay_Num,"
+    		+ "p_cpys,p_mjzh,p_fxkz,p_hkly,p_zjyt,p_rzf,p_dbf,p_create_time,p_update_time) "
+            + "values (#{pm.pCode},#{pm.pShortName}, #{pm.pFullName},#{pm.pType},#{pm.pExpectAnnualRevenue},#{pm.pSaleStatus},"
             + "#{pm.pDulTime}, #{pm.pSaleStartTime},#{pm.pAllIssuingScale},#{pm.pMinAmount}, #{pm.pPaymentInterestType},"
-            +" #{pm.pInvestType}, #{pm.pSizeRatioType},#{pm.pInvestOwnerId})")
-    int savaProduct(ProductModel pm);
+            +" #{pm.pInvestType}, #{pm.pSizeRatioType},#{pm.pInvestOwnerId},#{pm.pRecruitmentSummary},#{pm.pAllSubscriptionAmount},#{pm.latestPayNum},"
+            +" #{pm.pCpys}, #{pm.pMjzh},#{pm.pFxkz}, #{pm.pHkly},#{pm.pZjyt}, #{pm.pRzf},#{pm.pDbf}, #{pm.createTime},#{pm.updateTime})")
+    int savaProduct(@Param("pm") ProductModel pm);
 	
-	@Select("select count(*) num from Product where pType= #{type} limit 1")
-    int queryCountByPType(@Param("type") String type);
+	@Select("select count(*) num from Product where p_type= #{pType}")
+    int queryCountByPType(@Param("pType") String pType);
 	
     @Select("select * from Product where p_code=#{pCode} limit 1")
     @Results({
@@ -47,7 +49,7 @@ public interface ProductsMapper {
 
     /**
      */
-    @Select("select * from Product where pType= #{type} limit #{startIndex} #{pageSize}")
+    @Select("select * from Product where p_type= #{pType}")
     @Results({
     	@Result(property = "id", column = "p_id"), @Result(property = "pCode", column = "p_code"),
     	@Result(property = "pShortName", column = "p_short_name"), @Result(property = "pFullName", column = "p_full_name"),
@@ -58,7 +60,7 @@ public interface ProductsMapper {
     	@Result(property = "pInvestType", column = "p_invest_type"), @Result(property = "pSizeRatioType", column = "p_size_ratio_type"),
     	@Result(property = "pInvestOwnerId", column = "p_invest_owner_id")
     })
-    List<ProductModel> queryProducts(@Param("startIndex")int startIndex, @Param("pageSize")int pageSize, @Param("type")String type);
+    List<ProductModel> queryProductList(@Param("pType") String pType);
     
     @Select("select * from Product where 1= 1 limit 4")
     @Results({

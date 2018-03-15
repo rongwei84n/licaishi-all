@@ -46,4 +46,14 @@ public class CustomerServiceImpl implements CustomerService{
 		return customerMapper.queryCustomerCountByFuid(financerId);
 	}
 
+	@Override
+	public List<CustomerModel> queryCustomerForOrder(String financerId) {
+		return customerMapper.queryCustomerForOrder(financerId);
+	}
+
+	@Override
+	public CustomerModel queryCustomerByUid(String uid) {
+		return customerMapper.queryCustomerByUid(uid);
+	}
+
 }
