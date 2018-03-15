@@ -105,10 +105,10 @@ public class JavaBridge implements Serializable {
     }
 
     private void callbackJs(String callbackIdJs, String data) {
-//        Map<String, String> message = new HashMap<>();
-//        message.put("responseId", callbackIdJs);
-//        message.put("responseData", data);
-        _dispatchMessage(data);
+        Map<String, String> message = new HashMap<>();
+        message.put("responseId", callbackIdJs);
+        message.put("responseData", data);
+        _dispatchMessage(message);
     }
 
 
