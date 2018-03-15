@@ -15,7 +15,7 @@ extension AppDelegate {
         if User.current.isLoggedIn {
             
             // 登录过,自动登录
-            let vc = UINavigationController(rootViewController: MeViewController.instanceFromStoryBoard())
+            let vc = UINavigationController(rootViewController: AssociationViewController())
             window?.rootViewController? = vc
             
         } else {
