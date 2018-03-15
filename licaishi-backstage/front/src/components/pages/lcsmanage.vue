@@ -384,5 +384,8 @@
 </script>
 
 <style scoped>
-
+  .handle-input {
+    width: 220px;
+    display: inline-block;
+  }
 </style>

@@ -3,7 +3,7 @@ package com.auts.backstage.service.impl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.auts.backstage.dao.UserMapper;
+import com.auts.backstage.dao.AccountMapper;
 import com.auts.backstage.model.dao.AccountModel;
 import com.auts.backstage.service.UserService;
 import com.auts.backstage.util.EntryUtils;
@@ -12,11 +12,11 @@ import com.auts.backstage.util.EntryUtils;
 public class UserServiceImpl implements UserService {
 
 	@Autowired
-	UserMapper userMapper;
+	AccountMapper userMapper;
 	
 	@Override
 	public AccountModel queryLoginUser(String username, String password) {
-		return userMapper.queryLoginUser(username, EntryUtils.getMd5(password));
+		return userMapper.login(username, EntryUtils.getMd5(password));
 	}
 
 }

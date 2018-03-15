@@ -111,13 +111,9 @@ a{text-decoration: none}
 .editor-btn{
   margin-top: 20px;
 }
+
 .handle-box {
   margin-bottom: 20px;
-}
-
-.handle-input {
-  width: 300px;
-  display: inline-block;
 }
 
 .detail-in-table {
