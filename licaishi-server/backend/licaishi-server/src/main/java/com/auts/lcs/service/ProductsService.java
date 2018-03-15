@@ -14,7 +14,7 @@ public interface ProductsService {
 
     List<ProductModel> queryProducts(int pageNo, int pageSize, String type,
     		String pInvestType, String pPaymentInterestType, String pSizeRatioType, 
-    		String minimumAmount, String dueTime, String annualRevenue, String saleStatus);
+    		String minimumAmount, String dueTime, String annualRevenue, String saleStatus, boolean pRabateProfitParameter, boolean pAnnualRevenueExpectParameter);
     
     int queryProductCountByPType(String type);
     
