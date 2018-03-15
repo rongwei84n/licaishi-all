@@ -93,7 +93,7 @@ class AssociationViewController: UIViewController {
         }
 
         var headers =  json["headers"].object as? HTTPHeaders ?? HTTPHeaders()
-//        headers["Authorization"] = "Bearer " + ( User.current.accessToken ?? "" )
+        headers["Authorization"] = "Bearer " + ( User.current.accessToken ?? "" )
 
 
         let sessionManager =  DefaultAlamofireManager.sharedManager
@@ -122,17 +122,20 @@ class AssociationViewController: UIViewController {
 
         }
 
-//        request.responseString() { response in
-//            let json = JSON(response.data)
-//            guard Utils.checkMultiClientLogin(response: json) == false else { return }
-//
-//            if let error = response.error {
-//                responseCallback?(.networkError(error.code, error.localizedDescription))
-//            }else {
+        ZWHud.shared.show()
+        request.responseString() { response in
+            
+            ZWHud.shared.dismiss()
+            
+            let json = JSON(response.data)
+            if json["error"].stringValue == "0" {
 //                let ret = ["netResponse": response.result.value ?? "没有响应内容"]
-//                responseCallback?(.succeed(ret))
-//            }
-//        }
+                let ret = response.result.value ?? "没有响应内容"
+                responseCallback?(.succeed(ret))
+            } else {
+                HUDHelper.shared.showWithMsg(json["error"].stringValue)
+            }
+        }
     }
 
     private func handleOpenPage(_ page: String, _ extraData: String?, _ responseCallback: PhiJBResponseCallback?) {
