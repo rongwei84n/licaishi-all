@@ -86,13 +86,10 @@ extension User: StringDefaultSettable {
         case captchaid
         case phoneNumber
         case verCode
-//        case deviceId
-//        case udid
         case familyId
         case familyName
         case job
         case birthDay
-        //李满
         case zipcode
         case img
         case address

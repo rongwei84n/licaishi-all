@@ -14,7 +14,7 @@ public interface Const {
      * header头部.
      */
     String AUTHORIZATION = "Authorization";
-    
+
     //产品类参数
     String RECOMMEND_TYPE = "recommendType";
     String PAGE_NO = "pageNo";
@@ -60,6 +60,7 @@ public interface Const {
             int TOKEN_OK = 0;
             int TOKEN_NEED_REFRESH = 1;
             int TOKEN_INVILID = 2;
+            String STR_TOKEN_INVILID = "TOKEN INVILID";
         }
     }
 }

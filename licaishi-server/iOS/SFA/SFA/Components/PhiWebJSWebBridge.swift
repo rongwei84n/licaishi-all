@@ -9,7 +9,8 @@
 import Foundation
 import SwiftyJSON
 
-typealias PhiJBResponse = [String: String]
+typealias PhiJBResponse = String
+//typealias PhiJBResponse = [String: String]
 typealias PhiJBResponseCallback = (PhiWebJSBridgeCode)  -> Void
 typealias PhiJBHandler = (JSON?,  PhiJBResponseCallback?) -> Void
 
@@ -62,11 +63,12 @@ enum PhiWebJSBridgeCode:  Error, CustomStringConvertible {
     var jsonString: String? {
         switch self {
         case .succeed(let succeed): // 如果是成功,将字典加入到返回中
-            var d: [String: Any] = ["errorCode":code, "errorMsg": description]
-            if let succeed = succeed {
-                d += succeed
-            }
-            return JSON(d).rawString()
+//            var d: [String: Any] = ["errorCode":code, "errorMsg": description]
+//            if let succeed = succeed {
+//                d += succeed
+//            }
+//            return JSON(d).rawString()
+            return JSON(succeed).rawString()
         default:
             return jsonObject.rawString()
         }

@@ -23,8 +23,6 @@ public class ProductModel extends BaseDaoModel {
     private String pInvestType;
     private String pSizeRatioType;
     private String pInvestOwnerId;
-    private String pIssuingScale;
-    private String pExpectSaleAmount;
     private String pAllSubscriptionAmount;
     private String pRecruitmentSummary;
     private String pCpys;
@@ -33,31 +31,25 @@ public class ProductModel extends BaseDaoModel {
     private String pHkly;
     private String pZjyt;
     private String pRzf;
-    public String getpRzf() {
-		return pRzf;
+    private String pDbf;
+    private Date createTime;
+    private Date updateTime;
+    
+	public Date getCreateTime() {
+		return createTime;
 	}
 
-	public void setpRzf(String pRzf) {
-		this.pRzf = pRzf;
+	public void setCreateTime(Date createTime) {
+		this.createTime = createTime;
 	}
 
-	private String pDbf;
+	public Date getUpdateTime() {
+		return updateTime;
+	}
 
-	public String getpIssuingScale() {
-        return pIssuingScale;
-    }
-
-    public void setpIssuingScale(String pIssuingScale) {
-        this.pIssuingScale = pIssuingScale;
-    }
-
-	public String getpExpectSaleAmount() {
-        return pExpectSaleAmount;
-    }
-
-    public void setpExpectSaleAmount(String pExpectSaleAmount) {
-        this.pExpectSaleAmount = pExpectSaleAmount;
-    }
+	public void setUpdateTime(Date updateTime) {
+		this.updateTime = updateTime;
+	}
 
     public String getpAllSubscriptionAmount() {
         return pAllSubscriptionAmount;
@@ -113,6 +105,14 @@ public class ProductModel extends BaseDaoModel {
 
 	public void setpZjyt(String pZjyt) {
 		this.pZjyt = pZjyt;
+	}
+
+	public String getpRzf() {
+		return pRzf;
+	}
+
+	public void setpRzf(String pRzf) {
+		this.pRzf = pRzf;
 	}
 
 	public String getpDbf() {

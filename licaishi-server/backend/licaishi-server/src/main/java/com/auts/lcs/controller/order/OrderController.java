@@ -31,6 +31,7 @@ import com.auts.lcs.model.response.Pager;
 import com.auts.lcs.service.CustomerService;
 import com.auts.lcs.service.OrderService;
 import com.auts.lcs.service.ProductsService;
+import com.auts.lcs.util.StringUtil;
 
 /**
  * 订单管理API入口
@@ -69,8 +70,16 @@ public class OrderController extends SBaseController {
 
         LOGGER.info("queryOrders pageNo [{}] pageSize [{}] status [{}]", pageNo, pageSize, status);
         String token = request.getHeader(Const.AUTHORIZATION);
-        LOGGER.info("queryOrders toekn [{}]", token);
         String uid = getUidByToken(token);
+        LOGGER.info("queryOrders toekn [{}] uid [{}]", token, uid);
+
+        if (StringUtil.isNullOrEmpty(uid)) {
+            LOGGER.info("Parsed uid is null, return");
+            rspObj.setCode(Const.ErrorCode.Account.TOKEN_INVILID);
+            rspObj.setMessage(Const.ErrorCode.Account.STR_TOKEN_INVILID);
+            return rspObj;
+        }
+
         //uid 查找理财师的uid
         int totalCount = orderService.queryOrderCountByStatus(status, uid);
         List<OrderResponseDto> orderResponseDtoList = new ArrayList<>();

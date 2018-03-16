@@ -52,8 +52,8 @@ public class ProductsController extends SBaseController {
      */
     @RequestMapping(value = "/v1/product/list", method = RequestMethod.GET, produces = { "application/json" })
     public PhiHomeBaseResponse queryProducts(HttpServletRequest request,
-            @RequestParam(value = "pageNo", required = true) String pageNo,
-            @RequestParam(value = "pageSize", required = true) String pageSize,
+            @RequestParam(value = "pageNo", required = true) int pageNo,
+            @RequestParam(value = "pageSize", required = true) int pageSize,
             @RequestParam(value = "type", required = false) String type,
             @RequestParam(value = "pInvestType", required = false) String pInvestType, //01：房地产类 02：金融市场 03：基础设施 04：资金池 05：工商企业 99：其他
             @RequestParam(value = "pPaymentInterestType", required = false) String pPaymentInterestType,//01：按月付息 02：按季付息 03：按半年付息 04：按年付息 05 到期付本息
@@ -62,8 +62,8 @@ public class ProductsController extends SBaseController {
             @RequestParam(value = "dueTime", required = false) String dueTime,//产品期限      01；02；03；04；05
             @RequestParam(value = "annualRevenue", required = false) String annualRevenue,//预期收益     01；02；03；04；05；06
             @RequestParam(value = "saleStatus", required = false) String saleStatus,//募集状态    01：预热中 02：募集中 03：募集结束 
-            @RequestParam(value = "pRabateProfitParameter", required = false) String pRabateProfitParameter,
-            @RequestParam(value = "pAnnualRevenueExpectParameter", required = false) String pAnnualRevenueExpectParameter) {
+            @RequestParam(value = "pRabateProfitParameter", required = false) boolean pRabateProfitParameter,
+            @RequestParam(value = "pAnnualRevenueExpectParameter", required = false) boolean pAnnualRevenueExpectParameter) {
         PhiHomeBaseResponse rspObj = new PhiHomeBaseResponse();
         Pager pager = null;
 
@@ -71,8 +71,8 @@ public class ProductsController extends SBaseController {
 
         int totalCount = productsService.queryProductCountByPType(type);
         List<ProductResponseModel> productResponseList = new ArrayList<>();
-        List<ProductModel> products = productsService.queryProducts(Integer.parseInt(pageNo), Integer.parseInt(pageSize), type,
-        		pInvestType, pPaymentInterestType, pSizeRatioType, minimumAmount, dueTime, annualRevenue, saleStatus);
+        List<ProductModel> products = productsService.queryProducts(pageNo, pageSize, type,pInvestType, pPaymentInterestType, 
+        		pSizeRatioType, minimumAmount, dueTime, annualRevenue, saleStatus, pRabateProfitParameter, pAnnualRevenueExpectParameter);
         if(products!=null && !products.isEmpty()) {
         	for(ProductModel productModel : products) {
             	List<ProfitRebateModel> profitRebates =  productsService.queryProfitRebateByPCode(productModel.getpCode());
@@ -85,7 +85,7 @@ public class ProductsController extends SBaseController {
             	productResponseList.add(productResponseModel);
             }
         	//分页
-        	pager = genernatePager(Integer.parseInt(pageNo), Integer.parseInt(pageSize), totalCount, products.size());
+        	pager = genernatePager(pageNo, pageSize, totalCount, products.size());
         }
 
         Data<ProductResponseModel> data = new Data<ProductResponseModel>();

@@ -75,9 +75,53 @@ public interface ProductsMapper {
     })
     ProductModel queryProductByPid(@Param("pid") String pid);
 
-    /**
-     */
-    @Select("select * from Product where p_type= #{type} limit #{startIndex}, #{pageSize}")
+    @Select("<script>"
+    		+ "select * from Product where p_type= #{type} "
+    		+ "<if test='pInvestType !=null '>"
+    		+ "  and p_invest_type = #{pInvestType} "
+    		+ "</if> "
+    		+ "<if test='pPaymentInterestType !=null '>"
+    		+ "  and p_payment_interest_type = #{pPaymentInterestType} "
+    		+ "</if> "
+    		+ "<if test='pSizeRatioType !=null '>"
+    		+ "  and p_size_ratio_type = #{pSizeRatioType} "
+    		+ "</if> "
+    		+ "<if test='minimumAmount !=null '>"
+    		+ "  and p_min_amount >= #{minimumAmount} "
+    		+ "</if> "
+    		+ "<if test='dueTime !=null '>"
+    		+    "<choose>"
+    		+      	"<when test='dueTime ==\"01\"'>"
+    		+			"and p_due_time &lt;= 11"
+    		+      	"</when>"
+    		+      	"<when test='dueTime ==\"02\"'>"
+    		+			"and p_due_time = 12"
+    		+      	"</when>"
+    		+      	"<when test='dueTime ==\"03\"'>"
+    		+			"and 12&gt;= p_due_time &lt;=23"
+    		+      	"</when>"
+    		+      	"<when test='dueTime ==\"04\"'>"
+    		+			"and p_due_time = 24"
+    		+      	"</when>"
+    		+      	"<when test='dueTime ==\"05\"'>"
+    		+			"and p_due_time &gt;  24"
+    		+      	"</when>"
+    		+    "</choose>"
+    		+ "</if> "
+    		+ "<if test='saleStatus !=null '>"
+    		+ "  and p_sale_status = #{saleStatus} "
+    		+ "</if> "
+//    		+ "<if test='pInvestType !=null '>"
+//    		+ "  and p_invest_type = #{pInvestType} "
+//    		+ "</if> "
+//    		+ "<if test='pInvestType !=null '>"
+//    		+ "  and p_invest_type = #{pInvestType} "
+//    		+ "</if> "
+//    		+ "<if test='pInvestType !=null '>"
+//    		+ "  and p_invest_type = #{pInvestType} "
+//    		+ "</if> "
+    		+ "limit #{startIndex}, #{pageSize}"
+			+"</script>")
     @Results({
     	@Result(property = "id", column = "p_id"), @Result(property = "pCode", column = "p_code"),
     	@Result(property = "pShortName", column = "p_short_name"), @Result(property = "pFullName", column = "p_full_name"),
@@ -88,7 +132,11 @@ public interface ProductsMapper {
     	@Result(property = "pInvestType", column = "p_invest_type"), @Result(property = "pSizeRatioType", column = "p_size_ratio_type"),
     	@Result(property = "pInvestOwnerId", column = "p_invest_owner_id")
     })
-    List<ProductModel> queryProductsByType(@Param("startIndex")int startIndex, @Param("pageSize")int pageSize, @Param("type")String type);
+    List<ProductModel> queryProductsByType(@Param("startIndex")int startIndex, @Param("pageSize") int pageSize, @Param("type")String type,
+    		@Param("pInvestType")String pInvestType, @Param("pPaymentInterestType")String pPaymentInterestType, @Param("pSizeRatioType")String pSizeRatioType, 
+    		@Param("minimumAmount")String minimumAmount, @Param("dueTime")String dueTime, @Param("annualRevenue")String annualRevenue,
+    		@Param("saleStatus")String saleStatus, @Param("pRabateProfitParameter")boolean pRabateProfitParameter,
+    		@Param("pAnnualRevenueExpectParameter")boolean pAnnualRevenueExpectParameter);
    
     @Select("select * from Product limit #{startIndex}, #{pageSize}")
     @Results({
