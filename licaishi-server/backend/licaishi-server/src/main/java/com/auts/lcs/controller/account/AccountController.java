@@ -3,6 +3,7 @@ package com.auts.lcs.controller.account;
 import com.alibaba.fastjson.JSON;
 import com.auts.lcs.consts.Const;
 import com.auts.lcs.controller.SBaseController;
+import com.auts.lcs.model.common.PhiHomeBaseResponse;
 import com.auts.lcs.model.dao.AccountModel;
 import com.auts.lcs.model.dao.TokenModel;
 import com.auts.lcs.model.request.PropertyChangeRequestModel;
@@ -15,6 +16,7 @@ import com.auts.lcs.model.response.PropertyChangeResponseModel;
 import com.auts.lcs.model.response.RegistResponseModel;
 import com.auts.lcs.service.AccountService;
 import com.auts.lcs.util.Base64Utils;
+import com.auts.lcs.util.MyResponseutils;
 import com.auts.lcs.util.RegexUtils;
 import com.auts.lcs.util.StringUtil;
 import com.auts.lcs.util.UidGenerater;
@@ -532,5 +534,24 @@ public class AccountController extends SBaseController {
             e.printStackTrace();
         }
         return file.getName();
+    }
+
+    @RequestMapping(value = "/v1/login_status", method = RequestMethod.GET, produces = { "application/json" })
+    public PhiHomeBaseResponse loginStatus(HttpServletRequest request) {
+        PhiHomeBaseResponse rsp = new PhiHomeBaseResponse();
+        String token = request.getHeader(Const.AUTHORIZATION);
+        LOGGER.info("Property change request [{}] token [{}]", token);
+
+        String uid = getUidByToken(token);
+        LOGGER.info("parsed uid [{}]", uid);
+        if (StringUtil.isNullOrEmpty(uid)) {
+            LOGGER.info("Parsed uid is null, return");
+            rsp.setCode(Const.ErrorCode.Account.TOKEN_INVILID);
+            rsp.setMessage(MyResponseutils.parseMsg(Const.ErrorCode.Account.TOKEN_INVILID));
+            return rsp;
+        }
+        rsp.setCode(Const.STATUS_OK);
+        rsp.setMessage(MyResponseutils.parseMsg(Const.STATUS_OK));
+        return rsp;
     }
 }
