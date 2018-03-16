@@ -134,16 +134,16 @@ public class OrderController extends SBaseController {
      */
     @RequestMapping(value = "/v1/order/createOrder", method = RequestMethod.POST, produces = { "application/json" })
     public PhiHomeBaseResponse createOrder(HttpServletRequest request,
-    		@RequestParam(value = "productId", required = true) String productId,
-            @RequestParam(value = "customerId", required = true) String customerId,
-            @RequestParam(value = "customerName", required = true) String customerName,
-            @RequestParam(value = "cardId", required = true) String cardId,
-            @RequestParam(value = "amount", required = true) String amount,
-            @RequestParam(value = "lastPayDate", required = true) String lastPayDate,
-            @RequestParam(value = "comRatio", required = true) String comRatio,
-            @RequestParam(value = "proRatio", required = true) String proRatio,
-            @RequestParam(value = "issuingBank", required = true) String issuingBank,
-            @RequestParam(value = "bankCardNo", required = true) String bankCardNo,
+    		@RequestParam(value = "productId", required = false) String productId,
+            @RequestParam(value = "customerId", required = false) String customerId,
+            @RequestParam(value = "customerName", required = false) String customerName,
+            @RequestParam(value = "cardId", required = false) String cardId,
+            @RequestParam(value = "amount", required = false) String amount,
+            @RequestParam(value = "lastPayDate", required = false) String lastPayDate,
+            @RequestParam(value = "comRatio", required = false) String comRatio,
+            @RequestParam(value = "proRatio", required = false) String proRatio,
+            @RequestParam(value = "issuingBank", required = false) String issuingBank,
+            @RequestParam(value = "bankCardNo", required = false) String bankCardNo,
             @RequestParam(value = "note", required = false) String note) {
         PhiHomeBaseResponse rspObj = new PhiHomeBaseResponse();
 
