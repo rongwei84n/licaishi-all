@@ -19,26 +19,26 @@ import com.auts.lcs.model.dao.product.ProductModel;
  *
  */
 public interface ProductsMapper {
-	
+
     @Insert("insert into Product (p_id, p_code, p_short_name,p_full_name,p_type,p_expect_annual_revenue,p_sale_status"
     		+ "p_due_time, p_sale_date_start, p_all_issuing_scale, p_min_amount,p_payment_interest_type, "
     		+" p_invest_type, p_size_ratio_type, p_invest_owner_id) "
             + "values (#{pm.id}, #{pm.pCode},#{pm.pShortName}, #{pm.pFullName},#{pm.pType},#{pm.pExpectAnnualRevenue},#{pm.pSaleStatus},"
             + "#{pm.pDulTime}, #{pm.pSaleStartTime},#{pm.pAllIssuingScale},#{pm.pMinAmount}, #{pm.pPaymentInterestType},"
             +" #{pm.pInvestType}, #{pm.pSizeRatioType},#{pm.pInvestOwnerId})")
-    @Options(useGeneratedKeys = true, keyProperty = "p_id") 
+    @Options(useGeneratedKeys = true, keyProperty = "p_id")
     int savaProduct(ProductModel pm);
-    
+
     @UpdateProvider(type = ProductSqlProvider.class, method = "updateSql")
     int updateProduct(@Param("product") ProductModel pm);
-    
+
     @Select("select count(*) num from Product where p_type = #{type} limit 1 ")
 //	@Select("select count(*) num from Product where p_type= #{type} limit 1")
     int queryCountByPType(@Param("type") String type);
-    
+
 	@Select("select count(*) num from Product limit 1")
     int queryAllCount();
-	
+
     @Select("select * from Product where p_code=#{pCode} limit 1")
     @Results({
     	@Result(property = "id", column = "p_id"), @Result(property = "pCode", column = "p_code"),
@@ -53,10 +53,10 @@ public interface ProductsMapper {
     	@Result(property = "pRecruitmentSummary", column = "p_recruitment_summary"), @Result(property = "pCpys", column = "p_cpys"),
     	@Result(property = "pMjzh", column = "p_mjzh"), @Result(property = "pFxkz", column = "p_fxkz"),
     	@Result(property = "pHkly", column = "p_hkly"), @Result(property = "pZjyt", column = "p_zjyt"),
-    	@Result(property = "pRrzf", column = "p_rzf"), @Result(property = "pDbf", column = "p_dbf")
+    	@Result(property = "pRzf", column = "p_rzf"), @Result(property = "pDbf", column = "p_dbf")
     })
     ProductModel queryProductByPCode(@Param("pCode") String pCode);
-    
+
     @Select("select * from Product where p_id=#{pid} limit 1")
     @Results({
     	@Result(property = "id", column = "p_id"), @Result(property = "pCode", column = "p_code"),
@@ -71,7 +71,7 @@ public interface ProductsMapper {
     	@Result(property = "pRecruitmentSummary", column = "p_recruitment_summary"), @Result(property = "pCpys", column = "p_cpys"),
     	@Result(property = "pMjzh", column = "p_mjzh"), @Result(property = "pFxkz", column = "p_fxkz"),
     	@Result(property = "pHkly", column = "p_hkly"), @Result(property = "pZjyt", column = "p_zjyt"),
-    	@Result(property = "pRrzf", column = "p_rzf"), @Result(property = "pDbf", column = "p_dbf")
+    	@Result(property = "pRzf", column = "p_rzf"), @Result(property = "pDbf", column = "p_dbf")
     })
     ProductModel queryProductByPid(@Param("pid") String pid);
 
@@ -133,11 +133,11 @@ public interface ProductsMapper {
     	@Result(property = "pInvestOwnerId", column = "p_invest_owner_id")
     })
     List<ProductModel> queryProductsByType(@Param("startIndex")int startIndex, @Param("pageSize") int pageSize, @Param("type")String type,
-    		@Param("pInvestType")String pInvestType, @Param("pPaymentInterestType")String pPaymentInterestType, @Param("pSizeRatioType")String pSizeRatioType, 
+    		@Param("pInvestType")String pInvestType, @Param("pPaymentInterestType")String pPaymentInterestType, @Param("pSizeRatioType")String pSizeRatioType,
     		@Param("minimumAmount")String minimumAmount, @Param("dueTime")String dueTime, @Param("annualRevenue")String annualRevenue,
     		@Param("saleStatus")String saleStatus, @Param("pRabateProfitParameter")boolean pRabateProfitParameter,
     		@Param("pAnnualRevenueExpectParameter")boolean pAnnualRevenueExpectParameter);
-   
+
     @Select("select * from Product limit #{startIndex}, #{pageSize}")
     @Results({
     	@Result(property = "id", column = "p_id"), @Result(property = "pCode", column = "p_code"),
@@ -151,8 +151,8 @@ public interface ProductsMapper {
     	@Result(property = "pExpectSaleAmount", column = "p_expect_sale_amount"), @Result(property = "pAllSubscriptionAmount", column = "p_all_subscription_amount")
     })
     List<ProductModel> queryAllProducts(@Param("startIndex")int startIndex, @Param("pageSize")int pageSize);
-    
-    
+
+
     @Select("select * from Product where 1= 1 limit 4")
     @Results({
     	@Result(property = "id", column = "p_id"), @Result(property = "pCode", column = "p_code"),
