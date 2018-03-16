@@ -53,6 +53,8 @@ public class BannerResponseModel {
 
         private String url;
 
+        private String link_url;
+
         public String getName() {
             return name;
         }
@@ -67,6 +69,14 @@ public class BannerResponseModel {
 
         public void setUrl(String url) {
             this.url = url;
+        }
+
+        public String getLink_url() {
+            return link_url;
+        }
+
+        public void setLink_url(String link_url) {
+            this.link_url = link_url;
         }
     }
 }
