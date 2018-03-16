@@ -32,8 +32,16 @@ public class ProductModel extends BaseDaoModel {
     private String pFxkz;
     private String pHkly;
     private String pZjyt;
-    private String pRrzf;
-    private String pDbf;
+    private String pRzf;
+    public String getpRzf() {
+		return pRzf;
+	}
+
+	public void setpRzf(String pRzf) {
+		this.pRzf = pRzf;
+	}
+
+	private String pDbf;
 
 	public String getpIssuingScale() {
         return pIssuingScale;
@@ -105,14 +113,6 @@ public class ProductModel extends BaseDaoModel {
 
 	public void setpZjyt(String pZjyt) {
 		this.pZjyt = pZjyt;
-	}
-
-	public String getpRrzf() {
-		return pRrzf;
-	}
-
-	public void setpRrzf(String pRrzf) {
-		this.pRrzf = pRrzf;
 	}
 
 	public String getpDbf() {
@@ -234,16 +234,4 @@ public class ProductModel extends BaseDaoModel {
 	public void setpInvestOwnerId(String pInvestOwnerId) {
 		this.pInvestOwnerId = pInvestOwnerId;
 	}
-
-	@JsonProperty("time_limit")
-    @JSONField(name = "time_limit")
-    private String timeLimit;
-
-    public String getTimeLimit() {
-        return timeLimit;
-    }
-
-    public void setTimeLimit(String timeLimit) {
-        this.timeLimit = timeLimit;
-    }
 }
