@@ -78,5 +78,65 @@ class MeViewModel: NSObject {
         
     }
     
+    func getAccouontDetail() -> Observable<Bool> {
+        
+        return Observable.create({ [weak self] (observer) -> Disposable in
+            
+            self?.provider.request(.accountDetail) { result in
+                switch result {
+                    
+                case let .success(moyaResponse):
+                    
+                    let json = JSON(moyaResponse.data)
+                    if json["error"].stringValue == "0" {
+                        
+                        let data = json["data"]
+                        User.current.phoneNumber = data["phonenumber"].string
+                        User.current.img = data["img"].string
+                        User.current.phoneNumber = data["phonenumber"].string
+                        User.current.nickname = data["nickname"].string
+                        User.current.loginName = data["accountname"].string
+                        User.current.studioName = data["workstudio"].string
+                        
+                        observer.onNext(true)
+                    }
+                    observer.onCompleted()
+                    
+                case let .failure(error):
+                    observer.onError(error)
+                }
+            }
+            return Disposables.create()
+        }).observeOn(MainScheduler.instance).takeUntil(self.rx.deallocated)
+        
+    }
+    
+    func modiifyAccouontDetail(nickName: String?, studioName: String?) -> Observable<Bool> {
+        
+        return Observable.create({ [weak self] (observer) -> Disposable in
+            
+            self?.provider.request(.modifyAccountDetail(nickName: nickName, studioName: studioName)) { result in
+                switch result {
+                    
+                case let .success(moyaResponse):
+                    
+                    let json = JSON(moyaResponse.data)
+                    if json["error"].stringValue == "0" {
+                        observer.onNext(true)
+                    }
+                    else {
+                        observer.onNext(false)
+                    }
+                    observer.onCompleted()
+                    
+                case let .failure(error):
+                    observer.onError(error)
+                }
+            }
+            return Disposables.create()
+        }).observeOn(MainScheduler.instance).takeUntil(self.rx.deallocated)
+        
+    }
+    
 }
 

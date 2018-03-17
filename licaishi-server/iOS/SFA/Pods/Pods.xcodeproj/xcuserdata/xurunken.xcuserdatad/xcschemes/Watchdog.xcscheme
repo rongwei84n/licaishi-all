@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Scheme
-   LastUpgradeVersion = "0700"
+   LastUpgradeVersion = "0930"
    version = "1.3">
    <BuildAction
       parallelizeBuildables = "YES"
@@ -13,11 +13,11 @@
             buildForProfiling = "YES"
             buildForArchiving = "YES">
             <BuildableReference
-               BuildableIdentifier = 'primary'
-               BlueprintIdentifier = '9C4F6581EF5713DE1D9A05A476C097CA'
-               BlueprintName = 'Watchdog'
-               ReferencedContainer = 'container:Pods.xcodeproj'
-               BuildableName = 'Watchdog.framework'>
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "9C4F6581EF5713DE1D9A05A476C097CA"
+               BlueprintName = "Watchdog"
+               ReferencedContainer = "container:Pods.xcodeproj"
+               BuildableName = "Watchdog.framework">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>

@@ -12,7 +12,11 @@ import SwiftyJSON
 import Alamofire
 import SwiftyTimer
 
-class AssociationViewController: UIViewController {
+class AssociationViewController: UIViewController, InstanceFromStoryBoard {
+    
+    static var storyBoardName: String {
+        return "Me"
+    }
     
     var urlString = "http://47.97.100.240:9095"
     
