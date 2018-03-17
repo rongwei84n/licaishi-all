@@ -7,25 +7,27 @@ import org.springframework.format.annotation.DateTimeFormat;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 
-public class FinancerModel {
+public class CustomerModel {
 
 	private int uid;
 	private int userId;
+	private int financerId;
+	private String financer;//理财师uid
 	@NotBlank(message = "用户名不能为空")
 	private String name;
-	private int sex;
-	private String birthday;
 	@NotBlank(message = "手机号不能为空")
 	private String phone;
 	private String email;
 	private String address;
+	private int sex;
+	private String birthday;
 	@JsonFormat(timezone = "GMT+8", pattern = "yyyy-MM-dd HH:mm:ss")
 	@DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
 	private Date createtime;
 	@JsonFormat(timezone = "GMT+8", pattern = "yyyy-MM-dd HH:mm:ss")
 	@DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
 	private Date updatetime;
-	private int status;
+	private int status;//状态
 
 	public String getName() {
 		return name;
@@ -86,6 +88,18 @@ public class FinancerModel {
 	}
 	public void setUserId(int userId) {
 		this.userId = userId;
+	}
+	public int getFinancerId() {
+		return financerId;
+	}
+	public void setFinancerId(int financerId) {
+		this.financerId = financerId;
+	}
+	public String getFinancer() {
+		return financer;
+	}
+	public void setFinancer(String financer) {
+		this.financer = financer;
 	}
 	public int getStatus() {
 		return status;

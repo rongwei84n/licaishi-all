@@ -1,5 +1,8 @@
 package com.auts.backstage.controller;
 
+import java.util.List;
+import java.util.Map;
+
 import javax.servlet.http.HttpServletRequest;
 
 import org.apache.logging.log4j.LogManager;
@@ -105,6 +108,49 @@ public class FinancerController extends SBaseController {
         	financerService.btrvFinancer(uids);
         }catch(Exception e){
         	LOGGER.error("批量删除理财师异常", e);
+        	return errorResponse(10001);
+        }
+        return successResponse(rspObj);
+    }
+    
+    /**
+     * 查询理财师uid和name
+     */
+    @RequestMapping(value = "/v1/financer/queryfinaasync", method = RequestMethod.GET, produces = { "application/json" })
+    public PhiHomeBaseResponse queryFinaAsync(HttpServletRequest request) {
+        PhiHomeBaseResponse rspObj = new PhiHomeBaseResponse();
+        List<Map<String, Object>> financerList = financerService.queryFinaAsync();
+        rspObj.setResult(financerList);
+        return successResponse(rspObj);
+    }
+    
+    /**
+     * 注销理财师
+     */
+    @RequestMapping(value = "/v1/financer/handlecancel", method = RequestMethod.POST, produces = { "application/json" })
+    public PhiHomeBaseResponse handleCancel(HttpServletRequest request, 
+    		@RequestParam(value="uid", required=true) String uid) {
+        PhiHomeBaseResponse rspObj = new PhiHomeBaseResponse();
+        try{
+        	financerService.handleCancel(uid);
+        }catch(Exception e){
+        	LOGGER.error("注销理财师异常", e);
+        	return errorResponse(10001);
+        }
+        return successResponse(rspObj);
+    }
+    
+    /**
+     * 启用理财师
+     */
+    @RequestMapping(value = "/v1/financer/handlenormal", method = RequestMethod.POST, produces = { "application/json" })
+    public PhiHomeBaseResponse handleNormal(HttpServletRequest request, 
+    		@RequestParam(value="uid", required=true) String uid) {
+        PhiHomeBaseResponse rspObj = new PhiHomeBaseResponse();
+        try{
+        	financerService.handleNormal(uid);
+        }catch(Exception e){
+        	LOGGER.error("启用理财师异常", e);
         	return errorResponse(10001);
         }
         return successResponse(rspObj);

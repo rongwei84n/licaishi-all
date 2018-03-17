@@ -7,7 +7,7 @@ package com.auts.backstage.model.dao;
  */
 public class AccountModel {
 
-    private String uid;
+    private int uid;
     private String user_name;
     private String real_name;
     private String passwd;
@@ -17,12 +17,6 @@ public class AccountModel {
     private long update_time;
     private String avtr;//头像
     
-    public String getUid() {
-        return uid;
-    }
-    public void setUid(String uid) {
-        this.uid = uid;
-    }
     public String getUser_name() {
         return user_name;
     }
@@ -86,7 +80,13 @@ public class AccountModel {
         this.avtr = avtr;
     }
 
-    @Override
+    public int getUid() {
+		return uid;
+	}
+	public void setUid(int uid) {
+		this.uid = uid;
+	}
+	@Override
     public String toString() {
         return "AccountModel [uid=" + uid + ", user_name=" + user_name + ", real_name=" + real_name
                 + ", passwd=" + passwd + ", role=" + role

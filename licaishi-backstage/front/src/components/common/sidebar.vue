@@ -30,6 +30,11 @@
             title: '理财师管理'
           },
           {
+            icon: 'el-icon-location-outline',
+            index: '/home/khmanage',
+            title: '客户管理'
+          },
+          {
             icon: 'el-icon-goods',
             index: '5',
             title: '产品管理',

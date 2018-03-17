@@ -3,12 +3,12 @@
     <div class="crumbs">
       <el-breadcrumb separator="/">
         <el-breadcrumb-item :to="{ path: '/home' }"><i class="el-icon-menu"></i> 首页</el-breadcrumb-item>
-        <el-breadcrumb-item>理财师管理</el-breadcrumb-item>
+        <el-breadcrumb-item>客户管理</el-breadcrumb-item>
       </el-breadcrumb>
     </div>
 
     <div class="handle-box">
-      <el-input v-model="nameSearch" placeholder="理财师姓名" class="handle-input"></el-input>
+      <el-input v-model="nameSearch" placeholder="客户姓名" class="handle-input"></el-input>
       <el-button type="primary" icon="el-icon-search" @click="handleSearch">检索</el-button>
       <el-button type="primary" icon="el-icon-plus" @click="handleAdd">新增</el-button>
       <el-button type="danger" icon="el-icon-close" :disabled="this.multipleSelection.length===0" class="handle-del"
@@ -16,7 +16,7 @@
       </el-button>
     </div>
 
-    <el-table :data="lcsList" v-loading="listLoading" style="width: 100%" border ref="multipleTable"
+    <el-table :data="khList" v-loading="listLoading" style="width: 100%" border ref="multipleTable"
               @selection-change="handleSelectionChange">
       <el-table-column type="selection" width="40"></el-table-column>
       <el-table-column type="expand">
@@ -43,11 +43,15 @@
             <el-form-item label="地址">
               <span>{{ props.row.address }}</span>
             </el-form-item>
+            <el-form-item label="所属理财师">
+              <span>{{ props.row.financer }}</span>
+            </el-form-item>
           </el-form>
         </template>
       </el-table-column>
       <el-table-column prop="uid" label="uid" width="70"></el-table-column>
-      <el-table-column prop="name" label="姓名" width="150"></el-table-column>
+      <el-table-column prop="name" label="姓名" width="110"></el-table-column>
+      <el-table-column prop="financer" label="所属理财师" width="110"></el-table-column>
       <el-table-column prop="phone" label="电话" width="150"></el-table-column>
       <el-table-column prop="sex" label="性别" width="80" :formatter="formatSex"></el-table-column>
       <el-table-column prop="email" label="电子邮箱" width="100"></el-table-column>
@@ -98,6 +102,14 @@
         <el-form-item label="地址">
           <el-input type="textarea" v-model="addForm.address"></el-input>
         </el-form-item>
+        <el-form-item label="理财师">
+          <el-autocomplete
+            v-model="addForm.financer"
+            :fetch-suggestions="queryFinancerAsync"
+            placeholder="请输入理财师姓名"
+            @select="handleAddAsyncSelect"
+          ></el-autocomplete>
+        </el-form-item>
       </el-form>
       <div slot="footer" class="dialog-footer">
         <el-button @click.native="addFormVisible = false">取消</el-button>
@@ -130,6 +142,14 @@
         <el-form-item label="地址">
           <el-input type="textarea" v-model="editForm.address"></el-input>
         </el-form-item>
+        <el-form-item label="理财师">
+          <el-autocomplete
+            v-model="editForm.financer"
+            :fetch-suggestions="queryFinancerAsync"
+            placeholder="请输入理财师姓名"
+            @select="handleEditAsyncSelect"
+          ></el-autocomplete>
+        </el-form-item>
       </el-form>
       <div slot="footer" class="dialog-footer">
         <el-button @click.native="editFormVisible = false">取消</el-button>
@@ -144,7 +164,7 @@
     data() {
       return {
         nameSearch: '',
-        lcsList: [],
+        khList: [],
         multipleSelection: [],//列表选中列
         listLoading: false,
 
@@ -173,7 +193,9 @@
           sex: -1,
           birthday: '',
           email: '',
-          address: ''
+          address: '',
+          financerId: 0,
+          financer: ''
         },
 
         editFormVisible: false,//新增界面是否显示
@@ -185,12 +207,17 @@
           sex: -1,
           birthday: '',
           email: '',
-          address: ''
-        }
+          address: '',
+          financerId: 0,
+          financer: ''
+        },
+
+        asyncFinancers: []
       }
     },
     mounted: function () {
       this.handleSearch();
+      this.loadAllFinancer();
     },
     filters: {
       formatDetailSex: function (val) {
@@ -198,6 +225,37 @@
       }
     },
     methods: {
+      loadAllFinancer(){
+        this.$axios.get('/financer/queryfinaasync', {}).then((res) => {
+          if (res.data.status == 200) {
+            this.asyncFinancers = res.data.result;
+          }
+        }).catch((res) => {
+          console.log(res);
+        });
+      },
+      queryFinancerAsync(queryString, cb) {
+        var asyncFinancers = this.asyncFinancers;
+        var results = queryString ? asyncFinancers.filter(this.createStateFilter(queryString)) : asyncFinancers;
+        clearTimeout(this.timeout);
+        this.timeout = setTimeout(() => {
+          cb(results);
+        }, 1000 * Math.random());
+      },
+      createStateFilter(queryString) {
+        return (state) => {
+          return (state.value.toLowerCase().indexOf(queryString.toLowerCase()) === 0);
+        };
+      },
+      handleAddAsyncSelect(item) {
+        this.addForm.financerId = item.uid;
+        console.log(this.addForm);
+      },
+      handleEditAsyncSelect(item) {
+        this.editForm.financerId = item.uid;
+        console.log(this.editForm);
+      },
+
       handleSelectionChange(val) {
         this.multipleSelection = val;
       },
@@ -215,10 +273,10 @@
         this.handleSearch();
       },
       handleSearch() {
-        this.$axios.get('/financer/financerlist', {params: {nameSearch: this.nameSearch, pageNumber: this.pageNumber, pageSize: this.pageSize}}).then((res) => {
+        this.$axios.get('/customer/customerlist', {params: {nameSearch: this.nameSearch, pageNumber: this.pageNumber, pageSize: this.pageSize}}).then((res) => {
           if (res.data.status == 200) {
             this.total = res.data.result.total;
-            this.lcsList = res.data.result.dataList;
+            this.khList = res.data.result.dataList;
           }
         }).catch((res) => {
           console.log(res);
@@ -234,7 +292,8 @@
           sex: -1,
           age: 0,
           birthday: '',
-          address: ''
+          address: '',
+          financerId: 0
         }
       },
       //显示修改界面
@@ -251,7 +310,7 @@
               type: 'warning'
             }).then(() => {
               this.addLoading = true;
-              this.$axios.post('/financer/addfinancer', this.addForm).then((res) => {
+              this.$axios.post('/customer/addcustomer', this.addForm).then((res) => {
                 this.addLoading = false;
                 if (res.data.status == 200) {
                   this.$message({
@@ -289,7 +348,7 @@
               type: 'warning'
             }).then(() => {
               this.editLoading = true;
-              this.$axios.post('/financer/editfinancer', this.editForm).then((res) => {
+              this.$axios.post('/customer/editcustomer', this.editForm).then((res) => {
                 console.log(res);
                 this.editLoading = false;
                 if (res.data.status == 200) {
@@ -326,7 +385,7 @@
           type: 'warning'
         }).then(() => {
           this.listLoading = true;
-          this.$axios.post('/financer/btrvfinancer', {uids: ids}).then((res) => {
+          this.$axios.post('/customer/btrvcustomer', {uids: ids}).then((res) => {
             this.listLoading = false;
             if (res.data.status == 200) {
               this.$message({
@@ -356,7 +415,7 @@
           type: 'warning'
         }).then(() => {
           this.listLoading = true;
-          this.$axios.post('/financer/delfinancer', {uid: row.uid}).then((res) => {
+          this.$axios.post('/customer/delcustomer', {uid: row.uid}).then((res) => {
             this.listLoading = false;
             if (res.data.status == 200) {
               this.$message({
@@ -382,11 +441,11 @@
         });
       },
       handleCancel(index, row) {
-        this.$confirm('确认注销该理财师账号吗?', '提示', {
+        this.$confirm('确认注销该客户账号吗?', '提示', {
           type: 'warning'
         }).then(() => {
           this.listLoading = true;
-          this.$axios.post('/financer/handlecancel', {uid: row.uid}).then((res) => {
+          this.$axios.post('/customer/handlecancel', {uid: row.uid}).then((res) => {
             this.listLoading = false;
             if (res.data.status == 200) {
               this.$message({
@@ -412,11 +471,11 @@
         });
       },
       handleNormal(index, row) {
-        this.$confirm('确认启用该理财师账户吗?', '提示', {
+        this.$confirm('确认启用该客户账户吗?', '提示', {
           type: 'warning'
         }).then(() => {
           this.listLoading = true;
-          this.$axios.post('/financer/handlenormal', {uid: row.uid}).then((res) => {
+          this.$axios.post('/customer/handlenormal', {uid: row.uid}).then((res) => {
             this.listLoading = false;
             if (res.data.status == 200) {
               this.$message({

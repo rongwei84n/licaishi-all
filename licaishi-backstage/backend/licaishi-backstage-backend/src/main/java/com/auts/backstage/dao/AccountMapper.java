@@ -1,6 +1,8 @@
 package com.auts.backstage.dao;
 
+import org.apache.ibatis.annotations.Delete;
 import org.apache.ibatis.annotations.Insert;
+import org.apache.ibatis.annotations.Options;
 import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
 import org.apache.ibatis.annotations.Update;
@@ -17,7 +19,8 @@ public interface AccountMapper {
     
     @Insert("insert into tbl_user (user_name, real_name, passwd, role, status, create_time, update_time) "
             + "values (#{ac.user_name},#{ac.real_name},#{ac.passwd},#{ac.role},#{ac.status},#{ac.create_time},#{ac.update_time})")
-    int addAccount(@Param("ac") AccountModel ac);
+    @Options(useGeneratedKeys = true, keyProperty = "ac.uid")
+    void addAccount(@Param("ac") AccountModel ac);
 
     @Select("select * from tbl_user where phone=#{phone} and passwd=#{pwd} and status=0 limit 1")
     AccountModel loginPhone(@Param("phone") String phone, @Param("pwd") String pwd);
@@ -37,4 +40,19 @@ public interface AccountMapper {
 
     @Update("update tbl_user set user_name = #{model.user_name}, real_name=#{model.real_name}, phone=#{model.phone}, passwd=#{model.passwd}, email=#{model.email}, sex=#{model.sex}, remark=#{model.remark}, role=#{model.role}, status=#{model.status}, create_time=#{model.create_time}, update_time=#{model.update_time}, workstudio=#{model.workstudio}, avtr=#{model.avtr} where uid=#{model.uid}")
     int updateAccount(@Param("model") AccountModel model);
+    
+    @Update("update tbl_user set user_name = #{phone}, real_name=#{realName} where uid=#{uid}")
+    int updateAccountByFinancer(@Param("phone") String phone, @Param("realName") String realName, @Param("uid") int uid);
+    
+    @Delete("delete from tbl_user where uid = #{uid}")
+    void deleteAccount(@Param("uid") int uid);
+
+    @Update("update tbl_user set user_name = #{phone}, real_name=#{realName} where uid=#{uid}")
+	void updateAccountByCustomer(@Param("phone") String phone, @Param("realName") String name, @Param("uid") int uid);
+
+    @Update("update tbl_user set status = -1 where uid=#{userId}")
+	void handelCancel(@Param("userId") int userId);
+
+    @Update("update tbl_user set status = 0 where uid=#{userId}")
+	void handleNormal(@Param("userId") int userId);
 }

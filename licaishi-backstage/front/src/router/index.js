@@ -22,6 +22,10 @@ export default new Router({
           component: resolve => require(['../components/pages/lcsmanage.vue'], resolve)
         },
         {
+          path: 'khmanage',
+          component: resolve => require(['../components/pages/khmanage.vue'], resolve)
+        },
+        {
           path: 'product/trust',
           component: resolve => require(['../components/pages/product/Trust.vue'], resolve)
         },

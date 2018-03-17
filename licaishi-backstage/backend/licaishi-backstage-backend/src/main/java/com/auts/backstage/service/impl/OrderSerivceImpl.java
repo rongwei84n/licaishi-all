@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.auts.backstage.dao.OrderMapper;
 import com.auts.backstage.model.common.PageInfo;
@@ -30,21 +31,25 @@ public class OrderSerivceImpl implements OrderService {
 	}
 
 	@Override
+	@Transactional
 	public void orderSettle(String uid) {
 		orderMapper.orderSettle(uid);
 	}
 
 	@Override
+	@Transactional
 	public void orderFailure(String uid) {
 		orderMapper.orderFailure(uid);
 	}
 
 	@Override
+	@Transactional
 	public void orderContract(String uid) {
 		orderMapper.orderContract(uid);
 	}
 
 	@Override
+	@Transactional
 	public void orderSettled(String uid) {
 		orderMapper.orderSettled(uid);
 	}

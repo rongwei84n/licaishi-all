@@ -13,16 +13,20 @@ import com.auts.backstage.model.dao.FinancerModel;
 public interface FinancerMapper {
 	
 	@Select("<script>"
-			+ "select * from tbl_financer "
+			+ "select f.*,u.status from tbl_financer f "
+			+ "left join tbl_user u on u.uid = f.userId "
 			+ "<if test='nameSearch != \"\"'>"
-			+ 	"where name like concat('%',#{nameSearch},'%')"
+			+ 	"where f.name like concat('%',#{nameSearch},'%')"
 			+ "</if>"
-			+ "order by uid"
+			+ "order by f.uid"
 		  + "</script>")
     List<FinancerModel> queryFinancerList(@Param("nameSearch") String nameSearch);
+	
+	@Select("select * from tbl_financer where uid = #{uid}")
+	FinancerModel queryFinancer(@Param("uid") String uid);
 
-	@Insert("insert into tbl_financer (name,phone,email,address,createtime,updatetime,sex,birthday) values "
-			+ "(#{financer.name},#{financer.phone},#{financer.email},#{financer.address},#{financer.createtime},#{financer.updatetime},#{financer.sex},#{financer.birthday})")
+	@Insert("insert into tbl_financer (name,phone,email,address,createtime,updatetime,sex,birthday,userId) values "
+			+ "(#{financer.name},#{financer.phone},#{financer.email},#{financer.address},#{financer.createtime},#{financer.updatetime},#{financer.sex},#{financer.birthday},#{financer.userId})")
 	void addFinancer(@Param("financer") FinancerModel financer);
 
 	@Delete("delete from tbl_financer where uid = #{uid}")
@@ -45,7 +49,10 @@ public interface FinancerMapper {
 			+ "<if test='nameSearch != \"\"'>"
 			+ 	"where name like concat('%',#{nameSearch},'%')"
 			+ "</if>"
-			+ "order by uid"
 		  + "</script>")
 	int queryFinancerCount(@Param("nameSearch") String nameSearch);
+
+	@Select("select * from tbl_financer")
+	List<FinancerModel> queryFinaAsync();
+
 }
