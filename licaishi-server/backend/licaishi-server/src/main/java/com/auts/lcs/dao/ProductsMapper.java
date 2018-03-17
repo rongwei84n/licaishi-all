@@ -32,9 +32,91 @@ public interface ProductsMapper {
     @UpdateProvider(type = ProductSqlProvider.class, method = "updateSql")
     int updateProduct(@Param("product") ProductModel pm);
 
-    @Select("select count(*) num from Product where p_type = #{type} limit 1 ")
+//    @Select("select count(*) num from Product where p_type = #{type} limit 1 ")
 //	@Select("select count(*) num from Product where p_type= #{type} limit 1")
-    int queryCountByPType(@Param("type") String type);
+    @Select("<script>"
+    		+ "select count(*) num from Product where p_type= #{type} "
+    		+ "<if test='pInvestType !=null and pInvestType !=\"00\"'>"
+    		+ "  and p_invest_type = #{pInvestType} "
+    		+ "</if> "
+    		+ "<if test='pPaymentInterestType !=null and pPaymentInterestType !=\"00\" '>"
+    		+ "  and p_payment_interest_type = #{pPaymentInterestType} "
+    		+ "</if> "
+    		+ "<if test='pSizeRatioType !=null and pSizeRatioType !=\"00\" '>"
+    		+ "  and p_size_ratio_type = #{pSizeRatioType} "
+    		+ "</if> "
+    		+ "<if test='minimumAmount !=null and minimumAmount !=\"00\" '>"
+    		+ "  and p_min_amount >= #{minimumAmount} "
+    		+ "</if> "
+    		+ "<if test='dueTime !=null and dueTime !=\"00\" '>"
+    		+    "<choose>"
+    		+      	"<when test='dueTime ==\"01\"'>"
+    		+			"and p_due_time &lt;= 11"
+    		+      	"</when>"
+    		+      	"<when test='dueTime ==\"02\"'>"
+    		+			"and p_due_time = 12"
+    		+      	"</when>"
+    		+      	"<when test='dueTime ==\"03\"'>"
+    		+			"and 13&gt;= p_due_time &lt;=23"
+    		+      	"</when>"
+    		+      	"<when test='dueTime ==\"04\"'>"
+    		+			"and p_due_time = 24"
+    		+      	"</when>"
+    		+      	"<when test='dueTime ==\"05\"'>"
+    		+			"and p_due_time &gt;  24"
+    		+      	"</when>"
+    		+    "</choose>"
+    		+ "</if> "
+    		+ "<if test='annualRevenue !=null and annualRevenue !=\"00\" '>"
+    		+    "<choose>"
+    		+      	"<when test='annualRevenue ==\"01\"'>"
+    		+			"and p_expect_annual_revenue + '0' &lt; '7' + 0 "
+    		+      	"</when>"
+    		+      	"<when test='annualRevenue ==\"02\"'>"
+    		+			"and '7' + 0 &gt;= p_expect_annual_revenue + '0' &lt; '8' + 0 "
+    		+      	"</when>"
+    		+      	"<when test='annualRevenue ==\"03\"'>"
+    		+			"and '8' + 0 &gt;= p_expect_annual_revenue + '0' &lt; '9' + 0 "
+    		+      	"</when>"
+    		+      	"<when test='annualRevenue ==\"04\"'>"
+    		+			"and '9' + 0 &gt;= p_expect_annual_revenue + '0' &lt; '10' + 0 "
+    		+      	"</when>"
+    		+      	"<when test='annualRevenue ==\"05\"'>"
+    		+			"and p_expect_annual_revenue + '0' &gt;= '10' + 0 "
+    		+      	"</when>"
+    		+      	"<when test='annualRevenue ==\"06\"'>"
+    		+			"and p_expect_annual_revenue = '浮动' "
+    		+      	"</when>"
+    		+    "</choose>"
+    		+ "</if> "
+    		+ "<if test='pCommission !=null and pCommission !=\"00\" '>"
+    		+    "<choose>"
+    		+      	"<when test='pCommission ==\"01\"'>"
+    		+			"and p_commission + '0' &lt; '1' + 0 "
+    		+      	"</when>"
+    		+      	"<when test='pCommission ==\"02\"'>"
+    		+			"and '1' + 0 &gt;= p_commission + '0' &lt; '3' + 0 "
+    		+      	"</when>"
+    		+      	"<when test='pCommission ==\"03\"'>"
+    		+			"and p_commission + '0' &gt;= '3' + 0 "
+    		+      	"</when>"
+    		+    "</choose>"
+    		+ "</if> "
+    		+ "<if test='saleStatus !=null and saleStatus !=\"00\" '>"
+    		+ "  and p_sale_status = #{saleStatus} "
+    		+ "</if> "
+    		+ "<if test='pRabateProfitParameter !=null and pRabateProfitParameter ==\"true\"'>"
+    		+ "  order by p_commission + '0' desc "
+    		+ "</if> "
+    		+ "<if test='pAnnualRevenueExpectParameter !=null and pAnnualRevenueExpectParameter ==\"true\"'>"
+    		+ "  order by p_expect_annual_revenue + '0' desc "
+    		+ "</if> "
+			+"</script>")
+    int queryCountByPType(@Param("type")String type,
+    		@Param("pInvestType")String pInvestType, @Param("pPaymentInterestType")String pPaymentInterestType, @Param("pSizeRatioType")String pSizeRatioType,
+    		@Param("minimumAmount")String minimumAmount, @Param("dueTime")String dueTime, @Param("annualRevenue")String annualRevenue,
+    		@Param("saleStatus")String saleStatus, @Param("pRabateProfitParameter")String pRabateProfitParameter,
+    		@Param("pAnnualRevenueExpectParameter")String pAnnualRevenueExpectParameter,@Param("pCommission")String pCommission);
 
 	@Select("select count(*) num from Product limit 1")
     int queryAllCount();
@@ -53,7 +135,10 @@ public interface ProductsMapper {
     	@Result(property = "pRecruitmentSummary", column = "p_recruitment_summary"), @Result(property = "pCpys", column = "p_cpys"),
     	@Result(property = "pMjzh", column = "p_mjzh"), @Result(property = "pFxkz", column = "p_fxkz"),
     	@Result(property = "pHkly", column = "p_hkly"), @Result(property = "pZjyt", column = "p_zjyt"),
-    	@Result(property = "pRzf", column = "p_rzf"), @Result(property = "pDbf", column = "p_dbf")
+    	@Result(property = "pRzf", column = "p_rzf"), @Result(property = "pDbf", column = "p_dbf"),
+		@Result(property = "pLatestPayNum", column = "p_latest_Pay_Num"), @Result(property = "pRgxz", column = "p_rgxz"),
+    	@Result(property = "pRexiao", column = "p_rexiao"), @Result(property = "pTuijian", column = "p_tuijian"),
+    	@Result(property = "pCommission", column = "p_commission")
     })
     ProductModel queryProductByPCode(@Param("pCode") String pCode);
 
@@ -71,7 +156,10 @@ public interface ProductsMapper {
     	@Result(property = "pRecruitmentSummary", column = "p_recruitment_summary"), @Result(property = "pCpys", column = "p_cpys"),
     	@Result(property = "pMjzh", column = "p_mjzh"), @Result(property = "pFxkz", column = "p_fxkz"),
     	@Result(property = "pHkly", column = "p_hkly"), @Result(property = "pZjyt", column = "p_zjyt"),
-    	@Result(property = "pRzf", column = "p_rzf"), @Result(property = "pDbf", column = "p_dbf")
+    	@Result(property = "pRzf", column = "p_rzf"), @Result(property = "pDbf", column = "p_dbf"),
+		@Result(property = "pLatestPayNum", column = "p_latest_Pay_Num"), @Result(property = "pRgxz", column = "p_rgxz"),
+    	@Result(property = "pRexiao", column = "p_rexiao"), @Result(property = "pTuijian", column = "p_tuijian"),
+    	@Result(property = "pCommission", column = "p_commission")
     })
     ProductModel queryProductByPid(@Param("pid") String pid);
 
@@ -98,7 +186,7 @@ public interface ProductsMapper {
     		+			"and p_due_time = 12"
     		+      	"</when>"
     		+      	"<when test='dueTime ==\"03\"'>"
-    		+			"and 12&gt;= p_due_time &lt;=23"
+    		+			"and 13&gt;= p_due_time &lt;=23"
     		+      	"</when>"
     		+      	"<when test='dueTime ==\"04\"'>"
     		+			"and p_due_time = 24"
@@ -108,18 +196,50 @@ public interface ProductsMapper {
     		+      	"</when>"
     		+    "</choose>"
     		+ "</if> "
+    		+ "<if test='annualRevenue !=null and annualRevenue !=\"00\" '>"
+    		+    "<choose>"
+    		+      	"<when test='annualRevenue ==\"01\"'>"
+    		+			"and p_expect_annual_revenue + '0' &lt; '7' + 0 "
+    		+      	"</when>"
+    		+      	"<when test='annualRevenue ==\"02\"'>"
+    		+			"and '7' + 0 &gt;= p_expect_annual_revenue + '0' &lt; '8' + 0 "
+    		+      	"</when>"
+    		+      	"<when test='annualRevenue ==\"03\"'>"
+    		+			"and '8' + 0 &gt;= p_expect_annual_revenue + '0' &lt; '9' + 0 "
+    		+      	"</when>"
+    		+      	"<when test='annualRevenue ==\"04\"'>"
+    		+			"and '9' + 0 &gt;= p_expect_annual_revenue + '0' &lt; '10' + 0 "
+    		+      	"</when>"
+    		+      	"<when test='annualRevenue ==\"05\"'>"
+    		+			"and p_expect_annual_revenue + '0' &gt;= '10' + 0 "
+    		+      	"</when>"
+    		+      	"<when test='annualRevenue ==\"06\"'>"
+    		+			"and p_expect_annual_revenue = '浮动' "
+    		+      	"</when>"
+    		+    "</choose>"
+    		+ "</if> "
+    		+ "<if test='pCommission !=null and pCommission !=\"00\" '>"
+    		+    "<choose>"
+    		+      	"<when test='pCommission ==\"01\"'>"
+    		+			"and p_commission + '0' &lt; '1' + 0 "
+    		+      	"</when>"
+    		+      	"<when test='pCommission ==\"02\"'>"
+    		+			"and '1' + 0 &gt;= p_commission + '0' &lt; '3' + 0 "
+    		+      	"</when>"
+    		+      	"<when test='pCommission ==\"03\"'>"
+    		+			"and p_commission + '0' &gt;= '3' + 0 "
+    		+      	"</when>"
+    		+    "</choose>"
+    		+ "</if> "
     		+ "<if test='saleStatus !=null and saleStatus !=\"00\" '>"
     		+ "  and p_sale_status = #{saleStatus} "
     		+ "</if> "
-//    		+ "<if test='pInvestType !=null '>"
-//    		+ "  and p_invest_type = #{pInvestType} "
-//    		+ "</if> "
-//    		+ "<if test='pInvestType !=null '>"
-//    		+ "  and p_invest_type = #{pInvestType} "
-//    		+ "</if> "
-//    		+ "<if test='pInvestType !=null '>"
-//    		+ "  and p_invest_type = #{pInvestType} "
-//    		+ "</if> "
+    		+ "<if test='pRabateProfitParameter !=null and pRabateProfitParameter ==\"true\"'>"
+    		+ "  order by p_commission + '0' desc "
+    		+ "</if> "
+    		+ "<if test='pAnnualRevenueExpectParameter !=null and pAnnualRevenueExpectParameter ==\"true\"'>"
+    		+ "  order by p_expect_annual_revenue + '0' desc "
+    		+ "</if> "
     		+ "limit #{startIndex}, #{pageSize}"
 			+"</script>")
     @Results({
@@ -130,13 +250,16 @@ public interface ProductsMapper {
     	@Result(property = "pSaleStartTime", column = "p_sale_date_start"), @Result(property = "pAllIssuingScale", column = "p_all_issuing_scale"),
     	@Result(property = "pMinAmount", column = "p_min_amount"), @Result(property = "pPaymentInterestType", column = "p_payment_interest_type"),
     	@Result(property = "pInvestType", column = "p_invest_type"), @Result(property = "pSizeRatioType", column = "p_size_ratio_type"),
-    	@Result(property = "pInvestOwnerId", column = "p_invest_owner_id")
+    	@Result(property = "pInvestOwnerId", column = "p_invest_owner_id"), @Result(property = "pAllSubscriptionAmount", column = "p_all_subscription_amount"),
+		@Result(property = "pLatestPayNum", column = "p_latest_Pay_Num"), @Result(property = "pRgxz", column = "p_rgxz"),
+    	@Result(property = "pRexiao", column = "p_rexiao"), @Result(property = "pTuijian", column = "p_tuijian"),
+    	@Result(property = "pCommission", column = "p_commission")
     })
     List<ProductModel> queryProductsByType(@Param("startIndex")int startIndex, @Param("pageSize") int pageSize, @Param("type")String type,
     		@Param("pInvestType")String pInvestType, @Param("pPaymentInterestType")String pPaymentInterestType, @Param("pSizeRatioType")String pSizeRatioType,
     		@Param("minimumAmount")String minimumAmount, @Param("dueTime")String dueTime, @Param("annualRevenue")String annualRevenue,
-    		@Param("saleStatus")String saleStatus, @Param("pRabateProfitParameter")boolean pRabateProfitParameter,
-    		@Param("pAnnualRevenueExpectParameter")boolean pAnnualRevenueExpectParameter);
+    		@Param("saleStatus")String saleStatus, @Param("pRabateProfitParameter")String pRabateProfitParameter,
+    		@Param("pAnnualRevenueExpectParameter")String pAnnualRevenueExpectParameter,@Param("pCommission")String pCommission);
 
     @Select("select * from Product limit #{startIndex}, #{pageSize}")
     @Results({

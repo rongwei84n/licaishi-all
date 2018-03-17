@@ -30,8 +30,6 @@ public class ProductDetailResponseModel {
     private String pSizeRatioType;
     private String pInvestOwnerId;
     private String pInvestName;
-	private BigDecimal pIssuingScale;
-    private BigDecimal pExpectSaleAmount;
     private BigDecimal pAllSubscriptionAmount;
     private String pRecruitmentSummary;
     private String pCpys;
@@ -44,7 +42,35 @@ public class ProductDetailResponseModel {
     private List<ProfitRebateModel> profitRebates;
     private List<ProductAttachmentModel> productAttachments;
     private String pCommission; //佣金比例
+    private String pLatestPayNum;//最迟打款天数
+	private String pRexiao;//是否热销
+	private String pTuijian;//是否推荐
+	private String pRgxz; //认购须知
     
+	public String getpLatestPayNum() {
+		return pLatestPayNum;
+	}
+	public void setpLatestPayNum(String pLatestPayNum) {
+		this.pLatestPayNum = pLatestPayNum;
+	}
+	public String getpRexiao() {
+		return pRexiao;
+	}
+	public void setpRexiao(String pRexiao) {
+		this.pRexiao = pRexiao;
+	}
+	public String getpTuijian() {
+		return pTuijian;
+	}
+	public void setpTuijian(String pTuijian) {
+		this.pTuijian = pTuijian;
+	}
+	public String getpRgxz() {
+		return pRgxz;
+	}
+	public void setpRgxz(String pRgxz) {
+		this.pRgxz = pRgxz;
+	}
 	public String getpCommission() {
 		return pCommission;
 	}
@@ -140,18 +166,6 @@ public class ProductDetailResponseModel {
 	}
 	public void setpInvestOwnerId(String pInvestOwnerId) {
 		this.pInvestOwnerId = pInvestOwnerId;
-	}
-	public BigDecimal getpIssuingScale() {
-		return pIssuingScale;
-	}
-	public void setpIssuingScale(BigDecimal pIssuingScale) {
-		this.pIssuingScale = pIssuingScale;
-	}
-	public BigDecimal getpExpectSaleAmount() {
-		return pExpectSaleAmount;
-	}
-	public void setpExpectSaleAmount(BigDecimal pExpectSaleAmount) {
-		this.pExpectSaleAmount = pExpectSaleAmount;
 	}
 	public BigDecimal getpAllSubscriptionAmount() {
 		return pAllSubscriptionAmount;

@@ -14,10 +14,13 @@ public interface ProductsService {
 
     List<ProductModel> queryProducts(int pageNo, int pageSize, String type,
     		String pInvestType, String pPaymentInterestType, String pSizeRatioType, 
-    		String minimumAmount, String dueTime, String annualRevenue, String saleStatus, boolean pRabateProfitParameter, boolean pAnnualRevenueExpectParameter);
+    		String minimumAmount, String dueTime, String annualRevenue, String saleStatus, String pRabateProfitParameter, 
+    		String pAnnualRevenueExpectParameter, String pCommission);
     
-    int queryProductCountByPType(String type);
-    
+    int queryProductCountByPType(String type,String pInvestType, String pPaymentInterestType, String pSizeRatioType, 
+    		String minimumAmount, String dueTime, String annualRevenue, String saleStatus, String pRabateProfitParameter, 
+    		String pAnnualRevenueExpectParameter, String pCommission);
+        
     ProductModel queryProductDetail(String pCode);
     
     ProductModel queryProductByPid(String pid);
