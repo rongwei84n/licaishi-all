@@ -8,6 +8,7 @@
 
 import Foundation
 import UIKit
+import Kingfisher
 
 class MeViewController: UITableViewController, InstanceFromStoryBoard, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
     
@@ -29,15 +30,38 @@ class MeViewController: UITableViewController, InstanceFromStoryBoard, UIImagePi
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        ZWHud.shared.show()
+        _ = viewModel.getAccouontDetail().subscribe(onNext: { [weak self] (isSuccessful) in
+            
+            ZWHud.shared.dismiss()
+            
+            if isSuccessful {
+                self?.setupUI()
+            }
+            
+        }, onError: { (error) in
+            
+            ZWHud.shared.dismiss()
+            HUDHelper.shared.showWithMsg(error.localizedDescription)
+            
+        })
         
     }
+    
+    private func setupUI() {
+        
+        avatar.kf.setImage(with: URL(string: User.current.img ?? ""), placeholder: UIImage(named: "icon_avatar_default"), options: nil, progressBlock: nil, completionHandler: nil)
+        nickNameLabel.text = User.current.nickname
+        loginNameLabel.text = User.current.loginName
+        studioLabel.text = User.current.studioName
+        phoneNumberLabel.text = User.current.phoneNumber
+        
+    }
+    
     @IBAction func logoutButtonTapped(_ sender: Any) {
         
         User.current.isLoggedIn = false
-        
-        let vc = UINavigationController(rootViewController: LoginViewController.instanceFromStoryBoard())
-        let appDelegate = UIApplication.shared.delegate as? AppDelegate
-        appDelegate?.window?.rootViewController = vc
+        User.current.clearUserInfo()
         
     }
     

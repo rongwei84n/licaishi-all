@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import CryptoSwift
 
 class LoginViewController: UITableViewController, InstanceFromStoryBoard, UITextFieldDelegate {
     
@@ -44,13 +45,12 @@ class LoginViewController: UITableViewController, InstanceFromStoryBoard, UIText
         
         // 登录
         ZWHud.shared.show()
-        _ = viewModel.login(phoneNumber: phone, password: password).subscribe(onNext: { [weak self] (isSuccessful) in
+        _ = viewModel.login(phoneNumber: phone, password: password.md5()).subscribe(onNext: { [weak self] (isSuccessful) in
             
             ZWHud.shared.dismiss()
             
             if isSuccessful {
-                let vc = AssociationViewController()
-                self?.navigationController?.pushViewController(vc, animated: true)
+                self?.navigationController?.popViewController(animated: true)
             }
             
         }, onError: { (error) in

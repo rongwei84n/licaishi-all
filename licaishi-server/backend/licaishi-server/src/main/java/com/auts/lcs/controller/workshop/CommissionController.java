@@ -26,10 +26,11 @@ import com.auts.lcs.model.response.Data;
 import com.auts.lcs.model.response.OrderResponseDto;
 import com.auts.lcs.model.response.Pager;
 import com.auts.lcs.service.OrderService;
+import com.auts.lcs.util.StringUtil;
 
 /**
  * 工作室，我的佣金相关功能
- * 
+ *
  * @author libing
  *
  */
@@ -44,7 +45,7 @@ public class CommissionController extends SBaseController {
 
     @Autowired
     OrderService orderService;
-    
+
     /**
      * 根据客户ID查询客户所有订单
      * @param request
@@ -54,11 +55,19 @@ public class CommissionController extends SBaseController {
     public PhiHomeBaseResponse queryCommission(HttpServletRequest request) {
         PhiHomeBaseResponse rspObj = new PhiHomeBaseResponse();
         CommissionResponseDto commissionResponseDto = new CommissionResponseDto();
-                     
+
         LOGGER.info("queryCommission start");
         String token = request.getHeader(Const.AUTHORIZATION);
-        LOGGER.info("queryOrdersByfinancerId toekn [{}]", token);
         String uid = getUidByToken(token);
+        LOGGER.info("queryOrders toekn [{}] uid [{}]", token, uid);
+
+        if (StringUtil.isNullOrEmpty(uid)) {
+            LOGGER.info("Parsed uid is null, return");
+            rspObj.setCode(Const.ErrorCode.Account.TOKEN_INVILID);
+            rspObj.setMessage(Const.ErrorCode.Account.STR_TOKEN_INVILID);
+            return rspObj;
+        }
+
         String financerId = "10";
         //累计佣金
         List<String> allStatus = new ArrayList<>();
@@ -76,11 +85,11 @@ public class CommissionController extends SBaseController {
         commissionResponseDto.setSumCommission(allComms);
         commissionResponseDto.setWcCommission(wcCommission);
         commissionResponseDto.setOcCommission(ocCommission);
-        
+
         rspObj.setResult(commissionResponseDto);
         return successResponse(rspObj);
     }
-    
+
     /**
      * 根据客户ID查询客户所有订单
      * @param request
@@ -92,7 +101,7 @@ public class CommissionController extends SBaseController {
             @RequestParam(value = "pageSize", required = true) String pageSize) {
         PhiHomeBaseResponse rspObj = new PhiHomeBaseResponse();
         Pager pager = null;
-                     
+
 //        LOGGER.info("queryOrdersByfinancerId financerId [{}]", financerId);
         String token = request.getHeader(Const.AUTHORIZATION);
         LOGGER.info("queryOrdersByfinancerId toekn [{}]", token);

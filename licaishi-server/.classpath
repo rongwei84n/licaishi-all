@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+	<classpathentry excluding="com/auts/lcssv/views/" kind="src" path="android/app/src/main/java"/>
+	<classpathentry kind="src" path="android/app/src/main/java/com/auts/lcssv/views"/>
+	<classpathentry kind="src" path="backend/licaishi-server/src/main/java"/>
+	<classpathentry kind="lib" path="android/app/libs/alicloud-android-monitor-2.5.1.1_for_bc_proguard.jar"/>
+	<classpathentry kind="lib" path="android/app/libs/alicloud-android-utils-1.0.3.jar"/>
+	<classpathentry kind="lib" path="android/app/libs/core-3.2.1.jar"/>
+	<classpathentry kind="lib" path="android/app/libs/tbs_sdk_thirdapp.jar"/>
+	<classpathentry kind="lib" path="android/app/libs/utdid4all-1.1.5.3_proguard.jar"/>
+	<classpathentry kind="lib" path="android/gradle/wrapper/gradle-wrapper.jar"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
+	<classpathentry kind="output" path="bin"/>
+</classpath>

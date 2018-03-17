@@ -7,12 +7,15 @@
 //
 
 import UIKit
+import RxSwift
 
 class EditViewController: UITableViewController, InstanceFromStoryBoard {
     
     static var storyBoardName: String {
         return "Me"
     }
+    
+    let viewModel = MeViewModel()
     
     static func instanceFromStoryBoard(editType: EditType, _ prevText: String?) -> EditViewController {
         
@@ -39,9 +42,35 @@ class EditViewController: UITableViewController, InstanceFromStoryBoard {
     
     @IBAction func saveButtonTapped(_ sender: Any) {
         
-        callback?(textfield.text ?? "")
+        var savingRequest: Observable<Bool>?
+        let text = textfield.text ?? ""
         
-        navigationController?.popViewController(animated: true)
+        if editType == .nick {
+            savingRequest = viewModel.modiifyAccouontDetail(nickName: text, studioName: nil)
+        }
+        else if editType == .studio {
+            savingRequest = viewModel.modiifyAccouontDetail(nickName: nil, studioName: text)
+        }
+        
+        ZWHud.shared.show()
+        
+        _ = savingRequest?.subscribe(onNext: { [weak self] (isSuccessful) in
+            
+            ZWHud.shared.dismiss()
+            
+            if isSuccessful {
+                
+                self?.callback?(text)
+                self?.navigationController?.popViewController(animated: true)
+            }
+            
+            
+        }, onError: { (error) in
+            
+            ZWHud.shared.show()
+            HUDHelper.shared.showWithMsg(error.localizedDescription)
+            
+        })
         
     }
     

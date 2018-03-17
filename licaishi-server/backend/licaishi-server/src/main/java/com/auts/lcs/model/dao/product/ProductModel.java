@@ -34,7 +34,51 @@ public class ProductModel extends BaseDaoModel {
     private String pDbf;
     private Date createTime;
     private Date updateTime;
+    private String pLatestPayNum;
+	private String pRexiao;
+	private String pTuijian;
+	private String pRgxz; //认购须知
+	private String pCommission;
 
+    public String getpLatestPayNum() {
+		return pLatestPayNum;
+	}
+
+	public void setpLatestPayNum(String pLatestPayNum) {
+		this.pLatestPayNum = pLatestPayNum;
+	}
+	public String getpRexiao() {
+		return pRexiao;
+	}
+
+	public void setpRexiao(String pRexiao) {
+		this.pRexiao = pRexiao;
+	}
+
+	public String getpTuijian() {
+		return pTuijian;
+	}
+
+	public void setpTuijian(String pTuijian) {
+		this.pTuijian = pTuijian;
+	}
+
+	public String getpRgxz() {
+		return pRgxz;
+	}
+
+	public void setpRgxz(String pRgxz) {
+		this.pRgxz = pRgxz;
+	}
+
+	public String getpCommission() {
+		return pCommission;
+	}
+
+	public void setpCommission(String pCommission) {
+		this.pCommission = pCommission;
+	}
+    
 	public Date getCreateTime() {
 		return createTime;
 	}

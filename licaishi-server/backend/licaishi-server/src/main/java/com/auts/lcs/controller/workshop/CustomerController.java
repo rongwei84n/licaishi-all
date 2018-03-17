@@ -28,10 +28,11 @@ import com.auts.lcs.model.response.OrderResponseDto;
 import com.auts.lcs.model.response.Pager;
 import com.auts.lcs.service.CustomerService;
 import com.auts.lcs.service.OrderService;
+import com.auts.lcs.util.StringUtil;
 
 /**
  * 工作室，我的客户相关功能
- * 
+ *
  * @author libing
  *
  */
@@ -64,8 +65,14 @@ public class CustomerController extends SBaseController {
         Pager pager = null;
         LOGGER.info("queryMyCustomers type [{}]");
         String token = request.getHeader(Const.AUTHORIZATION);
-        LOGGER.info("queryOrders toekn [{}]", token);
         String uid = getUidByToken(token);
+        LOGGER.info("queryOrders toekn [{}] uid [{}]", token, uid);
+        if (StringUtil.isNullOrEmpty(uid)) {
+            LOGGER.info("Parsed uid is null, return");
+            rspObj.setCode(Const.ErrorCode.Account.TOKEN_INVILID);
+            rspObj.setMessage(Const.ErrorCode.Account.STR_TOKEN_INVILID);
+            return rspObj;
+        }
 
         String financerId = "10";
         int totalCount = customerService.queryCustomerCountByFuid(financerId);
@@ -73,7 +80,7 @@ public class CustomerController extends SBaseController {
         List<CustomerResponseDto> customerResponseDtoList = new ArrayList<>();
         if(customers!=null && !customers.isEmpty()) {
         	for(CustomerModel customerModel : customers) {
-        		
+
         		CustomerResponseDto customerResponseDto = new CustomerResponseDto();
             	BeanUtils.copyProperties(customerModel, customerResponseDto);
             	int orderCounts = 10;
@@ -104,7 +111,7 @@ public class CustomerController extends SBaseController {
 //        rspObj.setResult(allInfoCount);
 //        return successResponse(rspObj);
     }
-    
+
     /**
      * 根据客户ID查询客户所有订单
      * @param request
@@ -117,7 +124,7 @@ public class CustomerController extends SBaseController {
             @RequestParam(value = "customerId", required = true) String customerId) {
         PhiHomeBaseResponse rspObj = new PhiHomeBaseResponse();
         Pager pager = null;
-                     
+
         LOGGER.info("queryOrdersByCustomerId customerId [{}]", customerId);
         String token = request.getHeader(Const.AUTHORIZATION);
         LOGGER.info("queryOrdersByCustomerId toekn [{}]", token);
@@ -144,7 +151,7 @@ public class CustomerController extends SBaseController {
         rspObj.setResult(data);
         return successResponse(rspObj);
     }
-    
+
 //    /**
 //     * 查询产品列表
 //     * type 01：集合信托  02集合资管 03债权基金 04股权基金 05阳光私募

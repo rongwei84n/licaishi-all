@@ -18,14 +18,10 @@ class User {
         User.current.set(nil, forKey: .accessTokenExpireAt)
         User.current.set(nil, forKey: .refreshTokenExpireAt)
         
-        User.current.zipcode = nil
         User.current.img = nil
-        User.current.address = nil
-        User.current.zone = nil
-        User.current.sex = nil
         User.current.nickname = nil
-        User.current.age = nil
-        User.current.realname = nil
+        User.current.loginName = nil
+        User.current.studioName = nil
 
         User.current.uid = nil
         User.current.isLoggedIn = false
@@ -33,37 +29,9 @@ class User {
         User.current.accessToken = nil
         User.current.refreshToken = nil
         User.current.kAccessToken = nil // 云知声accessToken
-        User.current.captchaid = nil
-        User.current.captcha = nil
         User.current.phoneNumber = nil
-        User.current.verCode = nil
-//        User.current.deviceId = nil // 当前保存的绑定的设备deviceId
-//        User.current.udid = nil // 当前保存的绑定的设备udid
-        User.current.familyId = nil
-        User.current.familyName = nil
-        User.current.job = nil
-        User.current.birthDay = nil
-//        User.current.updateDeadline = 0.0
     }
     
-    func sexString() -> String? {
-        
-        if let sex = sex {
-            
-            if sex == "1" {
-                return "男"
-            }
-            else if sex == "2" {
-                return "女"
-            }
-            else {
-                return "未设置"
-            }
-        }
-        
-        
-        return nil
-    }
 }
 
 // MARK: -  user defaults extensions
@@ -82,22 +50,13 @@ extension User: StringDefaultSettable {
         case accessToken
         case refreshToken
         case kAccessToken
-        case captcha
-        case captchaid
+        
         case phoneNumber
-        case verCode
-        case familyId
-        case familyName
-        case job
-        case birthDay
-        case zipcode
         case img
-        case address
-        case zone
-        case sex
         case nickname
-        case age
-        case realname
+        case loginName
+        case studioName
+        
         case versionCode // 记录当前的版本信息
     }
 }
@@ -181,39 +140,12 @@ extension User {
         }
     }
 
-    var captchaid: String? {
-        get {
-            return User.current.string(forKey: .captchaid)
-        }
-        set {
-            User.current.set(newValue, forKey: .captchaid)
-        }
-    }
-
-    var captcha: String? {
-        get {
-            return User.current.string(forKey: .captcha)
-        }
-        set {
-            User.current.set(newValue, forKey: .captcha)
-        }
-    }
-
     var phoneNumber: String? {
         get {
             return User.current.string(forKey: .phoneNumber)
         }
         set {
             User.current.set(newValue, forKey: .phoneNumber)
-        }
-    }
-
-    var verCode: String? {
-        get {
-            return User.current.string(forKey: .verCode)
-        }
-        set {
-            User.current.set(newValue, forKey: .verCode)
         }
     }
 
@@ -225,70 +157,6 @@ extension User {
             User.current.set(newValue, forKey: .versionCode)
         }
     }
-
-//    var deviceId: String? {
-//        get {
-//            return User.current.string(forKey: .deviceId)
-//        }
-//        set {
-//            User.current.set(newValue, forKey: .deviceId)
-//        }
-//    }
-//
-//    var udid: String? {
-//        get {
-//            return User.current.string(forKey: .udid)
-//        }
-//        set {
-//            User.current.set(newValue, forKey: .udid)
-//        }
-//    }
-    
-    var familyId: String? {
-        get {
-            return User.current.string(forKey: .familyId)
-        }
-        set {
-            User.current.set(newValue, forKey: .familyId)
-        }
-    }
-    
-    var familyName: String? {
-        get {
-            return User.current.string(forKey: .familyName)
-        }
-        set {
-            User.current.set(newValue, forKey: .familyName)
-        }
-    }
-    
-    var job: String? {
-        get {
-            return User.current.string(forKey: .job)
-        }
-        set {
-            User.current.set(newValue, forKey: .job)
-        }
-    }
-    
-    var birthDay: String? {
-        get {
-            return User.current.string(forKey: .birthDay)
-        }
-        set {
-            User.current.set(newValue, forKey: .birthDay)
-        }
-    }
-
-    //李满
-    var zipcode: String? {
-        get {
-            return User.current.string(forKey: .zipcode)
-        }
-        set {
-            User.current.set(newValue, forKey: .zipcode)
-        }
-    }
     
     var img: String? {
         get {
@@ -296,32 +164,6 @@ extension User {
         }
         set {
             User.current.set(newValue, forKey: .img)
-        }
-    }
-    var address: String? {
-        get {
-            return User.current.string(forKey: .address)
-        }
-        set {
-            User.current.set(newValue, forKey: .address)
-        }
-    }
-    
-    var zone: String? {
-        get {
-            return User.current.string(forKey: .zone)
-        }
-        set {
-            User.current.set(newValue, forKey: .zone)
-        }
-    }
-    
-    var sex: String? {
-        get {
-            return User.current.string(forKey: .sex)
-        }
-        set {
-            User.current.set(newValue, forKey: .sex)
         }
     }
     
@@ -334,21 +176,21 @@ extension User {
         }
     }
     
-    var age: String? {
+    var loginName: String? {
         get {
-            return User.current.string(forKey: .age)
+            return User.current.string(forKey: .loginName)
         }
         set {
-            User.current.set(newValue, forKey: .age)
+            User.current.set(newValue, forKey: .loginName)
         }
     }
     
-    var realname: String? {
+    var studioName: String? {
         get {
-            return User.current.string(forKey: .realname)
+            return User.current.string(forKey: .studioName)
         }
         set {
-            User.current.set(newValue, forKey: .realname)
+            User.current.set(newValue, forKey: .studioName)
         }
     }
     

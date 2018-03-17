@@ -136,6 +136,10 @@ public class JavaBridge implements Serializable {
 
     private void _dispatchMessage(Map<String, String> message) {
         String messageJSON = new JSONObject(message).toString();
+        _dispatchMessage(messageJSON);
+    }
+
+    private void _dispatchMessage(String messageJSON) {
         LogUtils.jsBridge("java call js: " + messageJSON);
         final String javascriptCommand = String.format("javascript:WebViewJavascriptBridge._handleMessageFromJava('%s');", doubleEscapeString(messageJSON));
         LogUtils.debug("_dispatchMessage: " + javascriptCommand);

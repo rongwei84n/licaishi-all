@@ -28,13 +28,17 @@ public class ProductsImpl implements ProductsService {
     @Override
     public List<ProductModel> queryProducts(int pageNo, int pageSize, String type,
     		String pInvestType, String pPaymentInterestType, String pSizeRatioType, 
-    		String minimumAmount, String dueTime, String annualRevenue, String saleStatus) {
+    		String minimumAmount, String dueTime, String annualRevenue, String saleStatus, 
+    		String pRabateProfitParameter, String pAnnualRevenueExpectParameter, String pCommission) {
         try {
         	int startIndex = (pageNo - 1) * pageSize;
         	if(StringUtils.isEmpty(type)) {
         		return productsMapper.queryAllProducts(startIndex, pageSize);
         	}
-            return productsMapper.queryProductsByType(startIndex, pageSize, type);
+        	
+            return productsMapper.queryProductsByType(startIndex, pageSize, type, pInvestType, pPaymentInterestType, 
+            		pSizeRatioType, minimumAmount, dueTime, annualRevenue, saleStatus, pRabateProfitParameter,
+            		pAnnualRevenueExpectParameter, pCommission);
         } catch (Exception e) {
             e.printStackTrace();
             return null;
@@ -62,11 +66,15 @@ public class ProductsImpl implements ProductsService {
 	}
 
 	@Override
-	public int queryProductCountByPType(String type) {
+	public int queryProductCountByPType(String type,String pInvestType, String pPaymentInterestType, String pSizeRatioType, 
+    		String minimumAmount, String dueTime, String annualRevenue, String saleStatus, 
+    		String pRabateProfitParameter, String pAnnualRevenueExpectParameter, String pCommission) {
 		if(StringUtils.isEmpty(type)) {
 			return productsMapper.queryAllCount();
 		}
-		return productsMapper.queryCountByPType(type);
+		return productsMapper.queryCountByPType(type, pInvestType, pPaymentInterestType, 
+        		pSizeRatioType, minimumAmount, dueTime, annualRevenue, saleStatus, pRabateProfitParameter, 
+        		pAnnualRevenueExpectParameter, pCommission);
 	}
 
 	@Override

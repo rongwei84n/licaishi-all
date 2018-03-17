@@ -18,7 +18,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         setupAppearance()
         
         // 自动登录
-        autoLogin()
+//        autoLogin()
         
         return true
     }

@@ -46,14 +46,14 @@ public class ProductsController extends SBaseController {
 
     /**
      * 查询产品列表
-     * type 01：集合信托  02集合资管 03债权基金 04股权基金 05阳光私募
+     * type 01：集合信托  02集合资管 03债权基金 04私募股权
      * @param request
      * @return
      */
     @RequestMapping(value = "/v1/product/list", method = RequestMethod.GET, produces = { "application/json" })
     public PhiHomeBaseResponse queryProducts(HttpServletRequest request,
-            @RequestParam(value = "pageNo", required = true) String pageNo,
-            @RequestParam(value = "pageSize", required = true) String pageSize,
+            @RequestParam(value = "pageNo", required = true) int pageNo,
+            @RequestParam(value = "pageSize", required = true) int pageSize,
             @RequestParam(value = "type", required = false) String type,
             @RequestParam(value = "pInvestType", required = false) String pInvestType, //01：房地产类 02：金融市场 03：基础设施 04：资金池 05：工商企业 99：其他
             @RequestParam(value = "pPaymentInterestType", required = false) String pPaymentInterestType,//01：按月付息 02：按季付息 03：按半年付息 04：按年付息 05 到期付本息
@@ -63,16 +63,20 @@ public class ProductsController extends SBaseController {
             @RequestParam(value = "annualRevenue", required = false) String annualRevenue,//预期收益     01；02；03；04；05；06
             @RequestParam(value = "saleStatus", required = false) String saleStatus,//募集状态    01：预热中 02：募集中 03：募集结束 
             @RequestParam(value = "pRabateProfitParameter", required = false) String pRabateProfitParameter,
-            @RequestParam(value = "pAnnualRevenueExpectParameter", required = false) String pAnnualRevenueExpectParameter) {
+            @RequestParam(value = "pAnnualRevenueExpectParameter", required = false) String pAnnualRevenueExpectParameter,
+            @RequestParam(value = "pCommission", required = false) String pCommission) {
         PhiHomeBaseResponse rspObj = new PhiHomeBaseResponse();
         Pager pager = null;
 
         LOGGER.info("queryProducts pageNo [{}] pageSize [{}] type [{}]", pageNo, pageSize, type);
 
-        int totalCount = productsService.queryProductCountByPType(type);
+        int totalCount = productsService.queryProductCountByPType(type, pInvestType, pPaymentInterestType, 
+        		pSizeRatioType, minimumAmount, dueTime, annualRevenue, saleStatus, pRabateProfitParameter,
+        		pAnnualRevenueExpectParameter, pCommission);
         List<ProductResponseModel> productResponseList = new ArrayList<>();
-        List<ProductModel> products = productsService.queryProducts(Integer.parseInt(pageNo), Integer.parseInt(pageSize), type,
-        		pInvestType, pPaymentInterestType, pSizeRatioType, minimumAmount, dueTime, annualRevenue, saleStatus);
+        List<ProductModel> products = productsService.queryProducts(pageNo, pageSize, type, pInvestType, pPaymentInterestType, 
+        		pSizeRatioType, minimumAmount, dueTime, annualRevenue, saleStatus, pRabateProfitParameter, 
+        		pAnnualRevenueExpectParameter, pCommission);
         if(products!=null && !products.isEmpty()) {
         	for(ProductModel productModel : products) {
             	List<ProfitRebateModel> profitRebates =  productsService.queryProfitRebateByPCode(productModel.getpCode());
@@ -85,7 +89,7 @@ public class ProductsController extends SBaseController {
             	productResponseList.add(productResponseModel);
             }
         	//分页
-        	pager = genernatePager(Integer.parseInt(pageNo), Integer.parseInt(pageSize), totalCount, products.size());
+        	pager = genernatePager(pageNo, pageSize, totalCount, products.size());
         }
 
         Data<ProductResponseModel> data = new Data<ProductResponseModel>();
@@ -103,26 +107,29 @@ public class ProductsController extends SBaseController {
      */
     private void convertProductResponse(ProductResponseModel productResponseModel, ProductModel productModel) {
     	//设置最高预计收益率
-    	List<ProfitRebateModel> profitRebates = productResponseModel.getProfitRebates();
-    	if(profitRebates != null && profitRebates.size() > 0) {
-    		double maxAnnualRevenue = 0;
-    		double maxCommission = 0;
-    		for(ProfitRebateModel prm : profitRebates) {
-    			String annualRevenue = prm.getPrExpectAnnualRevenue();
-    			double annualRevenueTmp =  Double.parseDouble(annualRevenue.replaceAll("%", ""));
-    			if(annualRevenueTmp > maxAnnualRevenue) {
-    				maxAnnualRevenue = annualRevenueTmp;
-    			}
-    			
-    			String prCommission = prm.getPrCommission();
-    			double prCommissionTmp =  Double.parseDouble(prCommission.replaceAll("%", ""));
-    			if(prCommissionTmp > maxCommission) {
-    				maxCommission = prCommissionTmp;
-    			}
-    		}
-    		productResponseModel.setpExpectAnnualRevenue(maxAnnualRevenue + "%");
-    		productResponseModel.setpCommission(maxCommission + "%");
+//    	List<ProfitRebateModel> profitRebates = productResponseModel.getProfitRebates();
+//    	if(profitRebates != null && profitRebates.size() > 0) {
+//    		double maxAnnualRevenue = 0;
+//    		double maxCommission = 0;
+//    		for(ProfitRebateModel prm : profitRebates) {
+//    			String annualRevenue = prm.getPrExpectAnnualRevenue();
+//    			double annualRevenueTmp =  Double.parseDouble(annualRevenue.replaceAll("%", ""));
+//    			if(annualRevenueTmp > maxAnnualRevenue) {
+//    				maxAnnualRevenue = annualRevenueTmp;
+//    			}
+//    			
+//    			String prCommission = prm.getPrCommission();
+//    			double prCommissionTmp =  Double.parseDouble(prCommission.replaceAll("%", ""));
+//    			if(prCommissionTmp > maxCommission) {
+//    				maxCommission = prCommissionTmp;
+//    			}
+//    		}
+    	if(productModel.getpExpectAnnualRevenue() != null && !productModel.getpExpectAnnualRevenue().contains("浮动")) {
+    		productResponseModel.setpExpectAnnualRevenue(productModel.getpExpectAnnualRevenue() + "%");
     	}
+    	productResponseModel.setpCommission(productModel.getpCommission() + "%");
+    		
+//    	}
     	
     }
 
@@ -173,27 +180,10 @@ public class ProductsController extends SBaseController {
     	productResponseModel.setpId(productModel.getId()+"");
     	//TODO查询机构简称
     	productResponseModel.setpInvestName("上海信托");
-    	//设置最高预计收益率
-    	List<ProfitRebateModel> profitRebates = productResponseModel.getProfitRebates();
-    	if(profitRebates != null && profitRebates.size() > 0) {
-    		double maxAnnualRevenue = 0;
-    		double maxCommission = 0;
-    		for(ProfitRebateModel prm : profitRebates) {
-    			String annualRevenue = prm.getPrExpectAnnualRevenue();
-    			double annualRevenueTmp =  Double.parseDouble(annualRevenue.replaceAll("%", ""));
-    			if(annualRevenueTmp > maxAnnualRevenue) {
-    				maxAnnualRevenue = annualRevenueTmp;
-    			}
-    			
-    			String prCommission = prm.getPrCommission();
-    			double prCommissionTmp =  Double.parseDouble(prCommission.replaceAll("%", ""));
-    			if(prCommissionTmp > maxCommission) {
-    				maxCommission = prCommissionTmp;
-    			}
-    		}
-    		productResponseModel.setpExpectAnnualRevenue(maxAnnualRevenue + "%");
-    		productResponseModel.setpCommission(maxCommission + "%");
+    	if(productModel.getpExpectAnnualRevenue() != null && !productModel.getpExpectAnnualRevenue().contains("浮动")) {
+    		productResponseModel.setpExpectAnnualRevenue(productModel.getpExpectAnnualRevenue() + "%");
     	}
+    	productResponseModel.setpCommission(productModel.getpCommission() + "%");
     	
     }
 }

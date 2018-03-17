@@ -21,12 +21,16 @@ enum AccountService {
     
     case uploadImage(imgBase64: String, type: String)
     
+    case accountDetail
+    
+    case modifyAccountDetail(nickName: String?, studioName: String?)
+    
+    
     
     
     case authorization
     case signup(authCode: String, phoneNumber: String, verifyCode: String, password: String)
     case sendVerifySMS(authCode: String, phoneNumber: String)
-    case accountDetail
     case logout
     case refreshToken(authCode: String)
     case checkPhoneUsability(authCode: String, phoneNumber: String)
@@ -77,6 +81,12 @@ extension AccountService: TargetType {
         case .uploadImage:
             return version + "pic/upload"  // 上传头像
             
+        case .accountDetail:
+            return version + "accountDetail"  // 获取账户详情
+            
+        case .modifyAccountDetail:
+            return version + "property"
+            
             
         case .authorization:
             return version + "authorization"//03_获取授权码
@@ -84,8 +94,6 @@ extension AccountService: TargetType {
             return version + "verificationCode"//02_获取验证码 ?????
         case .signup:
             return version + "account"//01_注册账户
-        case .accountDetail:
-            return version + "accountDetail"//15_获取账户详情
         case .logout:
             return version + "logout"//16_退出账户 ?????
         case .refreshToken:
@@ -115,13 +123,16 @@ extension AccountService: TargetType {
             
         case .login,
              .register,
-             .changePassword:
+             .changePassword,
+             .modifyAccountDetail:
             return .post
+            
+        case .accountDetail:
+            return .get
             
             
         case .authorization,
              .sendVerifySMS,
-             .accountDetail,
              .refreshToken,
              .checkPhoneUsability,
              .requestGraphValidateCode,
@@ -184,6 +195,22 @@ extension AccountService: TargetType {
                                                    "imgBase64": imgBase64,
                                                    "type": type],
                                       encoding: URLEncoding.default)
+            
+        case .modifyAccountDetail(let nickName,let studioName):
+            
+            var dic = [String : Any]()
+            
+            if let nickName = nickName, !nickName.isEmpty {
+                dic["nickname"] = nickName
+            }
+            
+            if let studioName = studioName, !studioName.isEmpty {
+                dic["workstudio"] = studioName
+            }
+            
+            return .requestParameters(parameters: ["data": dic.formatJSON2() ?? ""], encoding: URLEncoding.default)
+            
+            
             
             
             

@@ -59,10 +59,43 @@ public class ProductResponseModel {
 	@JSONField(name = "profitRebates")
     @JsonProperty("profitRebates")
     private List<ProfitRebateModel> profitRebates;
-    private String pIssuingScale;
-    private String pExpectSaleAmount;
     private String pAllSubscriptionAmount;
     private String pCommission; //佣金比例
+    private String pLatestPayNum;
+	private String pRexiao;
+	private String pTuijian;
+	private String pRgxz; //认购须知
+	
+	public String getpLatestPayNum() {
+		return pLatestPayNum;
+	}
+
+	public void setpLatestPayNum(String pLatestPayNum) {
+		this.pLatestPayNum = pLatestPayNum;
+	}
+	public String getpRexiao() {
+		return pRexiao;
+	}
+
+	public void setpRexiao(String pRexiao) {
+		this.pRexiao = pRexiao;
+	}
+
+	public String getpTuijian() {
+		return pTuijian;
+	}
+
+	public void setpTuijian(String pTuijian) {
+		this.pTuijian = pTuijian;
+	}
+
+	public String getpRgxz() {
+		return pRgxz;
+	}
+
+	public void setpRgxz(String pRgxz) {
+		this.pRgxz = pRgxz;
+	}
 
 	public String getpCommission() {
 		return pCommission;
@@ -70,19 +103,6 @@ public class ProductResponseModel {
 	public void setpCommission(String pCommission) {
 		this.pCommission = pCommission;
 	}
-	public String getpIssuingScale() {
-        return pIssuingScale;
-    }
-    public void setpIssuingScale(String pIssuingScale) {
-        this.pIssuingScale = pIssuingScale;
-    }
-
-	public String getpExpectSaleAmount() {
-        return pExpectSaleAmount;
-    }
-    public void setpExpectSaleAmount(String pExpectSaleAmount) {
-        this.pExpectSaleAmount = pExpectSaleAmount;
-    }
     public String getpAllSubscriptionAmount() {
         return pAllSubscriptionAmount;
     }

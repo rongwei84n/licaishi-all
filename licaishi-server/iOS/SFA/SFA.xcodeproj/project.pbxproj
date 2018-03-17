@@ -44,6 +44,7 @@
 		766035F7205680B3009A1CC6 /* FSMStateUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = 766035E9205680B3009A1CC6 /* FSMStateUtil.m */; };
 		766035F8205680B3009A1CC6 /* ReachStateWIFI.m in Sources */ = {isa = PBXBuildFile; fileRef = 766035EA205680B3009A1CC6 /* ReachStateWIFI.m */; };
 		766035FC20568169009A1CC6 /* UIView+Toast.m in Sources */ = {isa = PBXBuildFile; fileRef = 766035FB20568169009A1CC6 /* UIView+Toast.m */; };
+		76603604205B5826009A1CC6 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 76603603205B5826009A1CC6 /* Main.storyboard */; };
 		768C2C08202AE3A900F8ABB8 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 768C2C07202AE3A900F8ABB8 /* AppDelegate.swift */; };
 		768C2C0F202AE3A900F8ABB8 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 768C2C0E202AE3A900F8ABB8 /* Assets.xcassets */; };
 		768C2C12202AE3A900F8ABB8 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 768C2C10202AE3A900F8ABB8 /* LaunchScreen.storyboard */; };
@@ -156,6 +157,7 @@
 		766035EB205680B3009A1CC6 /* RealReachability.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RealReachability.h; sourceTree = "<group>"; };
 		766035FA20568169009A1CC6 /* UIView+Toast.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+Toast.h"; sourceTree = "<group>"; };
 		766035FB20568169009A1CC6 /* UIView+Toast.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+Toast.m"; sourceTree = "<group>"; };
+		76603603205B5826009A1CC6 /* Main.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
 		768C2C04202AE3A800F8ABB8 /* SFA.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SFA.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		768C2C07202AE3A900F8ABB8 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		768C2C0E202AE3A900F8ABB8 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -504,6 +506,7 @@
 			isa = PBXGroup;
 			children = (
 				7690EF6E2041588800BDA115 /* ViewController */,
+				76603603205B5826009A1CC6 /* Main.storyboard */,
 			);
 			path = Association;
 			sourceTree = "<group>";
@@ -693,6 +696,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				76603604205B5826009A1CC6 /* Main.storyboard in Resources */,
 				766035EE205680B3009A1CC6 /* README.md in Resources */,
 				766035C220566006009A1CC6 /* SVProgressHUD.bundle in Resources */,
 				768C2C12202AE3A900F8ABB8 /* LaunchScreen.storyboard in Resources */,
