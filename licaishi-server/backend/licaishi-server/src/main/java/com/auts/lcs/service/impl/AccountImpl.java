@@ -2,15 +2,20 @@ package com.auts.lcs.service.impl;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.auts.lcs.dao.AccountMapper;
+import com.auts.lcs.dao.FinancerMapper;
 import com.auts.lcs.model.dao.AccountModel;
+import com.auts.lcs.model.dao.FinancerModel;
 import com.auts.lcs.service.AccountService;
 
 @Service
 public class AccountImpl implements AccountService {
     @Autowired
     AccountMapper mapper;
+    @Autowired
+    FinancerMapper financerMapper;
 
     @Override
     public AccountModel login(String userName, String pwd) {
@@ -23,8 +28,17 @@ public class AccountImpl implements AccountService {
     }
 
     @Override
+    @Transactional
     public int register(AccountModel model) {
-        return mapper.register(model);
+        mapper.register(model);
+        
+        //生成理财师信息
+        FinancerModel financer = new FinancerModel();
+    	financer.setPhone(model.getPhone());
+    	financer.setUserId(Integer.parseInt(model.getUid()));
+    	financer.setName("");
+    	financerMapper.addFinancer(financer);
+    	return 1;
     }
 
     @Override
