@@ -45,9 +45,9 @@ public class WorkshopController extends SBaseController {
         
         String token = request.getHeader(Const.AUTHORIZATION);
         LOGGER.info("queryWorkshop toekn [{}]", token);
-//        String uid = getUidByToken(token);
-        //要通过账号表的UID找到理财师的UID
-        FinancerModel financerModel = financerService.queryFinancerByUID("10");
+        String uid = getUidByToken(token);
+        String financerUid = getFinancerUidByUid(uid);
+        FinancerModel financerModel = financerService.queryFinancerByUID(financerUid);
         
         rspObj.setResult(financerModel);
         return successResponse(rspObj);

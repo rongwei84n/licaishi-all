@@ -29,11 +29,12 @@ public interface OrderMapper {
     		+ "select count(*) num from tbl_order "
     		+ "<where>"
     		+ "<if test='status !=null '>"
-    		+ "  status = #{status} "
+    		+ "  and status = #{status} "
     		+ "</if> "
+    		+ " and financer_uid=#{financerID} "
     		+ "</where></script>")
 //	@Select("select count(*) num from tbl_order where status= #{status} limit 1")
-    int queryOrderCountByStatus(@Param("status") String status, @Param("uid") String uid);
+    int queryOrderCountByStatus(@Param("status") String status, @Param("financerID") String financerID);
 
 
 	@Select("select count(*) num from tbl_order where customer_uid= #{customerId} limit 1")
@@ -60,7 +61,7 @@ public interface OrderMapper {
 
     @Select("<script>"
     		+ "select * from tbl_order "
-    		+ " where financer_uid = 10 "
+    		+ " where financer_uid =#{financerID} "
 			+ "<if test='status !=null '>"
 			+ " and status = #{status} "
 			+ "</if> "
@@ -79,7 +80,7 @@ public interface OrderMapper {
     	@Result(property = "issueBank", column = "issuing_bank"), @Result(property = "cardNo", column = "card_no"),
     	@Result(property = "createTime", column = "create_time"), @Result(property = "updateTime", column = "update_time")
     })
-    List<OrderModel> queryOrders(@Param("startIndex") int startIndex, @Param("pageSize") int pageSize, @Param("status") String status, @Param("uid") String uid);
+    List<OrderModel> queryOrders(@Param("startIndex") int startIndex, @Param("pageSize") int pageSize, @Param("status") String status, @Param("financerID") String financerID);
 
     @Select("select * from tbl_order where customer_uid= #{customerId}")
     @Results({

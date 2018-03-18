@@ -73,7 +73,8 @@ public class OrderController extends SBaseController {
         LOGGER.info("queryOrders pageNo [{}] pageSize [{}] status [{}]", pageNo, pageSize, status);
         String token = request.getHeader(Const.AUTHORIZATION);
         String uid = getUidByToken(token);
-        LOGGER.info("queryOrders toekn [{}] uid [{}]", token, uid);
+        String financerUid = getFinancerUidByUid(uid);
+        LOGGER.info("queryOrders toekn [{}] uid [{}] financerUid [{}]", token, uid, financerUid);
 
         if (StringUtil.isNullOrEmpty(uid)) {
             LOGGER.info("Parsed uid is null, return");
@@ -82,10 +83,9 @@ public class OrderController extends SBaseController {
             return rspObj;
         }
 
-        //uid 查找理财师的uid
-        int totalCount = orderService.queryOrderCountByStatus(status, uid);
+        int totalCount = orderService.queryOrderCountByStatus(status, financerUid);
         List<OrderResponseDto> orderResponseDtoList = new ArrayList<>();
-        List<OrderModel> orders = orderService.queryOrders(pageNo, pageSize, status, uid);
+        List<OrderModel> orders = orderService.queryOrders(pageNo, pageSize, status, financerUid);
         if(orders !=null && !orders.isEmpty()) {
         	for(OrderModel orderModel : orders) {
         		OrderResponseDto orderResponseDto = new OrderResponseDto();
@@ -144,7 +144,7 @@ public class OrderController extends SBaseController {
         LOGGER.info("queryOrders toekn [{}]", token);
         String uid = getUidByToken(token);
         //通过理财师的uid找到理财师表里的UID
-        String financerUid = "10";
+        String financerUid = getFinancerUidByUid(uid);
         OrderModel om = generateOrder(requestModel.getProductId(), requestModel.getCustomerId(),
                 financerUid,
                 requestModel.getCardId(),
@@ -176,7 +176,7 @@ public class OrderController extends SBaseController {
         LOGGER.info("queryCustomersForOrder toekn [{}]", token);
         String uid = getUidByToken(token);
 
-        String financerId = "10";
+        String financerId = getFinancerUidByUid(uid);
         List<CustomerModel> customers = customerService.queryCustomerForOrder(financerId);
         List<CustomerListResponseDto> customerResponseDtoList = new ArrayList<>();
         if(customers!=null && !customers.isEmpty()) {
