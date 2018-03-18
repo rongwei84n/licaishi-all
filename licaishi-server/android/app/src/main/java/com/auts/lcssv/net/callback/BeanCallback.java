@@ -30,6 +30,8 @@ public abstract class BeanCallback<T> extends BaseCallback<T> {
             LogUtils.debug(e);
         }
 
+        LogUtils.debug("result: " + result);
+
         if (obj == null) {
             toUiError(Err2MsgUtils.CODE_PARSE_ERROR, null, request);
         } else {

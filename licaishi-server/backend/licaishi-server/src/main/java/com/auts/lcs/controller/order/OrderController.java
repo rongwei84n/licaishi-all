@@ -12,6 +12,7 @@ import org.apache.logging.log4j.Logger;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -23,6 +24,7 @@ import com.auts.lcs.model.common.PhiHomeBaseResponse;
 import com.auts.lcs.model.dao.CustomerModel;
 import com.auts.lcs.model.dao.order.OrderModel;
 import com.auts.lcs.model.enums.OrderStatus;
+import com.auts.lcs.model.request.CreateOrderRequestModel;
 import com.auts.lcs.model.response.CustomerListResponseDto;
 import com.auts.lcs.model.response.CustomerResponseDto;
 import com.auts.lcs.model.response.Data;
@@ -31,6 +33,7 @@ import com.auts.lcs.model.response.Pager;
 import com.auts.lcs.service.CustomerService;
 import com.auts.lcs.service.OrderService;
 import com.auts.lcs.service.ProductsService;
+import com.auts.lcs.util.DateUtils;
 import com.auts.lcs.util.StringUtil;
 
 /**
@@ -71,7 +74,8 @@ public class OrderController extends SBaseController {
         LOGGER.info("queryOrders pageNo [{}] pageSize [{}] status [{}]", pageNo, pageSize, status);
         String token = request.getHeader(Const.AUTHORIZATION);
         String uid = getUidByToken(token);
-        LOGGER.info("queryOrders toekn [{}] uid [{}]", token, uid);
+        String financerUid = getFinancerUidByUid(uid);
+        LOGGER.info("queryOrders toekn [{}] uid [{}] financerUid [{}]", token, uid, financerUid);
 
         if (StringUtil.isNullOrEmpty(uid)) {
             LOGGER.info("Parsed uid is null, return");
@@ -80,10 +84,9 @@ public class OrderController extends SBaseController {
             return rspObj;
         }
 
-        //uid 查找理财师的uid
-        int totalCount = orderService.queryOrderCountByStatus(status, uid);
+        int totalCount = orderService.queryOrderCountByStatus(status, financerUid);
         List<OrderResponseDto> orderResponseDtoList = new ArrayList<>();
-        List<OrderModel> orders = orderService.queryOrders(pageNo, pageSize, status, uid);
+        List<OrderModel> orders = orderService.queryOrders(pageNo, pageSize, status, financerUid);
         if(orders !=null && !orders.isEmpty()) {
         	for(OrderModel orderModel : orders) {
         		OrderResponseDto orderResponseDto = new OrderResponseDto();
@@ -134,26 +137,24 @@ public class OrderController extends SBaseController {
      */
     @RequestMapping(value = "/v1/order/createOrder", method = RequestMethod.POST, produces = { "application/json" })
     public PhiHomeBaseResponse createOrder(HttpServletRequest request,
-    		@RequestParam(value = "productId", required = false) String productId,
-            @RequestParam(value = "customerId", required = false) String customerId,
-            @RequestParam(value = "customerName", required = false) String customerName,
-            @RequestParam(value = "cardId", required = false) String cardId,
-            @RequestParam(value = "amount", required = false) String amount,
-            @RequestParam(value = "lastPayDate", required = false) String lastPayDate,
-            @RequestParam(value = "comRatio", required = false) String comRatio,
-            @RequestParam(value = "proRatio", required = false) String proRatio,
-            @RequestParam(value = "issuingBank", required = false) String issuingBank,
-            @RequestParam(value = "bankCardNo", required = false) String bankCardNo,
-            @RequestParam(value = "note", required = false) String note) {
+            @RequestBody CreateOrderRequestModel requestModel) {
         PhiHomeBaseResponse rspObj = new PhiHomeBaseResponse();
 
-        LOGGER.info("预约订单接口 start pCode, userId [{}]", productId, customerId);
+        LOGGER.info("预约订单接口 start pCode, userId [{}]", requestModel.getProductId(), requestModel.getCustomerId());
         String token = request.getHeader(Const.AUTHORIZATION);
         LOGGER.info("queryOrders toekn [{}]", token);
         String uid = getUidByToken(token);
         //通过理财师的uid找到理财师表里的UID
-        String financerUid = "10";
-        OrderModel om = generateOrder(productId, customerId, financerUid, cardId,amount,lastPayDate, comRatio, proRatio,issuingBank, bankCardNo);
+        String financerUid = getFinancerUidByUid(uid);
+        OrderModel om = generateOrder(requestModel.getProductId(), requestModel.getCustomerId(),
+                financerUid,
+                requestModel.getCardId(),
+                requestModel.getAmount(),
+                requestModel.getLastPayDate(),
+                requestModel.getComRatio(),
+                requestModel.getProRatio(),
+                requestModel.getIssuingBank(),
+                requestModel.getBankCardNo());
         //todo 产品额度够不够
         int result = orderService.saveOrder(om);
         if (result < 1) {
@@ -176,7 +177,7 @@ public class OrderController extends SBaseController {
         LOGGER.info("queryCustomersForOrder toekn [{}]", token);
         String uid = getUidByToken(token);
 
-        String financerId = "10";
+        String financerId = getFinancerUidByUid(uid);
         List<CustomerModel> customers = customerService.queryCustomerForOrder(financerId);
         List<CustomerListResponseDto> customerResponseDtoList = new ArrayList<>();
         if(customers!=null && !customers.isEmpty()) {
@@ -199,10 +200,10 @@ public class OrderController extends SBaseController {
     		String comRatio, String proRatio, String issuingBank, String bankCardNo) {
     	OrderModel om = new OrderModel();
     	om.setOrderNo(generateOrderNo());
-    	BigDecimal amountBD = new BigDecimal(amount);
+    	BigDecimal amountBD = new BigDecimal(amount).multiply(new BigDecimal("10000"));
     	om.setAmount(amountBD);
     	om.setOrderDate(new Date());
-    	om.setLatestPayDate(new Date());
+    	om.setLatestPayDate(DateUtils.parseStrToDate(lastPayDate, DateUtils.DATE_FORMAT_YYYY_MM_DD));
     	om.setFinancerUid(financerUid);
     	om.setCustomerUid(customerId);
     	om.setProductId(productId);
@@ -210,8 +211,12 @@ public class OrderController extends SBaseController {
     	BigDecimal commission = amountBD.multiply(new BigDecimal(comRatio.replace("%", ""))).divide(new BigDecimal(100));
     	om.setCommission(commission);
     	om.setProRatio(proRatio);
-    	BigDecimal profit = amountBD.multiply(new BigDecimal(proRatio.replace("%", ""))).divide(new BigDecimal(100));
-    	om.setProfit(profit);
+    	if(proRatio == null || proRatio.contains("浮动")) {
+    		om.setProfit(BigDecimal.ZERO);
+    	} else {
+    		BigDecimal profit = amountBD.multiply(new BigDecimal(proRatio.replace("%", ""))).divide(new BigDecimal(100));
+        	om.setProfit(profit);
+    	}
     	om.setStatus(OrderStatus.WP.getValue());
     	om.setVoucherStatus("0");
     	om.setContractStatus("0");

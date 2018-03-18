@@ -47,7 +47,7 @@ public class CommissionController extends SBaseController {
     OrderService orderService;
 
     /**
-     * 根据客户ID查询客户所有订单
+     * 根据理财师ID查询理财师的所有佣金
      * @param request
      * @return
      */
@@ -59,7 +59,8 @@ public class CommissionController extends SBaseController {
         LOGGER.info("queryCommission start");
         String token = request.getHeader(Const.AUTHORIZATION);
         String uid = getUidByToken(token);
-        LOGGER.info("queryOrders toekn [{}] uid [{}]", token, uid);
+        String financerId = getFinancerUidByUid(uid);
+        LOGGER.info("queryCommission toekn [{}] uid [{}] financerId [{}]", token, uid, financerId);
 
         if (StringUtil.isNullOrEmpty(uid)) {
             LOGGER.info("Parsed uid is null, return");
@@ -67,8 +68,7 @@ public class CommissionController extends SBaseController {
             rspObj.setMessage(Const.ErrorCode.Account.STR_TOKEN_INVILID);
             return rspObj;
         }
-
-        String financerId = "10";
+  
         //累计佣金
         List<String> allStatus = new ArrayList<>();
         allStatus.add(OrderStatus.WC.getValue());
@@ -91,7 +91,7 @@ public class CommissionController extends SBaseController {
     }
 
     /**
-     * 根据客户ID查询客户所有订单
+     * 根据理财师ID查询客户所有订单
      * @param request
      * @return
      */
@@ -104,9 +104,10 @@ public class CommissionController extends SBaseController {
 
 //        LOGGER.info("queryOrdersByfinancerId financerId [{}]", financerId);
         String token = request.getHeader(Const.AUTHORIZATION);
-        LOGGER.info("queryOrdersByfinancerId toekn [{}]", token);
         String uid = getUidByToken(token);
-        String financerId = "10";
+        String financerId = getFinancerUidByUid(uid);
+        LOGGER.info("queryOrdersByfinancerId toekn [{}] uid [{}] financerId [{}]", token, uid, financerId);
+        
         int totalCount = orderService.queryOrderCountByFinancerId(financerId);
         List<CommissionOrderResponseDto> orderResponseDtoList = new ArrayList<>();
         List<OrderModel> orders = orderService.queryOrdersByFinancerId(Integer.parseInt(pageNo), Integer.parseInt(pageSize), financerId);

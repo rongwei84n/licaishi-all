@@ -52,4 +52,10 @@ public interface FinancerMapper {
 			+ "order by uid"
 		  + "</script>")
 	int queryFinancerCount(@Param("nameSearch") String nameSearch);
+	
+	@Select("select uid from tbl_financer where userId = #{userID}")
+    @Results({
+    	@Result(property = "uid", column = "uid")
+    })
+    String queryFinancerIDByUserID(@Param("userID") String userID);
 }

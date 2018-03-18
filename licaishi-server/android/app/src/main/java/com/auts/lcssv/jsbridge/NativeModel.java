@@ -8,6 +8,7 @@ import android.text.TextUtils;
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.TypeReference;
 import com.auts.lcssv.activity.LoginCloudActivity;
+import com.auts.lcssv.activity.OrderItemDetailActivity;
 import com.auts.lcssv.activity.PersonalInformationActivity;
 import com.auts.lcssv.constants.AppConstans;
 import com.auts.lcssv.net.callback.SynCallback;
@@ -65,6 +66,11 @@ public class NativeModel {
                     break;
                 case "lcs.account.personinfo":
                     intent = new Intent(context, PersonalInformationActivity.class);
+                    break;
+                case "lcs.order.orderdetail":
+                    String orderid = jsData.getPageExtra();
+                    intent = new Intent(context, OrderItemDetailActivity.class);
+                    intent.putExtra("orderid", orderid);
                     break;
 
                 default:

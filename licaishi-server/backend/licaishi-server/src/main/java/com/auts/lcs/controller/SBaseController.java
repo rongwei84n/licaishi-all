@@ -1,17 +1,5 @@
 package com.auts.lcs.controller;
 
-import com.alibaba.fastjson.JSON;
-import com.auts.lcs.consts.Const;
-import com.auts.lcs.model.common.PhiHomeBaseResponse;
-import com.auts.lcs.model.common.PhicommAccountDetailModel;
-import com.auts.lcs.model.dao.TokenModel;
-import com.auts.lcs.model.response.Pager;
-import com.auts.lcs.page.Page;
-import com.auts.lcs.service.TokenService;
-import com.auts.lcs.util.MyResponseutils;
-import com.auts.lcs.util.PhicommHttpsClient;
-import com.auts.lcs.util.StringUtil;
-
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.HashMap;
@@ -21,6 +9,19 @@ import java.util.Random;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
+
+import com.alibaba.fastjson.JSON;
+import com.auts.lcs.consts.Const;
+import com.auts.lcs.model.common.PhiHomeBaseResponse;
+import com.auts.lcs.model.common.PhicommAccountDetailModel;
+import com.auts.lcs.model.dao.TokenModel;
+import com.auts.lcs.model.response.Pager;
+import com.auts.lcs.page.Page;
+import com.auts.lcs.service.FinancerService;
+import com.auts.lcs.service.TokenService;
+import com.auts.lcs.util.MyResponseutils;
+import com.auts.lcs.util.PhicommHttpsClient;
+import com.auts.lcs.util.StringUtil;
 
 /**
  * Phihome Controller基类, 提供了一些返回的基本功能.
@@ -43,6 +44,8 @@ public abstract class SBaseController {
 
     @Autowired
     protected TokenService tokenService;
+    @Autowired
+    protected FinancerService financerService;
 
     public static PhiHomeBaseResponse geResponse(Object result) {
         PhiHomeBaseResponse smartHomeResponseT = new PhiHomeBaseResponse();
@@ -185,5 +188,13 @@ public abstract class SBaseController {
     	String orderNo = String.format("%s%s", df.format(new Date()), new Random().nextInt(100));//订单编号
     	
     	return orderNo; 	
+    }
+    
+    protected String getFinancerUidByUid(String userID) {
+        if (StringUtil.isNullOrEmpty(userID)) {
+            return "";
+        }
+        
+        return financerService.queryFinancerIDByUID(userID);
     }
 }

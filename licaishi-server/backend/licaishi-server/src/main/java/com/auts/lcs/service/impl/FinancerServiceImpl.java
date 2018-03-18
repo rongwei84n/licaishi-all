@@ -53,4 +53,9 @@ public class FinancerServiceImpl implements FinancerService{
 		return financerMapper.queryFinancerByUID(uid);
 	}
 
+	@Override
+	public String queryFinancerIDByUID(String userID) {
+		return financerMapper.queryFinancerIDByUserID(userID);
+	}
+
 }

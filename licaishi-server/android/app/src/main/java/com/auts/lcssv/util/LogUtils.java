@@ -121,7 +121,7 @@ public class LogUtils {
     /**
      * The TAG of the Application
      */
-    public static String TAG = "phlog";
+    public static String TAG = "lcslog";
     /**
      * Whether to enable the log
      */
