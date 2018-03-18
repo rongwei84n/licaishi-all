@@ -66,7 +66,8 @@ public class CustomerController extends SBaseController {
         LOGGER.info("queryMyCustomers type [{}]");
         String token = request.getHeader(Const.AUTHORIZATION);
         String uid = getUidByToken(token);
-        LOGGER.info("queryOrders toekn [{}] uid [{}]", token, uid);
+        String financerId = getFinancerUidByUid(uid);
+        LOGGER.info("queryMyCustomers token [{}] uid [{}] financerId [{}]", token, uid, financerId);
         if (StringUtil.isNullOrEmpty(uid)) {
             LOGGER.info("Parsed uid is null, return");
             rspObj.setCode(Const.ErrorCode.Account.TOKEN_INVILID);
@@ -74,7 +75,6 @@ public class CustomerController extends SBaseController {
             return rspObj;
         }
 
-        String financerId = "10";
         int totalCount = customerService.queryCustomerCountByFuid(financerId);
         List<CustomerModel> customers = customerService.queryCustomerByFUID(Integer.parseInt(pageNo), Integer.parseInt(pageSize),financerId);
         List<CustomerResponseDto> customerResponseDtoList = new ArrayList<>();

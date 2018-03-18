@@ -132,13 +132,13 @@ class AssociationViewController: UIViewController, InstanceFromStoryBoard {
             ZWHud.shared.dismiss()
             
             let json = JSON(response.data)
-            if json["error"].stringValue == "0" {
+//            if json["error"].stringValue == "0" {
 //                let ret = ["netResponse": response.result.value ?? "没有响应内容"]
                 let ret = response.result.value ?? "没有响应内容"
                 responseCallback?(.succeed(ret))
-            } else {
-                HUDHelper.shared.showWithMsg(json["error"].stringValue)
-            }
+//            } else {
+//                HUDHelper.shared.showWithMsg(json["error"].stringValue)
+//            }
         }
     }
 
@@ -149,7 +149,7 @@ class AssociationViewController: UIViewController, InstanceFromStoryBoard {
             
             if User.current.isLoggedIn {
                 navigationController?.pushViewController(MeViewController.instanceFromStoryBoard(), animated: true)
-//                openPageCallback = responseCallback
+                openPageCallback = responseCallback
 //                openPageCallbackParam = ["hasChange":"1"]
             }
             else {

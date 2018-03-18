@@ -16,6 +16,7 @@ import com.auts.lcs.model.response.PropertyChangeResponseModel;
 import com.auts.lcs.model.response.RegistResponseModel;
 import com.auts.lcs.service.AccountService;
 import com.auts.lcs.util.Base64Utils;
+import com.auts.lcs.util.EntryUtils;
 import com.auts.lcs.util.MyResponseutils;
 import com.auts.lcs.util.RegexUtils;
 import com.auts.lcs.util.StringUtil;
@@ -109,7 +110,7 @@ public class AccountController extends SBaseController {
             return errorLogin(String.valueOf(Const.ErrorCode.Account.LOGIN_PARA_ERROR));
         }
 
-        AccountModel accountMode = accountService.loginPhone(phonenumber, password);
+        AccountModel accountMode = accountService.loginPhone(phonenumber, EntryUtils.getMd5(password));
         if (accountMode == null) {
             LOGGER.info("Login error username or password");
             return errorLogin(String.valueOf(Const.ErrorCode.Account.LOGIN_PASSWORD_ERROR));
@@ -205,8 +206,7 @@ public class AccountController extends SBaseController {
         String userName = "";
         model.setUser_name(userName);
         //注册的时候，保存md5密码，任何人都无法知道密码，防止泄漏!md5无法解密
-//        String md5PassWord = EntryUtils.getMd5(requestModel.getPassword());
-        model.setPasswd(password);
+        model.setPasswd(EntryUtils.getMd5(password));
         model.setReal_name("");
         model.setPhone(phonenumber);
         model.setEmail("");
