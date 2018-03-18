@@ -33,6 +33,7 @@ import com.auts.lcs.model.response.Pager;
 import com.auts.lcs.service.CustomerService;
 import com.auts.lcs.service.OrderService;
 import com.auts.lcs.service.ProductsService;
+import com.auts.lcs.util.DateUtils;
 import com.auts.lcs.util.StringUtil;
 
 /**
@@ -199,10 +200,10 @@ public class OrderController extends SBaseController {
     		String comRatio, String proRatio, String issuingBank, String bankCardNo) {
     	OrderModel om = new OrderModel();
     	om.setOrderNo(generateOrderNo());
-    	BigDecimal amountBD = new BigDecimal(amount);
+    	BigDecimal amountBD = new BigDecimal(amount).multiply(new BigDecimal("10000"));
     	om.setAmount(amountBD);
     	om.setOrderDate(new Date());
-    	om.setLatestPayDate(new Date());
+    	om.setLatestPayDate(DateUtils.parseStrToDate(lastPayDate, DateUtils.DATE_FORMAT_YYYY_MM_DD));
     	om.setFinancerUid(financerUid);
     	om.setCustomerUid(customerId);
     	om.setProductId(productId);
@@ -210,8 +211,12 @@ public class OrderController extends SBaseController {
     	BigDecimal commission = amountBD.multiply(new BigDecimal(comRatio.replace("%", ""))).divide(new BigDecimal(100));
     	om.setCommission(commission);
     	om.setProRatio(proRatio);
-    	BigDecimal profit = amountBD.multiply(new BigDecimal(proRatio.replace("%", ""))).divide(new BigDecimal(100));
-    	om.setProfit(profit);
+    	if(proRatio == null || proRatio.contains("浮动")) {
+    		om.setProfit(BigDecimal.ZERO);
+    	} else {
+    		BigDecimal profit = amountBD.multiply(new BigDecimal(proRatio.replace("%", ""))).divide(new BigDecimal(100));
+        	om.setProfit(profit);
+    	}
     	om.setStatus(OrderStatus.WP.getValue());
     	om.setVoucherStatus("0");
     	om.setContractStatus("0");
