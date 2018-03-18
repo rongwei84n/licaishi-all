@@ -70,19 +70,19 @@ public interface ProductsMapper {
     		+ "<if test='annualRevenue !=null and annualRevenue !=\"00\" '>"
     		+    "<choose>"
     		+      	"<when test='annualRevenue ==\"01\"'>"
-    		+			"and p_expect_annual_revenue + '0' &lt; '7' + 0 "
+    		+			"and p_expect_annual_revenue + 0  &lt; '7' + 0 "
     		+      	"</when>"
     		+      	"<when test='annualRevenue ==\"02\"'>"
-    		+			"and '7' + 0 &gt;= p_expect_annual_revenue + '0' &lt; '8' + 0 "
+    		+			"and '7' + 0 &gt;= p_expect_annual_revenue + 0 and p_expect_annual_revenue + 0 &lt; '8' + 0 "
     		+      	"</when>"
     		+      	"<when test='annualRevenue ==\"03\"'>"
-    		+			"and '8' + 0 &gt;= p_expect_annual_revenue + '0' &lt; '9' + 0 "
+    		+			"and '8' + 0 &gt;= p_expect_annual_revenue + 0  and p_expect_annual_revenue + 0 &lt; '9' + 0 "
     		+      	"</when>"
     		+      	"<when test='annualRevenue ==\"04\"'>"
-    		+			"and '9' + 0 &gt;= p_expect_annual_revenue + '0' &lt; '10' + 0 "
+    		+			"and '9' + 0 &gt;= p_expect_annual_revenue + 0  and p_expect_annual_revenue + 0 &lt; '10' + 0 "
     		+      	"</when>"
     		+      	"<when test='annualRevenue ==\"05\"'>"
-    		+			"and p_expect_annual_revenue + '0' &gt;= '10' + 0 "
+    		+			"and p_expect_annual_revenue + 0 &gt;= '10' + 0 "
     		+      	"</when>"
     		+      	"<when test='annualRevenue ==\"06\"'>"
     		+			"and p_expect_annual_revenue = '浮动' "
@@ -92,13 +92,13 @@ public interface ProductsMapper {
     		+ "<if test='pCommission !=null and pCommission !=\"00\" '>"
     		+    "<choose>"
     		+      	"<when test='pCommission ==\"01\"'>"
-    		+			"and p_commission + '0' &lt; '1' + 0 "
+    		+			"and p_commission + 0 &lt; '1' + 0 "
     		+      	"</when>"
     		+      	"<when test='pCommission ==\"02\"'>"
-    		+			"and '1' + 0 &gt;= p_commission + '0' &lt; '3' + 0 "
+    		+			"and '1' + 0 &gt;= p_commission + 0 and p_commission + 0 &lt; '3' + 0 "
     		+      	"</when>"
     		+      	"<when test='pCommission ==\"03\"'>"
-    		+			"and p_commission + '0' &gt;= '3' + 0 "
+    		+			"and p_commission + '0 &gt;= '3' + 0 "
     		+      	"</when>"
     		+    "</choose>"
     		+ "</if> "
@@ -199,19 +199,19 @@ public interface ProductsMapper {
     		+ "<if test='annualRevenue !=null and annualRevenue !=\"00\" '>"
     		+    "<choose>"
     		+      	"<when test='annualRevenue ==\"01\"'>"
-    		+			"and p_expect_annual_revenue + '0' &lt; '7' + 0 "
+    		+			"and p_expect_annual_revenue + 0  &lt; '7' + 0 "
     		+      	"</when>"
     		+      	"<when test='annualRevenue ==\"02\"'>"
-    		+			"and '7' + 0 &gt;= p_expect_annual_revenue + '0' &lt; '8' + 0 "
+    		+			"and '7' + 0 &gt;= p_expect_annual_revenue + 0 and p_expect_annual_revenue + 0 &lt; '8' + 0 "
     		+      	"</when>"
     		+      	"<when test='annualRevenue ==\"03\"'>"
-    		+			"and '8' + 0 &gt;= p_expect_annual_revenue + '0' &lt; '9' + 0 "
+    		+			"and '8' + 0 &gt;= p_expect_annual_revenue + 0  and p_expect_annual_revenue + 0 &lt; '9' + 0 "
     		+      	"</when>"
     		+      	"<when test='annualRevenue ==\"04\"'>"
-    		+			"and '9' + 0 &gt;= p_expect_annual_revenue + '0' &lt; '10' + 0 "
+    		+			"and '9' + 0 &gt;= p_expect_annual_revenue + 0  and p_expect_annual_revenue + 0 &lt; '10' + 0 "
     		+      	"</when>"
     		+      	"<when test='annualRevenue ==\"05\"'>"
-    		+			"and p_expect_annual_revenue + '0' &gt;= '10' + 0 "
+    		+			"and p_expect_annual_revenue + 0 &gt;= '10' + 0 "
     		+      	"</when>"
     		+      	"<when test='annualRevenue ==\"06\"'>"
     		+			"and p_expect_annual_revenue = '浮动' "
@@ -221,13 +221,13 @@ public interface ProductsMapper {
     		+ "<if test='pCommission !=null and pCommission !=\"00\" '>"
     		+    "<choose>"
     		+      	"<when test='pCommission ==\"01\"'>"
-    		+			"and p_commission + '0' &lt; '1' + 0 "
+    		+			"and p_commission + 0 &lt; '1' + 0 "
     		+      	"</when>"
     		+      	"<when test='pCommission ==\"02\"'>"
-    		+			"and '1' + 0 &gt;= p_commission + '0' &lt; '3' + 0 "
+    		+			"and '1' + 0 &gt;= p_commission + 0 and p_commission + 0 &lt; '3' + 0 "
     		+      	"</when>"
     		+      	"<when test='pCommission ==\"03\"'>"
-    		+			"and p_commission + '0' &gt;= '3' + 0 "
+    		+			"and p_commission + '0 &gt;= '3' + 0 "
     		+      	"</when>"
     		+    "</choose>"
     		+ "</if> "
@@ -270,8 +270,10 @@ public interface ProductsMapper {
     	@Result(property = "pSaleStartTime", column = "p_sale_date_start"), @Result(property = "pAllIssuingScale", column = "p_all_issuing_scale"),
     	@Result(property = "pMinAmount", column = "p_min_amount"), @Result(property = "pPaymentInterestType", column = "p_payment_interest_type"),
     	@Result(property = "pInvestType", column = "p_invest_type"), @Result(property = "pSizeRatioType", column = "p_size_ratio_type"),
-    	@Result(property = "pInvestOwnerId", column = "p_invest_owner_id"), @Result(property = "pIssuingScale", column = "p_issuing_scale"),
-    	@Result(property = "pExpectSaleAmount", column = "p_expect_sale_amount"), @Result(property = "pAllSubscriptionAmount", column = "p_all_subscription_amount")
+    	@Result(property = "pInvestOwnerId", column = "p_invest_owner_id"), @Result(property = "pAllSubscriptionAmount", column = "p_all_subscription_amount"),
+		@Result(property = "pLatestPayNum", column = "p_latest_Pay_Num"), @Result(property = "pRgxz", column = "p_rgxz"),
+    	@Result(property = "pRexiao", column = "p_rexiao"), @Result(property = "pTuijian", column = "p_tuijian"),
+    	@Result(property = "pCommission", column = "p_commission")
     })
     List<ProductModel> queryAllProducts(@Param("startIndex")int startIndex, @Param("pageSize")int pageSize);
 
@@ -285,8 +287,10 @@ public interface ProductsMapper {
     	@Result(property = "pSaleStartTime", column = "p_sale_date_start"), @Result(property = "pAllIssuingScale", column = "p_all_issuing_scale"),
     	@Result(property = "pMinAmount", column = "p_min_amount"), @Result(property = "pPaymentInterestType", column = "p_payment_interest_type"),
     	@Result(property = "pInvestType", column = "p_invest_type"), @Result(property = "pSizeRatioType", column = "p_size_ratio_type"),
-    	@Result(property = "pInvestOwnerId", column = "p_invest_owner_id"), @Result(property = "pIssuingScale", column = "p_issuing_scale"),
-    	@Result(property = "pExpectSaleAmount", column = "p_expect_sale_amount"), @Result(property = "pAllSubscriptionAmount", column = "p_all_subscription_amount")
+    	@Result(property = "pInvestOwnerId", column = "p_invest_owner_id"), @Result(property = "pAllSubscriptionAmount", column = "p_all_subscription_amount"),
+		@Result(property = "pLatestPayNum", column = "p_latest_Pay_Num"), @Result(property = "pRgxz", column = "p_rgxz"),
+    	@Result(property = "pRexiao", column = "p_rexiao"), @Result(property = "pTuijian", column = "p_tuijian"),
+    	@Result(property = "pCommission", column = "p_commission")
     })
     List<ProductModel> queryRecommendProducts(String recommendype);
 }
