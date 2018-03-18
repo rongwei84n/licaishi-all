@@ -12,6 +12,7 @@ import org.apache.logging.log4j.Logger;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -23,6 +24,7 @@ import com.auts.lcs.model.common.PhiHomeBaseResponse;
 import com.auts.lcs.model.dao.CustomerModel;
 import com.auts.lcs.model.dao.order.OrderModel;
 import com.auts.lcs.model.enums.OrderStatus;
+import com.auts.lcs.model.request.CreateOrderRequestModel;
 import com.auts.lcs.model.response.CustomerListResponseDto;
 import com.auts.lcs.model.response.CustomerResponseDto;
 import com.auts.lcs.model.response.Data;
@@ -134,26 +136,24 @@ public class OrderController extends SBaseController {
      */
     @RequestMapping(value = "/v1/order/createOrder", method = RequestMethod.POST, produces = { "application/json" })
     public PhiHomeBaseResponse createOrder(HttpServletRequest request,
-    		@RequestParam(value = "productId", required = false) String productId,
-            @RequestParam(value = "customerId", required = false) String customerId,
-            @RequestParam(value = "customerName", required = false) String customerName,
-            @RequestParam(value = "cardId", required = false) String cardId,
-            @RequestParam(value = "amount", required = false) String amount,
-            @RequestParam(value = "lastPayDate", required = false) String lastPayDate,
-            @RequestParam(value = "comRatio", required = false) String comRatio,
-            @RequestParam(value = "proRatio", required = false) String proRatio,
-            @RequestParam(value = "issuingBank", required = false) String issuingBank,
-            @RequestParam(value = "bankCardNo", required = false) String bankCardNo,
-            @RequestParam(value = "note", required = false) String note) {
+            @RequestBody CreateOrderRequestModel requestModel) {
         PhiHomeBaseResponse rspObj = new PhiHomeBaseResponse();
 
-        LOGGER.info("预约订单接口 start pCode, userId [{}]", productId, customerId);
+        LOGGER.info("预约订单接口 start pCode, userId [{}]", requestModel.getProductId(), requestModel.getCustomerId());
         String token = request.getHeader(Const.AUTHORIZATION);
         LOGGER.info("queryOrders toekn [{}]", token);
         String uid = getUidByToken(token);
         //通过理财师的uid找到理财师表里的UID
         String financerUid = "10";
-        OrderModel om = generateOrder(productId, customerId, financerUid, cardId,amount,lastPayDate, comRatio, proRatio,issuingBank, bankCardNo);
+        OrderModel om = generateOrder(requestModel.getProductId(), requestModel.getCustomerId(),
+                financerUid,
+                requestModel.getCardId(),
+                requestModel.getAmount(),
+                requestModel.getLastPayDate(),
+                requestModel.getComRatio(),
+                requestModel.getProRatio(),
+                requestModel.getIssuingBank(),
+                requestModel.getBankCardNo());
         //todo 产品额度够不够
         int result = orderService.saveOrder(om);
         if (result < 1) {
