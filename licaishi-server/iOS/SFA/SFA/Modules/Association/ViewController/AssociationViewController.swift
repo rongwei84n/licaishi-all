@@ -18,7 +18,7 @@ class AssociationViewController: UIViewController, InstanceFromStoryBoard {
         return "Me"
     }
     
-    var urlString = "http://192.168.2.107:8080"
+    var urlString = "http://47.97.100.240:9095"
     
     var webview: WKWebView!
     
