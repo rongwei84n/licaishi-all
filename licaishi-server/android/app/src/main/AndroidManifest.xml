@@ -138,20 +138,7 @@
                 android:resource="@xml/file_paths" />
         </provider>
 
-        <activity android:name=".activity.HouseManageActivity" />
-        <activity android:name=".activity.HouseEditActivity" />
-        <activity
-            android:name=".activity.HouseNameEditActivity"
-            android:windowSoftInputMode="adjustPan|stateAlwaysVisible" />
-        <activity android:name=".activity.HousePicManageActivity" />
-        <activity
-            android:name=".activity.RoomManageActivity"
-            android:launchMode="singleTask" />
-        <activity
-            android:name=".activity.RoomAddActivity"
-            android:windowSoftInputMode="adjustPan|stateAlwaysVisible" />
-        <activity android:name=".activity.DevicePicActivity" />
-
+        <activity android:name=".activity.OrderItemDetailActivity" />
         <activity
             android:name=".activity.IntroductionActivity"
             android:theme="@style/greyBackgroundTheme" />
@@ -163,9 +150,6 @@
             android:theme="@style/greyBackgroundTheme" />
         <activity
             android:name=".activity.UpdateDetailActivity"
-            android:theme="@style/greyBackgroundTheme" />
-        <activity
-            android:name=".activity.SceneEditActivity"
             android:theme="@style/greyBackgroundTheme" />
         <activity
             android:name=".activity.ScenePicActivity"
