@@ -79,7 +79,7 @@ extension AccountService: TargetType {
             return version + "forgetpassword"  // 忘记密码
             
         case .uploadImage:
-            return version + "pic/upload"  // 上传头像
+            return version + "pic/uploadBase64"  // 上传头像
             
         case .accountDetail:
             return version + "accountDetail"  // 获取账户详情
