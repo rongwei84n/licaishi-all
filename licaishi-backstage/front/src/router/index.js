@@ -29,6 +29,11 @@ export default new Router({
           path: 'product/trust',
           component: resolve => require(['../components/pages/product/Trust.vue'], resolve)
         },
+        // 新增产品
+        {
+          path: 'product/addProduct',
+          component: resolve => require(['../components/pages/product/addProduct.vue'], resolve)
+        },
         {
           path: 'product/debtfund',
           component: resolve => require(['../components/pages/product/DebtFund.vue'], resolve)
@@ -52,6 +57,11 @@ export default new Router({
         {
           path: 'order/failure',
           component: resolve => require(['../components/pages/order/failure.vue'], resolve)
+        },
+        // 可视化编辑
+        {
+          path: 'Udit',
+          component: resolve => require(['../container/Udit/Udit.vue'], resolve)
         }
       ]
     },

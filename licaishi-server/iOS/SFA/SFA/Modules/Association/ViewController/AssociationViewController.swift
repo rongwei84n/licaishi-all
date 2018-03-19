@@ -149,7 +149,7 @@ class AssociationViewController: UIViewController, InstanceFromStoryBoard {
             
             if User.current.isLoggedIn {
                 navigationController?.pushViewController(MeViewController.instanceFromStoryBoard(), animated: true)
-//                openPageCallback = responseCallback
+                openPageCallback = responseCallback
 //                openPageCallbackParam = ["hasChange":"1"]
             }
             else {
