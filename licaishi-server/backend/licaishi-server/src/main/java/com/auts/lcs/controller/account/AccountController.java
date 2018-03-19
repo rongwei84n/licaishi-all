@@ -1,27 +1,5 @@
 package com.auts.lcs.controller.account;
 
-import com.alibaba.fastjson.JSON;
-import com.auts.lcs.consts.Const;
-import com.auts.lcs.controller.SBaseController;
-import com.auts.lcs.model.common.PhiHomeBaseResponse;
-import com.auts.lcs.model.dao.AccountModel;
-import com.auts.lcs.model.dao.TokenModel;
-import com.auts.lcs.model.request.PropertyChangeRequestModel;
-import com.auts.lcs.model.response.AccountBaseResponseModel;
-import com.auts.lcs.model.response.AccountDetailResponseModel;
-import com.auts.lcs.model.response.AuthorizationCodeResponseCode;
-import com.auts.lcs.model.response.LoginResponseModel;
-import com.auts.lcs.model.response.PasswordResponseModel;
-import com.auts.lcs.model.response.PropertyChangeResponseModel;
-import com.auts.lcs.model.response.RegistResponseModel;
-import com.auts.lcs.service.AccountService;
-import com.auts.lcs.util.Base64Utils;
-import com.auts.lcs.util.EntryUtils;
-import com.auts.lcs.util.MyResponseutils;
-import com.auts.lcs.util.RegexUtils;
-import com.auts.lcs.util.StringUtil;
-import com.auts.lcs.util.UidGenerater;
-
 import java.io.ByteArrayInputStream;
 import java.io.File;
 import java.io.FileOutputStream;
@@ -40,6 +18,31 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.alibaba.fastjson.JSON;
+import com.auts.lcs.api.YPSmsApi;
+import com.auts.lcs.consts.Const;
+import com.auts.lcs.controller.SBaseController;
+import com.auts.lcs.model.common.PhiHomeBaseResponse;
+import com.auts.lcs.model.dao.AccountModel;
+import com.auts.lcs.model.dao.CaptchaModel;
+import com.auts.lcs.model.dao.TokenModel;
+import com.auts.lcs.model.request.PropertyChangeRequestModel;
+import com.auts.lcs.model.response.AccountBaseResponseModel;
+import com.auts.lcs.model.response.AccountDetailResponseModel;
+import com.auts.lcs.model.response.AuthorizationCodeResponseCode;
+import com.auts.lcs.model.response.LoginResponseModel;
+import com.auts.lcs.model.response.PasswordResponseModel;
+import com.auts.lcs.model.response.PropertyChangeResponseModel;
+import com.auts.lcs.model.response.RegistResponseModel;
+import com.auts.lcs.service.AccountService;
+import com.auts.lcs.service.CaptchaService;
+import com.auts.lcs.util.Base64Utils;
+import com.auts.lcs.util.EntryUtils;
+import com.auts.lcs.util.MyResponseutils;
+import com.auts.lcs.util.RegexUtils;
+import com.auts.lcs.util.StringUtil;
+import com.auts.lcs.util.UidGenerater;
+
 /**
  * 账户相关的Controller.
  */
@@ -54,6 +57,10 @@ public class AccountController extends SBaseController {
 
     @Autowired
     AccountService accountService;
+    @Autowired
+    YPSmsApi ypSmsApi;
+    @Autowired
+    CaptchaService captchaService;
 
     private static final String AVATAR_SAVE_PATH = "/root/deploy/img/avatar/lcss";
 
@@ -71,8 +78,30 @@ public class AccountController extends SBaseController {
             @RequestParam(value = "scope", required = false) String scope)
     {
         AuthorizationCodeResponseCode rsp = new AuthorizationCodeResponseCode();
-        rsp.setError(String.valueOf(Const.ErrorCode.Account.OK));
-        rsp.setAuthorizationcode("lcs-gogo");
+        String phoneNo = "15250065067";
+        String captchaCode = YPSmsApi.getRandCaptchaCode();
+        try {
+			String result = YPSmsApi.sendSms(YPSmsApi.API_KEY, String.format(YPSmsApi.CAPTCHA_TEXT, captchaCode), phoneNo);
+			if(result.contains("发送成功")) {
+				CaptchaModel cm = new CaptchaModel();
+				cm.setPhoneNo(phoneNo);
+				cm.setCaptchaCode(captchaCode);
+				cm.setSendTime(System.currentTimeMillis() / 1000);
+				if(captchaService.queryCaptchaByPhoneNo(phoneNo) == null) {
+					captchaService.addCaptcha(cm);
+				} else {
+					captchaService.updateCaptcha(cm);
+				}
+				rsp.setError(String.valueOf(Const.ErrorCode.Account.OK));
+		        rsp.setAuthorizationcode("lcs-gogo");
+			} else {
+				rsp.setError(String.valueOf(Const.ErrorCode.Account.OK));
+		        rsp.setAuthorizationcode("lcs-gogo");
+			}
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+        
         return rsp;
     }
 
@@ -90,6 +119,16 @@ public class AccountController extends SBaseController {
                 verificationcode);
 
         AccountBaseResponseModel rsp = new AccountBaseResponseModel();
+        CaptchaModel captchaModel = captchaService.queryCaptchaByPhoneNo(phonenumber);
+        //暂定3分钟过期
+        long totalSeconds = System.currentTimeMillis() / 1000;
+        if(captchaModel == null || (totalSeconds - 3 * 60) > captchaModel.getSendTime() ) {
+        	rsp.setError(String.valueOf(Const.ErrorCode.Account.REGIST_VERCODE_OVERDUE));
+        	captchaService.delCaptcha(phonenumber);
+        } else if(!verificationcode.equals(captchaModel.getCaptchaCode())) {
+        	rsp.setError(String.valueOf(Const.ErrorCode.Account.REGIST_VERCODE_ERROR));
+        }
+        
         rsp.setError(String.valueOf(Const.ErrorCode.Account.OK));
         return rsp;
     }

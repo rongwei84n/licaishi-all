@@ -4,34 +4,38 @@ package com.auts.lcs.api;
  * Created by bingone on 15/12/16.
  */
 
-    import org.apache.http.HttpEntity;
-    import org.apache.http.NameValuePair;
-    import org.apache.http.client.entity.UrlEncodedFormEntity;
-    import org.apache.http.client.methods.CloseableHttpResponse;
-    import org.apache.http.client.methods.HttpPost;
-    import org.apache.http.impl.client.CloseableHttpClient;
-    import org.apache.http.impl.client.HttpClients;
-    import org.apache.http.message.BasicNameValuePair;
-    import org.apache.http.util.EntityUtils;
-    import java.io.IOException;
-    import java.net.URISyntaxException;
-    import java.net.URLEncoder;
-    import java.util.ArrayList;
-    import java.util.HashMap;
-    import java.util.List;
-    import java.util.Map;
+import org.apache.http.HttpEntity;
+import org.apache.http.NameValuePair;
+import org.apache.http.client.entity.UrlEncodedFormEntity;
+import org.apache.http.client.methods.CloseableHttpResponse;
+import org.apache.http.client.methods.HttpPost;
+import org.apache.http.impl.client.CloseableHttpClient;
+import org.apache.http.impl.client.HttpClients;
+import org.apache.http.message.BasicNameValuePair;
+import org.apache.http.util.EntityUtils;
+import org.springframework.stereotype.Component;
+
+import java.io.IOException;
+import java.net.URISyntaxException;
+import java.net.URLEncoder;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 /**
- * 短信http接口的java代码调用示例
- * 基于Apache HttpClient 4.3
+ * 云片短信服务API
+ * 
+ * 
+ * @author libing
  *
- * @author songchao
- * @since 2015-04-03
  */
-public class JavaSmsApi {
+@Component
+public class YPSmsApi {
 
 	//修改为您的apikey.apikey可在官网（http://www.yuanpian.com)登录后获取
-	public static String API_KEY = "11925f4b90680e82d9d3d4aa9c02f0f7";
+	public static final String API_KEY = "11925f4b90680e82d9d3d4aa9c02f0f7";
+	public static String CAPTCHA_TEXT = "【理财师】您的验证码是%s。如非本人操作，请忽略本短信";
     
     //查账户信息的http地址
     private static String URI_GET_USER_INFO = "https://sms.yunpian.com/v2/user/get.json";
@@ -54,32 +58,35 @@ public class JavaSmsApi {
         String apikey = "xxxxxxxxxxxxxxxxxxxxx";
         
         //修改为您要发送的手机号
-        String mobile = URLEncoder.encode("130xxxxxxxx",ENCODING);
+        String mobile = URLEncoder.encode("15250065067",ENCODING);
 
         /**************** 查账户信息调用示例 *****************/
-        System.out.println(JavaSmsApi.getUserInfo(apikey));
+//        System.out.println(YPSmsApi.getUserInfo(API_KEY));
+        for(int i = 0 ; i < 100 ; i++)
+        System.out.println(getRandCaptchaCode());
 
         /**************** 使用智能匹配模版接口发短信(推荐) *****************/
         //设置您要发送的内容(内容必须和某个模板匹配。以下例子匹配的是系统提供的1号模板）
-        String text = "【云片网】您的验证码是1234";
-        //发短信调用示例
-       // System.out.println(JavaSmsApi.sendSms(apikey, text, mobile));
+//        String text = "【云片网】您的验证码是1234";
+//        String text1 = "【理财师】您的验证码是1234。如非本人操作，请忽略本短信";
+//        //发短信调用示例
+//        System.out.println(YPSmsApi.sendSms(API_KEY, text1, "15250065067"));
 
         /**************** 使用指定模板接口发短信(不推荐，建议使用智能匹配模版接口) *****************/
-        //设置模板ID，如使用1号模板:【#company#】您的验证码是#code#
-        long tpl_id = 1;
-        //设置对应的模板变量值
-
-        String tpl_value = URLEncoder.encode("#code#",ENCODING) +"="
-            + URLEncoder.encode("1234", ENCODING) + "&"
-            + URLEncoder.encode("#company#",ENCODING) + "="
-            + URLEncoder.encode("云片网",ENCODING);
-        //模板发送的调用示例
-        System.out.println(tpl_value);
-        System.out.println(JavaSmsApi.tplSendSms(apikey, tpl_id, tpl_value, mobile));
+//        //设置模板ID，如使用1号模板:【#company#】您的验证码是#code#
+//        long tpl_id = 1;
+//        //设置对应的模板变量值
+//
+//        String tpl_value = URLEncoder.encode("#code#",ENCODING) +"="
+//            + URLEncoder.encode("1234", ENCODING) + "&"
+//            + URLEncoder.encode("#company#",ENCODING) + "="
+//            + URLEncoder.encode("云片网",ENCODING);
+//        //模板发送的调用示例
+//        System.out.println(tpl_value);
+//        System.out.println(YPSmsApi.tplSendSms(apikey, tpl_id, tpl_value, mobile));
 
         /**************** 使用接口发语音验证码 *****************/
-        String code = "1234";
+//        String code = "1234";
         //System.out.println(JavaSmsApi.sendVoice(apikey, mobile ,code));
     }
 
@@ -102,15 +109,15 @@ public class JavaSmsApi {
      * @param apikey apikey
      * @param text   　短信内容
      * @param mobile 　接受的手机号
-     * @return json格式字符串
+     * @return json格式字符串  { "code": 0, "msg": "发送成功", "count": 1, "fee": 0.05,  "unit": "RMB", "mobile": "13200000000", "sid": 3310228982}
      * @throws IOException
      */
-
     public static String sendSms(String apikey, String text, String mobile) throws IOException {
+    	String mobileNo = URLEncoder.encode(mobile,ENCODING);
         Map<String, String> params = new HashMap<String, String>();
         params.put("apikey", apikey);
         params.put("text", text);
-        params.put("mobile", mobile);
+        params.put("mobile", mobileNo);
         return post(URI_SEND_SMS, params);
     }
 
@@ -186,5 +193,19 @@ public class JavaSmsApi {
             }
         }
         return responseText;
+    }
+    
+    /**
+     * 随机生成6位验证码
+     * @return
+     */
+    public static String getRandCaptchaCode () {
+    	String sum = "";  
+        for (int i = 0; i < 6; i++) {  
+        	sum += (int)( Math.random() * 10); 
+        }
+        System.out.println(sum);  
+  
+        return sum;
     }
 }

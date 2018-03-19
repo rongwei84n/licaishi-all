@@ -83,7 +83,7 @@ public class CustomerController extends SBaseController {
 
         		CustomerResponseDto customerResponseDto = new CustomerResponseDto();
             	BeanUtils.copyProperties(customerModel, customerResponseDto);
-            	int orderCounts = 10;
+            	int orderCounts = orderService.queryOrderCountByCustomerId(customerModel.getUid()+"");
             	customerResponseDto.setOrderCounts(orderCounts);
             	customerResponseDtoList.add(customerResponseDto);
             }
