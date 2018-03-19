@@ -61,7 +61,7 @@ class SetNewPasswordViewController: UITableViewController, InstanceFromStoryBoar
         }
         
         ZWHud.shared.show()
-        _ = viewModel.changePassword(oldPassword: oldPassword, newPassword: newPassword).subscribe(onNext: { (isSuccess) in
+        _ = viewModel.changePassword(oldPassword: oldPassword, newPassword: newPassword.md5()).subscribe(onNext: { (isSuccess) in
             
             ZWHud.shared.dismiss()
             
