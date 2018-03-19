@@ -63,7 +63,7 @@ class SetPasswordViewController: UITableViewController, InstanceFromStoryBoard {
         }
         
         ZWHud.shared.show()
-        _ = viewModel.forgetPassword(phoneNumber: phoneNumber ?? "", password: password, verificationCode: "123456")
+        _ = viewModel.forgetPassword(phoneNumber: phoneNumber ?? "", password: password.md5(), verificationCode: "123456")
             .subscribe(onNext: { [weak self] (isSuccessful) in
                 
                 ZWHud.shared.dismiss()

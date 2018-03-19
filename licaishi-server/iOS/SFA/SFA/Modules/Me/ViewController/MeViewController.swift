@@ -63,6 +63,8 @@ class MeViewController: UITableViewController, InstanceFromStoryBoard, UIImagePi
         User.current.isLoggedIn = false
         User.current.clearUserInfo()
         
+        navigationController?.popViewController(animated: true)
+        
     }
     
     override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {

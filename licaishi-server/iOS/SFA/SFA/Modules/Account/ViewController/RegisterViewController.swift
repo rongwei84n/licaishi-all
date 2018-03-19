@@ -152,7 +152,7 @@ class RegisterViewController: UITableViewController, InstanceFromStoryBoard, UIT
         }
         
         ZWHud.shared.show()
-        _ = viewModel.register(phoneNumber: phone, password: password, verificationCode: verificationCode)
+        _ = viewModel.register(phoneNumber: phone, password: password.md5(), verificationCode: verificationCode)
             .subscribe(onNext: { [weak self] (isSuccess) in
                 
                 ZWHud.shared.dismiss()
