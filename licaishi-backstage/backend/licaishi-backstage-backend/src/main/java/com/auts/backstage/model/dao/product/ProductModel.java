@@ -12,40 +12,40 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 public class ProductModel extends BaseDaoModel {
 
-	private String pCode;
-    private String pShortName;
-    private String pFullName;
-    private String pType;
-    private String pExpectAnnualRevenue;
-    private String pSaleStatus;
-    private String pDulTime;
+	private String pCode; //产品code 后台API自己生成
+    private String pShortName; //产品简称
+    private String pFullName;//产品全称
+    private String pType; //产品类型
+    private String pExpectAnnualRevenue;//预期年化收益
+    private String pSaleStatus; //产品销售状态 热销中等
+    private String pDulTime; //发行期限
 	@JsonFormat(timezone = "GMT+8", pattern = "yyyy-MM-dd")
 	@DateTimeFormat(pattern = "yyyy-MM-dd")
-    private Date pSaleStartTime;
-    private String pAllIssuingScale;
-    private String pMinAmount;
-    private String pPaymentInterestType;
-    private String pInvestType;
-    private String pSizeRatioType;
-    private String pInvestOwnerId;
-    private String pAllSubscriptionAmount;
-    private String pRecruitmentSummary;
+    private Date pSaleStartTime; //发行开始日期
+    private String pAllIssuingScale;//募集规模
+    private String pMinAmount; //最少起投金额 100W
+    private String pPaymentInterestType; //付息方式
+    private String pInvestType; //投资领域
+    private String pSizeRatioType;//大小配比
+    private String pInvestOwnerId;//发行机构
+    private String pAllSubscriptionAmount;// 已销售金额
+    private String pRecruitmentSummary;//产品summary
     private int latestPayNum; //最迟打款天数
-	private String pCpys;
-    private String pMjzh;
-    private String pFxkz;
-    private String pHkly;
-    private String pZjyt;
-    private String pRzf;
-    private String pDbf;
+	private String pCpys;//产品优势
+    private String pMjzh;//募集账号
+    private String pFxkz;//风险控制
+    private String pHkly;//还款来源
+    private String pZjyt;//资金用途
+    private String pRzf;//融资方
+    private String pDbf;//担保方
 	@JsonFormat(timezone = "GMT+8", pattern = "yyyy-MM-dd HH:mm:ss")
 	@DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     private Date createTime;
 	@JsonFormat(timezone = "GMT+8", pattern = "yyyy-MM-dd HH:mm:ss")
 	@DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     private Date updateTime;
-	private List<ProfitRebateModel> profitRebates;
-	private List<ProductAttachmentModel> productAttachments;
+	private List<ProfitRebateModel> profitRebates;//不同起投金额，不同收益率和佣金
+	private List<ProductAttachmentModel> productAttachments;//预览资料
 
 	public List<ProfitRebateModel> getProfitRebates() {
 		return profitRebates;
