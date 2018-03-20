@@ -212,6 +212,12 @@ public class AccountController extends SBaseController {
             return errorRegister(String.valueOf(Const.ErrorCode.REQUEST_NO_PARAS));
         }
 
+        //校验验证码
+        if(!checkCaptchaCode(phonenumber, verificationcode)) {
+        	LOGGER.info("Register with verificationcode erro [{}]", verificationcode);
+        	return errorRegister(String.valueOf(Const.ErrorCode.Account.REGIST_VERCODE_ERROR));
+        }
+        
         AccountModel acModel = accountService.queryByUserPhone(phonenumber);
         if (acModel != null) {
             LOGGER.info("Already registed phone [{}]", phonenumber);
@@ -406,6 +412,14 @@ public class AccountController extends SBaseController {
             rsp.setError(String.valueOf(Const.ErrorCode.REQUEST_NO_PARAS));
             return rsp;
         }
+        //校验验证码
+        if(!checkCaptchaCode(phonenumber, verificationcode)) {
+        	LOGGER.info("Modify password with verificationcode erro [{}]", verificationcode);
+        	AccountBaseResponseModel rsp = new AccountBaseResponseModel();
+        	rsp.setError(String.valueOf(Const.ErrorCode.Account.REGIST_VERCODE_ERROR));
+        	return rsp;
+        }
+        
         AccountModel model = null;
         try {
             model = accountService.queryByUserPhone(phonenumber);
@@ -612,5 +626,25 @@ public class AccountController extends SBaseController {
         rsp.setCode(Const.STATUS_OK);
         rsp.setMessage(MyResponseutils.parseMsg(Const.STATUS_OK));
         return rsp;
+    }
+    
+    /**
+     * 校验验证码 三分钟之内都有效
+     * @param phonenumber
+     * @param verificationcode
+     * @return
+     */
+    private boolean checkCaptchaCode(String phonenumber, String verificationcode) {
+    	boolean result = true;
+    	CaptchaModel captchaModel = captchaService.queryCaptchaByPhoneNo(phonenumber);
+        //暂定3分钟过期
+        long totalSeconds = System.currentTimeMillis() / 1000;
+        if(captchaModel == null || (totalSeconds - 3 * 60) > captchaModel.getSendTime() ) {
+        	captchaService.delCaptcha(phonenumber);
+        	result = false;
+        } else if(!verificationcode.equals(captchaModel.getCaptchaCode())) {
+        	result = false;
+        } 
+        return result;
     }
 }

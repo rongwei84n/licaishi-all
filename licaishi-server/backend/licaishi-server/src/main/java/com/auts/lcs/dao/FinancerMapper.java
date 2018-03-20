@@ -25,8 +25,8 @@ public interface FinancerMapper {
     })
     FinancerModel queryFinancerByUID(@Param("uid") String uid);
 
-	@Insert("insert into tbl_financer (name,phone,email,address,createtime,updatetime,sex,birthday) values "
-			+ "(#{financer.name},#{financer.phone},#{financer.email},#{financer.address},#{financer.createtime},#{financer.updatetime},#{financer.sex},#{financer.birthday})")
+	@Insert("insert into tbl_financer (userId,name,phone,email,address,createtime,updatetime,sex,birthday) values "
+			+ "(#{financer.userId},#{financer.name},#{financer.phone},#{financer.email},#{financer.address},#{financer.createtime},#{financer.updatetime},#{financer.sex},#{financer.birthday})")
 	void addFinancer(@Param("financer") FinancerModel financer);
 
 	@Delete("delete from tbl_financer where uid = #{uid}")
