@@ -1,7 +1,7 @@
 <!DOCTYPE resources [<!ENTITY device_soft_ap "Phicomm_TC1_XXXX">]>
 
 <resources>
-    <string name="app_name">超级理财师</string>
+    <string name="app_name">嘿牛理财师</string>
     <string name="loading">加载中&#8230;</string>
     <string name="app_exit_hit">再按一次退出程序</string>
     <string name="next_step">下一步</string>
