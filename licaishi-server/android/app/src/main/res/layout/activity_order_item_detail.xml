@@ -103,70 +103,6 @@
             android:layout_width="match_parent"
             android:layout_height="1dp"
             android:background="@color/default_line"/>
-        <!-- 产品期限 -->
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/listview_item_height"
-            android:background="@color/white"
-            android:orientation="horizontal"
-            android:paddingLeft="10dp"
-            android:paddingRight="10dp">
-            <TextView
-                android:id="@+id/tv_product_qixian_label"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_centerVertical="true"
-                android:layout_alignParentLeft="true"
-                android:text="@string/tv_order_detail_qixian"
-                android:textColor="@color/text_small"
-                android:textSize="@dimen/text_normal" />
-            <TextView
-                android:id="@+id/tv_product_qixian"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_centerVertical="true"
-                android:layout_alignParentRight="true"
-                android:gravity="right"
-                android:textColor="@color/text_large"
-                android:layout_toRightOf="@+id/tv_product_qixian_label"/>
-        </RelativeLayout>
-
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:background="@color/default_line"/>
-        <!-- 投资领域 -->
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/listview_item_height"
-            android:background="@color/white"
-            android:orientation="horizontal"
-            android:paddingLeft="10dp"
-            android:paddingRight="10dp">
-            <TextView
-                android:id="@+id/tv_area_label"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_centerVertical="true"
-                android:layout_alignParentLeft="true"
-                android:text="@string/tv_order_detail_area"
-                android:textColor="@color/text_small"
-                android:textSize="@dimen/text_normal" />
-            <TextView
-                android:id="@+id/tv_area"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_centerVertical="true"
-                android:layout_alignParentRight="true"
-                android:gravity="right"
-                android:textColor="@color/text_large"
-                android:layout_toRightOf="@+id/tv_area_label"/>
-        </RelativeLayout>
-
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:background="@color/default_line"/>
         <!-- 返佣比例 -->
         <RelativeLayout
             android:layout_width="match_parent"
@@ -176,23 +112,23 @@
             android:paddingLeft="10dp"
             android:paddingRight="10dp">
             <TextView
-                android:id="@+id/tv_fanyong_present_label"
+                android:id="@+id/tv_comratio_label"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_centerVertical="true"
                 android:layout_alignParentLeft="true"
-                android:text="@string/tv_order_detail_fanyong_present"
+                android:text="@string/tv_order_detail_comratio"
                 android:textColor="@color/text_small"
                 android:textSize="@dimen/text_normal" />
             <TextView
-                android:id="@+id/tv_fanyong_present"
+                android:id="@+id/tv_comratio"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_centerVertical="true"
                 android:layout_alignParentRight="true"
                 android:gravity="right"
                 android:textColor="@color/red"
-                android:layout_toRightOf="@+id/tv_fanyong_present_label"/>
+                android:layout_toRightOf="@+id/tv_comratio_label"/>
         </RelativeLayout>
 
         <View
@@ -208,23 +144,87 @@
             android:paddingLeft="10dp"
             android:paddingRight="10dp">
             <TextView
-                android:id="@+id/tv_fanyong_amount_label"
+                android:id="@+id/tv_commission_label"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_centerVertical="true"
                 android:layout_alignParentLeft="true"
-                android:text="@string/tv_order_detail_fanyong_amount"
+                android:text="@string/tv_order_detail_commission_amount"
                 android:textColor="@color/text_small"
                 android:textSize="@dimen/text_normal" />
             <TextView
-                android:id="@+id/tv_fanyong_amount"
+                android:id="@+id/tv_commission"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_centerVertical="true"
                 android:layout_alignParentRight="true"
                 android:gravity="right"
                 android:textColor="@color/text_large"
-                android:layout_toRightOf="@+id/tv_fanyong_amount_label"/>
+                android:layout_toRightOf="@+id/tv_commission_label"/>
+        </RelativeLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/default_line"/>
+        <!-- 预期收益率 -->
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/listview_item_height"
+            android:background="@color/white"
+            android:orientation="horizontal"
+            android:paddingLeft="10dp"
+            android:paddingRight="10dp">
+            <TextView
+                android:id="@+id/tv_pro_ratio_label"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_alignParentLeft="true"
+                android:text="@string/tv_order_detail_proratio"
+                android:textColor="@color/text_small"
+                android:textSize="@dimen/text_normal" />
+            <TextView
+                android:id="@+id/tv_pro_ratio"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_alignParentRight="true"
+                android:gravity="right"
+                android:textColor="@color/text_large"
+                android:layout_toRightOf="@+id/tv_pro_ratio_label"/>
+        </RelativeLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/default_line"/>
+        <!-- 客户收益 -->
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/listview_item_height"
+            android:background="@color/white"
+            android:orientation="horizontal"
+            android:paddingLeft="10dp"
+            android:paddingRight="10dp">
+            <TextView
+                android:id="@+id/tv_profit_label"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_alignParentLeft="true"
+                android:text="@string/tv_order_detail_profit"
+                android:textColor="@color/text_small"
+                android:textSize="@dimen/text_normal" />
+            <TextView
+                android:id="@+id/tv_profit"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_alignParentRight="true"
+                android:gravity="right"
+                android:textColor="@color/text_large"
+                android:layout_toRightOf="@+id/tv_profit_label"/>
         </RelativeLayout>
 
         <View
@@ -263,7 +263,7 @@
             android:layout_width="match_parent"
             android:layout_height="1dp"
             android:background="@color/default_line"/>
-        <!-- 产品发行状态 -->
+        <!-- 支付凭证上传状态 -->
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="@dimen/listview_item_height"
@@ -272,39 +272,7 @@
             android:paddingLeft="10dp"
             android:paddingRight="10dp">
             <TextView
-                android:id="@+id/tv_product_status_label"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_centerVertical="true"
-                android:layout_alignParentLeft="true"
-                android:text="@string/tv_order_detail_product_status"
-                android:textColor="@color/text_small"
-                android:textSize="@dimen/text_normal" />
-            <TextView
-                android:id="@+id/tv_product_status"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_centerVertical="true"
-                android:layout_alignParentRight="true"
-                android:gravity="right"
-                android:textColor="@color/text_large"
-                android:layout_toRightOf="@+id/tv_product_status_label"/>
-        </RelativeLayout>
-
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:background="@color/default_line"/>
-        <!-- 支付状态 -->
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/listview_item_height"
-            android:background="@color/white"
-            android:orientation="horizontal"
-            android:paddingLeft="10dp"
-            android:paddingRight="10dp">
-            <TextView
-                android:id="@+id/tv_pay_status_label"
+                android:id="@+id/tv_voucher_status_label"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_centerVertical="true"
@@ -313,14 +281,14 @@
                 android:textColor="@color/text_small"
                 android:textSize="@dimen/text_normal" />
             <TextView
-                android:id="@+id/tv_pay_status"
+                android:id="@+id/tv_voucher_status"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_centerVertical="true"
                 android:layout_alignParentRight="true"
                 android:gravity="right"
                 android:textColor="@color/text_large"
-                android:layout_toRightOf="@+id/tv_pay_status_label"/>
+                android:layout_toRightOf="@+id/tv_voucher_status_label"/>
         </RelativeLayout>
 
         <View
@@ -336,23 +304,23 @@
             android:paddingLeft="10dp"
             android:paddingRight="10dp">
             <TextView
-                android:id="@+id/tv_dakuan_certificate_label"
+                android:id="@+id/tv_voucher_path_label"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_centerVertical="true"
                 android:layout_alignParentLeft="true"
-                android:text="@string/tv_order_detail_dakuan_certificate"
+                android:text="@string/tv_order_detail_voucher_path_certificate"
                 android:textColor="@color/text_small"
                 android:textSize="@dimen/text_normal" />
             <TextView
-                android:id="@+id/tv_dakuan_certificate"
+                android:id="@+id/tv_voucher_path"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_centerVertical="true"
                 android:layout_alignParentRight="true"
                 android:gravity="right"
                 android:textColor="@color/text_large"
-                android:layout_toRightOf="@+id/tv_dakuan_certificate_label"/>
+                android:layout_toRightOf="@+id/tv_voucher_path_label"/>
         </RelativeLayout>
 
         <View
@@ -387,70 +355,6 @@
                 android:layout_toRightOf="@+id/tv_customer_name_label"/>
         </RelativeLayout>
 
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:background="@color/default_line"/>
-        <!-- 客户手机 -->
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/listview_item_height"
-            android:background="@color/white"
-            android:orientation="horizontal"
-            android:paddingLeft="10dp"
-            android:paddingRight="10dp">
-            <TextView
-                android:id="@+id/tv_customer_phone_label"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_centerVertical="true"
-                android:layout_alignParentLeft="true"
-                android:text="@string/tv_order_detail_customer_phone"
-                android:textColor="@color/text_small"
-                android:textSize="@dimen/text_normal" />
-            <TextView
-                android:id="@+id/tv_customer_phone"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_centerVertical="true"
-                android:layout_alignParentRight="true"
-                android:gravity="right"
-                android:textColor="@color/text_large"
-                android:layout_toRightOf="@+id/tv_customer_phone_label"/>
-        </RelativeLayout>
-
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:background="@color/default_line"/>
-        <!-- 备注信息 -->
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/listview_item_height"
-            android:background="@color/white"
-            android:orientation="horizontal"
-            android:paddingLeft="10dp"
-            android:paddingRight="10dp">
-            <TextView
-                android:id="@+id/tv_tip_label"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_centerVertical="true"
-                android:layout_alignParentLeft="true"
-                android:text="@string/tv_order_detail_tip"
-                android:textColor="@color/text_small"
-                android:textSize="@dimen/text_normal" />
-            <TextView
-                android:id="@+id/tv_tip"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_centerVertical="true"
-                android:layout_alignParentRight="true"
-                android:gravity="left"
-                android:textColor="@color/text_large"
-                android:text="dsfdfsdfasklfjdksaljfdklsajfkldsajfklsjklfdjsklfdjslajdkj232312321"
-                android:layout_toRightOf="@+id/tv_tip_label"/>
-        </RelativeLayout>
         <View
             android:layout_width="match_parent"
             android:layout_height="1dp"

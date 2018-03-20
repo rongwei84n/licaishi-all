@@ -39,38 +39,33 @@ public class OrderItemDetailActivity extends BaseActivity {
     @BindView(R.id.tv_productname)
     TextView tvProductname; //产品名称
 
-    @BindView(R.id.tv_product_qixian)
-    TextView tvProductQixian; //产品期限
 
-    @BindView(R.id.tv_area)
-    TextView tvArea; //投资领域
+    @BindView(R.id.tv_comratio)
+    TextView tvComratio; //返佣比例
 
-    @BindView(R.id.tv_fanyong_present)
-    TextView tvFanyongPresent; //返佣比例
+    @BindView(R.id.tv_commission)
+    TextView tvCommission; //返佣金额
 
-    @BindView(R.id.tv_fanyong_amount)
-    TextView tvFanyongAmount; //返佣金额
+    @BindView(R.id.tv_pro_ratio)
+    TextView tvProRatio;//预期收益率
+
+    @BindView(R.id.tv_profit)
+    TextView tvProfit; //客户收益
 
     @BindView(R.id.tv_contract_status)
     TextView tvContractStatus; //合同状态
 
-    @BindView(R.id.tv_product_status)
-    TextView tvProductStatus; //产品发行状态
+    @BindView(R.id.tv_voucher_status)
+    TextView tvVoucherStatus; //支付凭证上传状态
 
-    @BindView(R.id.tv_pay_status)
-    TextView tvPayStatus; //支付状态
-
-    @BindView(R.id.tv_dakuan_certificate)
-    TextView tvDakuanCertificate; //打款凭证
+    @BindView(R.id.tv_voucher_path)
+    TextView tvVoucherPath; //支付上传凭证图片地址
 
     @BindView(R.id.tv_customer_name)
     TextView tvCustomerName; //客户姓名
 
     @BindView(R.id.tv_customer_phone)
     TextView tvCustomerPhone; //客户手机号
-
-    @BindView(R.id.tv_tip)
-    TextView tvTip; //客户手机号
 
     OrderItemDetailPresenter presenter;
 
@@ -93,7 +88,7 @@ public class OrderItemDetailActivity extends BaseActivity {
                         || TextUtils.isEmpty(orderBean.getResult().getOrderNO())) {
                     return;
                 }
-                orderStatus = orderBean.getResult().getStatus();
+                orderStatus = orderBean.getResult().getStatus(); //订单状态
 
                 if (ORDER_STATUS_WAIT_PAY.equals(orderStatus)) {
                     btnCancelOrder.setVisibility(View.VISIBLE);
@@ -101,9 +96,18 @@ public class OrderItemDetailActivity extends BaseActivity {
                     btnCancelOrder.setVisibility(View.GONE);
                 }
 
-                tvOrderId.setText(orderBean.getResult().getOrderNO());
-                tvProductname.setText(orderBean.getResult().getProductShortName());
-                tvCustomerName.setText(orderBean.getResult().getCustomerName());
+                tvOrderId.setText(orderBean.getResult().getOrderNO()); //订单号
+                tvAmount.setText(orderBean.getResult().getAmount()); //订单金额
+                tvComratio.setText(orderBean.getResult().getComRatio());//返佣比例
+                tvCommission.setText(orderBean.getResult().getCommission()); //返佣金额
+                tvProRatio.setText(orderBean.getResult().getProRatio());
+                tvProfit.setText(orderBean.getResult().getProfit());//客户收益
+                tvContractStatus.setText(orderBean.getResult().getContractStatus());
+                tvVoucherStatus.setText(orderBean.getResult().getVoucher_status());//支付凭证上传状态
+                tvVoucherPath.setText(orderBean.getResult().getVoucher_path());//打款凭证上传状态
+                tvCustomerName.setText(orderBean.getResult().getCustomerName()); //客户姓名
+
+                tvProductname.setText(orderBean.getResult().getProductShortName()); //产品名称
             }
 
             @Override
