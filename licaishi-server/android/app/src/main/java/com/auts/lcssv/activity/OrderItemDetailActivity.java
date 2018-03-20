@@ -64,9 +64,6 @@ public class OrderItemDetailActivity extends BaseActivity {
     @BindView(R.id.tv_customer_name)
     TextView tvCustomerName; //客户姓名
 
-    @BindView(R.id.tv_customer_phone)
-    TextView tvCustomerPhone; //客户手机号
-
     OrderItemDetailPresenter presenter;
 
     @Override

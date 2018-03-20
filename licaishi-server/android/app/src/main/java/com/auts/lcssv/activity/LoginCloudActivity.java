@@ -1,25 +1,18 @@
 package com.auts.lcssv.activity;
 
-import android.Manifest;
 import android.app.Dialog;
-import android.content.Context;
 import android.content.Intent;
-import android.content.pm.PackageManager;
-import android.os.Build;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.Gravity;
 import android.view.View;
-import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
-import com.auts.lcssv.PhApplication;
 import com.auts.lcssv.R;
 import com.auts.lcssv.base.BaseActivity;
 import com.auts.lcssv.bean.CloudAccount;
-import com.auts.lcssv.constants.AppConstans;
 import com.auts.lcssv.listener.DialogOnClickListener;
 import com.auts.lcssv.manager.AccountManager;
 import com.auts.lcssv.manager.UpdateManager;
@@ -29,26 +22,14 @@ import com.auts.lcssv.presenter.viewback.ILoadingView;
 import com.auts.lcssv.service.CommonService;
 import com.auts.lcssv.util.KeyboardHelper;
 import com.auts.lcssv.util.KeyboardUtils;
-import com.auts.lcssv.util.LogUtils;
 import com.auts.lcssv.util.RegexUtils;
 import com.auts.lcssv.util.ShadowUtil;
 import com.auts.lcssv.util.ToastUtil;
-import com.auts.lcssv.util.UmengUtil;
-import com.auts.lcssv.util.ViewUtils;
 import com.auts.lcssv.views.LogoutDialog;
 import com.auts.lcssv.views.MyEditText;
-import com.umeng.analytics.MobclickAgent;
-
-import java.io.BufferedReader;
-import java.io.FileNotFoundException;
-import java.io.FileReader;
-import java.io.IOException;
-import java.lang.reflect.Method;
 
 import butterknife.BindView;
 import butterknife.OnClick;
-import butterknife.OnLongClick;
-import cn.jpush.android.api.JPushInterface;
 
 /**
  * 登陆云账号
@@ -101,9 +82,6 @@ public class LoginCloudActivity extends BaseActivity implements ILoadingView {
 //        ViewUtils.changeBtn(mMyEtUser.getEt(), 13, mMyEtPwd.getEt(), 6, mTvLogin);
         ShadowUtil.setShadowSelectorBg(mTvLogin, getResources().getColor(R.color.btn_enable_bg));
         mMyEtPwd.setContent("");
-        if (!JPushInterface.isPushStopped(PhApplication.getPhApplication())) {
-            JPushInterface.stopPush(PhApplication.getPhApplication());
-        }
 //        mLlBottom.post(new Runnable() {
 //            @Override
 //            public void run() {
@@ -166,7 +144,6 @@ public class LoginCloudActivity extends BaseActivity implements ILoadingView {
             //登录失败
             @Override
             public void onLoginError(String code, String msg) {
-                UmengUtil.onEvent(LoginCloudActivity.this,"LOGIN_FAIL");
                 ToastUtil.show(msg);
             }
 
@@ -174,7 +151,6 @@ public class LoginCloudActivity extends BaseActivity implements ILoadingView {
             @Override
             public void onLoginSuccess(CloudAccount cloudAccount) {
 //                mPresenter.upLoadRegistrationId(JPushInterface.getRegistrationID(LoginCloudActivity.this));
-                UmengUtil.onEvent(LoginCloudActivity.this,"LOGIN_SUCESS");
                 gotoMainActivity();
             }
         });
@@ -193,13 +169,11 @@ public class LoginCloudActivity extends BaseActivity implements ILoadingView {
 
     @OnClick(R.id.tv_register)
     public void tv_register() {
-        UmengUtil.onEvent(this, "REGIST_CLICK");
         startActivityForResult(new Intent(this, RegisterCodeActivity.class), 601);
     }
 
     @OnClick(R.id.tv_forget_pwd)
     public void tv_forget_pwd() {
-        UmengUtil.onEvent(this, "FORGET_PWD");
         startActivity(new Intent(this, ForgotPwdCodeActivity.class));
     }
 
@@ -233,10 +207,6 @@ public class LoginCloudActivity extends BaseActivity implements ILoadingView {
      * 进入主页
      */
     private void gotoMainActivity() {
-        if (JPushInterface.isPushStopped(PhApplication.getPhApplication())) {
-            JPushInterface.resumePush(PhApplication.getPhApplication());
-        }
-
         Intent intent = new Intent(this, JsBridgeActivity.class);
 //        intent.putExtra(AppConstans.Common.INTENT_URL,url);
         startActivity(intent);

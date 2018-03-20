@@ -101,7 +101,7 @@ public class AccountController extends SBaseController {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-        
+
         return rsp;
     }
 
@@ -128,7 +128,7 @@ public class AccountController extends SBaseController {
         } else if(!verificationcode.equals(captchaModel.getCaptchaCode())) {
         	rsp.setError(String.valueOf(Const.ErrorCode.Account.REGIST_VERCODE_ERROR));
         }
-        
+
         rsp.setError(String.valueOf(Const.ErrorCode.Account.OK));
         return rsp;
     }
@@ -149,7 +149,7 @@ public class AccountController extends SBaseController {
             return errorLogin(String.valueOf(Const.ErrorCode.Account.LOGIN_PARA_ERROR));
         }
 
-        AccountModel accountMode = accountService.loginPhone(phonenumber, EntryUtils.getMd5(password));
+        AccountModel accountMode = accountService.loginPhone(phonenumber, password);
         if (accountMode == null) {
             LOGGER.info("Login error username or password");
             return errorLogin(String.valueOf(Const.ErrorCode.Account.LOGIN_PASSWORD_ERROR));

@@ -46,7 +46,6 @@ import com.auts.lcssv.util.RecyclerUtils;
 import com.auts.lcssv.util.ShadowUtil;
 import com.auts.lcssv.util.SpfUtils;
 import com.auts.lcssv.util.ToastUtil;
-import com.auts.lcssv.util.UmengUtil;
 import com.auts.lcssv.util.ViewUtils;
 import com.auts.lcssv.views.refresh.RefreshLayout;
 
@@ -309,7 +308,6 @@ public class DeviceFragment extends BaseFragment implements ILoadingView {
                 startActivityForResult(new Intent(getActivity(), JsBridgeActivity.class)
                         .putExtra(AppConstans.Common.INTENT_URL, webUrl)
                         .putExtra("device_id", deviceDetail.device_id), 107);
-                UmengUtil.onEvent(getActivity(), UmengUtil.DEVICE_ENTER);
             }
         });
 

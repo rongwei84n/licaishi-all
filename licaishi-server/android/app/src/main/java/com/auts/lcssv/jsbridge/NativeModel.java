@@ -18,7 +18,6 @@ import com.auts.lcssv.util.IntentUtils;
 import com.auts.lcssv.util.LogUtils;
 import com.auts.lcssv.util.NetworkUtils;
 import com.auts.lcssv.util.ToastUtil;
-import com.auts.lcssv.util.UmengUtil;
 
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -274,7 +273,6 @@ public class NativeModel {
                     callBackParamError(jsCallback);
                     return;
                 }
-                UmengUtil.onEvent(eventId);
             }
 
             //pageTitle为空
@@ -283,13 +281,6 @@ public class NativeModel {
                 return;
             }
 
-            if (eventType.equals("2")) {
-                UmengUtil.onPageStart(pageTitle);
-            }
-
-            if (eventType.equals("3")) {
-                UmengUtil.onPageEnd(pageTitle);
-            }
             JavaCallback javaCallback = new JavaCallback(0, "success");
             jsCallback.callback(JSON.toJSONString(javaCallback));
 

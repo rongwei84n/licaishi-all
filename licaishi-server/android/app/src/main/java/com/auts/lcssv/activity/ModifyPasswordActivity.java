@@ -14,7 +14,6 @@ import com.auts.lcssv.presenter.viewback.UserInfoView;
 import com.auts.lcssv.util.AppManager;
 import com.auts.lcssv.util.RegexUtils;
 import com.auts.lcssv.util.ToastUtil;
-import com.auts.lcssv.util.UmengUtil;
 import com.auts.lcssv.util.ViewUtils;
 import com.auts.lcssv.views.MyEditText;
 
@@ -55,7 +54,6 @@ public class ModifyPasswordActivity extends BaseActivity implements ILoadingView
 //                        startActivity(new_icon Intent(ModifyPasswordActivity.this, LoginCloudActivity.class));
 //                    }
 //                });
-                UmengUtil.onEvent(ModifyPasswordActivity.this, UmengUtil.PWD_MODIFY_SUCCESS);
                 ToastUtil.show(R.string.password_modify_success);
                 AppManager.getAppManager().finishAllActivity();
                 startActivity(new Intent(ModifyPasswordActivity.this, LoginCloudActivity.class));
@@ -63,7 +61,6 @@ public class ModifyPasswordActivity extends BaseActivity implements ILoadingView
 
             @Override
             public void modifyPasswordError(String code, String msg) {
-                UmengUtil.onEvent(ModifyPasswordActivity.this, UmengUtil.PWD_MODIFY_FAIL);
                 if ("8".equals(code)) {
                     ToastUtil.show(R.string.input_right_old_password);
                     return;

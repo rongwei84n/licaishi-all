@@ -3,7 +3,6 @@ package com.auts.lcssv.presenter;
 import android.text.TextUtils;
 import android.util.Log;
 
-import com.auts.lcssv.PhApplication;
 import com.auts.lcssv.R;
 import com.auts.lcssv.base.BasePresenter;
 import com.auts.lcssv.bean.Authorization;
@@ -21,7 +20,6 @@ import com.auts.lcssv.util.EntryUtils;
 import com.auts.lcssv.util.LogUtils;
 import com.auts.lcssv.util.SpfUtils;
 
-import cn.jpush.android.api.JPushInterface;
 import okhttp3.Request;
 
 /**
@@ -115,11 +113,7 @@ public class CloudAccountPresenter extends BasePresenter {
                         mView.onLoginSuccess(cloudLogin);
                     }
                 }
-
-                //上传RegistrationID
-//                upLoadRegistrationId(JPushInterface.getRegistrationID(PhApplication.getAppContext()));
             }
-
         });
 
     }
