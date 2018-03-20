@@ -126,7 +126,7 @@ public class ForgotPwdCodeActivity extends BaseActivity implements ILoadingView 
                 if (!isExist) {
                     ToastUtil.show(getString(R.string.check_phone_not_register));
                 } else {
-                    showDialog();
+                    mPresenter.getVerCode("", "", mPhone);
                 }
             }
 
@@ -162,24 +162,6 @@ public class ForgotPwdCodeActivity extends BaseActivity implements ILoadingView 
         } else {
             mPresenter.authorization();
         }
-    }
-
-    /**
-     * 弹出图形验证码
-     */
-    private void showDialog() {
-//        mDialog = new VerifyDialog(this, mPhone, new VerifyDialog.VerifyCallBack() {
-//            @Override
-//            public void onGetVetCodeSuccess() {
-//                mCodeTime = AppConstans.Common.REGISTER_CODE_TIME;
-//                mHandler.postDelayed(mCodeTimeR, 0);
-//                mDialog.dismiss();
-//                mMyEtVerCode.requestFocus();
-//            }
-//        });
-//        mDialog.show();
-        //验证手机号码成功后，请求验证码
-        ToastUtil.show("验证码发送成功");
     }
 
     /**
