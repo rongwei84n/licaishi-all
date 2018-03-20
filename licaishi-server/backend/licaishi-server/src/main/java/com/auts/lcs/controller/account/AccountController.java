@@ -78,30 +78,8 @@ public class AccountController extends SBaseController {
             @RequestParam(value = "scope", required = false) String scope)
     {
         AuthorizationCodeResponseCode rsp = new AuthorizationCodeResponseCode();
-        String phoneNo = "15250065067";
-        String captchaCode = YPSmsApi.getRandCaptchaCode();
-        try {
-			String result = YPSmsApi.sendSms(YPSmsApi.API_KEY, String.format(YPSmsApi.CAPTCHA_TEXT, captchaCode), phoneNo);
-			if(result.contains("发送成功")) {
-				CaptchaModel cm = new CaptchaModel();
-				cm.setPhoneNo(phoneNo);
-				cm.setCaptchaCode(captchaCode);
-				cm.setSendTime(System.currentTimeMillis() / 1000);
-				if(captchaService.queryCaptchaByPhoneNo(phoneNo) == null) {
-					captchaService.addCaptcha(cm);
-				} else {
-					captchaService.updateCaptcha(cm);
-				}
-				rsp.setError(String.valueOf(Const.ErrorCode.Account.OK));
-		        rsp.setAuthorizationcode("lcs-gogo");
-			} else {
-				rsp.setError(String.valueOf(Const.ErrorCode.Account.OK));
-		        rsp.setAuthorizationcode("lcs-gogo");
-			}
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-
+        rsp.setError(String.valueOf(Const.ErrorCode.Account.OK));
+        rsp.setAuthorizationcode("lcs-gogo");
         return rsp;
     }
 
@@ -279,23 +257,36 @@ public class AccountController extends SBaseController {
             @RequestParam(value = "phonenumber", required = true) String phonenumber,
             @RequestParam(value = "verificationtype", required = false) String verificationtype) {
         LOGGER.info("verificationMsg authorizationcode [{}] phone [{}]", authorizationcode, phonenumber);
-
+        AccountBaseResponseModel rsp = new AccountBaseResponseModel();
         if (StringUtil.isNullOrEmpty(phonenumber)) {
             LOGGER.info("verificationMsg with no phonenumber");
-            AccountBaseResponseModel rsp = new AccountBaseResponseModel();
             rsp.setError(String.valueOf(Const.ErrorCode.Account.REGIST_PHONE_ERROR));
-        }
-
-        boolean result = true;
-        //发送验证码短信
-
-        AccountBaseResponseModel rsp = new AccountBaseResponseModel();
-        if (result) {
-            rsp.setError(String.valueOf(Const.ErrorCode.Account.OK));
-        } else {
-            rsp.setError(String.valueOf(Const.ErrorCode.Account.REGIST_ERROR));
             return rsp;
         }
+        
+        //发送验证码短信
+        String captchaCode = YPSmsApi.getRandCaptchaCode();
+        try {
+			String result = YPSmsApi.sendSms(YPSmsApi.API_KEY, String.format(YPSmsApi.CAPTCHA_TEXT, captchaCode), phonenumber);
+			if(result.contains("发送成功")) {
+				CaptchaModel cm = new CaptchaModel();
+				cm.setPhoneNo(phonenumber);
+				cm.setCaptchaCode(captchaCode);
+				cm.setSendTime(System.currentTimeMillis() / 1000);
+				if(captchaService.queryCaptchaByPhoneNo(phonenumber) == null) {
+					captchaService.addCaptcha(cm);
+				} else {
+					captchaService.updateCaptcha(cm);
+				}
+				rsp.setError(String.valueOf(Const.ErrorCode.Account.OK));
+			} else {
+				rsp.setError(String.valueOf(Const.ErrorCode.Account.REGIST_ERROR));
+			}
+		} catch (IOException e) {
+			e.printStackTrace();
+			rsp.setError(String.valueOf(Const.ErrorCode.Account.REGIST_ERROR));
+		}
+        
         return rsp;
     }
 
