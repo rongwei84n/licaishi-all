@@ -244,7 +244,6 @@
 				765D9E65204D3EDC009DFA51 /* MeViewController.swift */,
 				765D9E7A204EBC3F009DFA51 /* EditViewController.swift */,
 				76DD2AC1203021F900371FCB /* SetNewPasswordViewController.swift */,
-				765D9E7C204EBD59009DFA51 /* EditType.swift */,
 			);
 			path = ViewController;
 			sourceTree = "<group>";
@@ -265,6 +264,7 @@
 			isa = PBXGroup;
 			children = (
 				765D9E75204EB4F1009DFA51 /* MeViewModel.swift */,
+				765D9E7C204EBD59009DFA51 /* EditType.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -1053,7 +1053,7 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
 				DEFINES_MODULE = YES;
-				DEVELOPMENT_TEAM = "";
+				DEVELOPMENT_TEAM = 2XQCSN79HT;
 				INFOPLIST_FILE = "SFA/Supporting Files/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -1074,7 +1074,7 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
 				DEFINES_MODULE = YES;
-				DEVELOPMENT_TEAM = "";
+				DEVELOPMENT_TEAM = 2XQCSN79HT;
 				INFOPLIST_FILE = "SFA/Supporting Files/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";

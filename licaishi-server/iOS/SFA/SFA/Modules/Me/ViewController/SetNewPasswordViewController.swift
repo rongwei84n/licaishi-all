@@ -23,9 +23,6 @@ class SetNewPasswordViewController: UITableViewController, InstanceFromStoryBoar
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        oldPasswordTextField.text = "123456"
-        newPasswordTextField.text = "654321"
-        psdRepeatTextField.text = "654321"
         
     }
 
@@ -61,9 +58,13 @@ class SetNewPasswordViewController: UITableViewController, InstanceFromStoryBoar
         }
         
         ZWHud.shared.show()
-        _ = viewModel.changePassword(oldPassword: oldPassword, newPassword: newPassword.md5()).subscribe(onNext: { (isSuccess) in
+        _ = viewModel.changePassword(oldPassword: oldPassword, newPassword: newPassword.md5()).subscribe(onNext: { [weak self] (isSuccessful) in
             
             ZWHud.shared.dismiss()
+            
+            if isSuccessful {
+                self?.navigationController?.popViewController(animated: true)
+            }
             
             
         }, onError: { (error) in

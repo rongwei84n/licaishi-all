@@ -28,7 +28,7 @@ class EditViewController: UITableViewController, InstanceFromStoryBoard {
     
     @IBOutlet weak var textfield: UITextField!
     
-    private var editType = EditType.nick
+    private var editType = EditType.unknown
     private var previousText = ""
     
     var callback: ((String) -> ())?
@@ -41,6 +41,10 @@ class EditViewController: UITableViewController, InstanceFromStoryBoard {
     }
     
     @IBAction func saveButtonTapped(_ sender: Any) {
+        
+        guard editType != .unknown else {
+            return
+        }
         
         var savingRequest: Observable<Bool>?
         let text = textfield.text ?? ""

@@ -115,7 +115,7 @@ class MeViewController: UITableViewController, InstanceFromStoryBoard, UIImagePi
         case 4:  // 工作室名称
             
             let text = studioLabel.text == "未设置" ? "" : studioLabel.text
-            let vc = EditViewController.instanceFromStoryBoard(editType: .nick, text)
+            let vc = EditViewController.instanceFromStoryBoard(editType: .studio, text)
             vc.callback = { [weak self] newNickName in
                 self?.studioLabel.text = newNickName
             }

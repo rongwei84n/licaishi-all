@@ -56,7 +56,7 @@ extension AccountService: TargetType {
     
     var baseURL: URL {
         
-        var domain = App.HTTPConfig.domain.name
+        let domain = App.HTTPConfig.domain.name
         
         return URL(string: domain)!
     }
@@ -196,7 +196,7 @@ extension AccountService: TargetType {
                                                    "type": type],
                                       encoding: URLEncoding.default)
             
-        case .modifyAccountDetail(let nickName,let studioName):
+        case .modifyAccountDetail(let nickName, let studioName):
             
             var dic = [String : Any]()
             
