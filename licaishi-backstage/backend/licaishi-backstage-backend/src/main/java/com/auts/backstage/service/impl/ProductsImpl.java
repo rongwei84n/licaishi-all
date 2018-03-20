@@ -86,6 +86,15 @@ public class ProductsImpl implements ProductsService {
 		productModel.setCreateTime(nowDate);
 		productModel.setUpdateTime(nowDate);
 		int result = productsMapper.savaProduct(productModel);
+		if(result > 0) {
+			if(productModel.getProfitRebates() != null && productModel.getProfitRebates().size() > 0) {
+				saveProfitRebate(productModel.getProfitRebates());
+			}
+			
+			if(productModel.getProductAttachments() != null && productModel.getProductAttachments().size() > 0) {
+				saveProductAttachment(productModel.getProductAttachments());
+			}
+		}
 		return result;
 	}
 	

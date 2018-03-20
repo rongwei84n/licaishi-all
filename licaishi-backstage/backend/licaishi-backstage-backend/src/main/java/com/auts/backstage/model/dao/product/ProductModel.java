@@ -31,6 +31,7 @@ public class ProductModel extends BaseDaoModel {
     private String pAllSubscriptionAmount;// 已销售金额
     private String pRecruitmentSummary;//产品summary
     private int latestPayNum; //最迟打款天数
+    private String pTgjg; //托管机构
 	private String pCpys;//产品优势
     private String pMjzh;//募集账号
     private String pFxkz;//风险控制
@@ -46,6 +47,51 @@ public class ProductModel extends BaseDaoModel {
     private Date updateTime;
 	private List<ProfitRebateModel> profitRebates;//不同起投金额，不同收益率和佣金
 	private List<ProductAttachmentModel> productAttachments;//预览资料
+    private String pLatestPayNum;//最迟打款天数
+	private String pRexiao;//是否热销
+	private String pTuijian;//是否推荐
+	private String pRgxz; //认购须知
+	private String pCommission;//返点佣金
+
+	public String getpLatestPayNum() {
+		return pLatestPayNum;
+	}
+
+	public void setpLatestPayNum(String pLatestPayNum) {
+		this.pLatestPayNum = pLatestPayNum;
+	}
+
+	public String getpRexiao() {
+		return pRexiao;
+	}
+
+	public void setpRexiao(String pRexiao) {
+		this.pRexiao = pRexiao;
+	}
+
+	public String getpTuijian() {
+		return pTuijian;
+	}
+
+	public void setpTuijian(String pTuijian) {
+		this.pTuijian = pTuijian;
+	}
+
+	public String getpRgxz() {
+		return pRgxz;
+	}
+
+	public void setpRgxz(String pRgxz) {
+		this.pRgxz = pRgxz;
+	}
+
+	public String getpCommission() {
+		return pCommission;
+	}
+
+	public void setpCommission(String pCommission) {
+		this.pCommission = pCommission;
+	}
 
 	public List<ProfitRebateModel> getProfitRebates() {
 		return profitRebates;
@@ -268,5 +314,13 @@ public class ProductModel extends BaseDaoModel {
 
 	public void setLatestPayNum(int latestPayNum) {
 		this.latestPayNum = latestPayNum;
+	}
+	
+	public String getpTgjg() {
+		return pTgjg;
+	}
+
+	public void setpTgjg(String pTgjg) {
+		this.pTgjg = pTgjg;
 	}
 }
