@@ -165,7 +165,6 @@ public class RegisterCodeActivity extends BaseActivity implements ILoadingView {
                     setResult(RESULT_OK, new Intent().putExtra("mobile_phone", mPhone));
                     finish();
                 } else {
-//                    showDialog();
                     mPresenter.getVerCode("", "", mPhone);
                 }
             }

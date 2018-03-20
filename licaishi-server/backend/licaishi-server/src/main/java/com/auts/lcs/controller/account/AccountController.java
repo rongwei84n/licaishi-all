@@ -100,14 +100,18 @@ public class AccountController extends SBaseController {
         CaptchaModel captchaModel = captchaService.queryCaptchaByPhoneNo(phonenumber);
         //暂定3分钟过期
         long totalSeconds = System.currentTimeMillis() / 1000;
+        LOGGER.info("totalSeconds [{}] captchaModel.getSendTime() [{}]", totalSeconds, captchaModel.getSendTime());
         if(captchaModel == null || (totalSeconds - 3 * 60) > captchaModel.getSendTime() ) {
+            LOGGER.info("if");
         	rsp.setError(String.valueOf(Const.ErrorCode.Account.REGIST_VERCODE_OVERDUE));
         	captchaService.delCaptcha(phonenumber);
         } else if(!verificationcode.equals(captchaModel.getCaptchaCode())) {
+            LOGGER.info("else if");
         	rsp.setError(String.valueOf(Const.ErrorCode.Account.REGIST_VERCODE_ERROR));
+        } else {
+            LOGGER.info("else");
+            rsp.setError(String.valueOf(Const.ErrorCode.Account.OK));
         }
-
-        rsp.setError(String.valueOf(Const.ErrorCode.Account.OK));
         return rsp;
     }
 
@@ -217,7 +221,7 @@ public class AccountController extends SBaseController {
         	LOGGER.info("Register with verificationcode erro [{}]", verificationcode);
         	return errorRegister(String.valueOf(Const.ErrorCode.Account.REGIST_VERCODE_ERROR));
         }
-        
+
         AccountModel acModel = accountService.queryByUserPhone(phonenumber);
         if (acModel != null) {
             LOGGER.info("Already registed phone [{}]", phonenumber);
@@ -229,7 +233,7 @@ public class AccountController extends SBaseController {
         String userName = "";
         model.setUser_name(userName);
         //注册的时候，保存md5密码，任何人都无法知道密码，防止泄漏!md5无法解密
-        model.setPasswd(EntryUtils.getMd5(password));
+        model.setPasswd(password);
         model.setReal_name("");
         model.setPhone(phonenumber);
         model.setEmail("");
@@ -269,7 +273,7 @@ public class AccountController extends SBaseController {
             rsp.setError(String.valueOf(Const.ErrorCode.Account.REGIST_PHONE_ERROR));
             return rsp;
         }
-        
+
         //发送验证码短信
         String captchaCode = YPSmsApi.getRandCaptchaCode();
         try {
@@ -292,7 +296,7 @@ public class AccountController extends SBaseController {
 			e.printStackTrace();
 			rsp.setError(String.valueOf(Const.ErrorCode.Account.REGIST_ERROR));
 		}
-        
+
         return rsp;
     }
 
@@ -419,7 +423,7 @@ public class AccountController extends SBaseController {
         	rsp.setError(String.valueOf(Const.ErrorCode.Account.REGIST_VERCODE_ERROR));
         	return rsp;
         }
-        
+
         AccountModel model = null;
         try {
             model = accountService.queryByUserPhone(phonenumber);
@@ -627,7 +631,7 @@ public class AccountController extends SBaseController {
         rsp.setMessage(MyResponseutils.parseMsg(Const.STATUS_OK));
         return rsp;
     }
-    
+
     /**
      * 校验验证码 三分钟之内都有效
      * @param phonenumber
@@ -644,7 +648,7 @@ public class AccountController extends SBaseController {
         	result = false;
         } else if(!verificationcode.equals(captchaModel.getCaptchaCode())) {
         	result = false;
-        } 
+        }
         return result;
     }
 }
