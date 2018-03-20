@@ -3,6 +3,7 @@ import App from './App';
 import router from './router';
 import axios from 'axios';
 import qs from 'qs';
+import ajax from '../src/ajax/ajax';
 import ElementUI from 'element-ui';
 import 'element-ui/lib/theme-chalk/index.css';    // 默认主题
 // import '../static/css/theme-green/index.css';       // 浅绿色主题
@@ -13,9 +14,11 @@ Vue.use(ElementUI);
 axios.defaults.baseURL = 'http://47.97.100.240/backstage/v1';
 // axios.defaults.baseURL = 'http://127.0.0.1:7074/v1';
 axios.defaults.transformRequest = [function (data) {
+  console.log(qs.stringify(data));
   return qs.stringify(data)
 }];
 Vue.prototype.$axios = axios;
+Vue.prototype.$ajax = ajax;
 Vue.prototype.remoteImgURL = "http://47.97.100.240/img/";
 
 new Vue({

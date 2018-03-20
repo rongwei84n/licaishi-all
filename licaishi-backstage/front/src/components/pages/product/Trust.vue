@@ -50,7 +50,7 @@
 
     <!--新增界面-->
     <el-dialog title="新增产品" :visible.sync="addFormVisible" :close-on-click-modal="false">
-      <el-form :model="addForm" label-width="100px" :rules="formRules" ref="addForm">
+      <el-form :model="addForm" label-width="100px" ref="addForm">
         <el-form-item label="产品简称" prop="pShortName">
           <el-input v-model="addForm.pShortName"></el-input>
         </el-form-item>
@@ -203,7 +203,7 @@ export default {
         pRzf: "",
         pDbf: "",
         pZjyt: ""
-      }
+      },
     };
   },
   mounted: function() {
