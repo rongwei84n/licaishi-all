@@ -166,7 +166,7 @@ public class RegisterCodeActivity extends BaseActivity implements ILoadingView {
                     finish();
                 } else {
 //                    showDialog();
-                    ToastUtil.show("验证码已发送");
+                    mPresenter.getVerCode("", "", mPhone);
                 }
             }
 
@@ -181,6 +181,16 @@ public class RegisterCodeActivity extends BaseActivity implements ILoadingView {
                 mPresenter.register(mMyPassword.getContent(), mMyEtPhone.getContent(), mMyEtVerCode.getContent());
                 hideLoading();
                 gotoRegister();
+            }
+
+            @Override
+            public void onGetVerCodeError(String code, String msg) {
+                ToastUtil.show("验证码发送失败");
+            }
+
+            @Override
+            public void onGetVerCodeSuccess() {
+                ToastUtil.show("验证码已发送");
             }
         });
     }
