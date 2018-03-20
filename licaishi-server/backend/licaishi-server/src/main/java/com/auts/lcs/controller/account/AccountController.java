@@ -271,6 +271,35 @@ public class AccountController extends SBaseController {
     }
 
     /**
+     * 获取验证码信息.
+     */
+    @RequestMapping(value = "/v1/verificationMsg", method = RequestMethod.GET, produces = { "application/json" })
+    public AccountBaseResponseModel verificationMsg(HttpServletRequest request,
+            @RequestParam(value = "authorizationcode", required = false) String authorizationcode,
+            @RequestParam(value = "phonenumber", required = true) String phonenumber,
+            @RequestParam(value = "verificationtype", required = false) String verificationtype) {
+        LOGGER.info("verificationMsg authorizationcode [{}] phone [{}]", authorizationcode, phonenumber);
+
+        if (StringUtil.isNullOrEmpty(phonenumber)) {
+            LOGGER.info("verificationMsg with no phonenumber");
+            AccountBaseResponseModel rsp = new AccountBaseResponseModel();
+            rsp.setError(String.valueOf(Const.ErrorCode.Account.REGIST_PHONE_ERROR));
+        }
+
+        boolean result = true;
+        //发送验证码短信
+
+        AccountBaseResponseModel rsp = new AccountBaseResponseModel();
+        if (result) {
+            rsp.setError(String.valueOf(Const.ErrorCode.Account.OK));
+        } else {
+            rsp.setError(String.valueOf(Const.ErrorCode.Account.REGIST_ERROR));
+            return rsp;
+        }
+        return rsp;
+    }
+
+    /**
      * 检查手机号码，是否是合法的号码，是否已经注册.
      */
     @RequestMapping(value = "/v1/checkPhonenumber", method = RequestMethod.GET, produces = { "application/json" })
