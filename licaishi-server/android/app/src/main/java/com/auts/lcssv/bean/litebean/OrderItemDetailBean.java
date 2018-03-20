@@ -43,13 +43,15 @@ public class OrderItemDetailBean {
 
         private String productShortName; //产品名称
 
-        private String productQixian; //产品期限--todo
-
         private String area; //投资领域
 
         private String comRatio; //返佣比例
 
         private String commission; //返佣金额
+
+        private String proRatio;//预期收益率
+
+        private String profit; //客户收益
 
         private String contractStatus; //合同状态
 
@@ -91,12 +93,12 @@ public class OrderItemDetailBean {
             this.productShortName = productShortName;
         }
 
-        public String getProductQixian() {
-            return productQixian;
+        public String getProfit() {
+            return profit;
         }
 
-        public void setProductQixian(String productQixian) {
-            this.productQixian = productQixian;
+        public void setProfit(String profit) {
+            this.profit = profit;
         }
 
         public String getArea() {
@@ -121,6 +123,14 @@ public class OrderItemDetailBean {
 
         public void setCommission(String commission) {
             this.commission = commission;
+        }
+
+        public String getProRatio() {
+            return proRatio;
+        }
+
+        public void setProRatio(String proRatio) {
+            this.proRatio = proRatio;
         }
 
         public String getContractStatus() {
