@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.alibaba.fastjson.JSON;
 import com.auts.backstage.consts.Const;
 import com.auts.backstage.controller.SBaseController;
 import com.auts.backstage.model.common.PageInfo;
@@ -51,6 +52,7 @@ public class ProductsController extends SBaseController {
     @RequestMapping(value = "/v1/product/addProduct", method = RequestMethod.POST, produces = { "application/json" })
     public PhiHomeBaseResponse addFinancer(HttpServletRequest request, @Validated ProductModel productModel) {
         PhiHomeBaseResponse rspObj = new PhiHomeBaseResponse();
+        LOGGER.info("addProduct ProductModel [{}]", JSON.toJSONString(productModel));
         try{
         	productModel.setpCode(UUID.randomUUID().toString().replaceAll("-", ""));
         	productModel.setpAllSubscriptionAmount("0");
@@ -64,7 +66,7 @@ public class ProductsController extends SBaseController {
     
     /**
      * 查询产品列表
-     * type 02：集合信托  03集合资管 04债权基金 05股权基金 06阳光私募
+     * type 01：集合信托  02集合资管 03债权基金 04私募
      * @param request
      * @return
      */

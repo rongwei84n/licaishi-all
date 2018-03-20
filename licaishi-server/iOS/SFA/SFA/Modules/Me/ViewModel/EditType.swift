@@ -9,7 +9,16 @@
 import Foundation
 
 enum EditType {
+    
+    case unknown
+    
+    // 姓名
     case nick
+    
+    // 登录名
     case login
+    
+    // 工作室名称
     case studio
+    
 }
