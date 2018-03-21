@@ -17,21 +17,13 @@ public enum EndpointSampleResponse {
 open class Endpoint<Target> {
     public typealias SampleResponseClosure = () -> EndpointSampleResponse
 
-    /// A string representation of the URL for the request.
     open let url: String
-
-    /// A closure responsible for returning an `EndpointSampleResponse`.
     open let sampleResponseClosure: SampleResponseClosure
-
-    /// The HTTP method for the request.
     open let method: Moya.Method
-
-    /// The `Task` for the request.
     open let task: Task
-
-    /// The HTTP header fields for the request.
     open let httpHeaderFields: [String: String]?
 
+    /// Main initializer for `Endpoint`.
     public init(url: String,
                 sampleResponseClosure: @escaping SampleResponseClosure,
                 method: Moya.Method,
@@ -100,9 +92,7 @@ extension Endpoint {
             let parameterEncoding = URLEncoding(destination: .queryString)
             return try request.encoded(parameters: urlParameters, parameterEncoding: parameterEncoding)
         case let .requestCompositeParameters(bodyParameters: bodyParameters, bodyEncoding: bodyParameterEncoding, urlParameters: urlParameters):
-            if let bodyParameterEncoding = bodyParameterEncoding as? URLEncoding, bodyParameterEncoding.destination != .httpBody {
-                fatalError("Only URLEncoding that `bodyEncoding` accepts is URLEncoding.httpBody. Others like `default`, `queryString` or `methodDependent` are prohibited - if you want to use them, add your parameters to `urlParameters` instead.")
-            }
+            if bodyParameterEncoding is URLEncoding { fatalError("URLEncoding is disallowed as bodyEncoding.") }
             let bodyfulRequest = try request.encoded(parameters: bodyParameters, parameterEncoding: bodyParameterEncoding)
             let urlEncoding = URLEncoding(destination: .queryString)
             return try bodyfulRequest.encoded(parameters: urlParameters, parameterEncoding: urlEncoding)
