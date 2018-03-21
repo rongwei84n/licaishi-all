@@ -295,7 +295,7 @@
             android:layout_width="match_parent"
             android:layout_height="1dp"
             android:background="@color/default_line"/>
-        <!-- 打款凭证 -->
+        <!-- 打款凭证上传 -->
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="@dimen/listview_item_height"
@@ -319,9 +319,22 @@
                 android:layout_centerVertical="true"
                 android:layout_alignParentRight="true"
                 android:gravity="right"
-                android:textColor="@color/text_large"
+                android:text="@string/tv_order_detail_upload_voucher"
+                android:textColor="@color/red"
                 android:layout_toRightOf="@+id/tv_voucher_path_label"/>
         </RelativeLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/default_line"/>
+        <!-- 已经拥有的打款凭证 -->
+        <ImageView
+            android:id="@+id/img_voucher_data"
+            android:padding="10dp"
+            android:layout_width="150dip"
+            android:layout_height="150dip"
+            android:gravity="left"/>
 
         <View
             android:layout_width="match_parent"

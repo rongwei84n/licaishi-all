@@ -1,25 +1,42 @@
 package com.auts.lcssv.activity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.auts.lcssv.R;
 import com.auts.lcssv.base.BaseActivity;
 import com.auts.lcssv.bean.litebean.OrderItemDetailBean;
+import com.auts.lcssv.constants.AppConstans;
+import com.auts.lcssv.listener.GetPhotoBeforeListener;
+import com.auts.lcssv.manager.imageloader.GlideCircleTransform;
+import com.auts.lcssv.manager.imageloader.ImageLoader;
+import com.auts.lcssv.popup.GetPhotoPopup;
 import com.auts.lcssv.presenter.OrderItemDetailPresenter;
 import com.auts.lcssv.presenter.viewback.OrderItemDetailView;
+import com.auts.lcssv.util.Base64Utils;
 import com.auts.lcssv.util.LogUtils;
+import com.auts.lcssv.util.PathUtils;
+
+import java.io.ByteArrayInputStream;
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
 
 import butterknife.BindView;
+import butterknife.OnClick;
 
 /**
  * 订单详情界面,如果是待打款，还可以取消订单和上传凭证.
  */
 
-public class OrderItemDetailActivity extends BaseActivity {
+public class OrderItemDetailActivity extends BaseActivity implements GetPhotoBeforeListener {
 
     private static String ORDER_STATUS_WAIT_PAY = "01";
 
@@ -59,7 +76,10 @@ public class OrderItemDetailActivity extends BaseActivity {
     TextView tvVoucherStatus; //支付凭证上传状态
 
     @BindView(R.id.tv_voucher_path)
-    TextView tvVoucherPath; //支付上传凭证图片地址
+    TextView tvVoucherPath; //上传打款凭证
+
+    @BindView(R.id.img_voucher_data)
+    ImageView imgVoucherData;
 
     @BindView(R.id.tv_customer_name)
     TextView tvCustomerName; //客户姓名
@@ -101,7 +121,7 @@ public class OrderItemDetailActivity extends BaseActivity {
                 tvProfit.setText(orderBean.getResult().getProfit());//客户收益
                 tvContractStatus.setText(orderBean.getResult().getContractStatus());
                 tvVoucherStatus.setText(orderBean.getResult().getVoucher_status());//支付凭证上传状态
-                tvVoucherPath.setText(orderBean.getResult().getVoucher_path());//打款凭证上传状态
+//                imgVoucherData.setimageorderBean.getResult().getVoucher_path()
                 tvCustomerName.setText(orderBean.getResult().getCustomerName()); //客户姓名
 
                 tvProductname.setText(orderBean.getResult().getProductShortName()); //产品名称
@@ -117,4 +137,70 @@ public class OrderItemDetailActivity extends BaseActivity {
 
         LogUtils.debug("orderid: " + orderid);
     }
+
+    //点击登录
+    @OnClick(R.id.tv_voucher_path)
+    public void tv_upload() {
+        LogUtils.debug("upload");
+        GetPhotoPopup photoPopup = new GetPhotoPopup(this, this);
+        photoPopup.showAsDropDown(imgVoucherData);
+    }
+
+    @Override
+    public void getPhotoFromCamera() {
+        Intent intent = new Intent(this, GetPhotoActivity.class);
+        intent.putExtra("type", AppConstans.GetPhoto.GET_PHOTO_FROM_CAMERA);
+        startActivityForResult(intent, AppConstans.GetPhoto.ONE_DRAGON);
+    }
+
+    @Override
+    public void getPhotoFromAlbum() {
+        Intent intent = new Intent(this, GetPhotoActivity.class);
+        intent.putExtra("type", AppConstans.GetPhoto.GET_PHOTO_FROM_ALBUM);
+        startActivityForResult(intent, AppConstans.GetPhoto.ONE_DRAGON);
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        switch (requestCode) {
+            case AppConstans.GetPhoto.ONE_DRAGON:
+                if (resultCode == RESULT_OK && data != null) {
+                    String imageString = data.getStringExtra("image_string");
+                    byte[] buf = Base64Utils.decode(imageString);
+                    InputStream inputStream = new ByteArrayInputStream(buf);
+
+                    String dir = PathUtils.getCameraImageDir();
+                    File file = new File(dir, System.currentTimeMillis() + ".jpg");
+                    try {
+                        OutputStream os = new FileOutputStream(file);
+                        int bytesRead;
+                        byte[] buffer = new byte[8192];
+                        while ((bytesRead = inputStream.read(buffer, 0, 8192)) != -1) {
+                            os.write(buffer, 0, bytesRead);
+                        }
+                        os.close();
+                        inputStream.close();
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                    String imageUrl = file.getAbsolutePath();
+                    if (TextUtils.isEmpty(imageUrl)) {
+                        imageUrl = "";
+                    }
+                    LogUtils.error("=====imageUrl6==", imageUrl + "===");
+                    ImageLoader.getLoader(this)
+                            .load(imageUrl)
+                            .placeholder(R.drawable.head_portrait)
+//                            .transform(new GlideCircleTransform(this))
+                            .into(imgVoucherData);
+                    presenter.uploadBase64(imageString, "1", orderid);
+                }
+                break;
+            default:
+                super.onActivityResult(requestCode, resultCode, data);
+                break;
+        }
+
+    }
+
 }

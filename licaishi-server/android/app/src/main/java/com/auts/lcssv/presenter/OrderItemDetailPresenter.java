@@ -3,6 +3,7 @@ package com.auts.lcssv.presenter;
 import com.auts.lcssv.R;
 import com.auts.lcssv.base.BasePresenter;
 import com.auts.lcssv.bean.Introduction;
+import com.auts.lcssv.bean.UploadBaseBean;
 import com.auts.lcssv.bean.litebean.OrderItemDetailBean;
 import com.auts.lcssv.model.AppModel;
 import com.auts.lcssv.model.OrderItemDetailModel;
@@ -42,6 +43,27 @@ public class OrderItemDetailPresenter extends BasePresenter {
             @Override
             public void onSuccess(OrderItemDetailBean orderItemDetailBean) {
                 view.onGetOrderSuccess(orderItemDetailBean);
+            }
+        });
+    }
+
+    public void uploadBase64(String imgBase64, String type, String orderNo) {
+        showLoading(R.string.loading_text);
+        model.uploadBase64(imgBase64, type, orderNo, new BeanCallback<UploadBaseBean>() {
+            @Override
+            public void onSuccess(UploadBaseBean uploadBaseBean) {
+                hideLoading();
+                if (view != null) {
+                    view.uploadBaseSuccess(uploadBaseBean);
+                }
+            }
+
+            @Override
+            public void onError(String code, String msg) {
+                hideLoading();
+                if (view != null) {
+                    view.uploadBaseError(code, msg);
+                }
             }
         });
     }

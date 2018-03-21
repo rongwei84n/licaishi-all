@@ -31,6 +31,8 @@ public interface UrlConfig {
         String PROPERTY = URL_HOST + "/srv/v1/property"; //修改用户云账户公共信息
         String PASSWORD = URL_HOST + "/srv/v1/password"; //修改密码
         String FORGOT_PWD = URL_HOST + "/srv/v1/forgetpassword"; //忘记密码重新设置
+
+        String UPLOAD_VOUCHER = URL_HOST + "/srv/v1/order/uploadPayPhote"; //上传打款凭证
     }
 
     interface CloudPortrait {

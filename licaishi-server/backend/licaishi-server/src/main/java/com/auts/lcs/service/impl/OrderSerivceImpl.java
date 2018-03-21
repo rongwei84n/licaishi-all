@@ -4,7 +4,6 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.util.StringUtils;
 
 import com.auts.lcs.dao.OrderMapper;
 import com.auts.lcs.model.dao.order.OrderModel;
@@ -36,6 +35,11 @@ public class OrderSerivceImpl implements OrderService {
 	}
 
 	@Override
+    public int updateVoucher(OrderModel om) {
+        return orderMapper.updateVoucher(om);
+    }
+
+	@Override
 	public int cancelOrder(String orderNo) {
 		return orderMapper.cancelOrder(orderNo);
 	}
@@ -63,7 +67,7 @@ public class OrderSerivceImpl implements OrderService {
 	@Override
 	public int queryOrderCountByFinancerId(String financerId) {
 		return orderMapper.queryOrderCountByFinancerId(financerId);
-				
+
 	}
 
 	@Override

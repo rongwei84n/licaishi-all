@@ -1,13 +1,11 @@
 package com.auts.lcssv.presenter.viewback;
 
-import com.auts.lcssv.bean.Introduction;
+import com.auts.lcssv.bean.UploadBaseBean;
 import com.auts.lcssv.bean.litebean.OrderItemDetailBean;
 
-import java.util.List;
 
 /**
- * 处理App数据的相关回调
- * Created by weiming.zeng on 2017/8/24.
+ * 处理订单详情相关回调.
  */
 
 public class OrderItemDetailView {
@@ -16,4 +14,10 @@ public class OrderItemDetailView {
 
     public void onGetOrderError() {}
 
+    //上传打款凭证
+    public void uploadBaseSuccess(UploadBaseBean uploadBaseBean) {
+    }
+
+    public void uploadBaseError(String code, String msg) {
+    }
 }

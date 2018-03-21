@@ -1,5 +1,11 @@
 package com.auts.lcs.controller.order;
 
+import java.io.ByteArrayInputStream;
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Date;
@@ -26,13 +32,13 @@ import com.auts.lcs.model.dao.order.OrderModel;
 import com.auts.lcs.model.enums.OrderStatus;
 import com.auts.lcs.model.request.CreateOrderRequestModel;
 import com.auts.lcs.model.response.CustomerListResponseDto;
-import com.auts.lcs.model.response.CustomerResponseDto;
 import com.auts.lcs.model.response.Data;
 import com.auts.lcs.model.response.OrderResponseDto;
 import com.auts.lcs.model.response.Pager;
 import com.auts.lcs.service.CustomerService;
 import com.auts.lcs.service.OrderService;
 import com.auts.lcs.service.ProductsService;
+import com.auts.lcs.util.Base64Utils;
 import com.auts.lcs.util.DateUtils;
 import com.auts.lcs.util.StringUtil;
 
@@ -46,6 +52,9 @@ import com.auts.lcs.util.StringUtil;
 @CrossOrigin
 public class OrderController extends SBaseController {
     private static final Logger LOGGER = LogManager.getLogger(OrderController.class);
+
+    private static final String VOUCHER_SAVE_PATH = "/root/deploy/img/voucher/";
+    public static final String VOUCHER_URL_PREFIX = "http://47.97.100.240/img/voucher/";
 
     public static final String DEFAULT_CHARSET = "utf-8";
     public static String HTTP_HEAD_AUTHORIZATION = "Authorization";
@@ -254,18 +263,51 @@ public class OrderController extends SBaseController {
      */
     @RequestMapping(value = "/v1/order/uploadPayPhote", method = RequestMethod.POST, produces = { "application/json" })
     public PhiHomeBaseResponse uploadPayPhote(HttpServletRequest request,
+            @RequestParam(value = "imgBase64", required = false) String imgBase64,
     		@RequestParam(value = "orderNo", required = false) String orderNo) {
         PhiHomeBaseResponse rspObj = new PhiHomeBaseResponse();
+        String token = request.getHeader(Const.AUTHORIZATION);
+        LOGGER.info("uploadPayPhote base64 token [{}] orderNo", token, orderNo);
+        String uid = getUidByToken(token);
+        LOGGER.info("parsed uid [{}]", uid);
+        if (StringUtil.isNullOrEmpty(uid)) {
+            LOGGER.info("Parsed uid is null, return");
+            rspObj.setCode(Const.ErrorCode.Account.TOKEN_INVILID);
+            return rspObj;
+        }
 
-        LOGGER.info("cancelOrder type [{}]", orderNo);
-
-        OrderModel om = new OrderModel();
-        int result = orderService.cancelOrder(orderNo);
-        if (result > 0) {
-
-        } else {
-//            return errorRegister(String.valueOf(Const.ErrorCode.Account.REGIST_ERROR));
+        OrderModel om = orderService.queryOrderByOrderNo(orderNo);
+        if (om == null) {
+            rspObj.setCode(Const.ErrorCode.COMMON_ERROR);
+            return rspObj;
+        }
+        om.setVoucherPath(savePic(imgBase64, uid, orderNo));
+        int result = orderService.updateVoucher(om);
+        if (result <= 0) {//更新失败
+            rspObj.setCode(Const.ErrorCode.COMMON_ERROR);
+            return rspObj;
         }
         return successResponse(rspObj);
+    }
+
+    private String savePic(String imageString, String uid, String orderNo) {
+        byte[] buf = Base64Utils.decode(imageString);
+        InputStream inputStream = new ByteArrayInputStream(buf);
+
+        String dir = VOUCHER_SAVE_PATH;
+        File file = new File(dir, uid + "-" + orderNo + "-" + System.currentTimeMillis() + ".jpg");
+        try {
+            OutputStream os = new FileOutputStream(file);
+            int bytesRead;
+            byte[] buffer = new byte[8192];
+            while ((bytesRead = inputStream.read(buffer, 0, 8192)) != -1) {
+                os.write(buffer, 0, bytesRead);
+            }
+            os.close();
+            inputStream.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return file.getName();
     }
 }

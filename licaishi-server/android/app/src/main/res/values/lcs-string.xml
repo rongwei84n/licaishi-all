@@ -21,6 +21,7 @@
     <string name="tv_order_detail_contract_status">合同状态:</string>
     <string name="tv_order_detail_pay_status">支付凭证状态:</string>
     <string name="tv_order_detail_voucher_path_certificate">打款凭证:</string>
+    <string name="tv_order_detail_upload_voucher">点击上传</string>
     <string name="tv_order_detail_customer_name">客户姓名:</string>
 
     <string name="btn_order_detail_cancel_order">取消订单</string>
