@@ -62,7 +62,7 @@ public class WorkshopController extends SBaseController {
      * @param workshopIntro
      * @return
      */
-    @RequestMapping(value = "/v1/Workshop/udpateWorkshop", method = RequestMethod.POST, produces = { "application/json" })
+    @RequestMapping(value = "/v1/Workshop/updateWorkshop", method = RequestMethod.POST, produces = { "application/json" })
     public PhiHomeBaseResponse updateWorkshop(HttpServletRequest request,
     		@RequestParam(value = "workshopName", required = false) String workshopName,
     		@RequestParam(value = "workshopUrl", required = false) String workshopUrl,
