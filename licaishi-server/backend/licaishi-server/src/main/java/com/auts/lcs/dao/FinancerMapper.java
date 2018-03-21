@@ -40,9 +40,11 @@ public interface FinancerMapper {
 		  + "</script>")
 	void btrvFinancer(@Param("uids") List<Integer> uids);
 
-	@Update("update tbl_financer set name=#{financer.name},sex=#{financer.sex},birthday=#{financer.birthday},phone=#{financer.phone},email=#{financer.email},address=#{financer.address}"
+	@Update("update tbl_financer set name=#{financer.name},sex=#{financer.sex},birthday=#{financer.birthday},"
+			+ "phone=#{financer.phone},email=#{financer.email},address=#{financer.address},"
+			+ "workshop_name=#{financer.workshopName},workshop_url=#{financer.workshopUrl},workshop_intro=#{financer.workshopIntro}"
 			+ " where uid=#{financer.uid}")
-	void editFinancer(@Param("financer") FinancerModel financer);
+	int editFinancer(@Param("financer") FinancerModel financer);
 
 	@Select("<script>"
 			+ "select count(*) from tbl_financer "
