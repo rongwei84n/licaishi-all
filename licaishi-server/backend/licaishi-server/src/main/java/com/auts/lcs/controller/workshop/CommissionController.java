@@ -111,6 +111,7 @@ public class CommissionController extends SBaseController {
         int totalCount = orderService.queryOrderCountByFinancerId(financerId);
         List<CommissionOrderResponseDto> orderResponseDtoList = new ArrayList<>();
         List<OrderModel> orders = orderService.queryOrdersByFinancerId(Integer.parseInt(pageNo), Integer.parseInt(pageSize), financerId);
+        LOGGER.info("queryOrdersByfinancerId result [{}]", orders.size());
         if(orders !=null && !orders.isEmpty()) {
         	for(OrderModel orderModel : orders) {
         		CommissionOrderResponseDto orderResponseDto = new CommissionOrderResponseDto();
@@ -120,6 +121,7 @@ public class CommissionController extends SBaseController {
         		orderResponseDto.setCustomerName("李冰帅哥");
         		orderResponseDtoList.add(orderResponseDto);
         	}
+        	LOGGER.info("queryOrdersByfinancerId result [{}]", orderResponseDtoList.size());
         	//分页
         	pager = genernatePager(Integer.parseInt(pageNo), Integer.parseInt(pageSize), totalCount, orders.size());
         }
@@ -128,6 +130,7 @@ public class CommissionController extends SBaseController {
         data.setList(orderResponseDtoList);
         data.setPager(pager);
         rspObj.setResult(data);
+        LOGGER.info("queryOrdersByfinancerId result [{}]", successResponse(rspObj));
         return successResponse(rspObj);
     }
 }
