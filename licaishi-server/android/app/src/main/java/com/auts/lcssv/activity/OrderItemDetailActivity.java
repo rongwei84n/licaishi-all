@@ -121,7 +121,10 @@ public class OrderItemDetailActivity extends BaseActivity implements GetPhotoBef
                 tvProfit.setText(orderBean.getResult().getProfit());//客户收益
                 tvContractStatus.setText(orderBean.getResult().getContractStatus());
                 tvVoucherStatus.setText(orderBean.getResult().getVoucher_status());//支付凭证上传状态
-//                imgVoucherData.setimageorderBean.getResult().getVoucher_path()
+                ImageLoader.getLoader(OrderItemDetailActivity.this)
+                        .load(orderBean.getResult().getVoucher_path())
+                        .into(imgVoucherData);
+
                 tvCustomerName.setText(orderBean.getResult().getCustomerName()); //客户姓名
 
                 tvProductname.setText(orderBean.getResult().getProductShortName()); //产品名称
