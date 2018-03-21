@@ -45,6 +45,7 @@
 		766035F8205680B3009A1CC6 /* ReachStateWIFI.m in Sources */ = {isa = PBXBuildFile; fileRef = 766035EA205680B3009A1CC6 /* ReachStateWIFI.m */; };
 		766035FC20568169009A1CC6 /* UIView+Toast.m in Sources */ = {isa = PBXBuildFile; fileRef = 766035FB20568169009A1CC6 /* UIView+Toast.m */; };
 		76603604205B5826009A1CC6 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 76603603205B5826009A1CC6 /* Main.storyboard */; };
+		7660363C20627B9A009A1CC6 /* GlobalType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7660363B20627B9A009A1CC6 /* GlobalType.swift */; };
 		768C2C08202AE3A900F8ABB8 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 768C2C07202AE3A900F8ABB8 /* AppDelegate.swift */; };
 		768C2C0F202AE3A900F8ABB8 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 768C2C0E202AE3A900F8ABB8 /* Assets.xcassets */; };
 		768C2C12202AE3A900F8ABB8 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 768C2C10202AE3A900F8ABB8 /* LaunchScreen.storyboard */; };
@@ -158,6 +159,7 @@
 		766035FA20568169009A1CC6 /* UIView+Toast.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+Toast.h"; sourceTree = "<group>"; };
 		766035FB20568169009A1CC6 /* UIView+Toast.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+Toast.m"; sourceTree = "<group>"; };
 		76603603205B5826009A1CC6 /* Main.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
+		7660363B20627B9A009A1CC6 /* GlobalType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GlobalType.swift; sourceTree = "<group>"; };
 		768C2C04202AE3A800F8ABB8 /* SFA.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SFA.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		768C2C07202AE3A900F8ABB8 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		768C2C0E202AE3A900F8ABB8 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -494,6 +496,7 @@
 		76DD2AC72030241A00371FCB /* Global */ = {
 			isa = PBXGroup;
 			children = (
+				7660363B20627B9A009A1CC6 /* GlobalType.swift */,
 				765D9E60204B93AA009DFA51 /* User.swift */,
 				76DD2AC82030249100371FCB /* App.swift */,
 				76A89AF1203FA7250007C13D /* Network.swift */,
@@ -843,6 +846,7 @@
 				766035F7205680B3009A1CC6 /* FSMStateUtil.m in Sources */,
 				76DD2AC2203021F900371FCB /* SetNewPasswordViewController.swift in Sources */,
 				766035EC205680B3009A1CC6 /* RealReachability.m in Sources */,
+				7660363C20627B9A009A1CC6 /* GlobalType.swift in Sources */,
 				76DD2AD02030322E00371FCB /* String+Extension.swift in Sources */,
 				766035F0205680B3009A1CC6 /* PingHelper.m in Sources */,
 				766035F2205680B3009A1CC6 /* ReachStateUnloaded.m in Sources */,

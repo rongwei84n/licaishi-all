@@ -95,12 +95,8 @@ class RegisterViewController: UITableViewController, InstanceFromStoryBoard, UIT
         // 请求验证码
         _ = viewModel.gainVerificationCode(phoneNumber: phoneNumberTextField.text ?? "").subscribe(onNext: { (isSuccess) in
             
-            
-            
         }, onError: { (error) in
-            
-            
-            
+            HUDHelper.shared.showWithMsg(error.localizedDescription)
         })
         
     }
@@ -152,20 +148,19 @@ class RegisterViewController: UITableViewController, InstanceFromStoryBoard, UIT
         }
         
         ZWHud.shared.show()
-        _ = viewModel.register(phoneNumber: phone, password: password.md5(), verificationCode: verificationCode)
-            .subscribe(onNext: { [weak self] (isSuccess) in
+        _ = viewModel.register(phoneNumber: phone, password: password.md5(), verificationCode: verificationCode).subscribe(onNext: { [weak self] (isSuccess) in
+            
+            ZWHud.shared.dismiss()
+            
+            let vc = RegisterSuccessfullyViewController.instanceFromStoryBoard(phoneNumber: phone, password: password)
+            self?.navigationController?.pushViewController(vc, animated: true)
+            
+            }, onError: { (error) in
                 
                 ZWHud.shared.dismiss()
+                HUDHelper.shared.showWithMsg(error.localizedDescription)
                 
-                let vc = RegisterSuccessfullyViewController.instanceFromStoryBoard(phoneNumber: phone, password: password)
-                self?.navigationController?.pushViewController(vc, animated: true)
-                
-                }, onError: { (error) in
-                    
-                    ZWHud.shared.dismiss()
-                    HUDHelper.shared.showWithMsg(error.localizedDescription)
-                    
-            })
+        })
         
     }
     

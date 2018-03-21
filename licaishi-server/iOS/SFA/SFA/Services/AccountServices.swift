@@ -25,6 +25,8 @@ enum AccountService {
     
     case modifyAccountDetail(nickName: String?, studioName: String?)
     
+    case gainVerificationCode(phoneNumber: String, type: VerificationCodeType)
+    
     
     
     
@@ -85,7 +87,12 @@ extension AccountService: TargetType {
             return version + "accountDetail"  // 获取账户详情
             
         case .modifyAccountDetail:
-            return version + "property"
+            return version + "property"  // 修改账户详情
+            
+        case .gainVerificationCode:
+            return version + "verificationMsg"  // 获取验证码
+            
+            
             
             
         case .authorization:
@@ -127,8 +134,11 @@ extension AccountService: TargetType {
              .modifyAccountDetail:
             return .post
             
-        case .accountDetail:
+        case .accountDetail,
+             .gainVerificationCode:
             return .get
+            
+            
             
             
         case .authorization,
@@ -209,6 +219,16 @@ extension AccountService: TargetType {
             }
             
             return .requestParameters(parameters: ["data": dic.formatJSON2() ?? ""], encoding: URLEncoding.default)
+            
+        case .gainVerificationCode(let phoneNumber, let verificationCodeType):
+            return .requestParameters(parameters: ["authorizationcode": "",
+                                                   "phonenumber": phoneNumber,
+                                                   "verificationtype": verificationCodeType],
+                                      encoding: URLEncoding.default)
+            
+            
+            
+            
             
             
             

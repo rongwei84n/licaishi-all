@@ -97,13 +97,26 @@ class LoginViewModel: NSObject {
     ///
     /// - Parameter phoneNumber: 手机号码
     /// - Returns: 网络请求是否成功
-    func gainVerificationCode(phoneNumber: String) -> Observable<Bool> {
+    func gainVerificationCode(phoneNumber: String, _ type: VerificationCodeType = .SMS) -> Observable<Bool> {
         
-        return Observable.create({ (observer) -> Disposable in
+        return Observable.create({ [weak self] (observer) -> Disposable in
             
-            observer.onNext(true)
-            observer.onCompleted()
-            
+            self?.provider.request(.gainVerificationCode(phoneNumber: phoneNumber, type: type), completion: { (result) in
+                
+                switch result {
+                case let .success(response):
+                    
+                    let json = JSON(response.data)
+                    if json["error"].stringValue == "0" {
+                        observer.onNext(true)
+                    }
+                    observer.onCompleted()
+                    
+                case let .failure(error):
+                    observer.onError(error)
+                }
+                
+            })
             return Disposables.create()
             
         }).observeOn(MainScheduler.instance).takeUntil(self.rx.deallocated)
