@@ -3,6 +3,7 @@ package com.auts.lcssv.activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
+import android.os.Message;
 import android.text.Editable;
 import android.text.TextUtils;
 import android.text.TextWatcher;
@@ -62,7 +63,7 @@ public class RegisterCodeActivity extends BaseActivity implements ILoadingView {
     private String mPhone;
     private String mVerCode;
     private CloudAccountPresenter mPresenter;
-    private int mCodeTime;
+    private int mCodeTime = 60;
     private Handler mHandler;
     private VerifyDialog mDialog;
 
@@ -80,7 +81,6 @@ public class RegisterCodeActivity extends BaseActivity implements ILoadingView {
             mTvGetVerCode.setTextColor(getResources().getColor(R.color.text_oringe));
             mTvGetVerCode.setText(mCodeTime + " S  ");
             mCodeTime -= 1;
-            AccountManager.getInstance().saveCountdownTime(mCodeTime, AppConstans.CountdownTimeKey.REGISTER_CODE_TIME);
             mHandler.postDelayed(this, 1000);
         }
     };
@@ -95,7 +95,6 @@ public class RegisterCodeActivity extends BaseActivity implements ILoadingView {
         setPageTitle(R.string.register);
         mHandler = new Handler();
         initPresenter();
-//        ViewUtils.linkage(mMyEtPhone.getEt(), 13, mMyEtVerCode.getEt(), 6, mTvNext);
         mTvNext.setEnabled(true);
         mMyEtVerCode.setContent("");
         mViewLineVercode.setBackgroundResource(R.color.default_line);
@@ -129,12 +128,6 @@ public class RegisterCodeActivity extends BaseActivity implements ILoadingView {
                 }
             }
         });
-
-        mCodeTime = AccountManager.getInstance().getCountdownTime(AppConstans.CountdownTimeKey.REGISTER_CODE_TIME);
-        if (mCodeTime < AppConstans.Common.REGISTER_CODE_TIME) {
-            mHandler.postDelayed(mCodeTimeR, 0);
-        }
-
     }
 
     protected void initPresenter() {
@@ -190,6 +183,7 @@ public class RegisterCodeActivity extends BaseActivity implements ILoadingView {
             @Override
             public void onGetVerCodeSuccess() {
                 ToastUtil.show("验证码已发送");
+                mHandler.postDelayed(mCodeTimeR, 0);
             }
         });
     }
@@ -255,22 +249,6 @@ public class RegisterCodeActivity extends BaseActivity implements ILoadingView {
         } else {
             mPresenter.authorization();
         }
-    }
-
-    /**
-     * 弹出图形验证码
-     */
-    private void showDialog() {
-        mDialog = new VerifyDialog(this, mPhone, new VerifyDialog.VerifyCallBack() {
-            @Override
-            public void onGetVetCodeSuccess() {
-                mCodeTime = AppConstans.Common.REGISTER_CODE_TIME;
-                mHandler.postDelayed(mCodeTimeR, 0);
-                mDialog.dismiss();
-                mMyEtVerCode.requestFocus();
-            }
-        });
-        mDialog.show();
     }
 
     /**
