@@ -131,6 +131,9 @@ public class OrderController extends SBaseController {
     		orderResponseDto.setProductShortName(productsService.queryProductByPid(orderModel.getProductId()).getpShortName());
     		orderResponseDto.setCustomerName(customerService.queryCustomerByUid(orderModel.getCustomerUid()).getName());
         }
+        if (StringUtil.isNotEmpty(orderResponseDto.getVoucherPath())) {
+            orderResponseDto.setVoucherPath(VOUCHER_URL_PREFIX + orderResponseDto.getVoucherPath());
+        }
         rspObj.setResult(orderResponseDto);
         return successResponse(rspObj);
     }
