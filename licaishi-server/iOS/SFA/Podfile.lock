@@ -1,5 +1,6 @@
 PODS:
   - Alamofire (4.7.0)
+  - CryptoSwift (0.7.2)
   - JRSwizzle (1.0)
   - Kingfisher (4.6.1)
   - Localize-Swift (2.0.0)
@@ -44,8 +45,10 @@ PODS:
   - SwifterSwift/SwiftStdlib (4.1.1)
   - SwifterSwift/UIKit (4.1.1)
   - SwiftyJSON (4.0.0)
+  - SwiftyTimer (2.0.0)
 
 DEPENDENCIES:
+  - CryptoSwift (~> 0.7.1)
   - JRSwizzle
   - Kingfisher
   - Localize-Swift
@@ -60,9 +63,11 @@ DEPENDENCIES:
   - SnapKit (~> 4.0.0)
   - SwifterSwift
   - SwiftyJSON
+  - SwiftyTimer
 
 SPEC CHECKSUMS:
   Alamofire: 907e0a98eb68cdb7f9d1f541a563d6ac5dc77b25
+  CryptoSwift: cd2158be2bf639aabc63ec804707c7137c90157c
   JRSwizzle: dd5ead5d913a0f29e7f558200165849f006bb1e3
   Kingfisher: 1f9157d9c02b380cbd0b7cc890161195164eb634
   Localize-Swift: c798ec9286494866f7068f85f7c71283ac5bdab4
@@ -78,7 +83,8 @@ SPEC CHECKSUMS:
   SnapKit: a42d492c16e80209130a3379f73596c3454b7694
   SwifterSwift: bfcae9d659dfd306d164f13f72cad09198f30723
   SwiftyJSON: 070dabdcb1beb81b247c65ffa3a79dbbfb3b48aa
+  SwiftyTimer: 2efd74b060d69ad4f1496baf5bbedbe132125fcf
 
-PODFILE CHECKSUM: 56b3fe937d88d9fd012c26b8335ff98ec6519f0a
+PODFILE CHECKSUM: 9970a041d345534fa3c70ec226227616327a18ba
 
 COCOAPODS: 1.4.0
