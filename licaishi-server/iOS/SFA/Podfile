@@ -2,7 +2,7 @@ platform :ios, '8.0'
 use_frameworks!
 
 target 'SFA' do
-
+    
 pod 'R.swift'
 pod 'JRSwizzle'
 pod 'SwifterSwift'
@@ -11,10 +11,10 @@ pod 'SwiftyTimer'
 pod 'PlainPing'
 pod 'Localize-Swift'
 pod 'SnapKit', '~> 4.0.0'#,'~>3.0.0'
-pod 'Moya'
+pod 'Moya','10.0.1'
 pod 'Moya/RxSwift'
-pod 'RxCocoa'
-pod 'RxSwift'
+pod 'RxCocoa','4.1.1'
+pod 'RxSwift','4.0'
 pod 'SwiftyBeaver'
 pod 'SwiftyJSON'
 pod "RxGesture"
@@ -27,9 +27,8 @@ pod 'HCSStarRatingView', '~> 1.5'
 pod 'RealReachability'
 pod 'Watchdog'
 pod 'SSZipArchive'
-
+    
 pod 'CryptoSwift', '~> 0.7.1'
-
 
 end
 
