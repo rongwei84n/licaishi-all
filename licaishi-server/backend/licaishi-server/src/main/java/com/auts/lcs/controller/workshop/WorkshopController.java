@@ -78,7 +78,7 @@ public class WorkshopController extends SBaseController {
         financerModel.setWorkshopUrl(workshopUrl);
         financerModel.setWorkshopIntro(workshopIntro);
         int result = financerService.editFinancer(financerModel);
-        if (result > 0) {
+        if (result < 1) {
         	return errorResponse(10008);
         } 
         return successResponse(rspObj);
