@@ -68,6 +68,7 @@ public interface OrderMapper {
 			+ "<if test='status !=null '>"
 			+ " and status = #{status} "
 			+ "</if> "
+			+ "order by order_date desc"
 			+ " limit #{startIndex}, #{pageSize}"
 			+ "</script>")
 //    @Select("select * from tbl_order")
@@ -90,6 +91,7 @@ public interface OrderMapper {
     		+ "<if test='status !=null '>"
 			+ " 	and status = #{status} "
 			+ "</if> "
+			+ "order by order_date desc"
     		+ "</script>")
     @Results({
     	@Result(property = "id", column = "uid"), @Result(property = "orderNo", column = "order_no"),
@@ -105,7 +107,7 @@ public interface OrderMapper {
     })
     List<OrderModel> queryOrdersByCustomerId(@Param("startIndex") int startIndex, @Param("pageSize") int pageSize, @Param("customerId") String customerId, @Param("status") String status);
 
-    @Select("select * from tbl_order where financer_uid= #{financerId}  and status in ('02','03')")
+    @Select("select * from tbl_order where financer_uid= #{financerId}  and status in ('02','03') order by order_date desc")
     @Results({
     	@Result(property = "id", column = "uid"), @Result(property = "orderNo", column = "order_no"),
     	@Result(property = "amount", column = "amount"), @Result(property = "orderDate", column = "order_date"),
