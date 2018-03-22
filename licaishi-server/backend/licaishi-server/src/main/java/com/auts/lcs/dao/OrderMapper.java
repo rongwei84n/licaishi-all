@@ -85,7 +85,12 @@ public interface OrderMapper {
     })
     List<OrderModel> queryOrders(@Param("startIndex") int startIndex, @Param("pageSize") int pageSize, @Param("status") String status, @Param("financerID") String financerID);
 
-    @Select("select * from tbl_order where customer_uid= #{customerId}")
+    @Select("<script>"
+    		+ "select * from tbl_order where customer_uid= #{customerId} "
+    		+ "<if test='status !=null '>"
+			+ " 	and status = #{status} "
+			+ "</if> "
+    		+ "</script>")
     @Results({
     	@Result(property = "id", column = "uid"), @Result(property = "orderNo", column = "order_no"),
     	@Result(property = "amount", column = "amount"), @Result(property = "orderDate", column = "order_date"),
@@ -98,7 +103,7 @@ public interface OrderMapper {
     	@Result(property = "issueBank", column = "issuing_bank"), @Result(property = "cardNo", column = "card_no"),
     	@Result(property = "createTime", column = "create_time"), @Result(property = "updateTime", column = "update_time")
     })
-    List<OrderModel> queryOrdersByCustomerId(@Param("startIndex") int startIndex, @Param("pageSize") int pageSize, @Param("customerId") String customerId);
+    List<OrderModel> queryOrdersByCustomerId(@Param("startIndex") int startIndex, @Param("pageSize") int pageSize, @Param("customerId") String customerId, @Param("status") String status);
 
     @Select("select * from tbl_order where financer_uid= #{financerId}  and status in ('02','03')")
     @Results({

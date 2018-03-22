@@ -8,7 +8,7 @@ public interface OrderService {
 
     List<OrderModel> queryOrders(int pageNo, int pageSize, String type, String uid);
 
-    List<OrderModel> queryOrdersByCustomerId(int pageNo, int pageSize, String customerId);
+    List<OrderModel> queryOrdersByCustomerId(int pageNo, int pageSize, String customerId, String status);
 
     List<OrderModel> queryOrdersByFinancerId(int pageNo, int pageSize, String financerId);
 

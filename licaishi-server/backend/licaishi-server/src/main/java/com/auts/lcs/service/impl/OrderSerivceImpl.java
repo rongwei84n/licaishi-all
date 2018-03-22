@@ -54,9 +54,13 @@ public class OrderSerivceImpl implements OrderService {
 	}
 
 	@Override
-	public List<OrderModel> queryOrdersByCustomerId(int pageNo, int pageSize, String customerId) {
+	public List<OrderModel> queryOrdersByCustomerId(int pageNo, int pageSize, String customerId, String status) {
 		int startIndex = (pageNo - 1) * pageSize;
-		return orderMapper.queryOrdersByCustomerId(startIndex, pageSize, customerId);
+		//00 01 02 03 99
+		if("00".equals(status)) {
+			status = null;
+		}
+		return orderMapper.queryOrdersByCustomerId(startIndex, pageSize, customerId, status);
 	}
 
 	@Override
