@@ -117,10 +117,20 @@ public class OrderItemDetailActivity extends BaseActivity implements GetPhotoBef
                 tvAmount.setText(orderBean.getResult().getAmount()); //订单金额
                 tvComratio.setText(orderBean.getResult().getComRatio());//返佣比例
                 tvCommission.setText(orderBean.getResult().getCommission()); //返佣金额
-                tvProRatio.setText(orderBean.getResult().getProRatio());
+                tvProRatio.setText(orderBean.getResult().getProRatio()); //预期收益率
                 tvProfit.setText(orderBean.getResult().getProfit());//客户收益
-                tvContractStatus.setText(orderBean.getResult().getContractStatus());
-                tvVoucherStatus.setText(orderBean.getResult().getVoucher_status());//支付凭证上传状态
+                if ("0".equals(orderBean.getResult().getContractStatus())) {//合同状态
+                    tvContractStatus.setText("未签订");
+                } else {
+                    tvContractStatus.setText("已签订");
+                }
+
+                if ("0".equals(orderBean.getResult().getVoucher_status())) {//支付凭证上传状态
+                    tvVoucherStatus.setText("未上传");
+                } else {
+                    tvVoucherStatus.setText("已上传");
+                }
+
                 ImageLoader.getLoader(OrderItemDetailActivity.this)
                         .load(orderBean.getResult().getVoucher_path())
                         .into(imgVoucherData);
