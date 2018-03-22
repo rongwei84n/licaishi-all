@@ -11,6 +11,7 @@
 
     <string name="tv_order_detail_title">订单详情</string>
     <string name="tv_order_detail_id">订单号:</string>
+    <string name="tv_order_detail_status">订单状态:</string>
     <string name="tv_order_detail_amount">订单金额:</string>
     <string name="tv_order_detail_productname">产品名称:</string>
     <string name="tv_order_detail_comratio">返佣比例:</string>
