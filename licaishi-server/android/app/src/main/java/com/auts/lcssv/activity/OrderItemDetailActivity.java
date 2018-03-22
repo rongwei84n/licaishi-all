@@ -38,7 +38,17 @@ import butterknife.OnClick;
 
 public class OrderItemDetailActivity extends BaseActivity implements GetPhotoBeforeListener {
 
-    private static String ORDER_STATUS_WAIT_PAY = "01";
+    private static String ORDER_STATUS_WAIT_PAY = "01";//待付款
+    private static String ORDER_STATUS_WAIT_COMMISSION = "02";//待结佣
+    private static String ORDER_STATUS_ALREADY_COMMISSION = "03";//已结佣
+    private static String ORDER_STATUS_ALREADY_FAILED = "99";//已失效
+
+    private static String STR_ORDER_STATUS_WAIT_PAY = "待付款";//待付款
+    private static String STR_ORDER_STATUS_WAIT_COMMISSION = "待结佣";//待结佣
+    private static String STR_ORDER_STATUS_ALREADY_COMMISSION = "已结佣";//已结佣
+    private static String STR_ORDER_STATUS_ALREADY_FAILED = "已失效";//已失效
+    private static String STR_ORDER_STATUS_UNKNOW = "未知";//已失效
+
 
     private String orderid;
 
@@ -49,6 +59,9 @@ public class OrderItemDetailActivity extends BaseActivity implements GetPhotoBef
 
     @BindView(R.id.tv_orderid)
     TextView tvOrderId; //订单ID
+
+    @BindView(R.id.tv_order_status)
+    TextView tvOrderStatus;//订单状态
 
     @BindView(R.id.tv_amount)
     TextView tvAmount; //订单金额
@@ -107,9 +120,20 @@ public class OrderItemDetailActivity extends BaseActivity implements GetPhotoBef
                 }
                 orderStatus = orderBean.getResult().getStatus(); //订单状态
 
-                if (ORDER_STATUS_WAIT_PAY.equals(orderStatus)) {
+                if (ORDER_STATUS_WAIT_PAY.equals(orderStatus)) { //待付款
                     btnCancelOrder.setVisibility(View.VISIBLE);
-                } else {
+                    tvOrderStatus.setText(STR_ORDER_STATUS_WAIT_PAY);
+                } else if(ORDER_STATUS_WAIT_COMMISSION.equals(orderStatus)) {//待结佣
+                    tvOrderStatus.setText(STR_ORDER_STATUS_WAIT_COMMISSION);
+                    btnCancelOrder.setVisibility(View.GONE);
+                } else if(ORDER_STATUS_ALREADY_COMMISSION.equals(orderStatus)) {//已结佣
+                    tvOrderStatus.setText(STR_ORDER_STATUS_ALREADY_COMMISSION);
+                    btnCancelOrder.setVisibility(View.GONE);
+                } else if(ORDER_STATUS_ALREADY_FAILED.equals(orderStatus)) {//已失效
+                    tvOrderStatus.setText(STR_ORDER_STATUS_ALREADY_FAILED);
+                    btnCancelOrder.setVisibility(View.GONE);
+                } else {//错误状态
+                    tvOrderStatus.setText(STR_ORDER_STATUS_UNKNOW);
                     btnCancelOrder.setVisibility(View.GONE);
                 }
 

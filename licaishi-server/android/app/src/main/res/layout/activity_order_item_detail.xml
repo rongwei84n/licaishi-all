@@ -39,6 +39,37 @@
             android:layout_width="match_parent"
             android:layout_height="1dp"
             android:background="@color/default_line"/>
+        <!-- 订单状态 -->
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/listview_item_height"
+            android:background="@color/white"
+            android:orientation="horizontal"
+            android:paddingLeft="10dp"
+            android:paddingRight="10dp">
+            <TextView
+                android:id="@+id/tv_order_status_label"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_alignParentLeft="true"
+                android:text="@string/tv_order_detail_status"
+                android:textColor="@color/text_small"
+                android:textSize="@dimen/text_normal" />
+            <TextView
+                android:id="@+id/tv_order_status"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_alignParentRight="true"
+                android:gravity="right"
+                android:textColor="@color/text_large"
+                android:layout_toRightOf="@+id/tv_order_status_label"/>
+        </RelativeLayout>
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/default_line"/>
         <!-- 订单金额 -->
         <RelativeLayout
             android:layout_width="match_parent"
