@@ -9,6 +9,11 @@ import com.auts.lcssv.net.engine.OkHttpUtil;
 
 public class OrderItemDetailModel {
 
+    public void cancelOrder(String orderNo, BaseCallback callback) {
+        OkHttpUtil.post(UrlConfig.SzUrl.CANCEL_ORDER_ + orderNo)
+                .run(null, callback);
+    }
+
     //获取功能介绍详细信息
     public void getItemDetailByID(String orderID, BaseCallback callback) {
         OkHttpUtil.get(UrlConfig.SzUrl.GET_ORDER_ITEM_DETAIL + orderID)

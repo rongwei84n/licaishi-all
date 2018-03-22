@@ -69,6 +69,8 @@ public interface UrlConfig {
 
         String GET_ORDER_ITEM_DETAIL = URL_HOST + "/srv/v1/order/orderDetail?orderNo=";
 
+        String CANCEL_ORDER_ = URL_HOST + "/srv/v1/order/cancelOrder?orderNo=";
+
         String GET_MESSAGES = URL_HOST + "/v1/user/messages";//消息提醒
         String CHECK_UNREADMESSAGES = URL_HOST + "/v1/user/check_msg_read_status";//检查是否有未读消息
 

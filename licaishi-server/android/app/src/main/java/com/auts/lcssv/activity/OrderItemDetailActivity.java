@@ -21,6 +21,7 @@ import com.auts.lcssv.presenter.viewback.OrderItemDetailView;
 import com.auts.lcssv.util.Base64Utils;
 import com.auts.lcssv.util.LogUtils;
 import com.auts.lcssv.util.PathUtils;
+import com.auts.lcssv.util.ToastUtil;
 
 import java.io.ByteArrayInputStream;
 import java.io.File;
@@ -53,9 +54,6 @@ public class OrderItemDetailActivity extends BaseActivity implements GetPhotoBef
     private String orderid;
 
     private String orderStatus;
-
-    @BindView(R.id.btn_cancel_order)
-    Button btnCancelOrder;
 
     @BindView(R.id.tv_orderid)
     TextView tvOrderId; //订单ID
@@ -97,6 +95,9 @@ public class OrderItemDetailActivity extends BaseActivity implements GetPhotoBef
     @BindView(R.id.tv_customer_name)
     TextView tvCustomerName; //客户姓名
 
+    @BindView(R.id.btn_cancel_order)
+    Button btnCancelOrder;
+
     OrderItemDetailPresenter presenter;
 
     @Override
@@ -110,6 +111,16 @@ public class OrderItemDetailActivity extends BaseActivity implements GetPhotoBef
         orderid = getIntent().getStringExtra("orderid");
 
         presenter = new OrderItemDetailPresenter(null, new OrderItemDetailView() {
+            @Override
+            public void onCancelOrderSuccess() {
+                ToastUtil.show("cancel ok");
+            }
+
+            @Override
+            public void onCancelOrderFailed() {
+                ToastUtil.show("cancel failed");
+            }
+
             @Override
             public void onGetOrderSuccess(OrderItemDetailBean orderBean) {
                 if (orderBean == null
@@ -175,10 +186,15 @@ public class OrderItemDetailActivity extends BaseActivity implements GetPhotoBef
         LogUtils.debug("orderid: " + orderid);
     }
 
+    //点击取消订单
+    @OnClick(R.id.btn_cancel_order)
+    public void btn_cancelOrder() {
+        presenter.cancelOrder(orderid);
+    }
+
     //点击登录
     @OnClick(R.id.tv_voucher_path)
     public void tv_upload() {
-        LogUtils.debug("upload");
         GetPhotoPopup photoPopup = new GetPhotoPopup(this, this);
         photoPopup.showAsDropDown(imgVoucherData);
     }

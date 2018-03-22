@@ -10,6 +10,12 @@ import com.auts.lcssv.bean.litebean.OrderItemDetailBean;
 
 public class OrderItemDetailView {
 
+    public void onCancelOrderSuccess() {
+    }
+
+    public void onCancelOrderFailed() {
+    }
+
     public void onGetOrderSuccess(OrderItemDetailBean orderBean) {}
 
     public void onGetOrderError() {}
