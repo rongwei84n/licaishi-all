@@ -46,8 +46,11 @@ class LoginViewModel: NSObject {
                         User.current.phoneNumber = phoneNumber
                         
                         observer.onNext(true)
+                        observer.onCompleted()
                     }
-                    observer.onError(ServerError.internalError(code: errorCode))
+                    else {
+                        observer.onError(ServerError.internalError(code: errorCode))
+                    }
                     
                 case let .failure(error):
                     observer.onError(error)
@@ -77,10 +80,14 @@ class LoginViewModel: NSObject {
                 case let .success(response):
                     
                     let json = JSON(response.data)
-                    if json["error"].stringValue == "0" {
+                    let errorCode = json["error"].stringValue
+                    if errorCode == "0" {
                         observer.onNext(true)
+                        observer.onCompleted()
                     }
-                    observer.onCompleted()
+                    else {
+                        observer.onError(ServerError.internalError(code: errorCode))
+                    }
                     
                 case let .failure(error):
                     observer.onError(error)
@@ -107,10 +114,14 @@ class LoginViewModel: NSObject {
                 case let .success(response):
                     
                     let json = JSON(response.data)
-                    if json["error"].stringValue == "0" {
+                    let errorCode = json["error"].stringValue
+                    if errorCode == "0" {
                         observer.onNext(true)
+                        observer.onCompleted()
                     }
-                    observer.onCompleted()
+                    else {
+                        observer.onError(ServerError.internalError(code: errorCode))
+                    }
                     
                 case let .failure(error):
                     observer.onError(error)
@@ -139,11 +150,14 @@ class LoginViewModel: NSObject {
                 case let .success(response):
                     
                     let json = JSON(response.data)
-                    if json["error"].stringValue == "0" {
+                    let errorCode = json["error"].stringValue
+                    if errorCode == "0" {
                         observer.onNext(true)
+                        observer.onCompleted()
                     }
-                    observer.onNext(true)
-                    observer.onCompleted()
+                    else {
+                        observer.onError(ServerError.internalError(code: errorCode))
+                    }
                     
                 case let .failure(error):
                     observer.onError(error)
