@@ -140,9 +140,9 @@ public class OrderItemDetailActivity extends BaseActivity implements GetPhotoBef
                 tvOrderId.setText(orderBean.getResult().getOrderNO()); //订单号
                 tvAmount.setText(orderBean.getResult().getAmount()); //订单金额
                 tvComratio.setText(orderBean.getResult().getComRatio());//返佣比例
-                tvCommission.setText(orderBean.getResult().getCommission()); //返佣金额
+                tvCommission.setText(orderBean.getResult().getCommission() + "元"); //返佣金额
                 tvProRatio.setText(orderBean.getResult().getProRatio()); //预期收益率
-                tvProfit.setText(orderBean.getResult().getProfit());//客户收益
+                tvProfit.setText(orderBean.getResult().getProfit() + "元");//客户收益
                 if ("0".equals(orderBean.getResult().getContractStatus())) {//合同状态
                     tvContractStatus.setText("未完成");
                 } else {
