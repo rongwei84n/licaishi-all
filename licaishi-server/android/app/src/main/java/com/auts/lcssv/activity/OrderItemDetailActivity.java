@@ -3,9 +3,11 @@ package com.auts.lcssv.activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.auts.lcssv.R;
@@ -49,7 +51,6 @@ public class OrderItemDetailActivity extends BaseActivity implements GetPhotoBef
     private static String STR_ORDER_STATUS_ALREADY_COMMISSION = "已结佣";//已结佣
     private static String STR_ORDER_STATUS_ALREADY_FAILED = "已失效";//已失效
     private static String STR_ORDER_STATUS_UNKNOW = "未知";//已失效
-
 
     private String orderid;
 
@@ -166,9 +167,15 @@ public class OrderItemDetailActivity extends BaseActivity implements GetPhotoBef
                     tvVoucherStatus.setText("已上传");
                 }
 
-                ImageLoader.getLoader(OrderItemDetailActivity.this)
-                        .load(orderBean.getResult().getVoucher_path())
-                        .into(imgVoucherData);
+                if (TextUtils.isEmpty(orderBean.getResult().getVoucher_path())) {
+                    imgVoucherData.setVisibility(View.GONE);
+                }else {
+                    ImageLoader.getLoader(OrderItemDetailActivity.this)
+                            .load(orderBean.getResult().getVoucher_path())
+                            .into(imgVoucherData);
+                    imgVoucherData.setVisibility(View.VISIBLE);
+                }
+
                 tvCustomerName.setText(orderBean.getResult().getCustomerName()); //客户姓名
 
                 tvProductname.setText(orderBean.getResult().getProductShortName()); //产品名称
@@ -239,7 +246,7 @@ public class OrderItemDetailActivity extends BaseActivity implements GetPhotoBef
                     if (TextUtils.isEmpty(imageUrl)) {
                         imageUrl = "";
                     }
-                    LogUtils.error("=====imageUrl6==", imageUrl + "===");
+                    imgVoucherData.setVisibility(View.VISIBLE);
                     ImageLoader.getLoader(this)
                             .load(imageUrl)
                             .placeholder(R.drawable.head_portrait)

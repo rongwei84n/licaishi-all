@@ -396,7 +396,8 @@
             android:padding="10dp"
             android:layout_width="150dip"
             android:layout_height="150dip"
-            android:gravity="left"/>
+            android:visibility="gone"
+            android:gravity="left" />
 
         <View
             android:layout_width="match_parent"
@@ -407,7 +408,7 @@
             style="@style/btn_common"
             android:layout_gravity="right"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_height="41dp"
             android:layout_margin="2dp"
             android:enabled="true"
             android:text="@string/btn_order_detail_cancel_order"/>
