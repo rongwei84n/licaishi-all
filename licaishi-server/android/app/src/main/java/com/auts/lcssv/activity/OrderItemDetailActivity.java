@@ -113,12 +113,12 @@ public class OrderItemDetailActivity extends BaseActivity implements GetPhotoBef
         presenter = new OrderItemDetailPresenter(null, new OrderItemDetailView() {
             @Override
             public void onCancelOrderSuccess() {
-                ToastUtil.show("cancel ok");
+                presenter.getOrderDetailByID(orderid);
             }
 
             @Override
             public void onCancelOrderFailed() {
-                ToastUtil.show("cancel failed");
+                ToastUtil.show("取消订单失败");
             }
 
             @Override
