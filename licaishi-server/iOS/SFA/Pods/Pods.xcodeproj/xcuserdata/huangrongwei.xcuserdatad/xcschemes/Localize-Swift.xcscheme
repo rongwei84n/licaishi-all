@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Scheme
-   LastUpgradeVersion = "0920"
+   LastUpgradeVersion = "0930"
    version = "1.3">
    <BuildAction
       parallelizeBuildables = "YES"
@@ -14,7 +14,7 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "FC00A2B118650C6C90D34FB24F60280D"
+               BlueprintIdentifier = "BA2FA1677D37816A8F208A20403EF00B"
                BuildableName = "Localize_Swift.framework"
                BlueprintName = "Localize-Swift"
                ReferencedContainer = "container:Pods.xcodeproj">
@@ -47,7 +47,7 @@
       <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "FC00A2B118650C6C90D34FB24F60280D"
+            BlueprintIdentifier = "BA2FA1677D37816A8F208A20403EF00B"
             BuildableName = "Localize_Swift.framework"
             BlueprintName = "Localize-Swift"
             ReferencedContainer = "container:Pods.xcodeproj">
@@ -62,15 +62,6 @@
       savedToolIdentifier = ""
       useCustomWorkingDirectory = "NO"
       debugDocumentVersioning = "YES">
-      <MacroExpansion>
-         <BuildableReference
-            BuildableIdentifier = "primary"
-            BlueprintIdentifier = "FC00A2B118650C6C90D34FB24F60280D"
-            BuildableName = "Localize_Swift.framework"
-            BlueprintName = "Localize-Swift"
-            ReferencedContainer = "container:Pods.xcodeproj">
-         </BuildableReference>
-      </MacroExpansion>
    </ProfileAction>
    <AnalyzeAction
       buildConfiguration = "Debug">
