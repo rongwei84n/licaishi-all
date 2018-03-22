@@ -120,9 +120,9 @@ public class OrderItemDetailActivity extends BaseActivity implements GetPhotoBef
                 tvProRatio.setText(orderBean.getResult().getProRatio()); //预期收益率
                 tvProfit.setText(orderBean.getResult().getProfit());//客户收益
                 if ("0".equals(orderBean.getResult().getContractStatus())) {//合同状态
-                    tvContractStatus.setText("未签订");
+                    tvContractStatus.setText("未完成");
                 } else {
-                    tvContractStatus.setText("已签订");
+                    tvContractStatus.setText("已完成");
                 }
 
                 if ("0".equals(orderBean.getResult().getVoucher_status())) {//支付凭证上传状态
