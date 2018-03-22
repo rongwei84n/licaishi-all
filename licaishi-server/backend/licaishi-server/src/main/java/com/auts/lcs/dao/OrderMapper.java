@@ -22,7 +22,7 @@ public interface OrderMapper {
             + "#{or.status}, #{or.voucherStatus},#{or.voucherPath},#{or.contractStatus},#{or.issueBank},#{or.cardNo}, sysdate(), sysdate())")
 	int saveOrder(@Param("or") OrderModel or);
 
-	@Update("update tbl_order set voucher_path = #{or.voucherPath} where order_no=#{or.orderNo}")
+	@Update("update tbl_order set voucher_path = #{or.voucherPath}, voucher_status=#{or.voucherStatus} where order_no=#{or.orderNo}")
 	int updateVoucher(@Param("or") OrderModel or);
 
 	@Update("update tbl_order set status = 99, update_time= NOW() where order_no=#{orderNo}")

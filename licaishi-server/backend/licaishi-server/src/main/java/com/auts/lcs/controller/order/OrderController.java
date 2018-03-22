@@ -285,6 +285,7 @@ public class OrderController extends SBaseController {
             return rspObj;
         }
         om.setVoucherPath(savePic(imgBase64, uid, orderNo));
+        om.setVoucherStatus("1");
         int result = orderService.updateVoucher(om);
         if (result <= 0) {//更新失败
             rspObj.setCode(Const.ErrorCode.COMMON_ERROR);
