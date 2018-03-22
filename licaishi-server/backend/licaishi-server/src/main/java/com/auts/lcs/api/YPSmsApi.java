@@ -35,7 +35,7 @@ public class YPSmsApi {
 
 	//修改为您的apikey.apikey可在官网（http://www.yuanpian.com)登录后获取
 	public static final String API_KEY = "11925f4b90680e82d9d3d4aa9c02f0f7";
-	public static String CAPTCHA_TEXT = "【理财师】您的验证码是%s。如非本人操作，请忽略本短信";
+	public static String CAPTCHA_TEXT = "【嘿牛理财师】您的验证码是%s。如非本人操作，请忽略本短信";
     
     //查账户信息的http地址
     private static String URI_GET_USER_INFO = "https://sms.yunpian.com/v2/user/get.json";
