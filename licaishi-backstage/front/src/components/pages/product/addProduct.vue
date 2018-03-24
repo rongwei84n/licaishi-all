@@ -2,7 +2,7 @@
  * @Author: 张浩然 
  * @Date: 2018-03-18 21:38:35 
  * @Last Modified by: 张浩然
- * @Last Modified time: 2018-03-20 17:57:45
+ * @Last Modified time: 2018-03-20 18:37:31
  * 
  * 新增产品页面，因为添加东西太多
  */
@@ -22,53 +22,52 @@
           <el-select v-model="addForm.pType " placeholder="请选择产品类型 ">
             <el-option v-for="(item,index) of pTypeList " :key="index " :label="item.value " :value="item.key "></el-option>
           </el-select>
-          <el-form-item label="产品简称: " prop="pShortName " class="w40p ">
-            <el-input v-model="addForm.pShortName "></el-input>
-          </el-form-item>
-          <el-form-item label="产品销售状态: " prop="pSaleStatus ">
-            <el-select v-model="addForm.pSaleStatus " placeholder="请选择产品销售状态 ">
-              <el-option v-for="(item,index) of pSaleStatusList " :key="index " :label="item.value " :value="item.key "></el-option>
-            </el-select>
-          </el-form-item>
-          <el-form-item label="投资信息配置:" prop="pSaleStatus">
-            <div class="investConf-content">
-              <p style="color:red">投资金额区间必须从100万开始且必须连贯</p>
-              <table cellspacing="10px">
-                <thead>
-                  <tr>
-                    <th>投资金额(万)</th>
-                    <th>预期年化收益(%)</th>
-                    <th>返佣比例(%)</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr v-for="(item,index) of investConfList" :key="index">
-                    <td class="money-content">
-                      <el-input type="text" v-model="item.prStartAmount" @change="lastChange(index)" :disabled="index===0&&investConfList.length!==1" />
-                      <span>-</span>
-                      <el-input type="text" v-model="item.prEndAmount" :disabled="(index+1) !== investConfList.length&&investConfList.length!==1" />
-                    </td>
-                    <td>
-                      <el-input v-model="item.prExpectAnnualRevenue" type="text" />
-                    </td>
-                    <td>
-                      <el-input type="text" v-model="item.prCommission" />
-                    </td>
-                    <td @click="delete_investConfList(index)">
-                      -
-                    </td>
-                  </tr>
-                </tbody>
-              </table>
-              <div class="dialog-footer">
-                <el-button type="primary " @click.native="add_investConfList">增加</el-button>
-              </div>
+        </el-form-item>
+        <el-form-item label="产品简称: " prop="pShortName " class="w40p ">
+          <el-input v-model="addForm.pShortName "></el-input>
+        </el-form-item>
+        <el-form-item label="产品销售状态: " prop="pSaleStatus ">
+          <el-select v-model="addForm.pSaleStatus " placeholder="请选择产品销售状态 ">
+            <el-option v-for="(item,index) of pSaleStatusList " :key="index " :label="item.value " :value="item.key "></el-option>
+          </el-select>
+        </el-form-item>
+        <el-form-item label="投资信息配置:" prop="pSaleStatus">
+          <div class="investConf-content">
+            <p style="color:red">投资金额区间必须从100万开始且必须连贯</p>
+            <table cellspacing="10px">
+              <thead>
+                <tr>
+                  <th>投资金额(万)</th>
+                  <th>预期年化收益(%)</th>
+                  <th>返佣比例(%)</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr v-for="(item,index) of investConfList" :key="index">
+                  <td class="money-content">
+                    <el-input type="text" v-model="item.prStartAmount" @change="lastChange(index)" :disabled="index===0&&investConfList.length!==1" />
+                    <span>-</span>
+                    <el-input type="text" v-model="item.prEndAmount" :disabled="(index+1) !== investConfList.length&&investConfList.length!==1" />
+                  </td>
+                  <td>
+                    <el-input v-model="item.prExpectAnnualRevenue" type="text" />
+                  </td>
+                  <td>
+                    <el-input type="text" v-model="item.prCommission" />
+                  </td>
+                  <td @click="delete_investConfList(index)">
+                    -
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+            <div class="dialog-footer">
+              <el-button type="primary " @click.native="add_investConfList">增加</el-button>
             </div>
-          </el-form-item>
-          <el-form-item label="产品全称:" prop="pFullName" class="w60p">
-            <el-input v-model="addForm.pFullName "></el-input>
-          </el-form-item>
-
+          </div>
+        </el-form-item>
+        <el-form-item label="产品全称:" prop="pFullName" class="w60p">
+          <el-input v-model="addForm.pFullName "></el-input>
         </el-form-item>
         <el-form-item label="募集规模" prop="pAllIssuingScale ">
           <el-input v-model="addForm.pAllIssuingScale " placeholder="请输入募集规模 ">
@@ -385,8 +384,6 @@ export default {
         // 将这一行的左区间设置为上一行的右区间
         temLineObj.prEndAmount = temObj.prStartAmount;
       }
-      // if (index !== 0 && arrLength > 1) {
-      // }
     },
     test() {
       this.$ajax({
