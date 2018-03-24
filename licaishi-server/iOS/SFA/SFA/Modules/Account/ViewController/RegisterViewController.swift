@@ -85,6 +85,18 @@ class RegisterViewController: UITableViewController, InstanceFromStoryBoard, UIT
 
     @IBAction func gainCodeButtonTapped(_ sender: Any) {
         
+        let phone = phoneNumberTextField.text ?? ""
+        
+        if phone.isEmpty {
+            HUDHelper.shared.showWithMsg("手机号码不能为空")
+            return
+        }
+        
+        if !Utils.phoneValidation(phone) {
+            HUDHelper.shared.showWithMsg("不是有效的手机号码")
+            return
+        }
+        
         gainCodeButton.isEnabled = false
         
         if timer == nil {
@@ -95,12 +107,8 @@ class RegisterViewController: UITableViewController, InstanceFromStoryBoard, UIT
         // 请求验证码
         _ = viewModel.gainVerificationCode(phoneNumber: phoneNumberTextField.text ?? "").subscribe(onNext: { (isSuccess) in
             
-            
-            
         }, onError: { (error) in
-            
-            
-            
+            HUDHelper.shared.showWithMsg(error.localizedDescription)
         })
         
     }
@@ -117,55 +125,54 @@ class RegisterViewController: UITableViewController, InstanceFromStoryBoard, UIT
         let verificationCode = codeTextField.text ?? ""
         
         if phone.isEmpty {
-            print("手机号码不能为空")
+            HUDHelper.shared.showWithMsg("手机号码不能为空")
             return
         }
         
         if !Utils.phoneValidation(phone) {
-            print("不是有效的手机号码")
+            HUDHelper.shared.showWithMsg("不是有效的手机号码")
             return
         }
         
         if verificationCode.isEmpty {
-            print("请填写验证码")
+            HUDHelper.shared.showWithMsg("请填写验证码")
             return
         }
         
         if password.isEmpty {
-            print("密码不能为空")
+            HUDHelper.shared.showWithMsg("密码不能为空")
             return
         }
         
         if !Utils.passwordValidation(password) {
-            print("密码无效")
+            HUDHelper.shared.showWithMsg("密码无效")
             return
         }
         
         if repeatPassword.isEmpty {
-            print("请再次确认密码")
+            HUDHelper.shared.showWithMsg("请再次确认密码")
             return
         }
         
         if password != repeatPassword {
-            print("两次密码输入不一致")
+            HUDHelper.shared.showWithMsg("两次密码输入不一致")
             return
         }
         
         ZWHud.shared.show()
-        _ = viewModel.register(phoneNumber: phone, password: password.md5(), verificationCode: verificationCode)
-            .subscribe(onNext: { [weak self] (isSuccess) in
+        _ = viewModel.register(phoneNumber: phone, password: password.md5(), verificationCode: verificationCode).subscribe(onNext: { [weak self] (isSuccess) in
+            
+            ZWHud.shared.dismiss()
+            
+            let vc = RegisterSuccessfullyViewController.instanceFromStoryBoard(phoneNumber: phone, password: password)
+            self?.navigationController?.pushViewController(vc, animated: true)
+            
+            }, onError: { (error) in
                 
                 ZWHud.shared.dismiss()
+                HUDHelper.shared.showWithMsg(error.localizedDescription)
                 
-                let vc = RegisterSuccessfullyViewController.instanceFromStoryBoard(phoneNumber: phone, password: password)
-                self?.navigationController?.pushViewController(vc, animated: true)
-                
-                }, onError: { (error) in
-                    
-                    ZWHud.shared.dismiss()
-                    HUDHelper.shared.showWithMsg(error.localizedDescription)
-                    
-            })
+        })
         
     }
     

@@ -1,18 +1,12 @@
 PODS:
-  - Alamofire (4.6.0)
-  - CocoaAsyncSocket (7.6.2)
-  - CocoaMQTT (1.1.1):
-    - CocoaAsyncSocket (~> 7.6.1)
-    - SwiftyTimer (~> 2.0.0)
+  - Alamofire (4.7.0)
   - CryptoSwift (0.7.2)
-  - HCSStarRatingView (1.5)
   - JRSwizzle (1.0)
   - Kingfisher (4.6.1)
   - Localize-Swift (2.0.0)
-  - MJRefresh (3.1.15.3)
   - ModelMapper (7.4.0)
-  - Moya (10.0.2):
-    - Moya/Core (= 10.0.2)
+  - Moya (10.0.1):
+    - Moya/Core (= 10.0.1)
   - Moya-ModelMapper (6.0.0):
     - Moya-ModelMapper/Core (= 6.0.0)
   - Moya-ModelMapper/Core (6.0.0):
@@ -22,31 +16,21 @@ PODS:
     - Moya-ModelMapper/Core
     - Moya/RxSwift (~> 10.0)
     - RxSwift
-  - Moya/Core (10.0.2):
+  - Moya/Core (10.0.1):
     - Alamofire (~> 4.1)
     - Result (~> 3.0)
-  - Moya/RxSwift (10.0.2):
+  - Moya/RxSwift (10.0.1):
     - Moya/Core
     - RxSwift (~> 4.0)
   - ObjectMapper (3.1.0)
-  - PlainPing (0.4)
   - R.swift (4.0.0):
     - R.swift.Library (~> 4.0.0)
   - R.swift.Library (4.0.0)
-  - RealReachability (1.1.9):
-    - RealReachability/Connection (= 1.1.9)
-    - RealReachability/Ping (= 1.1.9)
-  - RealReachability/Connection (1.1.9)
-  - RealReachability/Ping (1.1.9)
   - Result (3.2.4)
-  - RxCocoa (4.1.2):
+  - RxCocoa (4.1.1):
     - RxSwift (~> 4.0)
-  - RxGesture (1.2.1):
-    - RxCocoa (~> 4.0)
-    - RxSwift (~> 4.0)
-  - RxSwift (4.1.2)
+  - RxSwift (4.0.0)
   - SnapKit (4.0.0)
-  - SSZipArchive (2.1.1)
   - SwifterSwift (4.1.1):
     - SwifterSwift/AppKit (= 4.1.1)
     - SwifterSwift/CoreGraphics (= 4.1.1)
@@ -60,68 +44,47 @@ PODS:
   - SwifterSwift/Foundation (4.1.1)
   - SwifterSwift/SwiftStdlib (4.1.1)
   - SwifterSwift/UIKit (4.1.1)
-  - SwiftyBeaver (1.5.1)
   - SwiftyJSON (4.0.0)
   - SwiftyTimer (2.0.0)
-  - Watchdog (4.0)
 
 DEPENDENCIES:
-  - CocoaMQTT
   - CryptoSwift (~> 0.7.1)
-  - HCSStarRatingView (~> 1.5)
   - JRSwizzle
   - Kingfisher
   - Localize-Swift
-  - MJRefresh
-  - Moya
+  - Moya (= 10.0.1)
   - Moya-ModelMapper
   - Moya-ModelMapper/RxSwift
   - Moya/RxSwift
   - ObjectMapper (~> 3.1)
-  - PlainPing
   - R.swift
-  - RealReachability
-  - RxCocoa
-  - RxGesture
-  - RxSwift
+  - RxCocoa (= 4.1.1)
+  - RxSwift (= 4.0)
   - SnapKit (~> 4.0.0)
-  - SSZipArchive
   - SwifterSwift
-  - SwiftyBeaver
   - SwiftyJSON
   - SwiftyTimer
-  - Watchdog
 
 SPEC CHECKSUMS:
-  Alamofire: f41a599bd63041760b26d393ec1069d9d7b917f4
-  CocoaAsyncSocket: 3541e024f48c54b251638ef72d51dd42808de932
-  CocoaMQTT: 3a01a51d534e0419b950d32236d4da389f074de8
+  Alamofire: 907e0a98eb68cdb7f9d1f541a563d6ac5dc77b25
   CryptoSwift: cd2158be2bf639aabc63ec804707c7137c90157c
-  HCSStarRatingView: 1d18f79654735514cd6f00e6d90e38cb6320dc31
   JRSwizzle: dd5ead5d913a0f29e7f558200165849f006bb1e3
   Kingfisher: 1f9157d9c02b380cbd0b7cc890161195164eb634
   Localize-Swift: c798ec9286494866f7068f85f7c71283ac5bdab4
-  MJRefresh: b48380ae2b927b46c4ef000de9adb8dc748e1df7
   ModelMapper: 467f49f6f187b4e6cde2599e7cc5968cefa3f19b
-  Moya: 2b0531a9fef318e0bc484030c3db1e6f279ccb66
+  Moya: 9e621707ff754eeb51ff3ec51a3d54e517c0733a
   Moya-ModelMapper: c59c0bbd042cf9d1d9b0acf38c5f930956bebed8
   ObjectMapper: 20505058f54e5c3ca69e1d6de9897d152a5369a6
-  PlainPing: 17845ab9e2b41460edc0faa94fd02093fa17d236
   R.swift: d6a5ec2f55a8441dc0ed9f1f8b37d7d11ae85c66
   R.swift.Library: c3af34921024333546e23b70e70d0b4e0cffca75
-  RealReachability: a8c483900986a0f3305733961effbfbb00637a02
   Result: d2d07204ce72856f1fd9130bbe42c35a7b0fea10
-  RxCocoa: d88ba0f1f6abf040011a9eb4b539324fc426843a
-  RxGesture: c278eb05b187abd47e11e65464ae4de53ab71d95
-  RxSwift: e49536837d9901277638493ea537394d4b55f570
+  RxCocoa: fd0862fd2df95fa55562ad28ffd2522c25eb4a85
+  RxSwift: fd680d75283beb5e2559486f3c0ff852f0d35334
   SnapKit: a42d492c16e80209130a3379f73596c3454b7694
-  SSZipArchive: 14401ade5f8e82aba1ff03e9f88e9de60937ae60
   SwifterSwift: bfcae9d659dfd306d164f13f72cad09198f30723
-  SwiftyBeaver: 4f74563624b2c1e821c522c54142b5dd5ebb0f30
   SwiftyJSON: 070dabdcb1beb81b247c65ffa3a79dbbfb3b48aa
   SwiftyTimer: 2efd74b060d69ad4f1496baf5bbedbe132125fcf
-  Watchdog: 370d2c2a58c9bede0e3f9b8cc26bf297745c31c2
 
-PODFILE CHECKSUM: 692d2a274b2984322bc0d4acc4ae8424650eeba5
+PODFILE CHECKSUM: 9970a041d345534fa3c70ec226227616327a18ba
 
 COCOAPODS: 1.4.0

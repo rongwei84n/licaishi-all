@@ -83,6 +83,18 @@ class ResetPasswordViewController: UITableViewController, InstanceFromStoryBoard
     
     @IBAction func gainCodeButtonTapped(_ sender: Any) {
         
+        let phone = phoneTextField.text ?? ""
+        
+        if phone.isEmpty {
+            HUDHelper.shared.showWithMsg("手机号码不能为空")
+            return
+        }
+        
+        if !Utils.phoneValidation(phone) {
+            HUDHelper.shared.showWithMsg("不是有效的手机号码")
+            return
+        }
+        
         gainCodeButton.isEnabled = false
         
         if timer == nil {
@@ -91,29 +103,25 @@ class ResetPasswordViewController: UITableViewController, InstanceFromStoryBoard
         }
         
         // 请求验证码
-        _ = viewModel.gainVerificationCode(phoneNumber: phoneTextField.text ?? "").subscribe(onNext: { (isSuccess) in
-            
-            
-            
+        _ = viewModel.gainVerificationCode(phoneNumber: phone).subscribe(onNext: { (isSuccess) in
+
         }, onError: { (error) in
-            
-            
-            
+            HUDHelper.shared.showWithMsg(error.localizedDescription)
         })
         
     }
     
     @IBAction func nextStepButtonTapped(_ sender: Any) {
         
-        let phone = phoneTextField.text
+        let phone = phoneTextField.text ?? ""
         let verificationCode = codeTextField.text ?? ""
         
         if verificationCode.isEmpty {
-            print("请输入验证码")
+            HUDHelper.shared.showWithMsg("请输入验证码")
             return
         }
         
-        let vc = SetPasswordViewController.instanceFromStoryBoard(phoneNumber: phone)
+        let vc = SetPasswordViewController.instanceFromStoryBoard(phoneNumber: phone, verificationCode: verificationCode)
         navigationController?.pushViewController(vc, animated: true)
         
     }

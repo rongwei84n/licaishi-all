@@ -18,14 +18,17 @@ import org.springframework.web.bind.annotation.RestController;
 import com.auts.lcs.consts.Const;
 import com.auts.lcs.controller.SBaseController;
 import com.auts.lcs.model.common.PhiHomeBaseResponse;
+import com.auts.lcs.model.dao.CustomerModel;
 import com.auts.lcs.model.dao.order.OrderModel;
+import com.auts.lcs.model.dao.product.ProductModel;
 import com.auts.lcs.model.enums.OrderStatus;
 import com.auts.lcs.model.response.CommissionOrderResponseDto;
 import com.auts.lcs.model.response.CommissionResponseDto;
 import com.auts.lcs.model.response.Data;
-import com.auts.lcs.model.response.OrderResponseDto;
 import com.auts.lcs.model.response.Pager;
+import com.auts.lcs.service.CustomerService;
 import com.auts.lcs.service.OrderService;
+import com.auts.lcs.service.ProductsService;
 import com.auts.lcs.util.StringUtil;
 
 /**
@@ -45,6 +48,10 @@ public class CommissionController extends SBaseController {
 
     @Autowired
     OrderService orderService;
+    @Autowired
+    ProductsService productsService;
+    @Autowired
+    CustomerService customerService;
 
     /**
      * 根据理财师ID查询理财师的所有佣金
@@ -111,15 +118,19 @@ public class CommissionController extends SBaseController {
         int totalCount = orderService.queryOrderCountByFinancerId(financerId);
         List<CommissionOrderResponseDto> orderResponseDtoList = new ArrayList<>();
         List<OrderModel> orders = orderService.queryOrdersByFinancerId(Integer.parseInt(pageNo), Integer.parseInt(pageSize), financerId);
+        LOGGER.info("queryOrdersByfinancerId result [{}]", orders.size());
         if(orders !=null && !orders.isEmpty()) {
         	for(OrderModel orderModel : orders) {
         		CommissionOrderResponseDto orderResponseDto = new CommissionOrderResponseDto();
         		BeanUtils.copyProperties(orderModel, orderResponseDto);
         		//查询产品简称
-        		orderResponseDto.setProductShortName("大通阳明 1222 号");
-        		orderResponseDto.setCustomerName("李冰帅哥");
+        		ProductModel productModel = productsService.queryProductByPid(orderModel.getProductId());
+        		orderResponseDto.setProductShortName(productModel.getpShortName());
+        		CustomerModel customerModel = customerService.queryCustomerByUid(orderModel.getCustomerUid());
+        		orderResponseDto.setCustomerName(customerModel.getName());
         		orderResponseDtoList.add(orderResponseDto);
         	}
+        	LOGGER.info("queryOrdersByfinancerId result [{}]", orderResponseDtoList.size());
         	//分页
         	pager = genernatePager(Integer.parseInt(pageNo), Integer.parseInt(pageSize), totalCount, orders.size());
         }
@@ -128,6 +139,7 @@ public class CommissionController extends SBaseController {
         data.setList(orderResponseDtoList);
         data.setPager(pager);
         rspObj.setResult(data);
+        LOGGER.info("queryOrdersByfinancerId result [{}]", successResponse(rspObj));
         return successResponse(rspObj);
     }
 }

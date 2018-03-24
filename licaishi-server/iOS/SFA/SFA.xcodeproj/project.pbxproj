@@ -45,6 +45,7 @@
 		766035F8205680B3009A1CC6 /* ReachStateWIFI.m in Sources */ = {isa = PBXBuildFile; fileRef = 766035EA205680B3009A1CC6 /* ReachStateWIFI.m */; };
 		766035FC20568169009A1CC6 /* UIView+Toast.m in Sources */ = {isa = PBXBuildFile; fileRef = 766035FB20568169009A1CC6 /* UIView+Toast.m */; };
 		76603604205B5826009A1CC6 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 76603603205B5826009A1CC6 /* Main.storyboard */; };
+		7660363C20627B9A009A1CC6 /* GlobalType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7660363B20627B9A009A1CC6 /* GlobalType.swift */; };
 		768C2C08202AE3A900F8ABB8 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 768C2C07202AE3A900F8ABB8 /* AppDelegate.swift */; };
 		768C2C0F202AE3A900F8ABB8 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 768C2C0E202AE3A900F8ABB8 /* Assets.xcassets */; };
 		768C2C12202AE3A900F8ABB8 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 768C2C10202AE3A900F8ABB8 /* LaunchScreen.storyboard */; };
@@ -96,6 +97,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		20AA71EFC9E2868723D77FAA /* Pods-SFA.distribution.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SFA.distribution.xcconfig"; path = "Pods/Target Support Files/Pods-SFA/Pods-SFA.distribution.xcconfig"; sourceTree = "<group>"; };
 		380D921AAB746EA68C7DAA45 /* Pods-SFA.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SFA.debug.xcconfig"; path = "Pods/Target Support Files/Pods-SFA/Pods-SFA.debug.xcconfig"; sourceTree = "<group>"; };
 		48531B6DE45989EB493A085C /* Pods-SFA.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SFA.release.xcconfig"; path = "Pods/Target Support Files/Pods-SFA/Pods-SFA.release.xcconfig"; sourceTree = "<group>"; };
 		765D9E5E204B93A1009DFA51 /* UserDefaultsProtocols.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserDefaultsProtocols.swift; sourceTree = "<group>"; };
@@ -158,6 +160,7 @@
 		766035FA20568169009A1CC6 /* UIView+Toast.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+Toast.h"; sourceTree = "<group>"; };
 		766035FB20568169009A1CC6 /* UIView+Toast.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+Toast.m"; sourceTree = "<group>"; };
 		76603603205B5826009A1CC6 /* Main.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
+		7660363B20627B9A009A1CC6 /* GlobalType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GlobalType.swift; sourceTree = "<group>"; };
 		768C2C04202AE3A800F8ABB8 /* SFA.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SFA.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		768C2C07202AE3A900F8ABB8 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		768C2C0E202AE3A900F8ABB8 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -494,6 +497,7 @@
 		76DD2AC72030241A00371FCB /* Global */ = {
 			isa = PBXGroup;
 			children = (
+				7660363B20627B9A009A1CC6 /* GlobalType.swift */,
 				765D9E60204B93AA009DFA51 /* User.swift */,
 				76DD2AC82030249100371FCB /* App.swift */,
 				76A89AF1203FA7250007C13D /* Network.swift */,
@@ -582,6 +586,7 @@
 			children = (
 				380D921AAB746EA68C7DAA45 /* Pods-SFA.debug.xcconfig */,
 				48531B6DE45989EB493A085C /* Pods-SFA.release.xcconfig */,
+				20AA71EFC9E2868723D77FAA /* Pods-SFA.distribution.xcconfig */,
 			);
 			name = Pods;
 			sourceTree = "<group>";
@@ -764,62 +769,42 @@
 			inputPaths = (
 				"${SRCROOT}/Pods/Target Support Files/Pods-SFA/Pods-SFA-frameworks.sh",
 				"${BUILT_PRODUCTS_DIR}/Alamofire/Alamofire.framework",
-				"${BUILT_PRODUCTS_DIR}/CocoaAsyncSocket/CocoaAsyncSocket.framework",
-				"${BUILT_PRODUCTS_DIR}/CocoaMQTT/CocoaMQTT.framework",
 				"${BUILT_PRODUCTS_DIR}/CryptoSwift/CryptoSwift.framework",
-				"${BUILT_PRODUCTS_DIR}/HCSStarRatingView/HCSStarRatingView.framework",
 				"${BUILT_PRODUCTS_DIR}/JRSwizzle/JRSwizzle.framework",
 				"${BUILT_PRODUCTS_DIR}/Kingfisher/Kingfisher.framework",
 				"${BUILT_PRODUCTS_DIR}/Localize-Swift/Localize_Swift.framework",
-				"${BUILT_PRODUCTS_DIR}/MJRefresh/MJRefresh.framework",
 				"${BUILT_PRODUCTS_DIR}/ModelMapper/Mapper.framework",
 				"${BUILT_PRODUCTS_DIR}/Moya/Moya.framework",
 				"${BUILT_PRODUCTS_DIR}/Moya-ModelMapper/Moya_ModelMapper.framework",
 				"${BUILT_PRODUCTS_DIR}/ObjectMapper/ObjectMapper.framework",
-				"${BUILT_PRODUCTS_DIR}/PlainPing/PlainPing.framework",
 				"${BUILT_PRODUCTS_DIR}/R.swift.Library/Rswift.framework",
-				"${BUILT_PRODUCTS_DIR}/RealReachability/RealReachability.framework",
 				"${BUILT_PRODUCTS_DIR}/Result/Result.framework",
 				"${BUILT_PRODUCTS_DIR}/RxCocoa/RxCocoa.framework",
-				"${BUILT_PRODUCTS_DIR}/RxGesture/RxGesture.framework",
 				"${BUILT_PRODUCTS_DIR}/RxSwift/RxSwift.framework",
-				"${BUILT_PRODUCTS_DIR}/SSZipArchive/SSZipArchive.framework",
 				"${BUILT_PRODUCTS_DIR}/SnapKit/SnapKit.framework",
 				"${BUILT_PRODUCTS_DIR}/SwifterSwift/SwifterSwift.framework",
-				"${BUILT_PRODUCTS_DIR}/SwiftyBeaver/SwiftyBeaver.framework",
 				"${BUILT_PRODUCTS_DIR}/SwiftyJSON/SwiftyJSON.framework",
 				"${BUILT_PRODUCTS_DIR}/SwiftyTimer/SwiftyTimer.framework",
-				"${BUILT_PRODUCTS_DIR}/Watchdog/Watchdog.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Alamofire.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/CocoaAsyncSocket.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/CocoaMQTT.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/CryptoSwift.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/HCSStarRatingView.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/JRSwizzle.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Kingfisher.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Localize_Swift.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/MJRefresh.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Mapper.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Moya.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Moya_ModelMapper.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/ObjectMapper.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/PlainPing.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Rswift.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RealReachability.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Result.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RxCocoa.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RxGesture.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RxSwift.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SSZipArchive.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SnapKit.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SwifterSwift.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SwiftyBeaver.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SwiftyJSON.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SwiftyTimer.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Watchdog.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -843,6 +828,7 @@
 				766035F7205680B3009A1CC6 /* FSMStateUtil.m in Sources */,
 				76DD2AC2203021F900371FCB /* SetNewPasswordViewController.swift in Sources */,
 				766035EC205680B3009A1CC6 /* RealReachability.m in Sources */,
+				7660363C20627B9A009A1CC6 /* GlobalType.swift in Sources */,
 				76DD2AD02030322E00371FCB /* String+Extension.swift in Sources */,
 				766035F0205680B3009A1CC6 /* PingHelper.m in Sources */,
 				766035F2205680B3009A1CC6 /* ReachStateUnloaded.m in Sources */,
@@ -1059,8 +1045,8 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.lcss.SFA;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "0f858463-3216-4cdf-b483-0939c675106e";
-				PROVISIONING_PROFILE_SPECIFIER = "iOS Development";
+				PROVISIONING_PROFILE = "3fd8bb2c-72d9-4145-bd69-fb4bb7699c1e";
+				PROVISIONING_PROFILE_SPECIFIER = "develop pro";
 				SWIFT_OBJC_BRIDGING_HEADER = "SFA/Supporting Files/SFA-Bridging-Header.h";
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -1075,7 +1061,7 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Manual;
 				DEFINES_MODULE = YES;
-				DEVELOPMENT_TEAM = 2XQCSN79HT;
+				DEVELOPMENT_TEAM = "";
 				INFOPLIST_FILE = "SFA/Supporting Files/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -1213,7 +1199,7 @@
 		};
 		7A1E5B442060DDE1000D0C89 /* Distribution */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 380D921AAB746EA68C7DAA45 /* Pods-SFA.debug.xcconfig */;
+			baseConfigurationReference = 20AA71EFC9E2868723D77FAA /* Pods-SFA.distribution.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
@@ -1225,7 +1211,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.lcss.SFA;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "88e2dee9-6f9c-4802-9822-bdd738d1437e";
+				PROVISIONING_PROFILE = "c9254324-53bc-4853-9087-8883806e71fa";
 				PROVISIONING_PROFILE_SPECIFIER = lcssDistribution;
 				SWIFT_OBJC_BRIDGING_HEADER = "SFA/Supporting Files/SFA-Bridging-Header.h";
 				SWIFT_VERSION = 4.0;

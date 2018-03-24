@@ -43,7 +43,7 @@ You can check out more about the project direction in the [vision document](Visi
 
 ## Sample Project
 
-There's a sample project in the Demo directory. To use it, run `carthage update` to download the required libraries. Have fun!
+There's a sample project in the Demo directory. To use it, run `pod install` to download the required libraries. Have fun!
 
 ## Project Status
 
@@ -108,15 +108,15 @@ Note that as of Moya 10, SPM only works with Swift 4 toolchain and greater.
 For Moya, use the following entry in your Podfile:
 
 ```rb
-pod 'Moya', '~> 10.0'
+pod 'Moya'
 
 # or 
 
-pod 'Moya/RxSwift', '~> 10.0'
+pod 'Moya/RxSwift'
 
 # or
 
-pod 'Moya/ReactiveSwift', '~> 10.0'
+pod 'Moya/ReactiveSwift'
 ```
 
 Then run `pod install`.

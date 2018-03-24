@@ -119,9 +119,10 @@ public class CustomerController extends SBaseController {
      */
     @RequestMapping(value = "/v1/workshop/queryOrdersByCustomerId", method = RequestMethod.GET, produces = { "application/json" })
     public PhiHomeBaseResponse queryOrdersByCustomerId(HttpServletRequest request,
-    		@RequestParam(value = "pageNo", required = true) String pageNo,
-            @RequestParam(value = "pageSize", required = true) String pageSize,
-            @RequestParam(value = "customerId", required = true) String customerId) {
+    		@RequestParam(value = "pageNo", required = false) String pageNo,
+            @RequestParam(value = "pageSize", required = false) String pageSize,
+            @RequestParam(value = "customerId", required = false) String customerId,
+            @RequestParam(value = "status", required = false) String status) {
         PhiHomeBaseResponse rspObj = new PhiHomeBaseResponse();
         Pager pager = null;
 
@@ -131,7 +132,7 @@ public class CustomerController extends SBaseController {
         String uid = getUidByToken(token);
         int totalCount = orderService.queryOrderCountByCustomerId(customerId);
         List<OrderResponseDto> orderResponseDtoList = new ArrayList<>();
-        List<OrderModel> orders = orderService.queryOrdersByCustomerId(Integer.parseInt(pageNo), Integer.parseInt(pageSize), customerId);
+        List<OrderModel> orders = orderService.queryOrdersByCustomerId(Integer.parseInt(pageNo), Integer.parseInt(pageSize), customerId, status);
         if(orders !=null && !orders.isEmpty()) {
         	for(OrderModel orderModel : orders) {
         		OrderResponseDto orderResponseDto = new OrderResponseDto();

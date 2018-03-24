@@ -102,8 +102,6 @@ public interface AppConstans {
         String SECURITY_VERIFICATION_CODE_TIME = "SECURITY_VERIFICATION_CODE_TIME";
         String CHANGE_PHONE_NUMBER_CODE_TIME = "CHANGE_PHONE_NUMBER_CODE_TIME";
         String FORGOT_PWD_CODE_TIME = "FORGOT_PWD_CODE_TIME";
-        String SMART_LINK_TIME = "SMART_LINK_TIME";
-        String SMART_LINK_TIME2 = "SMART_LINK_TIME2";
     }
 
     interface Products {

@@ -19,12 +19,14 @@ class SetPasswordViewController: UITableViewController, InstanceFromStoryBoard {
     
     private let viewModel = LoginViewModel()
     
-    private var phoneNumber: String?
+    private var phoneNumber = ""
+    private var verificationCode = ""
     
-    static func instanceFromStoryBoard(phoneNumber: String?) -> SetPasswordViewController {
+    static func instanceFromStoryBoard(phoneNumber: String, verificationCode: String) -> SetPasswordViewController {
         
         let vc = instanceFromStoryBoard()
         vc.phoneNumber = phoneNumber
+        vc.verificationCode = verificationCode
         
         return vc
     }
@@ -32,9 +34,6 @@ class SetPasswordViewController: UITableViewController, InstanceFromStoryBoard {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-//        passwordTextField.text = "654321"
-//        psdRepeatTextField.text = "654321"
-
     }
 
     @IBAction func confirmButtonTapped(_ sender: Any) {
@@ -43,27 +42,27 @@ class SetPasswordViewController: UITableViewController, InstanceFromStoryBoard {
         let repeatPassword = psdRepeatTextField.text ?? ""
         
         if password.isEmpty {
-            print("密码不能为空")
+            HUDHelper.shared.showWithMsg("密码不能为空")
             return
         }
         
         if !Utils.passwordValidation(password) {
-            print("密码无效")
+            HUDHelper.shared.showWithMsg("密码无效")
             return
         }
         
         if repeatPassword.isEmpty {
-            print("请再次确认密码")
+            HUDHelper.shared.showWithMsg("请再次确认密码")
             return
         }
         
         if password != repeatPassword {
-            print("两次密码输入不一致")
+            HUDHelper.shared.showWithMsg("两次密码输入不一致")
             return
         }
         
         ZWHud.shared.show()
-        _ = viewModel.forgetPassword(phoneNumber: phoneNumber ?? "", password: password.md5(), verificationCode: "123456")
+        _ = viewModel.forgetPassword(phoneNumber: phoneNumber, password: password.md5(), verificationCode: verificationCode)
             .subscribe(onNext: { [weak self] (isSuccessful) in
                 
                 ZWHud.shared.dismiss()

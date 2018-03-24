@@ -46,8 +46,11 @@ class LoginViewModel: NSObject {
                         User.current.phoneNumber = phoneNumber
                         
                         observer.onNext(true)
+                        observer.onCompleted()
                     }
-                    observer.onError(ServerError.internalError(code: errorCode))
+                    else {
+                        observer.onError(ServerError.internalError(code: errorCode))
+                    }
                     
                 case let .failure(error):
                     observer.onError(error)
@@ -77,10 +80,14 @@ class LoginViewModel: NSObject {
                 case let .success(response):
                     
                     let json = JSON(response.data)
-                    if json["error"].stringValue == "0" {
+                    let errorCode = json["error"].stringValue
+                    if errorCode == "0" {
                         observer.onNext(true)
+                        observer.onCompleted()
                     }
-                    observer.onCompleted()
+                    else {
+                        observer.onError(ServerError.internalError(code: errorCode))
+                    }
                     
                 case let .failure(error):
                     observer.onError(error)
@@ -97,13 +104,30 @@ class LoginViewModel: NSObject {
     ///
     /// - Parameter phoneNumber: 手机号码
     /// - Returns: 网络请求是否成功
-    func gainVerificationCode(phoneNumber: String) -> Observable<Bool> {
+    func gainVerificationCode(phoneNumber: String, _ type: VerificationCodeType = .SMS) -> Observable<Bool> {
         
-        return Observable.create({ (observer) -> Disposable in
+        return Observable.create({ [weak self] (observer) -> Disposable in
             
-            observer.onNext(true)
-            observer.onCompleted()
-            
+            self?.provider.request(.gainVerificationCode(phoneNumber: phoneNumber, type: type), completion: { (result) in
+                
+                switch result {
+                case let .success(response):
+                    
+                    let json = JSON(response.data)
+                    let errorCode = json["error"].stringValue
+                    if errorCode == "0" {
+                        observer.onNext(true)
+                        observer.onCompleted()
+                    }
+                    else {
+                        observer.onError(ServerError.internalError(code: errorCode))
+                    }
+                    
+                case let .failure(error):
+                    observer.onError(error)
+                }
+                
+            })
             return Disposables.create()
             
         }).observeOn(MainScheduler.instance).takeUntil(self.rx.deallocated)
@@ -126,11 +150,14 @@ class LoginViewModel: NSObject {
                 case let .success(response):
                     
                     let json = JSON(response.data)
-                    if json["error"].stringValue == "0" {
+                    let errorCode = json["error"].stringValue
+                    if errorCode == "0" {
                         observer.onNext(true)
+                        observer.onCompleted()
                     }
-                    observer.onNext(true)
-                    observer.onCompleted()
+                    else {
+                        observer.onError(ServerError.internalError(code: errorCode))
+                    }
                     
                 case let .failure(error):
                     observer.onError(error)

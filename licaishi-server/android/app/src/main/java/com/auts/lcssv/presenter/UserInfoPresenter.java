@@ -14,11 +14,9 @@ import com.auts.lcssv.net.callback.BeanCallback;
 import com.auts.lcssv.presenter.viewback.ILoadingView;
 import com.auts.lcssv.presenter.viewback.UserInfoView;
 import com.auts.lcssv.util.EntryUtils;
-import com.auts.lcssv.util.UmengUtil;
 
 import okhttp3.Request;
 
-import static com.auts.lcssv.util.UmengUtil.TEL_SAVE_SUCCESS;
 
 /**
  * 用户信息
@@ -178,7 +176,6 @@ public class UserInfoPresenter extends BasePresenter {
             public void onError(String code, String msg) {
                 hideLoading();
                 if (mUserInfoView != null) {
-                    UmengUtil.onEvent(PhApplication.getPhApplication(), UmengUtil.TEL_SAVE_FAIL);
                     mUserInfoView.rebindError(code, msg);
                 }
             }
@@ -187,7 +184,6 @@ public class UserInfoPresenter extends BasePresenter {
             public void onSuccess(String result, Request request) {
                 hideLoading();
                 if (mUserInfoView != null) {
-                    UmengUtil.onEvent(PhApplication.getPhApplication(), TEL_SAVE_SUCCESS);
                     mUserInfoView.rebindSuccess();
                 }
             }

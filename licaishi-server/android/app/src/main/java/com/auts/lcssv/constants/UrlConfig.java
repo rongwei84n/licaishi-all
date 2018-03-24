@@ -22,8 +22,7 @@ public interface UrlConfig {
         String CHECK_PHONE = URL_HOST + "/srv/v1/checkPhonenumber"; //检查手机号
         String LOGOUT = URL_HOST + "/srv/v1/logout"; //退出登陆
         String GET_CAPTCHA = URL_HOST + "/v1/captcha"; //获取图形验证码
-        String GET_VER_CODE = URL_HOST + "/v1/verificationMsg"; //获取验证码
-        //        String GET_VER_CODE = "https://account.phicomm.com" + "/v1/verificationMsg"; //获取验证码
+        String GET_VER_CODE = URL_HOST + "/srv/v1/verificationMsg"; //获取验证码
         String CHECK_VER_CODE = URL_HOST + "/srv/v1/verifyVerificationCode"; //校验短信验证码
         String REGISTER = URL_HOST + "/srv/v1/account"; //注册账号
         String OLD_ACCOUNT_VERIFICATION = URL_HOST + "/v1/oldAccountVerification"; //校验旧的手机号或邮箱号
@@ -32,6 +31,8 @@ public interface UrlConfig {
         String PROPERTY = URL_HOST + "/srv/v1/property"; //修改用户云账户公共信息
         String PASSWORD = URL_HOST + "/srv/v1/password"; //修改密码
         String FORGOT_PWD = URL_HOST + "/srv/v1/forgetpassword"; //忘记密码重新设置
+
+        String UPLOAD_VOUCHER = URL_HOST + "/srv/v1/order/uploadPayPhote"; //上传打款凭证
     }
 
     interface CloudPortrait {
@@ -67,6 +68,8 @@ public interface UrlConfig {
         String GET_INSTRODUCTION = URL_HOST + "/v1/function/introduction";
 
         String GET_ORDER_ITEM_DETAIL = URL_HOST + "/srv/v1/order/orderDetail?orderNo=";
+
+        String CANCEL_ORDER_ = URL_HOST + "/srv/v1/order/cancelOrder?orderNo=";
 
         String GET_MESSAGES = URL_HOST + "/v1/user/messages";//消息提醒
         String CHECK_UNREADMESSAGES = URL_HOST + "/v1/user/check_msg_read_status";//检查是否有未读消息

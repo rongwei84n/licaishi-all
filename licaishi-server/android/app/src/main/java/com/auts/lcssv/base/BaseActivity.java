@@ -15,7 +15,6 @@ import com.auts.lcssv.presenter.viewback.ILoadingView;
 import com.auts.lcssv.util.AppManager;
 import com.auts.lcssv.util.LogUtils;
 import com.auts.lcssv.views.LoadingDialog;
-import com.umeng.analytics.MobclickAgent;
 
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
@@ -109,13 +108,11 @@ public abstract class BaseActivity extends AppCompatActivity implements ILoading
     @Override
     protected void onPause() {
         super.onPause();
-        MobclickAgent.onPause(this);
     }
 
     @Override
     protected void onResume() {
         super.onResume();
-        MobclickAgent.onResume(this);
     }
 
     @OnClick(R.id.iv_back)

@@ -4,7 +4,6 @@ import Result
 // MARK: - Method
 
 extension Method {
-    /// A Boolean value determining whether the request supports multipart.
     public var supportsMultipart: Bool {
         switch self {
         case .post, .put, .patch, .connect:
@@ -90,13 +89,13 @@ public extension MoyaProvider {
     private func performRequest(_ target: Target, request: URLRequest, callbackQueue: DispatchQueue?, progress: Moya.ProgressBlock?, completion: @escaping Moya.Completion, endpoint: Endpoint<Target>, stubBehavior: Moya.StubBehavior) -> Cancellable {
         switch stubBehavior {
         case .never:
-            switch endpoint.task {
+            switch target.task {
             case .requestPlain, .requestData, .requestJSONEncodable, .requestParameters, .requestCompositeData, .requestCompositeParameters:
                 return self.sendRequest(target, request: request, callbackQueue: callbackQueue, progress: progress, completion: completion)
             case .uploadFile(let file):
                 return self.sendUploadFile(target, request: request, callbackQueue: callbackQueue, file: file, progress: progress, completion: completion)
             case .uploadMultipart(let multipartBody), .uploadCompositeMultipart(let multipartBody, _):
-                guard !multipartBody.isEmpty && endpoint.method.supportsMultipart else {
+                guard !multipartBody.isEmpty && target.method.supportsMultipart else {
                     fatalError("\(target) is not a multipart upload target.")
                 }
                 return self.sendUploadMultipart(target, request: request, callbackQueue: callbackQueue, multipartBody: multipartBody, progress: progress, completion: completion)
@@ -152,7 +151,16 @@ private extension MoyaProvider {
         let cancellable = CancellableWrapper()
 
         let multipartFormData: (RequestMultipartFormData) -> Void = { form in
-            form.applyMoyaMultipartFormData(multipartBody)
+            for bodyPart in multipartBody {
+                switch bodyPart.provider {
+                case .data(let data):
+                    form.append(data: data, bodyPart: bodyPart)
+                case .file(let url):
+                    form.append(fileURL: url, bodyPart: bodyPart)
+                case .stream(let stream, let length):
+                    form.append(stream: stream, length: length, bodyPart: bodyPart)
+                }
+            }
         }
 
         manager.upload(multipartFormData: multipartFormData, with: request) { result in

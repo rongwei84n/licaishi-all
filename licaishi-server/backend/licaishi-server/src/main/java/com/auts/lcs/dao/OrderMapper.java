@@ -22,6 +22,9 @@ public interface OrderMapper {
             + "#{or.status}, #{or.voucherStatus},#{or.voucherPath},#{or.contractStatus},#{or.issueBank},#{or.cardNo}, sysdate(), sysdate())")
 	int saveOrder(@Param("or") OrderModel or);
 
+	@Update("update tbl_order set voucher_path = #{or.voucherPath}, voucher_status=#{or.voucherStatus} where order_no=#{or.orderNo}")
+	int updateVoucher(@Param("or") OrderModel or);
+
 	@Update("update tbl_order set status = 99, update_time= NOW() where order_no=#{orderNo}")
 	int cancelOrder(@Param("orderNo") String orderNo);
 
@@ -65,6 +68,7 @@ public interface OrderMapper {
 			+ "<if test='status !=null '>"
 			+ " and status = #{status} "
 			+ "</if> "
+			+ "order by order_date desc"
 			+ " limit #{startIndex}, #{pageSize}"
 			+ "</script>")
 //    @Select("select * from tbl_order")
@@ -82,7 +86,13 @@ public interface OrderMapper {
     })
     List<OrderModel> queryOrders(@Param("startIndex") int startIndex, @Param("pageSize") int pageSize, @Param("status") String status, @Param("financerID") String financerID);
 
-    @Select("select * from tbl_order where customer_uid= #{customerId}")
+    @Select("<script>"
+    		+ "select * from tbl_order where customer_uid= #{customerId} "
+    		+ "<if test='status !=null '>"
+			+ " 	and status = #{status} "
+			+ "</if> "
+			+ "order by order_date desc"
+    		+ "</script>")
     @Results({
     	@Result(property = "id", column = "uid"), @Result(property = "orderNo", column = "order_no"),
     	@Result(property = "amount", column = "amount"), @Result(property = "orderDate", column = "order_date"),
@@ -95,9 +105,9 @@ public interface OrderMapper {
     	@Result(property = "issueBank", column = "issuing_bank"), @Result(property = "cardNo", column = "card_no"),
     	@Result(property = "createTime", column = "create_time"), @Result(property = "updateTime", column = "update_time")
     })
-    List<OrderModel> queryOrdersByCustomerId(@Param("startIndex") int startIndex, @Param("pageSize") int pageSize, @Param("customerId") String customerId);
+    List<OrderModel> queryOrdersByCustomerId(@Param("startIndex") int startIndex, @Param("pageSize") int pageSize, @Param("customerId") String customerId, @Param("status") String status);
 
-    @Select("select * from tbl_order where financer_uid= #{financerId}  and status in ('02','03')")
+    @Select("select * from tbl_order where financer_uid= #{financerId}  and status in ('02','03') order by order_date desc")
     @Results({
     	@Result(property = "id", column = "uid"), @Result(property = "orderNo", column = "order_no"),
     	@Result(property = "amount", column = "amount"), @Result(property = "orderDate", column = "order_date"),

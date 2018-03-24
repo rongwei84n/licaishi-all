@@ -43,9 +43,8 @@ public class FinancerServiceImpl implements FinancerService{
 	}
 
 	@Override
-	public void editFinancer(FinancerModel financer) {
-		// TODO Auto-generated method stub
-		
+	public int editFinancer(FinancerModel financer) {
+		return financerMapper.editFinancer(financer);
 	}
 
 	@Override

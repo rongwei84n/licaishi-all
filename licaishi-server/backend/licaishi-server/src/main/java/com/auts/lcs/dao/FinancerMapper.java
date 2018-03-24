@@ -25,8 +25,8 @@ public interface FinancerMapper {
     })
     FinancerModel queryFinancerByUID(@Param("uid") String uid);
 
-	@Insert("insert into tbl_financer (name,phone,email,address,createtime,updatetime,sex,birthday) values "
-			+ "(#{financer.name},#{financer.phone},#{financer.email},#{financer.address},#{financer.createtime},#{financer.updatetime},#{financer.sex},#{financer.birthday})")
+	@Insert("insert into tbl_financer (userId,name,phone,email,address,createtime,updatetime,sex,birthday) values "
+			+ "(#{financer.userId},#{financer.name},#{financer.phone},#{financer.email},#{financer.address},#{financer.createtime},#{financer.updatetime},#{financer.sex},#{financer.birthday})")
 	void addFinancer(@Param("financer") FinancerModel financer);
 
 	@Delete("delete from tbl_financer where uid = #{uid}")
@@ -40,9 +40,11 @@ public interface FinancerMapper {
 		  + "</script>")
 	void btrvFinancer(@Param("uids") List<Integer> uids);
 
-	@Update("update tbl_financer set name=#{financer.name},sex=#{financer.sex},birthday=#{financer.birthday},phone=#{financer.phone},email=#{financer.email},address=#{financer.address}"
+	@Update("update tbl_financer set name=#{financer.name},sex=#{financer.sex},birthday=#{financer.birthday},"
+			+ "phone=#{financer.phone},email=#{financer.email},address=#{financer.address},"
+			+ "workshop_name=#{financer.workshopName},workshop_url=#{financer.workshopUrl},workshop_intro=#{financer.workshopIntro}"
 			+ " where uid=#{financer.uid}")
-	void editFinancer(@Param("financer") FinancerModel financer);
+	int editFinancer(@Param("financer") FinancerModel financer);
 
 	@Select("<script>"
 			+ "select count(*) from tbl_financer "

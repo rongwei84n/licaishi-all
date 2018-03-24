@@ -12,7 +12,7 @@ public interface FinancerService {
 
 	void btrvFinancer(String uids);
 
-	void editFinancer(FinancerModel financer);
+	int editFinancer(FinancerModel financer);
 	
 	String queryFinancerIDByUID(String userID);
 }

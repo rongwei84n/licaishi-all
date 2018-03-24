@@ -17,7 +17,6 @@ import com.auts.lcssv.presenter.DevicesPresenter;
 import com.auts.lcssv.presenter.viewback.DevicesView;
 import com.auts.lcssv.util.SpfUtils;
 import com.auts.lcssv.util.ToastUtil;
-import com.auts.lcssv.util.UmengUtil;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -49,7 +48,6 @@ public class RemindSettingActivity extends BaseActivity {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 if (!isChecked) {
-                    UmengUtil.onEvent(RemindSettingActivity.this, UmengUtil.TIMING_SWITCH_ON);
                     SpfUtils.put("isAllowPush", false);
                     if (adapter != null) {
                         adapter.closeAllReminding();
@@ -57,7 +55,6 @@ public class RemindSettingActivity extends BaseActivity {
                     mRecyclerView.setVisibility(View.INVISIBLE);
                     presenter.changeAllTaskRemind(false);
                 } else {
-                    UmengUtil.onEvent(RemindSettingActivity.this, UmengUtil.TIMING_SWITCH_OFF);
                     SpfUtils.put("isAllowPush", true);
                     mRecyclerView.setVisibility(View.VISIBLE);
                     if (adapter != null) {

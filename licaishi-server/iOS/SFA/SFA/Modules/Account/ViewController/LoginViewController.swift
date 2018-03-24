@@ -34,12 +34,12 @@ class LoginViewController: UITableViewController, InstanceFromStoryBoard, UIText
         let password = passwordTextField.text ?? ""
         
         if phone.isEmpty {
-            print("手机号码不能为空")
+            HUDHelper.shared.showWithMsg("手机号码不能为空")
             return
         }
         
         if password.isEmpty {
-            print("密码不能为空")
+            HUDHelper.shared.showWithMsg("密码不能为空")
             return
         }
         

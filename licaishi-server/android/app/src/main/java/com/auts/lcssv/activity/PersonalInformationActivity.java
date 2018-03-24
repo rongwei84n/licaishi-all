@@ -36,7 +36,6 @@ import com.auts.lcssv.util.Base64Utils;
 import com.auts.lcssv.util.LogUtils;
 import com.auts.lcssv.util.PathUtils;
 import com.auts.lcssv.util.ToastUtil;
-import com.auts.lcssv.util.UmengUtil;
 import com.auts.lcssv.views.CommonDialog;
 
 import org.greenrobot.eventbus.EventBus;
@@ -95,7 +94,6 @@ public class PersonalInformationActivity extends BaseActivity implements GetPhot
         mUploadBasePresenter = new UserInfoPresenter(this, new UserInfoView() {
             @Override
             public void uploadBaseSuccess(UploadBaseBean uploadBaseBean) {
-                UmengUtil.onEvent(PersonalInformationActivity.this, UmengUtil.AVATAR_SAVE_SUCCESS);
                 if (uploadBaseBean == null) {
                     uploadBaseError("0", null);
                 } else {
@@ -106,7 +104,6 @@ public class PersonalInformationActivity extends BaseActivity implements GetPhot
 
             @Override
             public void uploadBaseError(String code, String msg) {
-                UmengUtil.onEvent(PersonalInformationActivity.this, UmengUtil.AVATAR_SAVE_FAIL);
                 ToastUtil.show(TextUtils.isEmpty(msg) ? getString(R.string.upload_head_portrait_fail) : msg);
             }
 
@@ -170,13 +167,11 @@ public class PersonalInformationActivity extends BaseActivity implements GetPhot
         mCloudAccountPresenter = new CloudAccountPresenter(this, new CloudAccountView() {
             @Override
             public void onLogoutError(String code, String msg) {
-                UmengUtil.onEvent(PersonalInformationActivity.this, UmengUtil.LOGOUT_FAIL);
                 ToastUtil.show(msg);
             }
 
             @Override
             public void onLogoutSuccess() {
-                UmengUtil.onEvent(PersonalInformationActivity.this, UmengUtil.LOGOUT_SUCCESS);
                 logout();
             }
         });

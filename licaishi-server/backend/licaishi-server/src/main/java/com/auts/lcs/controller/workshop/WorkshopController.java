@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.auts.lcs.consts.Const;
@@ -50,6 +51,36 @@ public class WorkshopController extends SBaseController {
         FinancerModel financerModel = financerService.queryFinancerByUID(financerUid);
         
         rspObj.setResult(financerModel);
+        return successResponse(rspObj);
+    }
+    
+    /**
+     * 修改工作室信息
+     * @param request
+     * @param workshopName
+     * @param workshopUrl
+     * @param workshopIntro
+     * @return
+     */
+    @RequestMapping(value = "/v1/Workshop/updateWorkshop", method = RequestMethod.POST, produces = { "application/json" })
+    public PhiHomeBaseResponse updateWorkshop(HttpServletRequest request,
+    		@RequestParam(value = "workshopName", required = false) String workshopName,
+    		@RequestParam(value = "workshopUrl", required = false) String workshopUrl,
+    		@RequestParam(value = "workshopIntro", required = false) String workshopIntro) {
+        PhiHomeBaseResponse rspObj = new PhiHomeBaseResponse();
+        
+        String token = request.getHeader(Const.AUTHORIZATION);
+        LOGGER.info("updateWorkshop token [{}] workshopName [{}] workshopUrl [{}] workshopIntro [{}]", token, workshopName, workshopUrl, workshopIntro);
+        String uid = getUidByToken(token);
+        String financerUid = getFinancerUidByUid(uid);
+        FinancerModel financerModel = financerService.queryFinancerByUID(financerUid);
+        financerModel.setWorkshopName(workshopName);
+        financerModel.setWorkshopUrl(workshopUrl);
+        financerModel.setWorkshopIntro(workshopIntro);
+        int result = financerService.editFinancer(financerModel);
+        if (result < 1) {
+        	return errorResponse(10008);
+        } 
         return successResponse(rspObj);
     }
 }

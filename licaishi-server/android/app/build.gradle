@@ -219,12 +219,6 @@ dependencies {
     compile 'org.litepal.android:core:1.6.0'
     // 流布局 https://github.com/hongyangAndroid/FlowLayout
     compile 'com.zhy:flowlayout-lib:1.0.3'
-    //极光推送
-    compile 'cn.jiguang.sdk:jpush:3.0.8'
-    compile 'cn.jiguang.sdk:jcore:1.1.6'
-    //友盟统计
-    compile 'com.umeng.sdk:common:latest.integration'
-    compile 'com.umeng.analytics:analytics:latest.integration'
     //LeakCanary
     debugCompile 'com.squareup.leakcanary:leakcanary-android:1.5.4'
     releaseCompile 'com.squareup.leakcanary:leakcanary-android-no-op:1.5.4'
