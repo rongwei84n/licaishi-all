@@ -7,6 +7,7 @@ import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Result;
 import org.apache.ibatis.annotations.Results;
 import org.apache.ibatis.annotations.Select;
+import org.apache.ibatis.annotations.Update;
 
 import com.auts.backstage.model.dao.product.ProductModel;
 
@@ -29,6 +30,16 @@ public interface ProductsMapper {
             +" #{pm.pCpys}, #{pm.pMjzh},#{pm.pFxkz}, #{pm.pHkly},#{pm.pZjyt}, #{pm.pRzf},#{pm.pDbf},#{pm.pTgjg},#{pm.pRgxz}, "
             + "#{pm.pRexiao},#{pm.pTuijian},#{pm.pCommission},#{pm.createTime},#{pm.updateTime})")
     int savaProduct(@Param("pm") ProductModel pm);
+    
+    @Update("update Product set p_short_name=#{pm.pShortName}, p_full_name=#{pm.pFullName}, p_expect_annual_revenue=#{pm.pExpectAnnualRevenue}, "
+    		+ "p_sale_status=#{pm.pSaleStatus}, p_due_time=#{pm.pDulTime}, p_sale_date_start=#{pm.pSaleStartTime}, p_all_issuing_scale=#{pm.pAllIssuingScale}, "
+    		+ "p_payment_interest_type=#{pm.pPaymentInterestType}, p_invest_type=#{pm.pInvestType}, p_size_ratio_type=#{pm.pSizeRatioType}, "
+    		+ "p_invest_owner_id=#{pm.pInvestOwnerId}, p_recruitment_summary=#{pm.pRecruitmentSummary}, p_latest_Pay_Num=#{pm.latestPayNum}, "
+    		+ "p_cpys=#{pm.pCpys}, p_mjzh=#{pm.pMjzh}, p_fxkz=#{pm.pFxkz}, p_hkly=#{pm.pHkly}, p_zjyt=#{pm.pZjyt}, p_rzf=#{pm.pRzf}, p_dbf=#{pm.pDbf},"
+    		+ "p_tgjg=#{pm.pTgjg}, p_rgxz=#{pm.pRgxz}, p_rexiao=#{pm.pRexiao}, p_tuijian=#{pm.pTuijian}, p_commission=#{pm.pCommission}, p_update_time=#{pm.updateTime} "
+    		+ " where p_id = #{pm.id}")
+    int updateProduct(@Param("pm") ProductModel pm);
+    
 	
 	@Select("select count(*) num from Product where p_type= #{pType}")
     int queryCountByPType(@Param("pType") String pType);

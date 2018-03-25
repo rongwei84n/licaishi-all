@@ -1,6 +1,5 @@
 package com.auts.backstage.controller.product;
 
-import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
@@ -13,6 +12,7 @@ import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -23,12 +23,10 @@ import com.auts.backstage.consts.Const;
 import com.auts.backstage.controller.SBaseController;
 import com.auts.backstage.model.common.PageInfo;
 import com.auts.backstage.model.common.PhiHomeBaseResponse;
-import com.auts.backstage.model.dao.FinancerModel;
 import com.auts.backstage.model.dao.product.ProductAttachmentModel;
 import com.auts.backstage.model.dao.product.ProductModel;
 import com.auts.backstage.model.dao.product.ProfitRebateModel;
 import com.auts.backstage.model.response.Data;
-import com.auts.backstage.model.response.Pager;
 import com.auts.backstage.model.response.ProductResponseModel;
 import com.auts.backstage.service.ProductsService;
 
@@ -49,14 +47,43 @@ public class ProductsController extends SBaseController {
     @Autowired
     ProductsService productsService;
 
+    /**
+     * 新增产品
+     * @param proModalValidate
+     * @return
+     */
     @RequestMapping(value = "/v1/product/addProduct", method = RequestMethod.POST, produces = { "application/json" })
-    public PhiHomeBaseResponse addFinancer(HttpServletRequest request, @Validated ProductModel productModel) {
+    public PhiHomeBaseResponse addProduct(@RequestBody ProductModel proModalValidate) {
         PhiHomeBaseResponse rspObj = new PhiHomeBaseResponse();
-        LOGGER.info("addProduct ProductModel [{}]", JSON.toJSONString(productModel));
+        LOGGER.info("addProduct ProductModel [{}]", JSON.toJSONString(proModalValidate));
+        if(proModalValidate.getProfitRebates() == null || proModalValidate.getProfitRebates().size() < 1) {
+        	LOGGER.info("addProduct failure, profitRebates is null , [{}]", JSON.toJSONString(proModalValidate));
+        	return errorResponse(10001);
+        }
         try{
-        	productModel.setpCode(UUID.randomUUID().toString().replaceAll("-", ""));
-        	productModel.setpAllSubscriptionAmount("0");
-        	int result = productsService.addProduct(productModel);
+        	int result = productsService.addProduct(proModalValidate);
+        }catch(Exception e){
+        	LOGGER.error("新增产品异常", e);
+        	return errorResponse(10001);
+        }
+        return successResponse(rspObj);
+    }
+    
+    /**
+     * 修改产品
+     * @param proModalValidate
+     * @return
+     */
+    @RequestMapping(value = "/v1/product/editProduct", method = RequestMethod.POST, produces = { "application/json" })
+    public PhiHomeBaseResponse editProduct(@RequestBody ProductModel proModalValidate) {
+        PhiHomeBaseResponse rspObj = new PhiHomeBaseResponse();
+        LOGGER.info("editProduct ProductModel [{}]", JSON.toJSONString(proModalValidate));
+        if(proModalValidate.getProfitRebates() == null || proModalValidate.getProfitRebates().size() < 1) {
+        	LOGGER.info("editProduct failure, profitRebates is null , [{}]", JSON.toJSONString(proModalValidate));
+        	return errorResponse(10001);
+        }
+        try{
+        	int result = productsService.updateProducts(proModalValidate);
         }catch(Exception e){
         	LOGGER.error("新增产品异常", e);
         	return errorResponse(10001);

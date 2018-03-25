@@ -52,6 +52,15 @@ public class ProductModel extends BaseDaoModel {
 	private String pTuijian;//是否推荐
 	private String pRgxz; //认购须知
 	private String pCommission;//返点佣金
+	private String pRemark;//备注
+
+	public String getpRemark() {
+		return pRemark;
+	}
+
+	public void setpRemark(String pRemark) {
+		this.pRemark = pRemark;
+	}
 
 	public String getpLatestPayNum() {
 		return pLatestPayNum;

@@ -2,6 +2,7 @@ package com.auts.backstage.dao;
 
 import java.util.List;
 
+import org.apache.ibatis.annotations.Delete;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Result;
@@ -31,9 +32,14 @@ public interface ProfitRebateMapper {
     })
     List<ProfitRebateModel> queryProfitRebateByPCode(@Param("pCode") String pCode);
     
-    @Insert("insert into ProfitRebate (pr_id, pr_product_code, pr_start_amount,"
-    		+ "pr_end_amount, pr_amount_display, pr_expect_annual_revenue, pr_commission) "
-            + "values (#{pr.id}, #{pr.prProductCode},#{pr.prStartAmount}, "
-            + "#{pr.prEndAmount}, #{pr.prAmountDisplay},#{pr.prExpectSnnualRevenue},#{pr.prCommission})")
-    int savaProfitRebate(ProfitRebateModel pr);
+    @Insert("insert into ProfitRebate (pr_product_code, pr_start_amount,"
+    		+ "pr_end_amount, pr_amount_display, pr_expect_annual_revenue, pr_commission,pr_create_time,pr_update_time) "
+            + "values (#{pr.prProductCode},#{pr.prStartAmount}, "
+            + "#{pr.prEndAmount}, #{pr.prAmountDisplay},#{pr.prExpectAnnualRevenue},#{pr.prCommission},"
+            + "#{pr.prCreateTime},#{pr.prUpdateTime})")
+    int savaProfitRebate(@Param("pr") ProfitRebateModel pr);
+    
+    
+	@Delete("delete from ProfitRebate where pr_product_code=#{pCode}")
+	int delProfitRebateByPCode(@Param("pCode") String pCode);
 }

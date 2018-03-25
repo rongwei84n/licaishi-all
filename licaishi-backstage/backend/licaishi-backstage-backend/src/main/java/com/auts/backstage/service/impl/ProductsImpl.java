@@ -1,8 +1,10 @@
 package com.auts.backstage.service.impl;
 
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.UUID;
 
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -85,34 +87,112 @@ public class ProductsImpl implements ProductsService {
 		Date nowDate = new Date();
 		productModel.setCreateTime(nowDate);
 		productModel.setUpdateTime(nowDate);
+		productModel.setpCode(UUID.randomUUID().toString().replaceAll("-", ""));
+		productModel.setpAllSubscriptionAmount("0");
+    	//设置最高预计收益率
+    	List<ProfitRebateModel> profitRebates = productModel.getProfitRebates();
+    	if(profitRebates != null && profitRebates.size() > 0) {
+    		double maxAnnualRevenue = 0;
+    		double maxCommission = 0;
+    		for(ProfitRebateModel prm : profitRebates) {
+    			String annualRevenue = prm.getPrExpectAnnualRevenue();
+    			double annualRevenueTmp =  Double.parseDouble(annualRevenue.replaceAll("%", ""));
+    			if(annualRevenueTmp > maxAnnualRevenue) {
+    				maxAnnualRevenue = annualRevenueTmp;
+    			}
+    			
+    			String prCommission = prm.getPrCommission();
+    			double prCommissionTmp =  Double.parseDouble(prCommission.replaceAll("%", ""));
+    			if(prCommissionTmp > maxCommission) {
+    				maxCommission = prCommissionTmp;
+    			}
+    		}
+    		productModel.setpExpectAnnualRevenue(maxAnnualRevenue+"");
+    		productModel.setpCommission(maxCommission+"");
+    	}
 		int result = productsMapper.savaProduct(productModel);
 		if(result > 0) {
 			if(productModel.getProfitRebates() != null && productModel.getProfitRebates().size() > 0) {
-				saveProfitRebate(productModel.getProfitRebates());
+				saveProfitRebate(productModel);
 			}
 			
 			if(productModel.getProductAttachments() != null && productModel.getProductAttachments().size() > 0) {
-				saveProductAttachment(productModel.getProductAttachments());
+				saveProductAttachment(productModel);
 			}
 		}
 		return result;
 	}
 	
-	private void saveProfitRebate(List<ProfitRebateModel> profitRebates) {
-		for(ProfitRebateModel pr : profitRebates) {
+	private void saveProfitRebate(ProductModel productModel) {
+		for(ProfitRebateModel pr : productModel.getProfitRebates()) {
+			Date nowDate = new Date();
+			pr.setPrCreateTime(nowDate);
+			pr.setPrUpdateTime(nowDate);
+			pr.setPrProductCode(productModel.getpCode());
+			if(!pr.getPrExpectAnnualRevenue().contains("浮动")) {
+				pr.setPrExpectAnnualRevenue(pr.getPrExpectAnnualRevenue() +"%");
+			}
+			pr.setPrCommission(pr.getPrCommission()+"%");
+			BigDecimal rate = new BigDecimal(10000);
+			if(pr.getPrEndAmount() == null) {
+				String prAmountDisplay = pr.getPrStartAmount() + "万以上";
+				pr.setPrAmountDisplay(prAmountDisplay);
+				pr.setPrStartAmount(pr.getPrStartAmount().multiply(rate));
+				pr.setPrEndAmount(BigDecimal.ZERO);
+			} else {
+				String prAmountDisplay = pr.getPrStartAmount() + "-" + pr.getPrEndAmount() + "万";
+				pr.setPrAmountDisplay(prAmountDisplay);
+				pr.setPrStartAmount(pr.getPrStartAmount().multiply(rate));
+				pr.setPrEndAmount(pr.getPrEndAmount().multiply(rate));
+			}
 			profitRebateMapper.savaProfitRebate(pr);
 		}
 	}
 
-	private void saveProductAttachment(List<ProductAttachmentModel> productAttachments){
-		for(ProductAttachmentModel pa : productAttachments) {
+	private void saveProductAttachment(ProductModel productModel){
+		for(ProductAttachmentModel pa : productModel.getProductAttachments()) {
+			pa.setPaProductCode(productModel.getpCode());
 			productAttachmentMapper.savaProductAttachment(pa);
 		}	
 	}
 	
 	@Override
 	public int updateProducts(ProductModel productModel) {
-		// TODO Auto-generated method stub
+		Date nowDate = new Date();
+		productModel.setUpdateTime(nowDate);
+    	//设置最高预计收益率
+    	List<ProfitRebateModel> profitRebates = productModel.getProfitRebates();
+    	if(profitRebates != null && profitRebates.size() > 0) {
+    		double maxAnnualRevenue = 0;
+    		double maxCommission = 0;
+    		for(ProfitRebateModel prm : profitRebates) {
+    			String annualRevenue = prm.getPrExpectAnnualRevenue();
+    			double annualRevenueTmp =  Double.parseDouble(annualRevenue.replaceAll("%", ""));
+    			if(annualRevenueTmp > maxAnnualRevenue) {
+    				maxAnnualRevenue = annualRevenueTmp;
+    			}
+    			
+    			String prCommission = prm.getPrCommission();
+    			double prCommissionTmp =  Double.parseDouble(prCommission.replaceAll("%", ""));
+    			if(prCommissionTmp > maxCommission) {
+    				maxCommission = prCommissionTmp;
+    			}
+    		}
+    		productModel.setpExpectAnnualRevenue(maxAnnualRevenue+"");
+    		productModel.setpCommission(maxCommission+"");
+    	}
+		int result = productsMapper.updateProduct(productModel);
+		if(result > 0) {
+			if(productModel.getProfitRebates() != null && productModel.getProfitRebates().size() > 0) {
+				//先删除，后增加
+				profitRebateMapper.delProfitRebateByPCode(productModel.getpCode());
+				saveProfitRebate(productModel);
+			}
+			
+			if(productModel.getProductAttachments() != null && productModel.getProductAttachments().size() > 0) {
+				saveProductAttachment(productModel);
+			}
+		}
 		return 0;
 	}
 }
