@@ -52,16 +52,16 @@
     </div>
 
     <div class="my-owns">
-      <mt-cell title="我的工作室" to="/rank" is-link>
+      <mt-cell title="我的理财师" to="/rank" is-link>
         <img slot="icon" src="../../common/image/my_settings_mystudio.png" width="18" height="14">
       </mt-cell>
-      <mt-cell title="我的客户" to="/rank/mycustom" is-link>
+      <mt-cell title="我的收益" to="/rank/mycustom" is-link>
         <img slot="icon" src="../../common/image/my_settings_my_customer.png" width="18" height="14">
       </mt-cell>
-      <mt-cell title="我要推广" is-link>
+      <mt-cell title="我的银行卡" is-link>
         <img slot="icon" src="../../common/image/my_settings_spread.png" width="18" height="14">
       </mt-cell>
-      <mt-cell title="客服热线：400-0852-6325">
+      <mt-cell title="理财师热线：400-0852-6325">
         <img slot="icon" src="../../common/image/my_settings_hotline.png" width="18" height="14">
       </mt-cell>
     </div>
