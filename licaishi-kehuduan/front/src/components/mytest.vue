@@ -1,46 +1,29 @@
 <template>
   <div class="order-container">
-    <p>单选框:</p>
-    <input type="checkbox" id="checkbox" v-model="checked"/>
-    <label >{{checked}}</label> <br>
 
-    <p>多选框：</p>
+    <input type="button" value="热门产品" v-on:click="getHotProducts"></input>
+    <p>{{xxx}}</p>
 
-    <input type="checkbox" id="roob" value="Roob" v-model="checkedNames"/>
-
-    <input type="checkbox" id="goo" value="Google" v-model="checkedNames"/>
-
-    <span>选择的值 {{checkedNames}}</span>
-
-    <select v-model="selected">
-      <option value="未选择">选择一个网址</option>
-      <option value="www.baidu.com">百度</option>
-      <option value="www.google.com">谷歌</option>
-    </select>
-    <p>选择的值是 {{selected}}</p>
-
-    <input v-model.trim="age" />
-
-    <p>年龄是 {{age}}</p>
-
-    <img class="card-img" :src="imgDataUrl" style="height: 16rem;">
-    <div class="card-footer text-muted">
-      <input type="file" id="image" name="image" @change="preview($event)">
-    </div>
+    <ul id="example-1">
+      <li v-for="hot_p in hotProducts">
+        {{ hot_p.name }}
+        {{hot_p.url}}
+      </li>
+    </ul>
 
   </div>
 </template>
 <script type="text/javascript">
   import { changeOrder, changeStatus} from '../vuex/action'
-  export default{
-    data(){
-      let checked = true
-      let checkedNames = []
-      let selected = '未选择'
-      let age
-      let imgDataUrl = ''
 
-      return {checked, checkedNames, selected, age, imgDataUrl}
+  let prods = []; // 热门产品
+  export default {
+    data() {
+      return {
+        xxx:'xx',
+        roomJsonArr:[],
+        hotProducts:[prods]
+      }
     },
     vuex:{
       getters: {
@@ -65,7 +48,49 @@
       },
       preview: function(event){
         this.imgDataUrl = event.target.files;
+      },
+      getHotProducts: function () {
+        let _this = this;
+        window.phihome.util.netRequest('get','http://192.168.1.109:8094/server/hot_products','', '',function (response) {
+          let errorMessage;
+          response = JSON.parse(response);
+          if (response.errorCode == 0) {
+            let netResponse = JSON.parse(response.netResponse);
+
+            let responseResult = netResponse.result;
+            _this.roomJsonArr = [];
+            for (let i = 0; i < responseResult.length; i++) {
+              let hotProI = responseResult[i];
+              _this.roomJsonArr.push({'name': hotProI.name, 'url': hotProI.url});
+            }
+            _this.$data.hotProducts = _this.roomJsonArr;
+
+
+            // if (netResponse.status == 200) {
+            //   _this.hotProducts = netResponse.message;
+            //   window.phihome.app.hideLoading('', function (response) {
+            //   });
+            // } else {
+            //   if (netResponse.status == 11001) { // 账号下没有该设备，返回设备首页
+            //     _this.device_name = '智能排插TC1';
+            //     _this.toast_show = true;
+            //   } else {
+            //     window.phihome.app.toast(netResponse.message, function (response) {
+            //     });
+            //     window.phihome.app.hideLoading('', function (response) {
+            //     });
+            //   }
+            // }
+          } else {
+            errorMessage = response.errorMsg;
+            window.phihome.app.toast(errorMessage, function (response) {
+            });
+            window.phihome.app.hideLoading('', function (response) {
+            });
+          }
+        })
       }
+
     }
   }
 </script>

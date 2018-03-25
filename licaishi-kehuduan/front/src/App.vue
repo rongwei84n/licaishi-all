@@ -49,6 +49,8 @@
   </div>
 </template>
 <script type="text/javascript">
+    require('./assets/js/phihome-1.0.0.js?n=1');
+
     import store from './vuex/store'
     import { changeSelected } from './vuex/action'
 
