@@ -18,8 +18,8 @@
     <artifactId>licaishi-cli-backend</artifactId>
     <version>0.1-SNAPSHOT</version>
 
-    <name>licaishi-server-backend</name>
-    <description>licaishi-server-backend</description>
+    <name>licaishi-cli-backend</name>
+    <description>licaishi-cli-backend</description>
 
     <repositories>
         
