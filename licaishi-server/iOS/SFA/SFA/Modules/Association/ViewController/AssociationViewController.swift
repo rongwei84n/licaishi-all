@@ -149,11 +149,11 @@ class AssociationViewController: UIViewController, InstanceFromStoryBoard {
             
             if User.current.isLoggedIn {
                 navigationController?.pushViewController(MeViewController.instanceFromStoryBoard(), animated: true)
-                openPageCallback = responseCallback
             }
             else {
                 navigationController?.pushViewController(LoginViewController.instanceFromStoryBoard(), animated: true)
             }
+            openPageCallback = responseCallback
             
         case "lcs.order.orderdetail":
             
