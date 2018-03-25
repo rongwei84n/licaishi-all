@@ -1,0 +1,342 @@
+<?xml version="1.0" encoding="UTF-8"?>    
+<!DOCTYPE module PUBLIC "-//Puppy Crawl//DTD Check Configuration 1.3//EN" "http://www.puppycrawl.com/dtds/configuration_1_3.dtd">    
+<!--   
+    This configuration file was written by the eclipse-cs plugin configuration editor   
+-->    
+<!--    
+    Checkstyle-Configuration: check    
+    Description: none    
+-->    
+<module name="Checker">  
+      
+    <property name="severity" value="warning"/>  
+    <property name="charset" value="UTF-8"/>  
+    <message key="general.exception" value="有一个异常 - {0}  "/>  
+    <message key="general.fileNotFound" value="文件没找到!"/>  
+      
+    <!--章节2.2A  -->  
+    <!-- 不允许使用TAB缩进,此规则必须在<TreeWalker>标签外 -->  
+    <!-- <module name="FileTabCharacter">  
+        <property name="severity" value="warning"/>  
+        <property name="eachLine" value="true"/>  
+        <message key="containsTab" value="本行包含 tab 字符,违反编码规范2.2章节"/>  
+    </module>  --> 
+      
+    <!--章节3.1.1  -->  
+    <!-- 检查每个java package中是否有java注释文件，默认是允许一个package-info.java，  
+    也可以通过allowLegacy属性配置允许package.html。此规则必须在<TreeWalker>标签外 -->  
+    <module name="JavadocPackage" />  
+  
+    <module name="TreeWalker">  
+        <property name="severity" value="warning"/>    
+        <property name="tabWidth" value="4"/>    
+        <message key="general.exception" value="有一个异常 - {0}"/>   
+     
+        <!--章节4.8.7 -->  
+        <!-- ModifierOrder 检查修饰符的顺序，
+        	默认是 public,protected,private,abstract,static,final,transient,
+        	volatile,synchronized,native,strictfp--> 
+        <module name="ModifierOrder">    
+            <message key="mod.order" value="''{0}'' 修饰符顺序错误.违反编码规范4.8.7章节"/>    
+            <message key="annotation.order" value="''{0}'' 注释修饰符不能在非注释修饰符前面."/>    
+        </module>  
+          
+        <!--章节4.8.4.1B  -->     
+        <!-- switch缩进风格-->  
+        <module name="Indentation">  
+            <property name="severity" value="warning"/>  
+            <property name="basicOffset" value="4"/>  
+            <message key="indentation.warning" value="你缩进了{1}个空格，正确应该缩进 {2}个空格，违反编码规范4.8.4.1章节"/>  
+            <!-- 子级缩进  --> 
+            <message key="indentation.child.warning" value="你缩进了{1}个空格，正确应该缩进 {2}个空格，违反编码规范4.8.4.1章节"/>  
+        </module>  
+        <!-- 检查文件是否以一个新行结束-->  
+        <!-- <module name="NewlineAtEndOfFile"/>  -->
+        <!--章节2.3  -->  
+        <!-- 页宽-->  
+        <module name="LineLength">    
+            <property name="max" value="200"/>    
+            <message key="maxLineLen" value="行字符数超过200个.违反编码规范4.4章节"/>  
+            <!-- 3.3 import 语句不受行的最大长度限制（200 个字符） -->
+            <property name="ignorePattern" value="^package.*|^import.*|a href|href|http://|https://|ftp://"/>  
+        </module>   
+          
+        <!--章节2.4 -->  
+        <!--操作符换行策略检查-->  
+        <module name="OperatorWrap">  
+            <property name="severity" value="warning"/>  
+            <property name="option" value="nl"/>  
+            <property name="tokens" value="ASSIGN,BAND,BOR,DIV,EQUAL,GE,GT,LAND,LE,LOR,LT,MINUS_ASSIGN,MOD,MOD_ASSIGN,NOT_EQUAL,PLUS,PLUS_ASSIGN,QUESTION,STAR,STAR_ASSIGN"/>  
+            <message key="line.after" value="''{0}'没有放在新行之首，违反编码规范2.4章节"/>  
+        </module>      
+      
+        <!--章节2.6  -->  
+        <module name="ParenPad">  
+            <property name="severity" value="warning"/>  
+            <property name="tokens" value="LPAREN,RPAREN,CTOR_CALL,METHOD_CALL,SUPER_CTOR_CALL"/>  
+            <message key="ws.followed" value="''{0}'' 后面有空格，违反编码规范2.6章节"/>  
+            <message key="ws.preceded" value="''{0}''前面有空格，违反编码规范2.6章节"/>  
+        </module>      
+        <module name="TypecastParenPad">  
+            <property name="severity" value="warning"/>  
+            <property name="tokens" value="RPAREN,TYPECAST"/>  
+            <!-- <message key="ws.followed" value="''{0}''后面多一个空格，违反编码规范2.6章节"/>   -->
+            <message key="ws.preceded" value="''{0}''前面多一个空格，违反编码规范2.6章节"/>  
+        </module>      
+        <module name="WhitespaceAfter">  
+            <property name="severity" value="warning"/>  
+            <property name="tokens" value="COMMA,SEMI"/>  
+            <!-- <message key="ws.notFollowed" value="''{0}''后面多一个空格，违反编码规范2.6章节"/>   -->
+        </module>      
+        <module name="WhitespaceAround">  
+            <property name="severity" value="warning"/>  
+            <property name="tokens" value="RCURLY,LITERAL_ASSERT,LITERAL_ASSERT,LITERAL_CATCH,LITERAL_DO,LITERAL_ELSE,LITERAL_FINALLY,LITERAL_FOR,LITERAL_IF,LITERAL_RETURN,LITERAL_SYNCHRONIZED,LITERAL_TRY,LITERAL_WHILE"/>  
+            <property name="allowEmptyConstructors" value="true"/>  
+            <property name="allowEmptyMethods" value="true"/>  
+            <message key="ws.notPreceded" value="''{0}'' 关键字前少一个空格，违反编码规范4.6.2章节"/>  
+            <message key="ws.notFollowed" value="''{0}'' 关键字后少一个空格，违反编码规范4.6.2章节"/>  
+        </module>  
+          
+        <!--章节2.7 -->  
+        <!-- 每行语句数量-->  
+        <module name="OneStatementPerLine">  
+            <!--模块的元数据类型设置，经过测试发现该标签没用-->  
+            <metadata name="net.sf.eclipsecs.core.comment" value="Coding Problems-> Only one statement per line allowed" />  
+              
+            <message key="multiple.statements.line" value="禁止一行有多句代码，违反编码规范2.7章节" />  
+        </module>  
+          
+        <!--章节4.8.2.1 -->  
+        <!-- 每行变量声明数量-->  
+        <module name="MultipleVariableDeclarations">    
+            <property name="severity" value="warning"/>    
+            <message key="multiple.variable.declarations.comma" value="每一个变量的定义必须在它的声明处，且在同一行"/>    
+            <message key="multiple.variable.declarations" value="每一行只能定义一个变量，违反编码规范4.8.2.1章节"/>    
+        </module>       
+              
+        <!--章节2.9.1  -->  
+        <!-- Checks the placement of right curly braces ('}') for  else, try, and catch tokens. The policy to verify is specified using property  option.     
+          option: 右大括号是否单独一行显示    
+          tokens: 定义检查的类型  -->    
+        <module name="RightCurly">      
+            <property name="option" value="alone"/>   
+            <property name="severity" value="warning"/>                   
+        </module>   
+          
+        <!--章节4.1.2  -->    
+        <!-- 检查左侧大括号 左侧大括号必须放在前一行代码的行尾 -->  
+        <module name="LeftCurly">  
+            <property name="severity" value="warning"/>  
+            <message key="line.previous" value="左侧大括号没有放在前一行代码的行尾，违反编码规范4.1.2章节"/>  
+        </module>   
+          
+        <!--章节4.1.1  -->  
+        <!-- 检查代码块是否缺失大括号-->  
+        <module name="NeedBraces">    
+            <message key="needBraces" value="''{0}'' 结构没有用大括号 '''{}'''s，违反编码规范4.1.1章节"/>    
+        </module>   
+          
+        <!-- 章节3.2 -->  
+        <!-- 对文件头的注释进行检查 --> 
+         
+        <!--章节4.8.2.1  --> 
+        <!-- 每次只声明一个变量 -->
+ 		<module name="MultipleVariableDeclarations"/>
+        <!--章节4.8.6  -->  
+        <!--对类和接口的javadoc注释进行检查-->  
+        <module name="JavadocType">  
+            <property name="severity" value="warning"/>  
+            <!-- <message key="type.missingTag" value="Javadoc 类型的注释丢失 {0} 标签.违反编码规范4.8.6章节"/>   -->
+            <message key="javadoc.missing" value="缺少 Javadoc 注释.违反编码规范4.8.6章节"/>  
+            <message key="javadoc.unusedTagGeneral" value="未使用过的 Javadoc 标签.违反编码规范4.8.6章节"/>  
+            <message key="javadoc.unusedTag" value="未使用过的 {0} 标签for ''{1}''.违反编码规范3.3章节"/>  
+            <message key="type.tagFormat" value="Javadoc 类型标签 {0}必须匹配模式 ''{1}''.违反编码规范3.3章节"/>  
+        </module>  
+          
+        <!--章节3.4，3.7  -->      
+        <!--public protect private变量的注释进行检查-->  
+        <!-- <module name="JavadocVariable">  
+            <property name="severity" value="warning"/>  
+            <property name="scope" value="public"/>  
+            <message key="javadoc.missing" value="变量注释：缺少Javadoc注释,违反编码规范3.4章节"/>  
+        </module>  -->  
+        <module name="JavadocVariable">  
+            <property name="severity" value="warning"/>  
+            <property name="scope" value="protected"/>  
+            <message key="javadoc.missing" value="变量注释：缺少Javadoc注释,违反编码规范3.4章节"/>  
+        </module>   
+        <!-- <module name="JavadocVariable">  
+            <property name="severity" value="warning"/>  
+            <message key="javadoc.missing" value="变量注释：缺少Javadoc注释,违反编码规范3.4章节"/>  
+        </module>  -->      
+          
+        <!--章节4.8.6  -->  
+        <!-- 检查所有方法的javadoc，可以不声明RuntimeException -->  
+        <module name="JavadocMethod">  
+            <property name="allowUndeclaredRTE" value="true"/>  
+            <!--允许get set 方法没有注释-->  
+            <property name="allowMissingPropertyJavadoc" value="true"/>  
+            <message key="javadoc.missing" value="方法注释：缺少Javadoc注释，违反编码规范4.8.6章节"/>  
+        </module>       
+          
+        <!-- 命名规范 -->  
+        <!--章节4.2 -->  
+        <!-- 包名命名规范 -->  
+        <module name="PackageName">         
+            <!-- <property name="format" value="^[a-z]+(\.[a-z][a-z0-9]*)*$"/>  -->   
+            <property name="format" value="^com\.phicomm\.[a-z]+(\.[a-z]+)+$"/>        
+            <message key="name.invalidPattern" value="包名 ''{0}'' 不符合com.phicomm.项目名.模块名，违反编码规范3.4章节"/>    
+        </module> 
+        <!--章节4.8.3.2 -->    
+        <!-- 非C风格的数组声明 例如: String[] args -->
+ 		<module name="ArrayTypeStyle"/>
+ 		<!-- 对关键字else、try和catch的右侧大括号放置位置进行检查 -->
+	 	<module name="RightCurly">
+	 	<property name="severity" value="warning"/>
+	 	<!--与下一语句放在同一行 -->
+	 	<property name="option" value="same"/>
+	 	</module>
+	 	<!-- 检查未被注释的main方法,排除以Main结尾命名的类 -->
+	 	<module name="UncommentedMain">
+	 	<property name="excludedClasses" value=".*Main$"/>
+	 	</module>
+	 	<!-- 章节4.8.7 -->
+ 		<!-- ModifierOrder 检查修饰符的顺序，默认是 public,protected,private,abstract,static,final,
+ 			transient,volatile,synchronized,native,strictfp-->  
+        <module name="ModifierOrder"/>
+        <!--章节5.0 -->
+        <!-- 命名约定 -->  
+        <!-- 类的命名,匹配规则默认:(^[A-Z][a-zA-Z0-9]*$),必须以大写字母开始 -->  
+        <module name="TypeName">    
+            <property name="tokens" value="CLASS_DEF"/>  
+            <message key="name.invalidPattern" value="类名 ''{0}''没有通过大驼峰命名法命名，违反编码规范5.0章节"/>   
+        </module>   
+             
+        <!-- 接口命名,匹配规则默认:(^[A-Z][a-zA-Z0-9]*$),必须以大写字母开始 -->  
+        <module name="TypeName">    
+            <property name="tokens" value="INTERFACE_DEF"/>  
+            <message key="name.invalidPattern" value="接口名 ''{0}''没有通过大驼峰命名法命名，违反编码规范5.0章节"/>   
+        </module>  
+          
+        <!--章节5.0 -->  
+        <!-- 命名约定 -->      
+        <module name="MethodName">    
+            <property name="severity" value="warning"/>    
+            <property name="format" value="(^[a-z][a-zA-Z0-9]*$)"/>    
+            <message key="name.invalidPattern" value="方法名 ''{0}''没有通过小驼峰命名法命名.违反编码规范5.0章节"/>         
+        </module>    
+          
+        <!--章节5.0 -->  
+        <!-- 命名约定 -->  
+        <module name="LocalVariableName">         
+            <property name="format" value="(^[a-z][a-zA-Z0-9]*$)"/>    
+            <message key="name.invalidPattern" value="变量名 ''{0}''没有通过小驼峰命名法命名.违反编码规范5.0章节"/>        
+        </module>   
+          
+        <!-- 局部的final变量，包括catch中的参数的检查 -->     
+        <module name="LocalFinalVariableName" >    
+            <property name="severity" value="warning"/>  
+            <message key="name.invalidPattern" value="变量名 ''{0}''没有通过小驼峰命名法命名.违反编码规范5.0章节"/>  
+        </module>  
+              
+        <!-- 变量命名 -->  
+        <module name="MemberName">    
+            <message key="name.invalidPattern" value="变量名 ''{0}''没有通过小驼峰命名法命名.违反编码规范5.0章节"/>    
+        </module>   
+          
+        <!-- 静态变量命名 -->  
+        <module name="StaticVariableName">  
+            <message key="name.invalidPattern" value="变量名 ''{0}''没有通过小驼峰命名法命名.违反编码规范5.0章节"/>  
+        </module>  
+              
+        <!-- 数组变量命名 -->  
+        <module name="ArrayTypeStyle">  
+            <property name="severity" value="warning"/>  
+            <message key="array.type.style" value="数组定义没有采取int[] index这种方式，违反编码规范4.7.2章节"/>  
+        </module>   
+          
+        <!--章节4.8 -->  
+        <!-- 常量命名-->  
+        <!-- <module name="ConstantName">  
+            <property name="severity" value="warning"/>  
+            <message key="name.invalidPattern" value="常量 ''{0}'' 常量名违反编码规范4.8章节."/>  
+        </module>  --> 
+          
+        <!--章节5.1 -->  
+        <!-- import语句不使用通配符 -->  
+        <module name="AvoidStarImport">  
+            <property name="severity" value="warning"/>  
+            <message key="import.avoidStar" value="引用包时不能使用*号.违反编码规范5.1章节"/>  
+        </module>        
+          
+        <!--章节5.2 -->  
+        <!-- 魔法数检测-->  
+        <!-- <module name="MagicNumber">    
+            <property name="severity" value="warning"/>    
+            <message key="magic.number" value="''{0}'' 是一个魔法数(即常数).违反编码规范5.2章节"/>    
+        </module>  --> 
+          
+        <!--章节5.4 -->  
+        <!-- 多余的关键字，包含不适用this作为关键字 -->   
+        <!-- <module name="RedundantModifier">    
+            <message key="redundantModifier" value="''{0}'' 多余的修饰符.违反编码规范5.4章节"/>    
+        </module>  -->  
+          
+        <!--章节5.5 -->  
+        <!-- 重载父类方法 -->  
+        <module name="MissingOverride">     
+            <message key="annotation.missing.override" value="重载方法缺少@Override，违反编码规范5.5章节" />  
+            <message key="tag.not.valid.on" value="注释-> Javadoc {0}标签在这个位置是无效的." />  
+        </module>   
+          
+        <!--章节5.6 -->  
+        <!--判断语句使用  -->  
+        <module name="SimplifyBooleanExpression">  
+            <property name="severity" value="warning"/>  
+            <message key="simplify.expression" value="存在布尔冗余，违法编码规范5.6章节."/>  
+        </module>  
+          
+        <!--章节4.8.4.3  -->  
+        <!-- 检查switch语句是否忘记了default标签 -->  
+        <module name="MissingSwitchDefault" >  
+            <property name="severity" value="warning"/>  
+            <message key="missing.switch.default" value="switch 语句后边没有 default 语句.违法编码规范4.8.4.3章节"/>  
+        </module>  
+          
+        <!-- 检查switch语句中default标签的顺序 -->  
+        <module name="DefaultComesLast">  
+            <property name="severity" value="warning"/>  
+            <message key="default.comes.last" value="建议Default 放在 switch 语句的最后."/>  
+        </module>   
+          
+        <!--章节5.9 -->  
+        <!-- 禁止使用System.out.println -->  
+        <module name="Regexp">  
+            <property name="format" value="System\.out\.println"/>   
+            <property name="message" value="不要使用 System.out 进行控制台打印，应该使用日志工具类(如：log4j)进行统一记录或者打印"/>    
+            <property name="illegalPattern" value="true"/>  
+        </module>  
+        <!-- 禁止使用System.err.println -->  
+        <module name="Regexp">  
+            <property name="format" value="System\.err\.println"/>   
+            <property name="message" value="不要使用  System.err 进行控制台打印，应该使用日志工具类(如：log4j)进行统一记录或者打印"/>    
+            <property name="illegalPattern" value="true"/>  
+        </module>   
+        
+        <!--章节5.10 -->  
+        <!-- 不允许用main方法测试-->  
+        <module name="UncommentedMain">  
+              
+        </module>  
+          
+        <!--章节5.11 -->  
+        <!-- NeedBraces 检查是否应该使用括号的地方没有加括号    
+          tokens: 定义检查的类型 -->    
+        <module name="NeedBraces"/>    
+        <!--章节5.2.4常量名 -->  
+        <module name="ConstantName">  
+            <property name="format" value="^[A-Z][A-Z0-9]*(_[A-Z0-9]+)*$"/>  
+        </module> 
+    </module>    
+      
+</module>  
