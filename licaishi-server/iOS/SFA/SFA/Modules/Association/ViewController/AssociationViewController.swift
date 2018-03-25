@@ -131,7 +131,7 @@ class AssociationViewController: UIViewController, InstanceFromStoryBoard {
             
             ZWHud.shared.dismiss()
             
-            let json = JSON(response.data)
+//            let json = JSON(response.data)
 //            if json["error"].stringValue == "0" {
 //                let ret = ["netResponse": response.result.value ?? "没有响应内容"]
                 let ret = response.result.value ?? "没有响应内容"
@@ -150,12 +150,18 @@ class AssociationViewController: UIViewController, InstanceFromStoryBoard {
             if User.current.isLoggedIn {
                 navigationController?.pushViewController(MeViewController.instanceFromStoryBoard(), animated: true)
                 openPageCallback = responseCallback
-//                openPageCallbackParam = ["hasChange":"1"]
             }
             else {
                 navigationController?.pushViewController(LoginViewController.instanceFromStoryBoard(), animated: true)
             }
-
+            
+        case "lcs.order.orderdetail":
+            
+            if let orderId = extraData {
+                let vc = OrderDetailViewController.instanceFromStoryBoard(orderId: orderId)
+                navigationController?.pushViewController(vc, animated: true)
+            }
+            
         default:
             break
         }

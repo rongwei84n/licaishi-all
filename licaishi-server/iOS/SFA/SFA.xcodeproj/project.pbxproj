@@ -71,6 +71,11 @@
 		76DD2AC92030249100371FCB /* App.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76DD2AC82030249100371FCB /* App.swift */; };
 		76DD2ACD20302B7600371FCB /* AccountServices.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76DD2ACC20302B7600371FCB /* AccountServices.swift */; };
 		76DD2AD02030322E00371FCB /* String+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76DD2ACF2030322E00371FCB /* String+Extension.swift */; };
+		76E01DAC2064DF5F0010ADCF /* Order.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 76E01DAB2064DF5F0010ADCF /* Order.storyboard */; };
+		76E01DAE2064DF7E0010ADCF /* OrderDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76E01DAD2064DF7E0010ADCF /* OrderDetailViewController.swift */; };
+		76E01DB020674CF70010ADCF /* OrderViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76E01DAF20674CF70010ADCF /* OrderViewModel.swift */; };
+		76E01DB220674D590010ADCF /* OrderServices.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76E01DB120674D590010ADCF /* OrderServices.swift */; };
+		76E01DB5206750110010ADCF /* OrderDetail.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76E01DB4206750110010ADCF /* OrderDetail.swift */; };
 		76FFD43E2047FC1B00C0039D /* WebViewJavascriptBridgeBase.m in Sources */ = {isa = PBXBuildFile; fileRef = 76FFD4362047FC1A00C0039D /* WebViewJavascriptBridgeBase.m */; };
 		76FFD43F2047FC1B00C0039D /* WebViewJavascriptBridge.m in Sources */ = {isa = PBXBuildFile; fileRef = 76FFD4382047FC1A00C0039D /* WebViewJavascriptBridge.m */; };
 		76FFD4402047FC1B00C0039D /* WebViewJavascriptBridge_JS.m in Sources */ = {isa = PBXBuildFile; fileRef = 76FFD4392047FC1A00C0039D /* WebViewJavascriptBridge_JS.m */; };
@@ -192,6 +197,11 @@
 		76DD2AC82030249100371FCB /* App.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = App.swift; sourceTree = "<group>"; };
 		76DD2ACC20302B7600371FCB /* AccountServices.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountServices.swift; sourceTree = "<group>"; };
 		76DD2ACF2030322E00371FCB /* String+Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "String+Extension.swift"; sourceTree = "<group>"; };
+		76E01DAB2064DF5F0010ADCF /* Order.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Order.storyboard; sourceTree = "<group>"; };
+		76E01DAD2064DF7E0010ADCF /* OrderDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrderDetailViewController.swift; sourceTree = "<group>"; };
+		76E01DAF20674CF70010ADCF /* OrderViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrderViewModel.swift; sourceTree = "<group>"; };
+		76E01DB120674D590010ADCF /* OrderServices.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrderServices.swift; sourceTree = "<group>"; };
+		76E01DB4206750110010ADCF /* OrderDetail.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrderDetail.swift; sourceTree = "<group>"; };
 		76FFD4352047FB1900C0039D /* SFA-Bridging-Header.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "SFA-Bridging-Header.h"; sourceTree = "<group>"; };
 		76FFD4362047FC1A00C0039D /* WebViewJavascriptBridgeBase.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WebViewJavascriptBridgeBase.m; sourceTree = "<group>"; };
 		76FFD4372047FC1A00C0039D /* WebViewJavascriptBridge.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WebViewJavascriptBridge.h; sourceTree = "<group>"; };
@@ -414,6 +424,7 @@
 		768C2C35202AE3C500F8ABB8 /* Modules */ = {
 			isa = PBXGroup;
 			children = (
+				76E01DA82064DF170010ADCF /* Order */,
 				765D9E62204BD6F5009DFA51 /* Me */,
 				76DD2ACA203027CE00371FCB /* Association */,
 				768C2C37202AE3EE00F8ABB8 /* Account */,
@@ -520,6 +531,7 @@
 			children = (
 				765D9E78204EB6D5009DFA51 /* AuthTokenPlugin.swift */,
 				76DD2ACC20302B7600371FCB /* AccountServices.swift */,
+				76E01DB120674D590010ADCF /* OrderServices.swift */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -534,6 +546,41 @@
 				76DD2ACF2030322E00371FCB /* String+Extension.swift */,
 			);
 			path = Extensions;
+			sourceTree = "<group>";
+		};
+		76E01DA82064DF170010ADCF /* Order */ = {
+			isa = PBXGroup;
+			children = (
+				76E01DB320674FF60010ADCF /* Model */,
+				76E01DAA2064DF340010ADCF /* ViewModel */,
+				76E01DA92064DF240010ADCF /* ViewController */,
+				76E01DAB2064DF5F0010ADCF /* Order.storyboard */,
+			);
+			path = Order;
+			sourceTree = "<group>";
+		};
+		76E01DA92064DF240010ADCF /* ViewController */ = {
+			isa = PBXGroup;
+			children = (
+				76E01DAD2064DF7E0010ADCF /* OrderDetailViewController.swift */,
+			);
+			path = ViewController;
+			sourceTree = "<group>";
+		};
+		76E01DAA2064DF340010ADCF /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				76E01DAF20674CF70010ADCF /* OrderViewModel.swift */,
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		76E01DB320674FF60010ADCF /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				76E01DB4206750110010ADCF /* OrderDetail.swift */,
+			);
+			path = Model;
 			sourceTree = "<group>";
 		};
 		76FFD4322047FA8300C0039D /* Vendor */ = {
@@ -704,6 +751,7 @@
 				76603604205B5826009A1CC6 /* Main.storyboard in Resources */,
 				766035EE205680B3009A1CC6 /* README.md in Resources */,
 				766035C220566006009A1CC6 /* SVProgressHUD.bundle in Resources */,
+				76E01DAC2064DF5F0010ADCF /* Order.storyboard in Resources */,
 				768C2C12202AE3A900F8ABB8 /* LaunchScreen.storyboard in Resources */,
 				768C2C0F202AE3A900F8ABB8 /* Assets.xcassets in Resources */,
 				7690EF6D2041587900BDA115 /* Me.storyboard in Resources */,
@@ -842,6 +890,7 @@
 				765D9E68204E6C37009DFA51 /* AppDelegate+Login.swift in Sources */,
 				76A89AFC203FE06A0007C13D /* PhoneTextFieldDelegate.swift in Sources */,
 				76DD2AC0203021E700371FCB /* ResetPasswordViewController.swift in Sources */,
+				76E01DB5206750110010ADCF /* OrderDetail.swift in Sources */,
 				7690EF70204158C600BDA115 /* AssociationViewController.swift in Sources */,
 				766035C620566006009A1CC6 /* SVProgressAnimatedView.m in Sources */,
 				766035EF205680B3009A1CC6 /* PingFoundation.m in Sources */,
@@ -870,12 +919,15 @@
 				76DD2AC42030220800371FCB /* UserAgreementViewController.swift in Sources */,
 				768C2C08202AE3A900F8ABB8 /* AppDelegate.swift in Sources */,
 				766035ED205680B3009A1CC6 /* LocalConnection.m in Sources */,
+				76E01DB220674D590010ADCF /* OrderServices.swift in Sources */,
+				76E01DAE2064DF7E0010ADCF /* OrderDetailViewController.swift in Sources */,
 				765D9E8420512061009DFA51 /* UIImageView+Utils.m in Sources */,
 				76A89AF2203FA7250007C13D /* Network.swift in Sources */,
 				765D9E862052217E009DFA51 /* AppDelegate+Appearance.swift in Sources */,
 				766035B020565CA9009A1CC6 /* MMError.swift in Sources */,
 				76A89AEE203F9EB00007C13D /* Dictionary+Extension.swift in Sources */,
 				76FFD43F2047FC1B00C0039D /* WebViewJavascriptBridge.m in Sources */,
+				76E01DB020674CF70010ADCF /* OrderViewModel.swift in Sources */,
 				76A89AFE203FE3FC0007C13D /* PasswordTextFieldDelegate.swift in Sources */,
 				766035C420566006009A1CC6 /* SVRadialGradientLayer.m in Sources */,
 			);
