@@ -14,8 +14,8 @@
 
     <modelVersion>4.0.0</modelVersion>
 
-    <groupId>com.auts.licaishi.server</groupId>
-    <artifactId>licaishi-server-backend</artifactId>
+    <groupId>com.auts.licaishi.cli</groupId>
+    <artifactId>licaishi-cli-backend</artifactId>
     <version>0.1-SNAPSHOT</version>
 
     <name>licaishi-server-backend</name>
