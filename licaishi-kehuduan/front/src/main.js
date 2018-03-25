@@ -1,56 +1,72 @@
+import 'babel-polyfill'
 import Vue from 'vue'
 import App from './App'
-import VueRouter from 'vue-router'
-import VueResource from 'vue-resource'
-import MintUI from 'mint-ui';
-import 'mint-ui/lib/style.css';
+import router from './router'
+import FastClick from 'FastClick'
+import VueLazyload from 'vue-lazyload'
+import store from './store'
+import moment from "moment";
+import {
+  Cell,
+  Field,
+  Spinner,
+  Popup,
+  Header,
+  Button,
+  Navbar,
+  Tabbar,
+  TabItem,
+  MessageBox,
+  Swipe, SwipeItem,
+  Picker,
+  TabContainer,
+  TabContainerItem,
+  DatetimePicker
+} from "mint-ui"
 
-import login from './components/login.vue'
-import index from './components/index.vue'
-import order from './components/order.vue'
-import goods from './components/goods.vue'
-import personinfo from './components/personinfo.vue'
-import test from './components/test.vue'
-import mytest from './components/mytest.vue'
-import push from './components/push.vue'
-''
+import 'common/stylus/index.styl'
+import 'common/stylus/cover_mint.styl' // mint-ui覆盖文件
 
-//注册VueRouter这个插件
-Vue.use(VueRouter)
-//注册MintUi
-Vue.use(MintUI)
-//注册Vue-resource
-Vue.use(VueResource)
 
-const router = new VueRouter()
+import ajax from "api/ajax"
+import axios from 'axios'
 
-//路由map
-router.map({
-    '/login': {
-        component: login
-    },
-    '/index': {
-        component: index
-    },
-    '/order': {
-        component: order
-    },
-    '/goods': {
-        component: goods
-    },
-    '/personinfo': {
-        component: personinfo
-    },
-    '/test': {
-        component: test
-    },
-    '/mytest': {
-      component: mytest
-    }
+/* eslint-disable no-unused-vars */
+import vConsole from 'vconsole'
+
+Vue.component(Cell.name, Cell)
+Vue.component(Field.name, Field)
+Vue.component(Spinner.name, Spinner)
+Vue.component(Popup.name, Popup)
+Vue.component(Header.name, Header)
+Vue.component(Button.name, Button)
+Vue.component(Navbar.name, Navbar)
+Vue.component(Picker.name, Picker)
+Vue.component(Swipe.name, Swipe);
+Vue.component(SwipeItem.name, SwipeItem);
+Vue.component(Tabbar.name, Tabbar);
+Vue.component(TabItem.name, TabItem);
+Vue.component(MessageBox.name, MessageBox)
+Vue.component(DatetimePicker.name, DatetimePicker)
+Vue.component(TabContainer.name, TabContainer)
+Vue.component(TabContainerItem.name, TabContainerItem)
+
+FastClick.attach(document.body)
+
+Vue.use(VueLazyload, {
+  // loading: require('common/image/wangzai.jpg')
 })
-//路由重定向(访问不存在的页面时，重定向到这个页面)
-router.redirect({
-    '*':'/index'
+// Vue.use(ajax)
+moment.locale("zh-CN");
+
+/* eslint-disable no-new */
+new Vue({
+  el: '#app',
+  router,
+  store,
+  render: h => h(App)
 })
 
-router.start(App,'app')//启动一个启用了路由的应用。创建一个 App 的实例并且挂载到元素 'app'
+Vue.prototype.$ajax = ajax
+Vue.prototype.$axios = axios
+Vue.prototype.$moment = moment

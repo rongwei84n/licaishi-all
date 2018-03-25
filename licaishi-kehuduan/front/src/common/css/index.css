@@ -1,0 +1,50 @@
+    /*
+ * @Author: 张浩然 
+ * @Date: 2018-03-08 23:03:09 
+ * @Last Modified by: 张浩然
+ * @Last Modified time: 2018-03-09 08:55:05
+ *
+ * 此CSS文件为全局个性化定制文件
+ */
+
+    @import './reset.css';
+    /* 高度小于400时底部按钮隐藏 */
+
+    @media (max-width:400) {
+        .footer {
+            display: none !important;
+        }
+    }
+    /* 去掉不能输入后的样式 */
+
+    textarea:disabled,
+    input:not([type]):disabled,
+    input[type="color" i]:disabled,
+    input[type="date" i]:disabled,
+    input[type="datetime" i]:disabled,
+    input[type="datetime-local" i]:disabled,
+    input[type="email" i]:disabled,
+    input[type="month" i]:disabled,
+    input[type="password" i]:disabled,
+    input[type="number" i]:disabled,
+    input[type="search" i]:disabled,
+    input[type="tel" i]:disabled,
+    input[type="text" i]:disabled,
+    input[type="time" i]:disabled,
+    input[type="url" i]:disabled,
+    input[type="week" i]:disabled {
+        opacity: 1 !important;
+        background-color: #FFF !important;
+    }
+
+    input:disabled,
+    textarea:diabled {
+        -webkit-text-fill-color: #000;
+        -webkit-opacity: 1;
+        background-color: #fff !important;
+        color: #000;
+    }
+
+     ::-webkit-scrollbar {
+        display: none;
+    }

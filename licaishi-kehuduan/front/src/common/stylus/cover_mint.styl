@@ -1,0 +1,51 @@
+/*
+ * @Author: 张浩然 
+ * @Date: 2018-03-07 09:29:21 
+ * @Last Modified by: 张浩然
+ * @Last Modified time: 2018-03-09 09:38:51
+ * 此文件用来重置mint-ui
+ */
+
+@import '~common/stylus/variable';
+
+/* popup弹出层的初始高度 */
+
+div{
+    .mint-popup-bottom:not(.mint-datetime) {
+        height: 80%;
+        width: 100%;
+    }
+}
+
+
+/* header头部组件的样式 */
+
+.mint-header {
+    background-color: $color-background-d;
+    color: $color-highlight-background;
+    z-index: 1;
+}
+
+.mint-header-title {
+    font-size: $font-size-large;
+}
+
+
+/* field组件disabled样式 */
+
+.mint-field-core:disabled {
+    background-color: transparent;
+}
+
+
+/* 扩大header右边按钮的点击范围 */
+.extend-click{
+    .is-right{
+        extend-click()
+    }
+}
+
+// 模态框遮罩层层级 
+.v-modal{
+    z-index: 2
+}
