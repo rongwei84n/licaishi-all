@@ -67,7 +67,13 @@ public interface ProductsMapper {
 
     /**
      */
-    @Select("select * from Product where p_type= #{pType}")
+//    @Select("select * from Product where p_type= #{pType}")
+    @Select("<script>"
+    		+ "select * from Product where  "
+    		+ "<if test='pType !=null and pType !=\"00\" '>"
+    		+ "  where p_type= #{pType}"
+    		+ "</if> "
+			+"</script>")
     @Results({
     	@Result(property = "id", column = "p_id"), @Result(property = "pCode", column = "p_code"),
     	@Result(property = "pShortName", column = "p_short_name"), @Result(property = "pFullName", column = "p_full_name"),
