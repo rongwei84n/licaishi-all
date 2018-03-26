@@ -85,7 +85,7 @@ class OrderDetailViewController: UITableViewController, InstanceFromStoryBoard, 
         
         orderNoLabel.text = orderDetail.orderNo
         customerNameLabel.text = orderDetail.customerName
-        orderStatusLabel.text = orderDetail.status
+        orderStatusLabel.text = orderDetail.status?.toString()
         amountLabel.text = String(format: "%.2f", orderDetail.amount ?? 0)
         productNameLabel.text = orderDetail.productShortName
         comRatioLabel.text = orderDetail.comRatio

@@ -31,7 +31,7 @@ struct OrderDetail {
     
     var productShortName: String?   // 产品简称
     
-    var status: String?             // 订单状态
+    var status: OrderStatus?             // 订单状态
     
     var comRatio: String?           // 佣金比例
     
@@ -70,7 +70,7 @@ struct OrderDetail {
         instance.customerName = json["customerName"].stringValue
         instance.productId = json["productId"].stringValue
         instance.productShortName = json["productShortName"].stringValue
-        instance.status = json["status"].stringValue
+        instance.status = OrderStatus.from(json["status"].stringValue)
         instance.comRatio = json["comRatio"].stringValue
         instance.commission = json["commission"].doubleValue
         instance.proRatio = json["proRatio"].stringValue
