@@ -27,7 +27,7 @@ public interface ProfitRebateMapper {
     	@Result(property = "prStartAmount", column = "pr_start_amount"),
     	@Result(property = "prEndAmount", column = "pr_end_amount"), 
     	@Result(property = "prAmountDisplay", column = "pr_amount_display"), 
-    	@Result(property = "prExpectSnnualRevenue", column = "pr_expect_annual_revenue"), 
+    	@Result(property = "prExpectAnnualRevenue", column = "pr_expect_annual_revenue"), 
     	@Result(property = "prCommission", column = "pr_commission")
     })
     List<ProfitRebateModel> queryProfitRebateByPCode(@Param("pCode") String pCode);
