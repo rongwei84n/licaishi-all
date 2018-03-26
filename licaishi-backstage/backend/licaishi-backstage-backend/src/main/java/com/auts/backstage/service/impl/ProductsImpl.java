@@ -41,10 +41,10 @@ public class ProductsImpl implements ProductsService {
 		List<ProductModel> products = productsMapper.queryProductList(pType);
         if(products!=null && !products.isEmpty()) {
         	for(ProductModel productModel : products) {
-//            	List<ProfitRebateModel> profitRebates =  queryProfitRebateByPCode(productModel.getpCode());
-//            	List<ProductAttachmentModel> productAttachments = queryProductAttachmentByPCode(productModel.getpCode());
-//            	productModel.setProfitRebates(profitRebates);
-//            	productModel.setProductAttachments(productAttachments);
+            	List<ProfitRebateModel> profitRebates =  queryProfitRebateByPCode(productModel.getpCode());
+            	List<ProductAttachmentModel> productAttachments = queryProductAttachmentByPCode(productModel.getpCode());
+            	productModel.setProfitRebates(profitRebates);
+            	productModel.setProductAttachments(productAttachments);
             }
         
         }

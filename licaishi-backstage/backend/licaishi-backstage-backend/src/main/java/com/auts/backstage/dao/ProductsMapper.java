@@ -53,7 +53,15 @@ public interface ProductsMapper {
     	@Result(property = "pSaleStartTime", column = "p_sale_date_start"), @Result(property = "pAllIssuingScale", column = "p_all_issuing_scale"),
     	@Result(property = "pMinAmount", column = "p_min_amount"), @Result(property = "pPaymentInterestType", column = "p_payment_interest_type"),
     	@Result(property = "pInvestType", column = "p_invest_type"), @Result(property = "pSizeRatioType", column = "p_size_ratio_type"),
-    	@Result(property = "pInvestOwnerId", column = "p_invest_owner_id")
+    	@Result(property = "pInvestOwnerId", column = "p_invest_owner_id"), @Result(property = "pIssuingScale", column = "p_issuing_scale"),
+    	@Result(property = "pExpectSaleAmount", column = "p_expect_sale_amount"), @Result(property = "pAllSubscriptionAmount", column = "p_all_subscription_amount"),
+    	@Result(property = "pRecruitmentSummary", column = "p_recruitment_summary"), @Result(property = "pCpys", column = "p_cpys"),
+    	@Result(property = "pMjzh", column = "p_mjzh"), @Result(property = "pFxkz", column = "p_fxkz"),
+    	@Result(property = "pHkly", column = "p_hkly"), @Result(property = "pZjyt", column = "p_zjyt"),
+    	@Result(property = "pRzf", column = "p_rzf"), @Result(property = "pDbf", column = "p_dbf"),
+		@Result(property = "pLatestPayNum", column = "p_latest_Pay_Num"), @Result(property = "pRgxz", column = "p_rgxz"),
+    	@Result(property = "pRexiao", column = "p_rexiao"), @Result(property = "pTuijian", column = "p_tuijian"),
+    	@Result(property = "pCommission", column = "p_commission")
     })
     ProductModel queryProductByPCode(@Param("pCode") String pCode);
 
@@ -68,7 +76,15 @@ public interface ProductsMapper {
     	@Result(property = "pSaleStartTime", column = "p_sale_date_start"), @Result(property = "pAllIssuingScale", column = "p_all_issuing_scale"),
     	@Result(property = "pMinAmount", column = "p_min_amount"), @Result(property = "pPaymentInterestType", column = "p_payment_interest_type"),
     	@Result(property = "pInvestType", column = "p_invest_type"), @Result(property = "pSizeRatioType", column = "p_size_ratio_type"),
-    	@Result(property = "pInvestOwnerId", column = "p_invest_owner_id")
+    	@Result(property = "pInvestOwnerId", column = "p_invest_owner_id"), @Result(property = "pIssuingScale", column = "p_issuing_scale"),
+    	@Result(property = "pExpectSaleAmount", column = "p_expect_sale_amount"), @Result(property = "pAllSubscriptionAmount", column = "p_all_subscription_amount"),
+    	@Result(property = "pRecruitmentSummary", column = "p_recruitment_summary"), @Result(property = "pCpys", column = "p_cpys"),
+    	@Result(property = "pMjzh", column = "p_mjzh"), @Result(property = "pFxkz", column = "p_fxkz"),
+    	@Result(property = "pHkly", column = "p_hkly"), @Result(property = "pZjyt", column = "p_zjyt"),
+    	@Result(property = "pRzf", column = "p_rzf"), @Result(property = "pDbf", column = "p_dbf"),
+		@Result(property = "pLatestPayNum", column = "p_latest_Pay_Num"), @Result(property = "pRgxz", column = "p_rgxz"),
+    	@Result(property = "pRexiao", column = "p_rexiao"), @Result(property = "pTuijian", column = "p_tuijian"),
+    	@Result(property = "pCommission", column = "p_commission")
     })
     List<ProductModel> queryProductList(@Param("pType") String pType);
     
@@ -81,7 +97,15 @@ public interface ProductsMapper {
     	@Result(property = "pSaleStartTime", column = "p_sale_date_start"), @Result(property = "pAllIssuingScale", column = "p_all_issuing_scale"),
     	@Result(property = "pMinAmount", column = "p_min_amount"), @Result(property = "pPaymentInterestType", column = "p_payment_interest_type"),
     	@Result(property = "pInvestType", column = "p_invest_type"), @Result(property = "pSizeRatioType", column = "p_size_ratio_type"),
-    	@Result(property = "pInvestOwnerId", column = "p_invest_owner_id")
+    	@Result(property = "pInvestOwnerId", column = "p_invest_owner_id"), @Result(property = "pIssuingScale", column = "p_issuing_scale"),
+    	@Result(property = "pExpectSaleAmount", column = "p_expect_sale_amount"), @Result(property = "pAllSubscriptionAmount", column = "p_all_subscription_amount"),
+    	@Result(property = "pRecruitmentSummary", column = "p_recruitment_summary"), @Result(property = "pCpys", column = "p_cpys"),
+    	@Result(property = "pMjzh", column = "p_mjzh"), @Result(property = "pFxkz", column = "p_fxkz"),
+    	@Result(property = "pHkly", column = "p_hkly"), @Result(property = "pZjyt", column = "p_zjyt"),
+    	@Result(property = "pRzf", column = "p_rzf"), @Result(property = "pDbf", column = "p_dbf"),
+		@Result(property = "pLatestPayNum", column = "p_latest_Pay_Num"), @Result(property = "pRgxz", column = "p_rgxz"),
+    	@Result(property = "pRexiao", column = "p_rexiao"), @Result(property = "pTuijian", column = "p_tuijian"),
+    	@Result(property = "pCommission", column = "p_commission")
     })
     List<ProductModel> queryRecommendProducts(String recommendype);
 }
