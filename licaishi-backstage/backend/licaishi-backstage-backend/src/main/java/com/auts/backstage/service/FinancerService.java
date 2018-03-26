@@ -19,7 +19,5 @@ public interface FinancerService {
 
 	List<Map<String, Object>> queryFinaAsync();
 
-	void handleCancel(String uid);
-
-	void handleNormal(String uid);
+	void handleSwitch(String uid);
 }

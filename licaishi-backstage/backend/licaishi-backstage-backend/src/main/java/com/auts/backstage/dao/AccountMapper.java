@@ -55,4 +55,8 @@ public interface AccountMapper {
 
     @Update("update tbl_user set status = 0 where uid=#{userId}")
 	void handleNormal(@Param("userId") int userId);
+    
+    @Select("select * from tbl_user where uid=#{uid}")
+    AccountModel queryModelByUid(@Param("uid") int uid);
+    
 }

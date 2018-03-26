@@ -103,16 +103,15 @@ public class FinancerServiceImpl implements FinancerService{
 
 	@Override
 	@Transactional
-	public void handleCancel(String uid) {
+	public void handleSwitch(String uid) {
 		FinancerModel model = financerMapper.queryFinancer(uid);
-		accountMapper.handelCancel(model.getUserId());
-	}
-
-	@Override
-	@Transactional
-	public void handleNormal(String uid) {
-		FinancerModel model = financerMapper.queryFinancer(uid);
-		accountMapper.handleNormal(model.getUserId());
+		AccountModel am = accountMapper.queryModelByUid(model.getUserId());
+		if(0 == am.getStatus()){
+			accountMapper.handelCancel(am.getUid());
+		}else{
+			accountMapper.handleNormal(am.getUid());
+		}
+		
 	}
 
 }

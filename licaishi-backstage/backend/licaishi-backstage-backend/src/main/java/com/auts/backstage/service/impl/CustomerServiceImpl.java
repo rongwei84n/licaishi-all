@@ -100,4 +100,16 @@ public class CustomerServiceImpl implements CustomerService{
 		accountMapper.handleNormal(model.getUserId());
 	}
 
+	@Override
+	@Transactional
+	public void handleSwitch(String uid) {
+		CustomerModel model = customerMapper.queryCustomer(uid);
+		AccountModel am = accountMapper.queryModelByUid(model.getUserId());
+		if(0 == am.getStatus()){
+			accountMapper.handelCancel(am.getUid());
+		}else{
+			accountMapper.handleNormal(am.getUid());
+		}
+	}
+
 }

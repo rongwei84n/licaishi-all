@@ -19,4 +19,6 @@ public interface CustomerService {
 
 	void handleNormal(String uid);
 
+	void handleSwitch(String uid);
+
 }

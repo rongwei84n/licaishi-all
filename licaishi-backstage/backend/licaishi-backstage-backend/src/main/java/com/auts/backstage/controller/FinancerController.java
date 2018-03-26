@@ -125,30 +125,14 @@ public class FinancerController extends SBaseController {
     }
     
     /**
-     * 注销理财师
+     * 切换理财师状态
      */
-    @RequestMapping(value = "/v1/financer/handlecancel", method = RequestMethod.POST, produces = { "application/json" })
-    public PhiHomeBaseResponse handleCancel(HttpServletRequest request, 
+    @RequestMapping(value = "/v1/financer/handleswitch", method = RequestMethod.POST, produces = { "application/json" })
+    public PhiHomeBaseResponse handleSwitch(HttpServletRequest request, 
     		@RequestParam(value="uid", required=true) String uid) {
         PhiHomeBaseResponse rspObj = new PhiHomeBaseResponse();
         try{
-        	financerService.handleCancel(uid);
-        }catch(Exception e){
-        	LOGGER.error("注销理财师异常", e);
-        	return errorResponse(10001);
-        }
-        return successResponse(rspObj);
-    }
-    
-    /**
-     * 启用理财师
-     */
-    @RequestMapping(value = "/v1/financer/handlenormal", method = RequestMethod.POST, produces = { "application/json" })
-    public PhiHomeBaseResponse handleNormal(HttpServletRequest request, 
-    		@RequestParam(value="uid", required=true) String uid) {
-        PhiHomeBaseResponse rspObj = new PhiHomeBaseResponse();
-        try{
-        	financerService.handleNormal(uid);
+        	financerService.handleSwitch(uid);
         }catch(Exception e){
         	LOGGER.error("启用理财师异常", e);
         	return errorResponse(10001);

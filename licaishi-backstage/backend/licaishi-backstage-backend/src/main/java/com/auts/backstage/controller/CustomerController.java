@@ -142,4 +142,19 @@ public class CustomerController extends SBaseController{
         return successResponse(rspObj);
     }
 
+    /**
+     * 切换理财师状态
+     */
+    @RequestMapping(value = "/v1/customer/handleswitch", method = RequestMethod.POST, produces = { "application/json" })
+    public PhiHomeBaseResponse handleSwitch(HttpServletRequest request, 
+    		@RequestParam(value="uid", required=true) String uid) {
+        PhiHomeBaseResponse rspObj = new PhiHomeBaseResponse();
+        try{
+        	customerService.handleSwitch(uid);
+        }catch(Exception e){
+        	LOGGER.error("启用客户异常", e);
+        	return errorResponse(10001);
+        }
+        return successResponse(rspObj);
+    }
 }
