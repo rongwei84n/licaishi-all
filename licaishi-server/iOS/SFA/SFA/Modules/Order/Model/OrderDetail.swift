@@ -41,9 +41,9 @@ struct OrderDetail {
     
     var profit: Double?             // 客户收益
     
-    var contractStatus: String?     // 合同状态
+    var contractStatus: ContractStatus?     // 合同状态
     
-    var voucherStatus: String?      // 支付上传凭证状态
+    var voucherStatus: VoucherStatus?      // 支付上传凭证状态
     
     var voucherPath: String?        // 支付上传凭证图片地址
     
@@ -75,8 +75,8 @@ struct OrderDetail {
         instance.commission = json["commission"].doubleValue
         instance.proRatio = json["proRatio"].stringValue
         instance.profit = json["profit"].doubleValue
-        instance.contractStatus = json["contractStatus"].stringValue
-        instance.voucherStatus = json["voucherStatus"].stringValue
+        instance.contractStatus = ContractStatus.from(json["contractStatus"].stringValue)
+        instance.voucherStatus = VoucherStatus.from(json["voucherStatus"].stringValue)
         instance.voucherPath = json["voucherPath"].stringValue
         instance.issueBank = json["issueBank"].stringValue
         instance.cardNo = json["cardNo"].stringValue

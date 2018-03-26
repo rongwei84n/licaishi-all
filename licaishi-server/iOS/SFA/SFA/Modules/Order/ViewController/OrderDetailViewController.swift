@@ -92,8 +92,8 @@ class OrderDetailViewController: UITableViewController, InstanceFromStoryBoard, 
         commissionLabel.text = String(format: "%.2f", orderDetail.commission ?? 0)
         proRatioLabel.text = orderDetail.proRatio
         profitLabel.text = String(format: "%.2f", orderDetail.profit ?? 0)
-        contractStatusLabel.text = orderDetail.contractStatus
-        voucherStatusLabel.text = orderDetail.voucherStatus
+        contractStatusLabel.text = orderDetail.contractStatus?.toString()
+        voucherStatusLabel.text = orderDetail.voucherStatus?.toString()
         
         if let urlString = orderDetail.voucherPath {
             voucherImageView.kf.setImage(with: URL(string: urlString))
