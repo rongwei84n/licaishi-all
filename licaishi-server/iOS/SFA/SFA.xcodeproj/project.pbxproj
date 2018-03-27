@@ -1263,7 +1263,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.lcss.SFA;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "c9254324-53bc-4853-9087-8883806e71fa";
+				PROVISIONING_PROFILE = "0c17d98d-5222-4a66-922a-5a93b0e7ab33";
 				PROVISIONING_PROFILE_SPECIFIER = lcssDistribution;
 				SWIFT_OBJC_BRIDGING_HEADER = "SFA/Supporting Files/SFA-Bridging-Header.h";
 				SWIFT_VERSION = 4.0;
