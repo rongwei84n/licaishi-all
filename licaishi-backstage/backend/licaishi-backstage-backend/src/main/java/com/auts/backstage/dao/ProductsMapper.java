@@ -69,7 +69,7 @@ public interface ProductsMapper {
      */
 //    @Select("select * from Product where p_type= #{pType}")
     @Select("<script>"
-    		+ "select * from Product where  "
+    		+ "select * from Product "
     		+ "<if test='pType !=null and pType !=\"00\" '>"
     		+ "  where p_type= #{pType}"
     		+ "</if> "
