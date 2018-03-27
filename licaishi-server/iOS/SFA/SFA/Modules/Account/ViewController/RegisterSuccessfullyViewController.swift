@@ -39,7 +39,7 @@ class RegisterSuccessfullyViewController: UIViewController, InstanceFromStoryBoa
         if let phoneNumber = phoneNumber, let password = password {
             
             ZWHud.shared.show()
-            _ = loginViewModel.login(phoneNumber: phoneNumber, password: password).subscribe(onNext: { [weak self] (isSuccess) in
+            _ = loginViewModel.login(phoneNumber: phoneNumber, password: password.md5()).subscribe(onNext: { [weak self] (isSuccess) in
                 
                 ZWHud.shared.dismiss()
                 
