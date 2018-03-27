@@ -7,19 +7,47 @@ package com.auts.backstage.model.dao;
  */
 public class AccountModel {
 
-    private int uid;
+
+    private String uid;
+
     private String user_name;
+
     private String real_name;
+
+    private String phone;
+
     private String passwd;
+
+    private String email;
+
+    private int sex;
+
+    private String remark;
+
     private int role;
+
     private int status;
+
     private long create_time;
+
     private long update_time;
+
+    private String workstudio;
+
     private String avtr;//头像
-    
+
+    public String getUid() {
+        return uid;
+    }
+
+    public void setUid(String uid) {
+        this.uid = uid;
+    }
+
     public String getUser_name() {
         return user_name;
     }
+
     public void setUser_name(String user_name) {
         this.user_name = user_name;
     }
@@ -32,12 +60,44 @@ public class AccountModel {
         this.real_name = real_name;
     }
 
+    public String getPhone() {
+        return phone;
+    }
+
+    public void setPhone(String phone) {
+        this.phone = phone;
+    }
+
     public String getPasswd() {
         return passwd;
     }
 
     public void setPasswd(String passwd) {
         this.passwd = passwd;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public int getSex() {
+        return sex;
+    }
+
+    public void setSex(int sex) {
+        this.sex = sex;
+    }
+
+    public String getRemark() {
+        return remark;
+    }
+
+    public void setRemark(String remark) {
+        this.remark = remark;
     }
 
     public int getRole() {
@@ -72,6 +132,14 @@ public class AccountModel {
         this.update_time = update_time;
     }
 
+    public String getWorkstudio() {
+        return workstudio;
+    }
+
+    public void setWorkstudio(String workstudio) {
+        this.workstudio = workstudio;
+    }
+
     public String getAvtr() {
         return avtr;
     }
@@ -80,17 +148,11 @@ public class AccountModel {
         this.avtr = avtr;
     }
 
-    public int getUid() {
-		return uid;
-	}
-	public void setUid(int uid) {
-		this.uid = uid;
-	}
-	@Override
+    @Override
     public String toString() {
-        return "AccountModel [uid=" + uid + ", user_name=" + user_name + ", real_name=" + real_name
-                + ", passwd=" + passwd + ", role=" + role
+        return "AccountModel [uid=" + uid + ", user_name=" + user_name + ", real_name=" + real_name + ", phone=" + phone
+                + ", passwd=" + passwd + ", email=" + email + ", sex=" + sex + ", remark=" + remark + ", role=" + role
                 + ", status=" + status + ", create_time=" + create_time + ", update_time=" + update_time
-                + ", avtr=" + avtr + "]";
+                + ", workstudio=" + workstudio + ", avtr=" + avtr + "]";
     }
 }

@@ -50,6 +50,7 @@ public class FinancerServiceImpl implements FinancerService{
 		ac.setUser_name(financer.getPhone());
 		ac.setReal_name(financer.getName());
 		ac.setPasswd(EntryUtils.getMd5("123456"));
+		ac.setPhone(financer.getPhone());
 		ac.setRole(1);
 		ac.setStatus(0);
 		ac.setCreate_time(nowDate.getTime());
@@ -58,7 +59,7 @@ public class FinancerServiceImpl implements FinancerService{
 		
 		financer.setCreatetime(nowDate);
 		financer.setUpdatetime(nowDate);
-		financer.setUserId(ac.getUid());
+		financer.setUserId(Integer.parseInt(ac.getUid()));
 		financerMapper.addFinancer(financer);
 	}
 
@@ -107,9 +108,9 @@ public class FinancerServiceImpl implements FinancerService{
 		FinancerModel model = financerMapper.queryFinancer(uid);
 		AccountModel am = accountMapper.queryModelByUid(model.getUserId());
 		if(0 == am.getStatus()){
-			accountMapper.handelCancel(am.getUid());
+			accountMapper.handelCancel(Integer.parseInt(am.getUid()));
 		}else{
-			accountMapper.handleNormal(am.getUid());
+			accountMapper.handleNormal(Integer.parseInt(am.getUid()));
 		}
 		
 	}

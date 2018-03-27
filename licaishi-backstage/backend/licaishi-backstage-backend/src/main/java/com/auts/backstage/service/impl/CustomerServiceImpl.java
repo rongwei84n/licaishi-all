@@ -35,6 +35,7 @@ public class CustomerServiceImpl implements CustomerService{
 		ac.setUser_name(customer.getPhone());
 		ac.setReal_name(customer.getName());
 		ac.setPasswd(EntryUtils.getMd5("123456"));
+		ac.setPhone(customer.getPhone());
 		ac.setRole(0);
 		ac.setStatus(0);
 		ac.setCreate_time(nowDate.getTime());
@@ -43,7 +44,7 @@ public class CustomerServiceImpl implements CustomerService{
 		
 		customer.setCreatetime(nowDate);
 		customer.setUpdatetime(nowDate);
-		customer.setUserId(ac.getUid());
+		customer.setUserId(Integer.parseInt(ac.getUid()));
 		customerMapper.addCustomer(customer);
 	}
 
@@ -106,9 +107,9 @@ public class CustomerServiceImpl implements CustomerService{
 		CustomerModel model = customerMapper.queryCustomer(uid);
 		AccountModel am = accountMapper.queryModelByUid(model.getUserId());
 		if(0 == am.getStatus()){
-			accountMapper.handelCancel(am.getUid());
+			accountMapper.handelCancel(Integer.parseInt(am.getUid()));
 		}else{
-			accountMapper.handleNormal(am.getUid());
+			accountMapper.handleNormal(Integer.parseInt(am.getUid()));
 		}
 	}
 
