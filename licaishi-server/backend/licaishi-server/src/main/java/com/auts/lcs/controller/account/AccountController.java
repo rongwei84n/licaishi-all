@@ -225,7 +225,7 @@ public class AccountController extends SBaseController {
         AccountModel acModel = accountService.queryByUserPhone(phonenumber);
         if (acModel != null) {
             LOGGER.info("Already registed phone [{}]", phonenumber);
-//            return errorRegister(String.valueOf(Const.ErrorCode.Account.REGIST_ACCOUNT_EXISTS));
+            return errorRegister(String.valueOf(Const.ErrorCode.Account.REGIST_ACCOUNT_EXISTS));
         }
 
         AccountModel model = new AccountModel();
@@ -251,6 +251,7 @@ public class AccountController extends SBaseController {
         RegistResponseModel rsp = new RegistResponseModel();
         if (result > 0) {
             rsp.setError(String.valueOf(Const.ErrorCode.Account.OK));
+            LOGGER.info("Regist ok uid [{}]", model.getUid());
             rsp.setUid(model.getUid());
         } else {
             return errorRegister(String.valueOf(Const.ErrorCode.Account.REGIST_ERROR));
