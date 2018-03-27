@@ -42,6 +42,17 @@ public class ProductsImpl implements ProductsService {
         if(products!=null && !products.isEmpty()) {
         	for(ProductModel productModel : products) {
             	List<ProfitRebateModel> profitRebates =  queryProfitRebateByPCode(productModel.getpCode());
+            	if(profitRebates!= null && profitRebates.size()>0) {
+            		BigDecimal rate = new BigDecimal(10000);
+            		for(ProfitRebateModel profitRebateModel: profitRebates) {
+            			profitRebateModel.setPrStartAmount(profitRebateModel.getPrStartAmount().divide(rate));
+            			profitRebateModel.setPrEndAmount(profitRebateModel.getPrEndAmount().divide(rate));
+            			if(!profitRebateModel.getPrExpectAnnualRevenue().contains("浮动")) {
+            				profitRebateModel.setPrExpectAnnualRevenue(profitRebateModel.getPrExpectAnnualRevenue().replace("%", ""));
+            			}
+            			profitRebateModel.setPrCommission(profitRebateModel.getPrCommission().replace("%", ""));
+            		}
+            	}
             	List<ProductAttachmentModel> productAttachments = queryProductAttachmentByPCode(productModel.getpCode());
             	productModel.setProfitRebates(profitRebates);
             	productModel.setProductAttachments(productAttachments);
