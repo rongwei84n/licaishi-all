@@ -172,22 +172,29 @@ public class ProductsImpl implements ProductsService {
     	//设置最高预计收益率
     	List<ProfitRebateModel> profitRebates = productModel.getProfitRebates();
     	if(profitRebates != null && profitRebates.size() > 0) {
+    		boolean prExpectAnnualRevenueFlag = profitRebates.get(0).getPrExpectAnnualRevenue().contains("浮动");
     		double maxAnnualRevenue = 0;
     		double maxCommission = 0;
-    		for(ProfitRebateModel prm : profitRebates) {
-    			String annualRevenue = prm.getPrExpectAnnualRevenue();
-    			double annualRevenueTmp =  Double.parseDouble(annualRevenue.replaceAll("%", ""));
-    			if(annualRevenueTmp > maxAnnualRevenue) {
-    				maxAnnualRevenue = annualRevenueTmp;
-    			}
-    			
+			for(ProfitRebateModel prm : profitRebates) {
+				if(!prExpectAnnualRevenueFlag) {
+					String annualRevenue = prm.getPrExpectAnnualRevenue();
+	    			double annualRevenueTmp =  Double.parseDouble(annualRevenue.replaceAll("%", ""));
+	    			if(annualRevenueTmp > maxAnnualRevenue) {
+	    				maxAnnualRevenue = annualRevenueTmp;
+	    			}
+				}
+				
     			String prCommission = prm.getPrCommission();
     			double prCommissionTmp =  Double.parseDouble(prCommission.replaceAll("%", ""));
     			if(prCommissionTmp > maxCommission) {
     				maxCommission = prCommissionTmp;
     			}
     		}
-    		productModel.setpExpectAnnualRevenue(maxAnnualRevenue+"");
+			if(prExpectAnnualRevenueFlag) {
+				productModel.setpExpectAnnualRevenue(profitRebates.get(0).getPrExpectAnnualRevenue());
+			} else {
+				productModel.setpExpectAnnualRevenue(maxAnnualRevenue+"");
+			}	
     		productModel.setpCommission(maxCommission+"");
     	}
 		int result = productsMapper.updateProduct(productModel);

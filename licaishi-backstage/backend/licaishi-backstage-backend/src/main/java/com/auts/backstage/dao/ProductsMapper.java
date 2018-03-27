@@ -69,7 +69,7 @@ public interface ProductsMapper {
 		@Result(property = "pLatestPayNum", column = "p_latest_Pay_Num"), @Result(property = "pRgxz", column = "p_rgxz"),
     	@Result(property = "pRexiao", column = "p_rexiao"), @Result(property = "pTuijian", column = "p_tuijian"),
     	@Result(property = "pCommission", column = "p_commission"),@Result(property = "pTgjg", column = "p_tgjg"),
-    	@Result(property = "pRemark", column = "p_commission")
+    	@Result(property = "pRemark", column = "p_remark")
     })
     ProductModel queryProductByPCode(@Param("pCode") String pCode);
 
@@ -99,7 +99,7 @@ public interface ProductsMapper {
 		@Result(property = "pLatestPayNum", column = "p_latest_Pay_Num"), @Result(property = "pRgxz", column = "p_rgxz"),
     	@Result(property = "pRexiao", column = "p_rexiao"), @Result(property = "pTuijian", column = "p_tuijian"),
     	@Result(property = "pCommission", column = "p_commission"),@Result(property = "pTgjg", column = "p_tgjg"),
-    	@Result(property = "pRemark", column = "p_commission")
+    	@Result(property = "pRemark", column = "p_remark")
     })
     List<ProductModel> queryProductList(@Param("pType") String pType);
     
@@ -121,7 +121,7 @@ public interface ProductsMapper {
 		@Result(property = "pLatestPayNum", column = "p_latest_Pay_Num"), @Result(property = "pRgxz", column = "p_rgxz"),
     	@Result(property = "pRexiao", column = "p_rexiao"), @Result(property = "pTuijian", column = "p_tuijian"),
     	@Result(property = "pCommission", column = "p_commission"),@Result(property = "pTgjg", column = "p_tgjg"),
-    	@Result(property = "pRemark", column = "p_commission")
+    	@Result(property = "pRemark", column = "p_remark")
     })
     List<ProductModel> queryRecommendProducts(String recommendype);
 }

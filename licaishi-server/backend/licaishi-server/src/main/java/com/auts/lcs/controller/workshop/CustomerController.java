@@ -20,14 +20,13 @@ import com.auts.lcs.controller.SBaseController;
 import com.auts.lcs.model.common.PhiHomeBaseResponse;
 import com.auts.lcs.model.dao.CustomerModel;
 import com.auts.lcs.model.dao.order.OrderModel;
-import com.auts.lcs.model.enums.OrderStatus;
-import com.auts.lcs.model.response.AllInfoCountResponse;
 import com.auts.lcs.model.response.CustomerResponseDto;
 import com.auts.lcs.model.response.Data;
 import com.auts.lcs.model.response.OrderResponseDto;
 import com.auts.lcs.model.response.Pager;
 import com.auts.lcs.service.CustomerService;
 import com.auts.lcs.service.OrderService;
+import com.auts.lcs.service.ProductsService;
 import com.auts.lcs.util.StringUtil;
 
 /**
@@ -49,6 +48,8 @@ public class CustomerController extends SBaseController {
     OrderService orderService;
     @Autowired
     CustomerService customerService;
+    @Autowired
+    ProductsService productsService;
 
     /**
      * 查询我的客户列表
@@ -126,10 +127,10 @@ public class CustomerController extends SBaseController {
         PhiHomeBaseResponse rspObj = new PhiHomeBaseResponse();
         Pager pager = null;
 
-        LOGGER.info("queryOrdersByCustomerId customerId [{}]", customerId);
+        LOGGER.info("queryOrdersByCustomerId customerId [{}], status[{}]", customerId, status);
         String token = request.getHeader(Const.AUTHORIZATION);
         LOGGER.info("queryOrdersByCustomerId toekn [{}]", token);
-        String uid = getUidByToken(token);
+//        String uid = getUidByToken(token);
         int totalCount = orderService.queryOrderCountByCustomerId(customerId);
         List<OrderResponseDto> orderResponseDtoList = new ArrayList<>();
         List<OrderModel> orders = orderService.queryOrdersByCustomerId(Integer.parseInt(pageNo), Integer.parseInt(pageSize), customerId, status);
@@ -138,8 +139,8 @@ public class CustomerController extends SBaseController {
         		OrderResponseDto orderResponseDto = new OrderResponseDto();
         		BeanUtils.copyProperties(orderModel, orderResponseDto);
         		//查询产品简称
-        		orderResponseDto.setProductShortName("大通阳明 1222 号");
-        		orderResponseDto.setCustomerName("李冰帅哥");
+        		orderResponseDto.setProductShortName(productsService.queryProductByPid(orderModel.getProductId()).getpShortName());
+        		orderResponseDto.setCustomerName(customerService.queryCustomerByUid(orderModel.getCustomerUid()).getName());
         		orderResponseDtoList.add(orderResponseDto);
         	}
         	//分页
