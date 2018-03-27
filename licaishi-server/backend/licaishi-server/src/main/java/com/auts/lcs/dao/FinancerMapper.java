@@ -60,4 +60,7 @@ public interface FinancerMapper {
     	@Result(property = "uid", column = "uid")
     })
     String queryFinancerIDByUserID(@Param("userID") String userID);
+	
+	@Select("select * from tbl_financer where userId = #{userID}")
+	FinancerModel queryFinancerByUserID(@Param("userID") String userID);
 }

@@ -58,6 +58,12 @@ public class AccountImpl implements AccountService {
 
     @Override
     public int updateAccount(AccountModel model) {
-        return mapper.updateAccount(model);
+    	int result = mapper.updateAccount(model);
+    	if(result>0 && model.getReal_name() != null){
+    		FinancerModel financer = financerMapper.queryFinancerByUserID(model.getUid());
+    		financer.setName(model.getReal_name());
+    		financerMapper.editFinancer(financer);
+    	}
+        return result;
     }
 }
