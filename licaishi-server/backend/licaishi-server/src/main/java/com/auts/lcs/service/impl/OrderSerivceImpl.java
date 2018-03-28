@@ -1,18 +1,24 @@
 package com.auts.lcs.service.impl;
 
+import java.math.BigDecimal;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.auts.lcs.dao.OrderMapper;
+import com.auts.lcs.dao.ProductsMapper;
 import com.auts.lcs.model.dao.order.OrderModel;
+import com.auts.lcs.model.dao.product.ProductModel;
 import com.auts.lcs.service.OrderService;
 
 @Service
 public class OrderSerivceImpl implements OrderService {
 	@Autowired
 	OrderMapper orderMapper;
+	@Autowired
+	ProductsMapper productsMapper;
 
 	@Override
 	public List<OrderModel> queryOrders(int pageNo, int pageSize, String status, String uid) {
@@ -30,9 +36,27 @@ public class OrderSerivceImpl implements OrderService {
 	}
 
 	@Override
+	@Transactional
 	public int saveOrder(OrderModel om) {
-		return orderMapper.saveOrder(om);
+		int resutl = udpateProductAmount(om);
+		if(resutl > 0) {
+			resutl = orderMapper.saveOrder(om);
+		}
+		return resutl;
 	}
+	
+	/**
+	 * 并发处理方案
+	 * 
+	 * @param om
+	 * @return
+	 */
+	private int  udpateProductAmount(OrderModel om) {
+    	String pid = om.getProductId();
+    	ProductModel prodcut = productsMapper.queryProductByPid(pid);
+    	BigDecimal newAllSubscriptionAmount = new BigDecimal(prodcut.getpAllSubscriptionAmount()).add(om.getAmount());
+    	return productsMapper.updateProductAmount(newAllSubscriptionAmount.toString(), pid, prodcut.getpAllSubscriptionAmount());
+    }
 
 	@Override
     public int updateVoucher(OrderModel om) {

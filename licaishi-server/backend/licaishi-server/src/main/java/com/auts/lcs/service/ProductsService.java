@@ -11,7 +11,7 @@ public interface ProductsService {
 	int saveProducts(ProductModel productModel, List<ProfitRebateModel> profitRebates, List<ProductAttachmentModel> productAttachments);
 	
 	int updateProducts(ProductModel productModel);
-
+	
     List<ProductModel> queryProducts(int pageNo, int pageSize, String type,
     		String pInvestType, String pPaymentInterestType, String pSizeRatioType, 
     		String minimumAmount, String dueTime, String annualRevenue, String saleStatus, String pRabateProfitParameter, 

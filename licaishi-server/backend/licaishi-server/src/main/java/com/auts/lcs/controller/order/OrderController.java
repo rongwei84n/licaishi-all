@@ -29,6 +29,7 @@ import com.auts.lcs.controller.SBaseController;
 import com.auts.lcs.model.common.PhiHomeBaseResponse;
 import com.auts.lcs.model.dao.CustomerModel;
 import com.auts.lcs.model.dao.order.OrderModel;
+import com.auts.lcs.model.dao.product.ProductModel;
 import com.auts.lcs.model.enums.OrderStatus;
 import com.auts.lcs.model.request.CreateOrderRequestModel;
 import com.auts.lcs.model.response.CustomerListResponseDto;
@@ -158,6 +159,11 @@ public class OrderController extends SBaseController {
         String uid = getUidByToken(token);
         //通过理财师的uid找到理财师表里的UID
         String financerUid = getFinancerUidByUid(uid);
+        //检查额度够不够
+        int checkResult = checkProdcutAmount(requestModel);
+        if(checkResult != 200) {
+        	return errorResponse(checkResult);
+        }
         OrderModel om = generateOrder(requestModel.getProductId(), requestModel.getCustomerId(),
                 financerUid,
                 requestModel.getCardId(),
@@ -170,12 +176,24 @@ public class OrderController extends SBaseController {
         //todo 产品额度够不够
         int result = orderService.saveOrder(om);
         if (result < 1) {
-        	return errorResponse(100);
+        	return errorResponse(14001);
         }
 
         return successResponse(rspObj);
     }
 
+    private int checkProdcutAmount(CreateOrderRequestModel requestModel) {
+    	int success = 200;
+    	ProductModel prodcut = productsService.queryProductByPid(requestModel.getProductId());
+    	BigDecimal remainAmount = new BigDecimal(prodcut.getpAllIssuingScale()).subtract(new BigDecimal(prodcut.getpAllSubscriptionAmount()));
+    	if(remainAmount.compareTo(new BigDecimal(requestModel.getAmount())) == -1) {
+    		//产品余额不足
+    		return 14002;
+    	}
+    	return success;
+    }
+
+    
     /**
      * 查询我的客户列表
      * @param request
