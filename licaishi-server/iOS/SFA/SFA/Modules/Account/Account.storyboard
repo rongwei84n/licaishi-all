@@ -157,7 +157,7 @@
                             <outlet property="delegate" destination="zqJ-aJ-DQ0" id="aR8-eI-ZMy"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" title="嘿牛理财师登陆" id="qHK-9k-rk1"/>
+                    <navigationItem key="navigationItem" title="嘿牛理财师登录" id="qHK-9k-rk1"/>
                     <connections>
                         <outlet property="passwordTextField" destination="1RI-jF-gMU" id="d2W-kF-gVl"/>
                         <outlet property="phoneNumberTextField" destination="tb7-vb-PjV" id="ACL-Cx-SOV"/>

@@ -75,7 +75,7 @@ public class LoginCloudActivity extends BaseActivity implements ILoadingView {
     @Override
     public void afterInitView() {
         mViewdiv.setVisibility(View.GONE);
-        mTvtitle.setText("嘿牛理财师登陆");
+        mTvtitle.setText("嘿牛理财师登录");
         new UpdateManager(this).appUpdate(false);
         initPresenter();
         getExtra();
