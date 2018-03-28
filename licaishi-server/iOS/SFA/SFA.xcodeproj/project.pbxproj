@@ -1095,7 +1095,7 @@
 				INFOPLIST_FILE = "SFA/Supporting Files/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.lcss.SFA;
+				PRODUCT_BUNDLE_IDENTIFIER = com.auts.hein.lcss;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "3fd8bb2c-72d9-4145-bd69-fb4bb7699c1e";
 				PROVISIONING_PROFILE_SPECIFIER = "develop pro";
@@ -1117,7 +1117,7 @@
 				INFOPLIST_FILE = "SFA/Supporting Files/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.lcss.SFA;
+				PRODUCT_BUNDLE_IDENTIFIER = com.auts.hein.lcss;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "3ca8e3c0-df56-4d48-a407-6abd05eeee0d";
 				PROVISIONING_PROFILE_SPECIFIER = "ios upload";
@@ -1262,7 +1262,7 @@
 				INFOPLIST_FILE = "SFA/Supporting Files/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.lcss.SFA;
+				PRODUCT_BUNDLE_IDENTIFIER = com.auts.hein.lcss;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "0c17d98d-5222-4a66-922a-5a93b0e7ab33";
 				PROVISIONING_PROFILE_SPECIFIER = lcssDistribution;
