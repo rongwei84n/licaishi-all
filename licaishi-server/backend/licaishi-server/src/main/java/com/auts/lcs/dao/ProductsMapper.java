@@ -143,7 +143,8 @@ public interface ProductsMapper {
     	@Result(property = "pRzf", column = "p_rzf"), @Result(property = "pDbf", column = "p_dbf"),
 		@Result(property = "pLatestPayNum", column = "p_latest_Pay_Num"), @Result(property = "pRgxz", column = "p_rgxz"),
     	@Result(property = "pRexiao", column = "p_rexiao"), @Result(property = "pTuijian", column = "p_tuijian"),
-    	@Result(property = "pCommission", column = "p_commission")
+    	@Result(property = "pCommission", column = "p_commission"),@Result(property = "pTgjg", column = "p_tgjg"),
+    	@Result(property = "pRemark", column = "p_remark")
     })
     ProductModel queryProductByPCode(@Param("pCode") String pCode);
 
@@ -164,7 +165,8 @@ public interface ProductsMapper {
     	@Result(property = "pRzf", column = "p_rzf"), @Result(property = "pDbf", column = "p_dbf"),
 		@Result(property = "pLatestPayNum", column = "p_latest_Pay_Num"), @Result(property = "pRgxz", column = "p_rgxz"),
     	@Result(property = "pRexiao", column = "p_rexiao"), @Result(property = "pTuijian", column = "p_tuijian"),
-    	@Result(property = "pCommission", column = "p_commission")
+    	@Result(property = "pCommission", column = "p_commission"),@Result(property = "pTgjg", column = "p_tgjg"),
+    	@Result(property = "pRemark", column = "p_remark")
     })
     ProductModel queryProductByPid(@Param("pid") String pid);
 
@@ -263,7 +265,8 @@ public interface ProductsMapper {
     	@Result(property = "pInvestOwnerId", column = "p_invest_owner_id"), @Result(property = "pAllSubscriptionAmount", column = "p_all_subscription_amount"),
 		@Result(property = "pLatestPayNum", column = "p_latest_Pay_Num"), @Result(property = "pRgxz", column = "p_rgxz"),
     	@Result(property = "pRexiao", column = "p_rexiao"), @Result(property = "pTuijian", column = "p_tuijian"),
-    	@Result(property = "pCommission", column = "p_commission")
+    	@Result(property = "pCommission", column = "p_commission"),@Result(property = "pTgjg", column = "p_tgjg"),
+    	@Result(property = "pRemark", column = "p_remark")
     })
     List<ProductModel> queryProductsByType(@Param("startIndex")int startIndex, @Param("pageSize") int pageSize, @Param("type")String type,
     		@Param("pInvestType")String pInvestType, @Param("pPaymentInterestType")String pPaymentInterestType, @Param("pSizeRatioType")String pSizeRatioType,
@@ -283,7 +286,8 @@ public interface ProductsMapper {
     	@Result(property = "pInvestOwnerId", column = "p_invest_owner_id"), @Result(property = "pAllSubscriptionAmount", column = "p_all_subscription_amount"),
 		@Result(property = "pLatestPayNum", column = "p_latest_Pay_Num"), @Result(property = "pRgxz", column = "p_rgxz"),
     	@Result(property = "pRexiao", column = "p_rexiao"), @Result(property = "pTuijian", column = "p_tuijian"),
-    	@Result(property = "pCommission", column = "p_commission")
+    	@Result(property = "pCommission", column = "p_commission"),@Result(property = "pTgjg", column = "p_tgjg"),
+    	@Result(property = "pRemark", column = "p_remark")
     })
     List<ProductModel> queryAllProducts(@Param("startIndex")int startIndex, @Param("pageSize")int pageSize);
 
@@ -300,7 +304,8 @@ public interface ProductsMapper {
     	@Result(property = "pInvestOwnerId", column = "p_invest_owner_id"), @Result(property = "pAllSubscriptionAmount", column = "p_all_subscription_amount"),
 		@Result(property = "pLatestPayNum", column = "p_latest_Pay_Num"), @Result(property = "pRgxz", column = "p_rgxz"),
     	@Result(property = "pRexiao", column = "p_rexiao"), @Result(property = "pTuijian", column = "p_tuijian"),
-    	@Result(property = "pCommission", column = "p_commission")
+    	@Result(property = "pCommission", column = "p_commission"),@Result(property = "pTgjg", column = "p_tgjg"),
+    	@Result(property = "pRemark", column = "p_remark")
     })
     List<ProductModel> queryRecommendProducts(String recommendype);
 }

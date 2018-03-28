@@ -46,7 +46,23 @@ public class ProductDetailResponseModel {
 	private String pRexiao;//是否热销
 	private String pTuijian;//是否推荐
 	private String pRgxz; //认购须知
+	private String pRemark;//备注
+    private String pTgjg; //托管机构
     
+    public String getpTgjg() {
+		return pTgjg;
+	}
+
+	public void setpTgjg(String pTgjg) {
+		this.pTgjg = pTgjg;
+	}
+    public String getpRemark() {
+		return pRemark;
+	}
+
+	public void setpRemark(String pRemark) {
+		this.pRemark = pRemark;
+	}
 	public String getpLatestPayNum() {
 		return pLatestPayNum;
 	}

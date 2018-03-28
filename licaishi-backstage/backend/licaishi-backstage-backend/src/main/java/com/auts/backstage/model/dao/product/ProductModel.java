@@ -21,7 +21,7 @@ public class ProductModel extends BaseDaoModel {
     private String pDulTime; //发行期限
 	@JsonFormat(timezone = "GMT+8", pattern = "yyyy-MM-dd")
 	@DateTimeFormat(pattern = "yyyy-MM-dd")
-    private Date pSaleStartTime; //发行开始日期
+    private Date pSaleStartTime; //产品成立日期
     private String pAllIssuingScale;//募集规模
     private String pMinAmount; //最少起投金额 100W
     private String pPaymentInterestType; //付息方式
@@ -30,7 +30,6 @@ public class ProductModel extends BaseDaoModel {
     private String pInvestOwnerId;//发行机构
     private String pAllSubscriptionAmount;// 已销售金额
     private String pRecruitmentSummary;//产品summary
-    private int latestPayNum; //最迟打款天数
     private String pTgjg; //托管机构
 	private String pCpys;//产品优势
     private String pMjzh;//募集账号
@@ -316,13 +315,6 @@ public class ProductModel extends BaseDaoModel {
 
 	public void setpInvestOwnerId(String pInvestOwnerId) {
 		this.pInvestOwnerId = pInvestOwnerId;
-	}
-    public int getLatestPayNum() {
-		return latestPayNum;
-	}
-
-	public void setLatestPayNum(int latestPayNum) {
-		this.latestPayNum = latestPayNum;
 	}
 	
 	public String getpTgjg() {

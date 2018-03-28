@@ -65,6 +65,15 @@ public class ProductResponseModel {
 	private String pRexiao;
 	private String pTuijian;
 	private String pRgxz; //认购须知
+	private String pRemark;//备注
+
+    public String getpRemark() {
+		return pRemark;
+	}
+
+	public void setpRemark(String pRemark) {
+		this.pRemark = pRemark;
+	}
 	
 	public String getpLatestPayNum() {
 		return pLatestPayNum;

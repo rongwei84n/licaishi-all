@@ -16,7 +16,7 @@ public class ProductModel extends BaseDaoModel {
     private String pExpectAnnualRevenue;
     private String pSaleStatus;
     private String pDulTime;
-    private Date pSaleStartTime;
+    private Date pSaleStartTime;//产品成立日期
     private String pAllIssuingScale;
     private String pMinAmount;
     private String pPaymentInterestType;
@@ -25,7 +25,7 @@ public class ProductModel extends BaseDaoModel {
     private String pInvestOwnerId;
     private String pAllSubscriptionAmount;
     private String pRecruitmentSummary;
-    private String pCpys;
+	private String pCpys;
     private String pMjzh;
     private String pFxkz;
     private String pHkly;
@@ -39,8 +39,25 @@ public class ProductModel extends BaseDaoModel {
 	private String pTuijian;
 	private String pRgxz; //认购须知
 	private String pCommission;
+	private String pRemark;//备注
+    private String pTgjg; //托管机构
+    
+    public String getpTgjg() {
+		return pTgjg;
+	}
 
-    public String getpLatestPayNum() {
+	public void setpTgjg(String pTgjg) {
+		this.pTgjg = pTgjg;
+	}
+    public String getpRemark() {
+		return pRemark;
+	}
+
+	public void setpRemark(String pRemark) {
+		this.pRemark = pRemark;
+	}
+
+	public String getpLatestPayNum() {
 		return pLatestPayNum;
 	}
 
