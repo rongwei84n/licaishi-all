@@ -23,7 +23,10 @@ public class OrderModel extends BaseDaoModel {
     private String customerTel;
     private String productId;
     private String product;//产品全称
-    private String proShortNam;//产品简称
+	@JsonFormat(timezone = "GMT+8", pattern = "yyyy-MM-dd")
+	@DateTimeFormat(pattern = "yyyy-MM-dd")
+    private Date pSaleStartTime; //产品成立日期
+	private String proShortNam;//产品简称
     private String inst;//发行机构
     private String comRatio;//佣金比率
     private BigDecimal commission;//佣金
@@ -41,6 +44,13 @@ public class OrderModel extends BaseDaoModel {
 	@JsonFormat(timezone = "GMT+8", pattern = "yyyy-MM-dd HH:mm:ss")
 	@DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
 	private Date updatetime;
+	
+    public Date getpSaleStartTime() {
+		return pSaleStartTime;
+	}
+	public void setpSaleStartTime(Date pSaleStartTime) {
+		this.pSaleStartTime = pSaleStartTime;
+	}
 	
 	public int getUid() {
 		return uid;

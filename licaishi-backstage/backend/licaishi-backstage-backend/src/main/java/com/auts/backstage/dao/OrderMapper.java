@@ -21,7 +21,8 @@ public interface OrderMapper {
     		+ "d.phone customer_tel,"
     		+ "e.p_short_name pro_short_nam,"
     		+ "e.p_full_name product,"
-    		+ "e.p_invest_owner_id inst"
+    		+ "e.p_invest_owner_id inst,"
+    		+ "e.p_sale_date_start pSaleStartTime"
     	+ " FROM "
     		+ "tbl_order a "
     		+ "LEFT JOIN tbl_financer c ON c.uid = a.financer_uid "
@@ -49,7 +50,7 @@ public interface OrderMapper {
     	@Result(property = "financer", column = "financer"),@Result(property = "financerTel", column = "financer_tel"),
     	@Result(property = "customer", column = "customer"),@Result(property = "customerTel", column = "customer_tel"),
     	@Result(property = "proShortNam", column = "pro_short_nam"),@Result(property = "product", column = "product"),
-    	@Result(property = "inst", column = "inst")
+    	@Result(property = "inst", column = "inst"), @Result(property = "pSaleStartTime", column = "pSaleStartTime")
     })
 	List<OrderModel> queryOrders(@Param("status") String status, @Param("startDate") String startDate, @Param("endDate") String endDate);
 
