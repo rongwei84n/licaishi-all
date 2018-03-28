@@ -29,9 +29,9 @@ extension App {
                 case .dev:
                     return "http://47.97.100.240"
                 case .test:
-                    return "http://sithome.phicomm.com"
+                    return "http://47.97.100.240"
                 case .product:
-                    return "https://home.phicomm.com"
+                    return "http://47.97.100.240"
                 }
             }
         }
@@ -51,7 +51,7 @@ extension App {
         private(set) static var domain: Domain = Domain.test
         
         #elseif RELEASE
-        private(set) static var domain: Domain = Domain.production
+        private(set) static var domain: Domain = Domain.product 
         
         #endif
         
