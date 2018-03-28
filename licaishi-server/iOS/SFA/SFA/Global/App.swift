@@ -50,7 +50,7 @@ extension App {
         #elseif TEST
         private(set) static var domain: Domain = Domain.test
         
-        #elseif RELEASE
+        #else
         private(set) static var domain: Domain = Domain.product 
         
         #endif
