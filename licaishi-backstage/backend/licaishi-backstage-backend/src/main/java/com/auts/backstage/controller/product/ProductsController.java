@@ -62,6 +62,9 @@ public class ProductsController extends SBaseController {
         }
         try{
         	int result = productsService.addProduct(proModalValidate);
+        	if(result < 1) {
+        		return errorResponse(10008);
+        	}
         }catch(Exception e){
         	LOGGER.error("新增产品异常", e);
         	return errorResponse(10001);
@@ -84,8 +87,11 @@ public class ProductsController extends SBaseController {
         }
         try{
         	int result = productsService.updateProducts(proModalValidate);
+        	if(result < 1) {
+        		return errorResponse(10008);
+        	}
         }catch(Exception e){
-        	LOGGER.error("新增产品异常", e);
+        	LOGGER.error("修改产品异常", e);
         	return errorResponse(10001);
         }
         return successResponse(rspObj);
