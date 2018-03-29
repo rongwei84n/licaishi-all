@@ -26,7 +26,7 @@ public interface ProductsMapper {
     		+ "p_rexiao, p_tuijian, p_commission, p_create_time,p_update_time,p_remark) "
             + "values (#{pm.pCode},#{pm.pShortName}, #{pm.pFullName},#{pm.pType},#{pm.pExpectAnnualRevenue},#{pm.pSaleStatus},"
             + "#{pm.pDulTime}, #{pm.pSaleStartTime},#{pm.pAllIssuingScale},#{pm.pMinAmount}, #{pm.pPaymentInterestType},"
-            +" #{pm.pInvestType}, #{pm.pSizeRatioType},#{pm.pInvestOwnerId},#{pm.pRecruitmentSummary},#{pm.pAllSubscriptionAmount},#{pm.latestPayNum},"
+            +" #{pm.pInvestType}, #{pm.pSizeRatioType},#{pm.pInvestOwnerId},#{pm.pRecruitmentSummary},#{pm.pAllSubscriptionAmount},#{pm.pLatestPayNum},"
             +" #{pm.pCpys}, #{pm.pMjzh},#{pm.pFxkz}, #{pm.pHkly},#{pm.pZjyt}, #{pm.pRzf},#{pm.pDbf},#{pm.pTgjg},#{pm.pRgxz}, "
             + "#{pm.pRexiao},#{pm.pTuijian},#{pm.pCommission},#{pm.createTime},#{pm.updateTime},#{pm.pRemark})")
     int savaProduct(@Param("pm") ProductModel pm);
@@ -34,7 +34,7 @@ public interface ProductsMapper {
     @Update("update Product set p_short_name=#{pm.pShortName}, p_full_name=#{pm.pFullName}, p_expect_annual_revenue=#{pm.pExpectAnnualRevenue}, "
     		+ "p_sale_status=#{pm.pSaleStatus}, p_due_time=#{pm.pDulTime}, p_sale_date_start=#{pm.pSaleStartTime}, p_all_issuing_scale=#{pm.pAllIssuingScale}, "
     		+ "p_payment_interest_type=#{pm.pPaymentInterestType}, p_invest_type=#{pm.pInvestType}, p_size_ratio_type=#{pm.pSizeRatioType}, "
-    		+ "p_invest_owner_id=#{pm.pInvestOwnerId}, p_recruitment_summary=#{pm.pRecruitmentSummary}, p_latest_Pay_Num=#{pm.latestPayNum}, "
+    		+ "p_invest_owner_id=#{pm.pInvestOwnerId}, p_recruitment_summary=#{pm.pRecruitmentSummary}, p_latest_Pay_Num=#{pm.pLatestPayNum}, "
     		+ "p_cpys=#{pm.pCpys}, p_mjzh=#{pm.pMjzh}, p_fxkz=#{pm.pFxkz}, p_hkly=#{pm.pHkly}, p_zjyt=#{pm.pZjyt}, p_rzf=#{pm.pRzf}, p_dbf=#{pm.pDbf},"
     		+ "p_tgjg=#{pm.pTgjg}, p_rgxz=#{pm.pRgxz}, p_rexiao=#{pm.pRexiao}, p_tuijian=#{pm.pTuijian}, p_commission=#{pm.pCommission}, "
     		+ "p_remark=#{pm.pRemark}, p_update_time=#{pm.updateTime} "
