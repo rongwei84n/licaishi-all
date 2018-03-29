@@ -38,7 +38,7 @@ public class OrderSerivceImpl implements OrderService {
 	@Override
 	@Transactional
 	public int saveOrder(OrderModel om) {
-		int resutl = udpateProductAmount(om);
+		int resutl = udpateProductAmount(om, true);
 		if(resutl > 0) {
 			resutl = orderMapper.saveOrder(om);
 		}
@@ -47,14 +47,21 @@ public class OrderSerivceImpl implements OrderService {
 	
 	/**
 	 * 并发处理方案
-	 * 
+	 * flag :true 生成订单 false 取消订单
 	 * @param om
+	 * 
 	 * @return
 	 */
-	private int  udpateProductAmount(OrderModel om) {
+	private int  udpateProductAmount(OrderModel om, boolean flag) {
     	String pid = om.getProductId();
     	ProductModel prodcut = productsMapper.queryProductByPid(pid);
-    	BigDecimal newAllSubscriptionAmount = new BigDecimal(prodcut.getpAllSubscriptionAmount()).add(om.getAmount());
+    	BigDecimal newAllSubscriptionAmount = BigDecimal.ZERO;
+    	if(flag) {
+    		//生成订单
+    		newAllSubscriptionAmount = new BigDecimal(prodcut.getpAllSubscriptionAmount()).add(om.getAmount());
+    	} else {
+    		newAllSubscriptionAmount = new BigDecimal(prodcut.getpAllSubscriptionAmount()).subtract(om.getAmount());
+    	}
     	return productsMapper.updateProductAmount(newAllSubscriptionAmount.toString(), pid, prodcut.getpAllSubscriptionAmount());
     }
 
@@ -65,7 +72,12 @@ public class OrderSerivceImpl implements OrderService {
 
 	@Override
 	public int cancelOrder(String orderNo) {
-		return orderMapper.cancelOrder(orderNo);
+		OrderModel om = orderMapper.queryOrderByOrderNo(orderNo);
+		int resutl = udpateProductAmount(om, false);
+		if(resutl > 0) {
+			resutl = orderMapper.cancelOrder(orderNo);
+		}
+		return resutl;
 	}
 
 	@Override
