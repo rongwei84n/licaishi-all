@@ -154,7 +154,7 @@ public class ProductsImpl implements ProductsService {
 			}
 			pr.setPrCommission(pr.getPrCommission()+"%");
 			BigDecimal rate = new BigDecimal(10000);
-			if(pr.getPrEndAmount() == null) {
+			if(pr.getPrEndAmount() == null || pr.getPrEndAmount().compareTo(BigDecimal.ZERO) == 0) {
 				String prAmountDisplay = pr.getPrStartAmount() + "万以上";
 				pr.setPrAmountDisplay(prAmountDisplay);
 				pr.setPrStartAmount(pr.getPrStartAmount().multiply(rate));
