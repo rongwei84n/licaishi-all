@@ -34,7 +34,7 @@ public interface ProductsMapper {
     int updateProduct(@Param("product") ProductModel pm);
     
     @Update("update Product set p_all_subscription_amount=#{newAllSubscriptionAmount}, p_update_time = now()"
-    		+ " where p_id=#{pid} and p_all_subscription_amount = #{originSubscriptionAmount)")
+    		+ " where p_id=#{pid} and p_all_subscription_amount = #{originSubscriptionAmount}")
     int updateProductAmount(@Param("newAllSubscriptionAmount") String newAllSubscriptionAmount, @Param("pid") String pid, @Param("originSubscriptionAmount") String originSubscriptionAmount);
 
 //    @Select("select count(*) num from Product where p_type = #{type} limit 1 ")
