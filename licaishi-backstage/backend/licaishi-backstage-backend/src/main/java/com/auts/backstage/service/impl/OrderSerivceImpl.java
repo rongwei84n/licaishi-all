@@ -54,4 +54,15 @@ public class OrderSerivceImpl implements OrderService {
 		orderMapper.orderSettled(uid);
 	}
 
+	@Override
+	@Transactional
+	public void orderPay(String uid) {
+		orderMapper.orderPay(uid);
+	}
+
+	@Override
+	public OrderModel queryOrder(String uid) {
+		return orderMapper.queryOrder(uid);
+	}
+
 }

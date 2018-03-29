@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.auts.backstage.controller.SBaseController;
 import com.auts.backstage.model.common.PageInfo;
 import com.auts.backstage.model.common.PhiHomeBaseResponse;
+import com.auts.backstage.model.dao.order.OrderModel;
 import com.auts.backstage.service.OrderService;
 
 /**
@@ -49,12 +50,19 @@ public class OrderController extends SBaseController {
     }
     
     /**
-     * 完成打款
+     * 完成订单
      */
-    @RequestMapping(value = "/v1/order/ordersettle", method = RequestMethod.POST, produces = { "application/json" })
-    public PhiHomeBaseResponse orderSettle(HttpServletRequest request,
+    @RequestMapping(value = "/v1/order/orderdone", method = RequestMethod.POST, produces = { "application/json" })
+    public PhiHomeBaseResponse orderDone(HttpServletRequest request,
     		@RequestParam(value = "uid", required = true) String uid) {
         PhiHomeBaseResponse rspObj = new PhiHomeBaseResponse();
+        OrderModel order = orderService.queryOrder(uid);
+        if("0".equals(order.getPayStatus())){
+        	return errorResponse(100, "该订单还未打款");
+        }
+        if("0".equals(order.getContractStatus())){
+        	return errorResponse(100, "该订单还未签订合同");
+        }
         orderService.orderSettle(uid);
         return successResponse(rspObj);
     }
@@ -78,6 +86,17 @@ public class OrderController extends SBaseController {
     		@RequestParam(value = "uid", required = true) String uid) {
         PhiHomeBaseResponse rspObj = new PhiHomeBaseResponse();
         orderService.orderContract(uid);
+        return successResponse(rspObj);
+    }
+    
+    /**
+     * 完成打款
+     */
+    @RequestMapping(value = "/v1/order/orderpay", method = RequestMethod.POST, produces = { "application/json" })
+    public PhiHomeBaseResponse orderPay(HttpServletRequest request,
+    		@RequestParam(value = "uid", required = true) String uid) {
+        PhiHomeBaseResponse rspObj = new PhiHomeBaseResponse();
+        orderService.orderPay(uid);
         return successResponse(rspObj);
     }
     

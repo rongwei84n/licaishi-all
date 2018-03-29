@@ -33,6 +33,7 @@ public class OrderModel extends BaseDaoModel {
     private String proRatio;//收益比率
     private BigDecimal profit;//收益
     private String status;//状态
+    private String payStatus;//支付状态
     private String contractStatus;//合同状态
     private String voucherStatus;//凭证状态
     private String voucherPath;//凭证路径
@@ -213,6 +214,12 @@ public class OrderModel extends BaseDaoModel {
 	}
 	public void setLatestPayDate(String latestPayDate) {
 		this.latestPayDate = latestPayDate;
+	}
+	public String getPayStatus() {
+		return payStatus;
+	}
+	public void setPayStatus(String payStatus) {
+		this.payStatus = payStatus;
 	}
     
 }

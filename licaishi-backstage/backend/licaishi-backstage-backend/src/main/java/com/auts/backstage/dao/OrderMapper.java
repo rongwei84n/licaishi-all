@@ -43,7 +43,7 @@ public interface OrderMapper {
     	@Result(property = "customerUid", column = "customer_uid"),@Result(property = "productId", column = "product_id"),
     	@Result(property = "comRatio", column = "commission_ratio"),@Result(property = "commission", column = "commission"),
     	@Result(property = "proRatio", column = "profit_ratio"),@Result(property = "profit", column = "profit"),
-    	@Result(property = "status", column = "status"),@Result(property = "voucherStatus", column = "voucher_status"),
+    	@Result(property = "status", column = "status"),@Result(property = "payStatus", column = "pay_status"),@Result(property = "voucherStatus", column = "voucher_status"),
     	@Result(property = "voucherPath", column = "voucher_path"),@Result(property = "contractStatus", column = "contract_status"),
     	@Result(property = "issuingBank", column = "issuing_bank"),@Result(property = "cardNo", column = "card_no"),
     	@Result(property = "createtime", column = "create_time"),@Result(property = "updatetime", column = "update_time"),
@@ -73,9 +73,15 @@ public interface OrderMapper {
 	void orderFailure(@Param("uid") String uid);
 
     @Update("update tbl_order set contract_status = '1', update_time= NOW() where uid=#{uid}")
-	void orderContract(String uid);
+	void orderContract(@Param("uid") String uid);
 
     @Update("update tbl_order set status = '03', update_time= NOW() where uid=#{uid}")
-	void orderSettled(String uid);
+	void orderSettled(@Param("uid") String uid);
+
+    @Update("update tbl_order set pay_status = '1', update_time= NOW() where uid=#{uid}")
+	void orderPay(@Param("uid") String uid);
+
+    @Select("select * from tbl_order where uid = #{uid}")
+	OrderModel queryOrder(@Param("uid") String uid);
    
 }
