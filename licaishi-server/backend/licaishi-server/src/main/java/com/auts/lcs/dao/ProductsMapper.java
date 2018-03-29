@@ -33,7 +33,7 @@ public interface ProductsMapper {
     @UpdateProvider(type = ProductSqlProvider.class, method = "updateSql")
     int updateProduct(@Param("product") ProductModel pm);
     
-    @Update("update Product set p_all_subscription_amount=#{newAllSubscriptionAmount}, set p_update_time = now()"
+    @Update("update Product set p_all_subscription_amount=#{newAllSubscriptionAmount}, p_update_time = now()"
     		+ " where p_id=#{pid} and p_all_subscription_amount = #{originSubscriptionAmount)")
     int updateProductAmount(@Param("newAllSubscriptionAmount") String newAllSubscriptionAmount, @Param("pid") String pid, @Param("originSubscriptionAmount") String originSubscriptionAmount);
 
