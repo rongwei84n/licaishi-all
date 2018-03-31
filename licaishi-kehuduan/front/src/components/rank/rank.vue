@@ -1,34 +1,68 @@
 ﻿<template>
   <div class="rank">
     <div class="rank-context">
-      <div class="logo">
+      <div class="rank-top">
+        <div class="rank-top-title">财富</div>
+        <div class="rank-top-caifu">
+          <ul>
+            <li>
+              8888.00
+            </li>
+            <li>
+              我的资产(元)
+            </li>
+          </ul>
+        </div>
       </div>
-      <img src="~@/common/image/xuanchuan.png" class="xuanchuan"><br/>
-      <div class="rank-tubiaoqu">
-        <div class="tubiao-flex">
-          <div class = "tubiao" @click="rankClick" id="1">
-            <img src="~@/common/image/workroom-info.png" alt="工作室信息"><br>
-            <span>工作室信息</span>
-          </div>
+      <div class="cai-fu-context">
+        <div>
+          <ul>
+            <li>
+              3333.00
+            </li>
+            <li>
+              总期待回报(元)
+            </li>
+          </ul>
         </div>
-        <div class="tubiao-flex">
-          <div class = "tubiao" @click="rankClick" id="2">
-            <img src="~@/common/image/my-custom.png" alt="我的客户"><br/>
-            <span>我的客户</span>
-          </div>
+        <div>
+          <ul>
+            <li>
+              444.00
+            </li>
+            <li>
+              已完成回报(元)
+            </li>
+          </ul>
         </div>
-        <div class="tubiao-flex">
-          <div class = "tubiao" @click="rankClick" id="3">
-            <img src="~@/common/image/my-fee.png" alt="我的佣金"><br/>
-            <span>我的佣金</span>
-          </div>
-        </div>
-        <div class="tubiao-flex">
-          <div class = "tubiao" @click="rankClick" id="4">
-            <img src="~@/common/image/generalize.png" alt="我要推广"><br/>
-            <span>我要推广</span>
-          </div>
-        </div>
+      </div>
+      <div class="mi-zu-context">
+        <ul>
+          <li>
+            米族账号：12234343
+          </li>
+          <li>
+            余额：￥5555.00
+          </li>
+        </ul>
+      </div>
+      <split :sh="6"></split>
+      <div class="rank-product-kind">
+        <mt-cell title="集合信托" to="/rank" is-link value="0.00">
+          <img slot="icon" src="../../common/image/my_settings_mystudio.png" width="18" height="14">
+        </mt-cell>
+        <mt-cell title="集合资管" to="/rank/mycustom" is-link  value="0.00">
+          <img slot="icon" src="../../common/image/my_settings_my_customer.png" width="18" height="14">
+        </mt-cell>
+        <mt-cell title="债券基金" is-link value="0.00">
+          <img slot="icon" src="../../common/image/my_settings_spread.png" width="18" height="14">
+        </mt-cell>
+        <mt-cell title="阳光私募" is-link value="0.00">
+          <img slot="icon" src="../../common/image/my_settings_hotline.png" width="18" height="14">
+        </mt-cell>
+        <mt-cell title="固定类债权" is-link value="0.00">
+          <img slot="icon" src="../../common/image/my_settings_hotline.png" width="18" height="14">
+        </mt-cell>
       </div>
     </div>
     <router-view></router-view>
@@ -36,6 +70,7 @@
 </template>
 
 <script>
+  import split from "components/split/split";
   export default {
     data () {
       return {}
@@ -54,6 +89,9 @@
           this.$router.push("/rank/generalize")
         }
       }
+    },
+    components: {
+        split
     }
   }
 </script>
@@ -63,55 +101,71 @@
     position relative
     width 100%
     height 100vh
+    background #EFF3F6
     .rank-context
       position absolute
       bottom: 46px
       width 100%
       top 0px
-      //height 100%
-      overflow hidden
-      //background-color: #eff3f6;
       z-index 2
-      background-image url("~@/common/image/workroom-backimg.png")
-      background-size 100% 100%
-      .logo
-        width:14%
-        height:6%
-        background-image url("~@/common/image/lcs-logo.png")
+      .rank-top
+        height 20vh
+        background green
+        font-size 16px
+        color:#FFF
+        background-image url("~@/common/image/my-co.png")
         background-size 100% 100%
-        margin 36px 20px 0px auto
-        //float right
-      .xuanchuan
-        display block
-        width 90%
-        height 26%
-        margin 0px auto 10px auto
+        background-repeat no-repeat
+        //padding-top 10px
+        .rank-top-title
+          //height 8vh
+          line-height 50px
+          text-align center
+          //background gold
 
-      .rank-tubiaoqu
+        .rank-top-caifu
+          height 12vh
+          //background gray
+          padding-left 5vw
+          padding-top 4vh
+          ul
+            li
+              line-height 20px
+              &:first-child
+                font-size 19px
+                font-weight 600
+              &:last-child
+                font-size 13px
+      .cai-fu-context
+        height 8vh
+        //background red
         display flex
-        width 80%
-        margin auto
-        //margin-top 10%
-        flex-wrap wrap
-        justify-content: space-around;
-        align-items: center;
-        .tubiao-flex
-          flex 0 0 50%
-          .tubiao
-            width 85px
-            height 85px
-            background #FFF
-            border-radius 16px
-            text-align center
-            margin 0px auto 30%
-            padding-top 12px
-            img
-              width: 48px;
-            span
-              display block
-              font-size 13px
-              margin-top 5px
+        padding-top 2vh
+        background #FFF
+        div
+          flex 1
+          padding-left 5vw
+          &:last-child
+            padding-left 2vw
+          ul
+            li
+              line-height 20px
+              &:first-child
+                font-size 16px
+                color goldenrod
+              &:last-child
+                font-size 13px
+                color grey
 
-
-
+      .mi-zu-context
+        height 8vh
+        line-height 8vh
+        font-size 13px
+        padding-left 5vw
+        background #FFF
+      .rank-product-kind
+        .mint-cell-value
+          color:goldenrod
+        .mint-cell-text
+          font-size 14px
 </style>
