@@ -23,7 +23,7 @@ import {
   TabContainerItem,
   DatetimePicker
 } from "mint-ui"
-
+import 'mint-ui/lib/style.css'
 import 'common/stylus/index.styl'
 import 'common/stylus/cover_mint.styl' // mint-ui覆盖文件
 
