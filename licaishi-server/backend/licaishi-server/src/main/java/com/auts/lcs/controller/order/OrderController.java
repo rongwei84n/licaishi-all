@@ -236,6 +236,7 @@ public class OrderController extends SBaseController {
     	om.setLatestPayDate(DateUtils.parseStrToDate(lastPayDate, DateUtils.DATE_FORMAT_YYYY_MM_DD));
     	om.setFinancerUid(financerUid);
     	om.setCustomerUid(customerId);
+    	om.setCustomerCardNo(cardId);
     	om.setProductId(productId);
     	om.setComRatio(comRatio);
     	BigDecimal commission = amountBD.multiply(new BigDecimal(comRatio.replace("%", ""))).divide(new BigDecimal(100));

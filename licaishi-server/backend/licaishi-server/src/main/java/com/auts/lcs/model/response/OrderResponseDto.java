@@ -21,6 +21,7 @@ public class OrderResponseDto extends BaseDaoModel {
     private String financerUid;
     private String customerUid;
     private String customerName;//客户姓名
+    private String customerCardNo;//身份证号
     private String productId;
     private String productShortName; //产品简称
 	private String comRatio;//佣金比率
@@ -165,5 +166,11 @@ public class OrderResponseDto extends BaseDaoModel {
 	}
 	public void setProductShortName(String productShortName) {
 		this.productShortName = productShortName;
+	}
+    public String getCustomerCardNo() {
+		return customerCardNo;
+	}
+	public void setCustomerCardNo(String customerCardNo) {
+		this.customerCardNo = customerCardNo;
 	}
 }
