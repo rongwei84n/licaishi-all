@@ -17,8 +17,8 @@ public interface AccountMapper {
     @Select("select * from tbl_user where user_name=#{userName} and passwd=#{pwd} and status=0 limit 1")
     AccountModel login(@Param("userName") String userName, @Param("pwd") String pwd);
     
-    @Insert("insert into tbl_user (user_name, real_name, passwd, role, status, create_time, update_time) "
-            + "values (#{ac.user_name},#{ac.real_name},#{ac.passwd},#{ac.role},#{ac.status},#{ac.create_time},#{ac.update_time})")
+    @Insert("insert into tbl_user (user_name, real_name, phone, passwd, role, status, create_time, update_time) "
+            + "values (#{ac.user_name},#{ac.real_name},#{ac.phone},#{ac.passwd},#{ac.role},#{ac.status},#{ac.create_time},#{ac.update_time})")
     @Options(useGeneratedKeys = true, keyProperty = "ac.uid")
     void addAccount(@Param("ac") AccountModel ac);
 
