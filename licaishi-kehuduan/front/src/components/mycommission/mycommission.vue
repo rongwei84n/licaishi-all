@@ -17,7 +17,7 @@
     <!--<img src="~@/common/image/my-co.png"/>-->
     <Scroll class="scroll-conntent" :data="comList">
       <div>
-        <div v-for="(commission,index) in comList" :key="index">
+        <div v-for="(commission,index) in comList" :key="index" @click="displayOrderDetail(commission)">
           <split :sh="8"></split>
           <myCommissionInfo :myDate="commission.orderDate" :myComAmount="commission.commission"
               :orderId="commission.orderNo" :orderAmount="commission.amount"
@@ -55,9 +55,9 @@
             customTep:"1366666666"
           }
         ],*/
-        wcCommission:"",//待结佣
-        ocCommission:"",//已结佣
-        sumCommission:"",//总结佣
+        wcCommission:"0",//待结佣
+        ocCommission:"0",//已结佣
+        sumCommission:"0",//总结佣
         pageNo: 1, //当前页
         pullup: true, //开启上拉加载
 
@@ -76,6 +76,13 @@
     methods: {
       back() {
         this.$router.go(-1)
+      },
+      displayOrderDetail(orderDetail) {
+        this.$router.push({
+          path: "/rank/mycustom/customOrderDetail",
+          query: orderDetail
+        });
+
       },
       get_mycommission_info() {
         ajax({
@@ -101,9 +108,9 @@
           method: "GET"
         }).then(res => {
           if (res.status === 200) {
-            this.sumCommission = res.data.result.sumCommission;
-            this.ocCommission = res.data.result.ocCommission;
-            this.wcCommission = res.data.result.wcCommission;
+            this.sumCommission = res.data.result.sumCommission==null?"0":res.data.result.sumCommission;
+            this.ocCommission = res.data.result.ocCommission==null?"0":res.data.result.ocCommission;
+            this.wcCommission = res.data.result.wcCommission==null?"0":res.data.result.wcCommission;
           }
         });
       }

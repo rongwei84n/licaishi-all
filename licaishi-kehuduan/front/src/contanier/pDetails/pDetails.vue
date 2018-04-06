@@ -1,8 +1,8 @@
 /*
  * @Author: 张浩然 
  * @Date: 2018-03-07 19:23:27 
- * @Last Modified by: 张浩然
- * @Last Modified time: 2018-03-19 00:49:49
+ * @Last Modified by: zhanghr
+ * @Last Modified time: 2018-03-29 15:51:28
  *
  * 产品详情组件
  */
@@ -11,7 +11,7 @@
   <div id="pDetails">
     <mt-header title="产品详情">
       <mt-button icon="back" @click="back" slot="left"></mt-button>
-      <i class="fa fa-share-alt extend-click" slot="right"></i>
+      <i class="fa fa-share-alt extend-click" slot="right" @click="btnEvent"></i>
     </mt-header>
     <Scroll class="scroll-conntent" :data="pDetailsObj">
       <div>
@@ -48,7 +48,7 @@
           <div class="pro-header-content">
             <span>基础信息</span>
             <span class="copy" data-clipboard-target="#information" data-clipboard-action="copy" id="information_btn" @click="copy('information_btn','#information')">
-              <i></i>复制
+              <!-- <i></i>复制 -->
             </span>
           </div>
           <div class="body-content" id="information">
@@ -90,17 +90,36 @@
             </div> -->
           </div>
         </div>
+        <!-- 认购须知 -->
+        <div class="financing" v-if="pDetailsObj.pRgxz">
+          <div class="pro-header-content">
+            <span>认购须知</span>
+          </div>
+          <div class="body-content">
+            <p v-html="pDetailsObj.pRgxz">
+            </p>
+          </div>
+        </div>
+        <!-- 管理机构 -->
+        <div class="financing" v-if="pDetailsObj.pTgjg">
+          <div class="pro-header-content">
+            <span>管理机构</span>
+          </div>
+          <div class="body-content">
+            <p v-html="pDetailsObj.pTgjg">
+            </p>
+          </div>
+        </div>
         <!-- 产品优势 -->
         <div class="p-superiority" v-if="pDetailsObj.pCpys">
           <div class="pro-header-content">
             <span>产品优势</span>
             <span class="copy">
-              <i></i>复制
+              <!-- <i></i>复制 -->
             </span>
           </div>
           <div class="body-content">
-            <p>
-              {{pDetailsObj.pCpys}}
+            <p v-html="pDetailsObj.pCpys">
             </p>
           </div>
         </div>
@@ -109,7 +128,7 @@
           <div class="pro-header-content">
             <span>募集账号</span>
             <span class="copy">
-              <i></i>复制
+              <!-- <i></i>复制 -->
             </span>
           </div>
           <div class="body-content">
@@ -163,14 +182,19 @@
           <div class="pro-header-content">
             <span>预览资料</span>
           </div>
-          <!-- TODO:预览资料模块 -->
-          <!-- pDetailsObj.productAttachments -->
+          <div class="body-content">
+            <!-- <a v-for="(item,index) of pDetailsObj.productAttachments" :key='index' :href="item.paFilePath">{{item.paFileName}}</a> -->
+            <a href="https://mozilla.github.io/pdf.js/web/compressed.tracemonkey-pldi-09.pdf">测试pdf</a>
+          </div>
         </div>
         <!-- 备注 -->
-        <!-- TODO:缺少字段 -->
-        <div class="back">
+        <div class="financing" v-if="pDetailsObj.pRemark">
           <div class="pro-header-content">
             <span>备注</span>
+          </div>
+          <div class="body-content">
+            <p v-html="pDetailsObj.pRemark">
+            </p>
           </div>
         </div>
         <!-- 推荐 -->
@@ -188,6 +212,8 @@
       </a>
       <a class="subscribe" @click="subscribe">立即预约</a>
     </div>
+    <!-- 分享模态框组件 -->
+    <SoshmModal @confirmClick="confirmClick" @fooModalContent="soshmStatus = false" v-if="soshmStatus"></SoshmModal>
   </div>
 </template>
 
@@ -200,6 +226,7 @@ import {
 import Clipboard from "clipboard";
 import moduleTitle from "components/moduleTitle/moduleTitle";
 import Scroll from "base/scroll/scroll";
+import SoshmModal from "base/soshmModal/soshmModal";
 import productItem from "components/productItem/productItem";
 import whiteSpace from "base/whiteSpace/whiteSpace";
 
@@ -208,19 +235,64 @@ export default {
     return {
       pCode: "", //产品编号
       pStatusCode: "", //产品状态编码
-      pDetailsObj: {}, //产品详情
+      pDetailsObj: {
+        productAttachments: [] //pdf列表
+      }, //产品详情
       /**
        * 枚举返回字符串
        */
       pInvestType_str: "",
       pPaymentInterestType_str: "",
-      pSizeRatioType_str: ""
+      pSizeRatioType_str: "",
+      /**
+       * 模态框
+       */
+      soshmStatus: false
     };
   },
   created() {
     this.get_pDetails();
   },
   methods: {
+    // 分享模态框确定点击事件
+    confirmClick(index) {
+      this.AppShare(index);
+      this.soshmStatus = !this.soshmStatus;
+    }, // 在App内进行分享
+    AppShare(index) {
+      // let params = {
+      //   url: `${this.currentItem.url}`,
+      //   title: this.currentItem.share_main_title,
+      //   share_logo_url: this.currentItem.share_logo_url,
+      //   content: this.currentItem.share_sub_title,
+      //   sharetype: index
+      // };
+      // 发短信参数特殊处理
+      if (index === 6) {
+        params = {
+          url: "",
+          title: "",
+          share_logo_url: "",
+          content: `${window.localStorage.userName}邀请您加入${
+            this.currentItem.name
+          }${this.currentItem.url}`,
+          sharetype: index
+        };
+      }
+      if (window.webkit) {
+        // 跟ios发
+        window.webkit.messageHandlers.Share.postMessage(params);
+      } else if (window.jsInterface) {
+        // 跟安卓跑
+        window.jsInterface.invokeMethod(JSON.stringify(params));
+      } else {
+      }
+    },
+    // 分享按钮事件
+    btnEvent() {
+      // TODO:分享是不是要优先登录才行
+      this.soshmStatus = !this.soshmStatus;
+    },
     /**
      * @param btnId 按钮id
      * @param targetId 目标块id
@@ -329,7 +401,8 @@ export default {
     Scroll,
     whiteSpace,
     moduleTitle,
-    productItem
+    productItem,
+    SoshmModal
   }
 };
 </script>

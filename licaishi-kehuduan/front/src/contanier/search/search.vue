@@ -52,16 +52,20 @@
     </div>
 
     <div class="my-owns">
-      <mt-cell title="我的理财师" to="/rank" is-link>
+      <mt-cell title="我的工作室" to="/rank" is-link>
         <img slot="icon" src="../../common/image/my_settings_mystudio.png" width="18" height="14">
       </mt-cell>
-      <mt-cell title="我的收益" to="/rank/mycustom" is-link>
-        <img slot="icon" src="../../common/image/my_settings_my_customer.png" width="18" height="14">
-      </mt-cell>
-      <mt-cell title="我的银行卡" is-link>
-        <img slot="icon" src="../../common/image/my_settings_spread.png" width="18" height="14">
-      </mt-cell>
-      <mt-cell title="理财师热线：400-0852-6325">
+      <div v-on:click="gotoMyCustomer">
+        <mt-cell title="我的客户" is-link>
+          <img slot="icon" src="../../common/image/my_settings_my_customer.png" width="18" height="14">
+        </mt-cell>
+      </div>
+      <div v-on:click="gotoTuiguang">
+        <mt-cell title="我要推广" is-link>
+          <img slot="icon" src="../../common/image/my_settings_spread.png" width="18" height="14">
+        </mt-cell>
+      </div>
+      <mt-cell title="客服热线：400-0852-6325">
         <img slot="icon" src="../../common/image/my_settings_hotline.png" width="18" height="14">
       </mt-cell>
     </div>
@@ -90,6 +94,32 @@ export default {
   },
 
   methods: {
+    gotoTuiguang() {
+      let _this = this;
+      if (_this.isLogin) {
+        this.$router.push("/rank/generalize");
+      } else {
+        window.phihome.app.openPage("lcs.account.login", null, function(
+          response
+        ) {
+          _this.queryAccountDetail();
+          _this.queryCommission();
+        });
+      }
+    },
+    gotoMyCustomer() {
+      let _this = this;
+      if (_this.isLogin) {
+        _this.$router.push("/rank/mycustom");
+      } else {
+        window.phihome.app.openPage("lcs.account.login", null, function(
+          response
+        ) {
+          _this.queryAccountDetail();
+          _this.queryCommission();
+        });
+      }
+    },
     queryCommission() {
       let _this = this;
       window.phihome.util.netRequest(
@@ -144,12 +174,14 @@ export default {
           response
         ) {
           _this.queryAccountDetail();
+          _this.queryCommission();
         });
       } else {
         window.phihome.app.openPage("lcs.account.login", null, function(
           response
         ) {
           _this.queryAccountDetail();
+          _this.queryCommission();
         });
       }
     },
@@ -176,6 +208,8 @@ export default {
     },
 
     handleOrderClick(item) {
+      // this.$router.push({ name: "Orderlist", params: { tab_id: item } });
+      // return;
       if (this.isLogin) {
         this.$router.push({ name: "Orderlist", params: { tab_id: item } });
       } else {
@@ -183,6 +217,7 @@ export default {
           response
         ) {
           _this.queryAccountDetail();
+          _this.queryCommission();
         });
       }
     }
@@ -348,7 +383,7 @@ export default {
     border-bottom: solid 1px gainsboro;
 
     > div {
-      border-bottom: 1px solid #EDEEEF;
+      /* border-bottom: 1px solid #EDEEEF; */
     }
 
     /* 改变cell组件内的文字大小 */

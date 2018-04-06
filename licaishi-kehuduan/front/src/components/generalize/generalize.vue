@@ -43,9 +43,9 @@
     data() {
       return {
         headerAvatar:"",
-        name:"理财师姓名",
-        tel:"18682052180",
-        des:"是考虑到交付时间过来看世界各类考试结果历史来看过还是考虑的健康围殴提偶我还不能",
+        name:"",
+        tel:"",
+        des:"",
         neturl: "http://47.97.100.240/"
       }
     },
@@ -69,7 +69,7 @@
               //获取账号成功
               _this.name = response.data.nickname;
               _this.tel = response.data.phonenumber;
-              //_this.des = response.data.workstudio;
+              _this.des = response.data.workstudio;
               _this.headerAvatar = response.data.img;
 
               //_this.isLogin = true;
@@ -106,7 +106,7 @@
       top 4vh
       right 3vw
       height: 6%;
-      background-image: url(/static/img/lcs-logo.3133185.png);
+      background-image: url("~@/common/image/lcs-logo.png");
       background-size: 100% 100%;
       background-repeat no-repeat
     .generalize-avatar

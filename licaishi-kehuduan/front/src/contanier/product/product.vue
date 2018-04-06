@@ -1,8 +1,8 @@
 /*
  * @Author: 张浩然 
  * @Date: 2018-03-04 22:28:31 
- * @Last Modified by: 张浩然
- * @Last Modified time: 2018-03-17 15:59:10
+ * @Last Modified by: zhanghrnghrnghrnghr
+ * @Last Modified time: 2018-03-27 14:15:06
  * 产品模块布局组件
  */
 
@@ -25,7 +25,7 @@ import gatherTrust from "components/gatherTrust/gatherTrust"; //集合信托
 import gatherZG from "components/gatherZG/gatherZG"; //集合资管
 import bondFund from "components/bondFund/bondFund"; //债权基金
 /* 这期不做 */
-import sunPrivate from "components/sunPrivate/sunPrivate"; //阳光私募
+import sunPrivate from "components/sunPrivate/sunPrivate"; //股权私募
 import equityFund from "components/equityFund/equityFund"; //股权基金
 
 export default {
@@ -36,14 +36,13 @@ export default {
         "集合信托",
         "集合资管",
         "债权基金",
-        "阳光私募"
+        "股权私募"
         // "股权基金"
       ],
       activeIndex: 0 //初始化选中的tab项
     };
   },
   created() {
-    console.log(this.$route.query.activeIndex);
     this.activeIndex = parseInt(this.$route.query.activeIndex);
   },
   methods: {
