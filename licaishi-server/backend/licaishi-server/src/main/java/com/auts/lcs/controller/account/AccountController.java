@@ -100,7 +100,6 @@ public class AccountController extends SBaseController {
         CaptchaModel captchaModel = captchaService.queryCaptchaByPhoneNo(phonenumber);
         //暂定3分钟过期
         long totalSeconds = System.currentTimeMillis() / 1000;
-        LOGGER.info("totalSeconds [{}] captchaModel.getSendTime() [{}]", totalSeconds, captchaModel.getSendTime());
         if(captchaModel == null || (totalSeconds - 3 * 60) > captchaModel.getSendTime() ) {
             LOGGER.info("if");
         	rsp.setError(String.valueOf(Const.ErrorCode.Account.REGIST_VERCODE_OVERDUE));
@@ -112,6 +111,8 @@ public class AccountController extends SBaseController {
             LOGGER.info("else");
             rsp.setError(String.valueOf(Const.ErrorCode.Account.OK));
         }
+
+        LOGGER.info("totalSeconds [{}] captchaModel.getSendTime() [{}]", totalSeconds, captchaModel.getSendTime());
         return rsp;
     }
 
