@@ -1,0 +1,155 @@
+<resources xmlns:tools="http://schemas.android.com/tools">
+
+    <!-- Base application theme. -->
+    <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
+        <!-- Customize your theme here. -->
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryDark">@color/status_bar</item>
+        <!--<item name="colorAccent">@color/colorAccent</item>-->
+        <item name="colorAccent">@color/text_oringe</item>
+        <item name="android:windowBackground">@color/main_bg</item>
+        <item name="android:windowLightStatusBar" tools:targetApi="m">true</item>
+    </style>
+
+    <style name="PhiHome_Common_Text">
+        <item name="android:textSize">15sp</item>
+        <item name="android:textColor">@color/text_large</item>
+
+    </style>
+
+    <style name="DialogStyle" parent="@android:style/Theme.Dialog">
+        <item name="android:windowBackground">@android:color/transparent</item>
+        <item name="android:backgroundDimEnabled">false</item>
+    </style>
+
+    <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
+
+    <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
+
+    <style name="splash" parent="AppTheme">
+        <item name="android:windowFullscreen">true</item>
+    </style>
+
+    <style name="greyBackgroundTheme" parent="@style/AppTheme">
+        <!--<item name="windowBackground">#f5f5f5</item>-->
+        <item name="android:windowBackground">@color/phihome_grey</item>
+    </style>
+
+
+    <style name="switchTheme" parent="@style/Theme.AppCompat.Light">
+        <!-- switch 打开时的按钮的颜色 轨迹颜色 -->
+        <item name="colorControlActivated">@color/btn_enable_bg</item>
+        <!--  switch关闭时的按钮的颜色 -->
+        <item name="colorSwitchThumbNormal">@color/colorAccent</item>
+        <!-- switch关闭时的轨迹的颜色 30%这个颜色 -->
+        <item name="android:colorForeground">@color/colorPrimaryDark</item>
+    </style>
+
+
+    <style name="bg">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">match_parent</item>
+        <item name="android:background">#f5f5f5</item>
+        <item name="android:orientation">vertical</item>
+    </style>
+
+    <style name="empty_img">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_marginBottom">10dp</item>
+    </style>
+
+
+    <!--左进左出-->
+    <style name="PopupLeftAnimation" parent="android:Animation">
+        <item name="android:windowEnterAnimation">@anim/popup_enter</item>
+        <item name="android:windowExitAnimation">@anim/popup_exit</item>
+    </style>
+    <!--右进右出-->
+    <style name="PopupRightAnimation" parent="android:Animation">
+        <item name="android:windowEnterAnimation">@anim/popup_right_enter</item>
+        <item name="android:windowExitAnimation">@anim/popup_right_exit</item>
+    </style>
+    <!--底进底出-->
+    <style name="PopupBottomAnimation" parent="android:Animation">
+        <item name="android:windowEnterAnimation">@anim/popup_bottom_enter</item>
+        <item name="android:windowExitAnimation">@anim/popup_bottom_exit</item>
+    </style>
+    <!--顶进顶出-->
+    <style name="PopupTopAnimation" parent="android:Animation">
+        <item name="android:windowEnterAnimation">@anim/popup_top_enter</item>
+        <item name="android:windowExitAnimation">@anim/popup_top_exit</item>
+    </style>
+
+    <style name="text_common_style">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+    </style>
+
+    <style name="text_large_style" parent="text_common_style">
+        <item name="android:textSize">@dimen/text_large</item>
+        <item name="android:textColor">@color/text_large</item>
+    </style>
+
+    <style name="text_middle_style" parent="text_common_style">
+        <item name="android:textSize">@dimen/text_middle</item>
+        <item name="android:textColor">@color/text_middle</item>
+    </style>
+
+    <style name="text_small_style" parent="text_common_style">
+        <item name="android:textSize">@dimen/text_small</item>
+        <item name="android:textColor">@color/text_small</item>
+    </style>
+
+    <style name="text_normal_style" parent="text_common_style">
+        <item name="android:textSize">@dimen/text_normal</item>
+        <item name="android:textColor">@color/btn_disable_bg</item>
+    </style>
+
+    <style name="btn_common">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">45dp</item>
+        <item name="android:gravity">center</item>
+        <item name="android:layout_gravity">center</item>
+        <item name="android:background">@drawable/selector_btn</item>
+        <item name="android:enabled">false</item>
+        <item name="android:textColor">@color/btn_text</item>
+        <item name="android:textSize">@dimen/text_middle</item>
+    </style>
+
+    <style name="btn_login">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">match_parent</item>
+        <item name="android:background">@drawable/selector_btn</item>
+        <item name="android:enabled">false</item>
+        <item name="android:textColor">@color/btn_text</item>
+        <item name="android:textSize">@dimen/text_middle</item>
+    </style>
+
+    <style name="btn_common_hollow">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">45dp</item>
+        <item name="android:gravity">center</item>
+        <item name="android:layout_gravity">center</item>
+        <item name="android:background">@drawable/selector_btn_hollow</item>
+        <item name="android:textColor">@drawable/selector_btn_text_color</item>
+        <item name="android:textSize">@dimen/text_middle</item>
+    </style>
+
+
+    <style name="MyEditText" parent="Theme.AppCompat.Light">
+        <item name="colorControlNormal">@color/default_line</item>
+        <item name="colorControlActivated">@color/focused_line</item>
+    </style>
+
+    <style name="base_et_style">
+        <item name="android:textCursorDrawable">@drawable/my_cursor</item>
+    </style>
+
+
+    <!--浮层透明-->
+    <style name="MyTransparentDialog" parent="@android:style/Theme.DeviceDefault.Light.Dialog">
+        <item name="android:backgroundDimAmount">0</item>
+    </style>
+
+</resources>

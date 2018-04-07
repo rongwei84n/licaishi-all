@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+    <!--打开时switch轨迹图片-->
+    <item android:state_pressed="true"  android:drawable="@drawable/switch_border_on" />
+    <!--按压时switch轨迹图片-->
+    <item android:state_checked="true"  android:drawable="@drawable/switch_border_on" />
+    <!--正常状态switch轨迹图片-->
+    <item android:drawable="@drawable/switch_border_off" />
+
+</selector>
