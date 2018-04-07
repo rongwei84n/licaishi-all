@@ -1,9 +1,12 @@
 package com.auts.lcs.service.impl;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.auts.lcs.controller.account.AccountController;
 import com.auts.lcs.dao.AccountMapper;
 import com.auts.lcs.dao.FinancerMapper;
 import com.auts.lcs.model.dao.AccountModel;
@@ -12,6 +15,8 @@ import com.auts.lcs.service.AccountService;
 
 @Service
 public class AccountImpl implements AccountService {
+    private static final Logger LOGGER = LogManager.getLogger(AccountImpl.class);
+
     @Autowired
     AccountMapper mapper;
     @Autowired
@@ -31,7 +36,7 @@ public class AccountImpl implements AccountService {
     @Transactional
     public int register(AccountModel model) {
         mapper.register(model);
-        
+
         //生成理财师信息
         FinancerModel financer = new FinancerModel();
     	financer.setPhone(model.getPhone());

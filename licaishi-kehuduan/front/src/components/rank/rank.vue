@@ -48,19 +48,19 @@
       </div>
       <split :sh="6"></split>
       <div class="rank-product-kind">
-        <mt-cell title="集合信托" to="/rank" is-link value="0.00">
+        <mt-cell title="集合信托" to="/rank/caifuProduct/1" is-link value="0.00">
           <img slot="icon" src="../../common/image/icon_21.jpg" width="18" height="14">
         </mt-cell>
-        <mt-cell title="集合资管" to="/rank/mycustom" is-link  value="0.00">
+        <mt-cell title="集合资管" to="/rank/caifuProduct/2" is-link  value="0.00">
           <img slot="icon" src="../../common/image/my_settings_my_customer.png" width="18" height="14">
         </mt-cell>
-        <mt-cell title="债券基金" is-link value="0.00">
+        <mt-cell title="债券基金" to="/rank/caifuProduct/3" is-link value="0.00">
           <img slot="icon" src="../../common/image/my_settings_spread.png" width="18" height="14">
         </mt-cell>
-        <mt-cell title="阳光私募" is-link value="0.00">
+        <mt-cell title="阳光私募" to="/rank/caifuProduct/4" is-link value="0.00">
           <img slot="icon" src="../../common/image/my_settings_hotline.png" width="18" height="14">
         </mt-cell>
-        <mt-cell title="固定类债权" is-link value="0.00">
+        <mt-cell title="固定类债权" to="/rank/caifuProduct/5" is-link value="0.00">
           <img slot="icon" src="../../common/image/my_settings_hotline.png" width="18" height="14">
         </mt-cell>
       </div>
@@ -73,6 +73,7 @@
     import split from "components/split/split";
     export default {
         data () {
+
             return {}
         },
         methods:{
