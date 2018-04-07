@@ -22,8 +22,11 @@ import customOrderDetail from '@/components/myCustom/customOrderDetail'
 import mycommission from '@/components/mycommission/mycommission'
 import generalize from '@/components/generalize/generalize'
 
-/* 登录界面 */
+/* 登录注册模块 */
 import login from 'contanier/login/login' //登录页面
+import register from 'contanier/register/register' //注册页面
+import findPwdA from 'contanier/findPwd/findPwdA' //找回密码--验证身份
+import findPwdB from 'contanier/findPwd/findPwdB' //找回密码--重置密码
 
 
 Vue.use(Router)
@@ -42,6 +45,18 @@ export default new Router({
     {
       path: '/login',
       component: login
+    },
+    {
+      path: '/register',
+      component: register
+    },
+    {
+      path: '/findPwdA',
+      component: findPwdA
+    },
+    {
+      path: '/findPwdB',
+      component: findPwdB
     },
     {
       path: '/rank',
