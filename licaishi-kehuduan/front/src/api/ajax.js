@@ -29,50 +29,50 @@ function ajax({
     /**
      * 真机调试
      */
-    let methodL = method.toLocaleLowerCase();
-    window.phihome.util.netRequest(
-      methodL,
-      IP_PORT.houtai + url,
-      headers,
-      (params = qs.stringify(Object.assign({}, params))),
-      function(res) {
-        // 原生对象包装一层模拟axios返回的对象结构
-        const temObj = {
-          data: JSON.parse(res),
-          status: JSON.parse(res).status
-        };
-        /* 判断当前是否登录 */
-        if (JSON.parse(res).status === 2) {
-          window.phihome.app.openPage("lcs.account.login", null, function(
-            response
-          ) {
-            // _this.queryAccountDetail();
-          });
-        } else if (JSON.parse(res).status === 200) {
-          resolve(temObj);
-        }
-      }
-    );
+    // let methodL = method.toLocaleLowerCase();
+    // window.phihome.util.netRequest(
+    //   methodL,
+    //   IP_PORT.houtai + url,
+    //   headers,
+    //   (params = qs.stringify(Object.assign({}, params))),
+    //   function(res) {
+    //     // 原生对象包装一层模拟axios返回的对象结构
+    //     const temObj = {
+    //       data: JSON.parse(res),
+    //       status: JSON.parse(res).status
+    //     };
+    //     /* 判断当前是否登录 */
+    //     if (JSON.parse(res).status === 2) {
+    //       window.phihome.app.openPage("lcs.account.login", null, function(
+    //         response
+    //       ) {
+    //         // _this.queryAccountDetail();
+    //       });
+    //     } else if (JSON.parse(res).status === 200) {
+    //       resolve(temObj);
+    //     }
+    //   }
+    // );
     /**
      * 本地调试
      */
-    // axios({
-    //   withCredentials: true,
-    //   // TOOD:路径前缀
-    //   url: IP_PORT.houtai + url,
-    //   data: qsStatus ? qs.stringify(Object.assign({}, params)) : params,
-    //   headers,
-    //   method,
-    //   timeout: 10000
-    // }).then(
-    //   res => {
-    //     // 请求成功返回
-    //     if (res.status === 200) {
-    //       resolve(res);
-    //     }
-    //   },
-    //   err => reject(err)
-    // );
+    axios({
+      withCredentials: true,
+      // TOOD:路径前缀
+      url: IP_PORT.houtai + url,
+      data: qsStatus ? qs.stringify(Object.assign({}, params)) : params,
+      headers,
+      method,
+      timeout: 10000
+    }).then(
+      res => {
+        // 请求成功返回
+        if (res.status === 200) {
+          resolve(res);
+        }
+      },
+      err => reject(err)
+    );
   });
 }
 

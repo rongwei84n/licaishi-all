@@ -10,11 +10,11 @@
     </router-link>
     <router-link tag="div" class="tab-item" to="/rank" replace>
       <img @click.self="linkActive" title="2" src="~@/common/image/workRoom.png" alt="workRoomActive.png"><br/>
-      <span class="tab-link">工作室</span>
+      <span class="tab-link">财富</span>
     </router-link>
     <router-link tag="div" class="tab-item" to="/search" replace>
       <img @click.self="linkActive" title="3" src="~@/common/image/userCenter.png" alt="userCenterActive.png"><br/>
-      <span class="tab-link">我的</span>
+      <span class="tab-link">我</span>
     </router-link>
     <!-- <mt-tabbar v-model="selected">
       <mt-tab-item id="recommend">

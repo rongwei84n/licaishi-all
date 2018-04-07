@@ -22,6 +22,10 @@ import customOrderDetail from '@/components/myCustom/customOrderDetail'
 import mycommission from '@/components/mycommission/mycommission'
 import generalize from '@/components/generalize/generalize'
 
+/* 登录界面 */
+import login from 'contanier/login/login' //登录页面
+
+
 Vue.use(Router)
 
 export default new Router({
@@ -34,6 +38,10 @@ export default new Router({
     {
       path: '/hotProducts',
       component: hotProducts
+    },
+    {
+      path: '/login',
+      component: login
     },
     {
       path: '/rank',
