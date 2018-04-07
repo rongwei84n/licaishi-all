@@ -21,6 +21,7 @@ import customOrder from '@/components/myCustom/customOrder'
 import customOrderDetail from '@/components/myCustom/customOrderDetail'
 import mycommission from '@/components/mycommission/mycommission'
 import generalize from '@/components/generalize/generalize'
+import caifuProduct from '@/components/caifuProduct/caifuProduct'
 
 /* 登录界面 */
 import login from 'contanier/login/login' //登录页面
@@ -47,8 +48,8 @@ export default new Router({
       path: '/rank',
       component: Rank,
       children: [{
-          path: '/rank/workroominfo',
-          component: Workroominfo
+          path: '/rank/caifuProduct/:activeIndex',
+          component:caifuProduct
         },
         {
           path: '/rank/mycustom',
