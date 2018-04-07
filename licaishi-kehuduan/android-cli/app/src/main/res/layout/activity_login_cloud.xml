@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <include
+        layout="@layout/include_common_header"/>
+
+    <LinearLayout
+        android:id="@+id/ll_top"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:paddingLeft="10dp"
+        android:paddingRight="10dp">
+        
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="100dp"
+            android:layout_marginBottom="20dp"
+            android:layout_marginTop="20dp"
+            android:layout_gravity="center_horizontal"
+            android:src="@drawable/denglu"/>
+
+        <com.auts.lcscli.views.MyEditText
+            android:id="@+id/myet_user"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="30dp"
+            app:hint="@string/hint_login_user"
+            app:input_type="1"
+            app:is_phone="true"
+            app:max_length="11" />
+
+        <com.auts.lcscli.views.MyEditText
+            android:id="@+id/myet_pwd"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="15dp"
+            app:hint="请输入登录密码"
+            app:has_eye="true"
+            app:input_type="2"
+            app:max_length="20"/>
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/tv_login"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:layout_gravity="center"
+        android:layout_marginBottom="10dp"
+        android:layout_marginTop="40dp"
+        android:gravity="center"
+        android:text="@string/login"
+        android:textSize="@dimen/text_middle" />
+
+    <RelativeLayout
+        android:id="@+id/ll_bottom"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingLeft="10dp"
+        android:paddingRight="10dp"
+        android:layout_weight="1">
+        <TextView
+            android:id="@+id/tv_register"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:text="@string/register_now"
+            android:textSize="@dimen/text_normal" />
+        <TextView
+            android:id="@+id/tv_forget_pwd"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:text="@string/forget_pwd"
+            android:textSize="@dimen/text_normal" />
+    </RelativeLayout>
+
+</LinearLayout>

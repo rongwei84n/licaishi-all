@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="horizontal"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:padding="10dp">
+
+    <TextView
+        android:id="@+id/tv_room_name"
+        tools:text="主人房"
+        android:layout_width="71dp"
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
+        android:singleLine="true"
+        android:textColor="#313131"
+        android:textSize="15sp" />
+
+    <TextView
+        android:id="@+id/tv_device_name"
+        tools:text="智能排插"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="#313131"
+        android:singleLine="true"
+        android:layout_centerVertical="true"
+        android:textSize="15sp"
+        android:layout_alignBaseline="@+id/tv_room_name"
+        android:layout_alignBottom="@+id/tv_room_name"
+        android:layout_toRightOf="@+id/tv_room_name"
+        android:layout_toEndOf="@+id/tv_room_name" />
+
+    <TextView
+        android:id="@+id/tv_socket_name"
+        tools:text="插口S1"
+        android:singleLine="true"
+        android:layout_width="93dp"
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
+        android:layout_marginBottom="6dp"
+        android:layout_marginTop="6dp"
+        android:layout_toRightOf="@id/tv_device_name"
+        android:textColor="#313131"
+        android:textSize="15sp" />
+
+    <ImageView
+        android:id="@+id/iv_remove"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_centerVertical="true"
+        android:layout_gravity="right"
+        android:layout_marginRight="10dp"
+        android:src="@drawable/remove" />
+
+    <ImageView
+        android:id="@+id/arrow"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
+        android:layout_marginRight="22dp"
+        android:layout_toLeftOf="@id/iv_remove"
+        android:src="@drawable/jiantou02" />
+
+    <TextView
+        android:id="@+id/tv_status"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
+        android:layout_toLeftOf="@id/arrow"
+        android:maxLength="1" />
+
+</RelativeLayout>

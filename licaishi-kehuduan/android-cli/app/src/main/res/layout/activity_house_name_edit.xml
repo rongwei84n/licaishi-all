@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="#f5f5f5">
+
+    <include layout="@layout/include_common_header"/>
+    
+    <EditText
+        android:focusable="true"
+        android:focusableInTouchMode="true"
+        android:id="@+id/et_housename"
+        android:layout_width="match_parent"
+        android:layout_height="45dp"
+        android:layout_margin="10dp"
+        android:textSize="15sp"
+        android:lines="1"
+        android:singleLine="true"
+        android:textColor="@color/black_light_room"
+        android:maxLines="1"
+        android:background="@drawable/edittext_house_name"
+        android:paddingLeft="20dp"
+        android:hint="@string/housename_placeHolder"
+        style="@style/base_et_style"
+        android:textColorHint="#bfbfbf"
+        />
+
+</LinearLayout>
