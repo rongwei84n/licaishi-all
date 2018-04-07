@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.auts.lcscli.activity.UpdateDetailActivity">
+
+    <include layout="@layout/include_common_header" />
+    
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#ffffff"
+        android:layout_marginTop="10dp"
+        android:paddingTop="26dp"
+        android:paddingBottom="26dp"
+        android:paddingLeft="10dp"
+        android:paddingRight="10dp">
+
+        <TextView
+            android:id="@+id/iv_content"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:textSize="13sp"
+            android:textColor="#313131"
+            android:lineSpacingExtra="13dp"
+            tools:text="dsfsdafsdfsdfsdafsdafsdafsdfsdfsdfdsafdsafdsfsdfsdfsdafdsafsdfsdfsdfsdfsafs"/>
+
+    </FrameLayout>
+
+</LinearLayout>

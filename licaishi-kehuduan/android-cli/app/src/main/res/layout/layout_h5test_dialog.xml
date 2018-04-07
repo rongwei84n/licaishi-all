@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <TextView
+        android:layout_gravity="center"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="15sp"
+        android:text="用一次10块钱"/>
+
+    <EditText
+        android:layout_marginTop="10dp"
+        android:hint="url"
+        android:id="@+id/et_h5url"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="20sp"/>
+
+    <EditText
+        android:hint="deviceId"
+        android:layout_marginTop="20dp"
+        android:id="@+id/et_did"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="20sp"/>
+
+    <Button
+        android:layout_marginTop="20dp"
+        android:id="@+id/btn_h5_positive"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:inputType="textUri"
+        android:text="付钱"/>
+
+</LinearLayout>
