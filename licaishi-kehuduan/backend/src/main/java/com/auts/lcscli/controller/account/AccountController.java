@@ -37,11 +37,9 @@ import com.auts.lcscli.model.response.RegistResponseModel;
 import com.auts.lcscli.service.AccountService;
 import com.auts.lcscli.service.CaptchaService;
 import com.auts.lcscli.util.Base64Utils;
-import com.auts.lcscli.util.EntryUtils;
 import com.auts.lcscli.util.MyResponseutils;
 import com.auts.lcscli.util.RegexUtils;
 import com.auts.lcscli.util.StringUtil;
-import com.auts.lcscli.util.UidGenerater;
 
 /**
  * 账户相关的Controller.
@@ -230,7 +228,6 @@ public class AccountController extends SBaseController {
         }
 
         AccountModel model = new AccountModel();
-        model.setUid(String.valueOf(UidGenerater.gen()));
         String userName = "";
         model.setUser_name(userName);
         //注册的时候，保存md5密码，任何人都无法知道密码，防止泄漏!md5无法解密

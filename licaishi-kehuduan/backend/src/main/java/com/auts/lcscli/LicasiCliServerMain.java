@@ -1,7 +1,6 @@
 package com.auts.lcscli;
 
 import com.alibaba.fastjson.parser.ParserConfig;
-import com.auts.lcscli.util.UidGeneraterInit;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -51,8 +50,6 @@ public class LicasiCliServerMain {
      */
     public static void main(String[] args) {
         SpringApplication.run(LicasiCliServerMain.class, args);
-
-        UidGeneraterInit.instance.start();
 
         logger.info("startup success!");
     }
