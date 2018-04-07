@@ -110,7 +110,11 @@ public class AccountController extends SBaseController {
             rsp.setError(String.valueOf(Const.ErrorCode.Account.OK));
         }
 
-        LOGGER.info("totalSeconds [{}] captchaModel.getSendTime() [{}]", totalSeconds, captchaModel.getSendTime());
+        long sendTime = 0;
+        if (captchaModel != null) {
+            sendTime = captchaModel.getSendTime();
+        }
+        LOGGER.info("totalSeconds [{}] captchaModel.getSendTime() [{}]", totalSeconds, sendTime);
         return rsp;
     }
 
