@@ -37,8 +37,8 @@ public interface AccountMapper {
     @Select("select * from tbl_user where phone=#{phone} and passwd=#{pwd} and status=0 limit 1")
     AccountModel loginPhone(@Param("phone") String phone, @Param("pwd") String pwd);
 
-    @Insert("insert into tbl_user (uid, user_name, real_name, phone, passwd, email, sex, remark, role, status, create_time, update_time) "
-            + "values (#{ac.uid}, #{ac.user_name},#{ac.real_name},#{ac.phone},#{ac.passwd},#{ac.email},#{ac.sex},#{ac.remark},#{ac.role},#{ac.status},#{ac.create_time},#{ac.update_time})")
+    @Insert("insert into tbl_user (user_name, real_name, phone, passwd, email, sex, remark, role, status, create_time, update_time) "
+            + "values (#{ac.user_name},#{ac.real_name},#{ac.phone},#{ac.passwd},#{ac.email},#{ac.sex},#{ac.remark},#{ac.role},#{ac.status},#{ac.create_time},#{ac.update_time})")
     @Options(useGeneratedKeys = true, keyProperty = "ac.uid")
     int register(@Param("ac") AccountModel ac);
 
