@@ -20,7 +20,8 @@ public class OrderModel extends BaseDaoModel {
     private Date latestPayDate;
     private String financerUid;
     private String customerUid;
-    private String productId;
+    private String customerCardNo;//身份证号
+	private String productId;
     private String comRatio;//佣金比率
     private BigDecimal commission;//佣金
     private String proRatio;//收益比率
@@ -151,5 +152,11 @@ public class OrderModel extends BaseDaoModel {
 	}
 	public void setCardNo(String cardNo) {
 		this.cardNo = cardNo;
+	}
+    public String getCustomerCardNo() {
+		return customerCardNo;
+	}
+	public void setCustomerCardNo(String customerCardNo) {
+		this.customerCardNo = customerCardNo;
 	}
 }

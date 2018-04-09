@@ -19,6 +19,7 @@ public class OrderModel extends BaseDaoModel {
     private String financer;
     private String financerTel;
     private String customerUid;
+    private String customerCardNo;//身份证号
     private String customer;
     private String customerTel;
     private String productId;
@@ -221,5 +222,10 @@ public class OrderModel extends BaseDaoModel {
 	public void setPayStatus(String payStatus) {
 		this.payStatus = payStatus;
 	}
-    
+    public String getCustomerCardNo() {
+		return customerCardNo;
+	}
+	public void setCustomerCardNo(String customerCardNo) {
+		this.customerCardNo = customerCardNo;
+	}
 }

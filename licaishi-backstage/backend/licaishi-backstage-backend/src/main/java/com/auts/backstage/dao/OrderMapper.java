@@ -35,12 +35,13 @@ public interface OrderMapper {
 		+ "<if test='endDate != \"\"'>"
 		+ 	" and #{endDate} &gt;= a.order_date "
 		+ "</if>"
+		+ " order by order_date desc "
     	+ "</script>")
     @Results({
     	@Result(property = "uid", column = "uid"),@Result(property = "orderNo", column = "order_no"),
     	@Result(property = "amount", column = "amount"),@Result(property = "orderDate", column = "order_date"),
     	@Result(property = "latestPayDate", column = "latest_pay_date"),@Result(property = "financerUid", column = "financer_uid"),
-    	@Result(property = "customerUid", column = "customer_uid"),@Result(property = "productId", column = "product_id"),
+    	@Result(property = "customerUid", column = "customer_uid"), @Result(property = "customerCardNo", column = "customer_card_no"), @Result(property = "productId", column = "product_id"),
     	@Result(property = "comRatio", column = "commission_ratio"),@Result(property = "commission", column = "commission"),
     	@Result(property = "proRatio", column = "profit_ratio"),@Result(property = "profit", column = "profit"),
     	@Result(property = "status", column = "status"),@Result(property = "payStatus", column = "pay_status"),@Result(property = "voucherStatus", column = "voucher_status"),

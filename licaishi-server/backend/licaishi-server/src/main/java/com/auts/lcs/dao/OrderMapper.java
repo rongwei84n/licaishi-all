@@ -14,10 +14,10 @@ import com.auts.lcs.model.dao.order.OrderModel;
 public interface OrderMapper {
 
 	//create_time, update_time, create_user, update_user
-	@Insert("insert into tbl_order (order_no, amount, order_date, latest_pay_date, financer_uid, customer_uid, "
+	@Insert("insert into tbl_order (order_no, amount, order_date, latest_pay_date, financer_uid, customer_uid, customer_card_no,"
 			+ "product_id, commission_ratio, commission,profit_ratio,profit, "
 			+ "status, voucher_status,voucher_path,contract_status, issuing_bank,card_no,create_time, update_time) "
-            + "values (#{or.orderNo},#{or.amount},#{or.orderDate},#{or.latestPayDate},#{or.financerUid},#{or.customerUid}, "
+            + "values (#{or.orderNo},#{or.amount},#{or.orderDate},#{or.latestPayDate},#{or.financerUid},#{or.customerUid}, #{or.customerCardNo},"
             + "#{or.productId},#{or.comRatio},#{or.commission}, #{or.proRatio},#{or.profit},"
             + "#{or.status}, #{or.voucherStatus},#{or.voucherPath},#{or.contractStatus},#{or.issueBank},#{or.cardNo}, sysdate(), sysdate())")
 	int saveOrder(@Param("or") OrderModel or);
@@ -52,7 +52,7 @@ public interface OrderMapper {
     	@Result(property = "id", column = "uid"), @Result(property = "orderNo", column = "order_no"),
     	@Result(property = "amount", column = "amount"), @Result(property = "orderDate", column = "order_date"),
     	@Result(property = "latestPayDate", column = "latest_pay_date"), @Result(property = "financerUid", column = "financer_uid"),
-    	@Result(property = "customerUid", column = "customer_uid"), @Result(property = "productId", column = "product_id"),
+    	@Result(property = "customerUid", column = "customer_uid"), @Result(property = "customerCardNo", column = "customer_card_no"), @Result(property = "productId", column = "product_id"),
     	@Result(property = "comRatio", column = "commission_ratio"), @Result(property = "commission", column = "commission"),
     	@Result(property = "proRatio", column = "profit_ratio"), @Result(property = "profit", column = "profit"),
     	@Result(property = "status", column = "status"), @Result(property = "voucherStatus", column = "voucher_status"),
@@ -76,7 +76,7 @@ public interface OrderMapper {
     	@Result(property = "id", column = "uid"), @Result(property = "orderNo", column = "order_no"),
     	@Result(property = "amount", column = "amount"), @Result(property = "orderDate", column = "order_date"),
     	@Result(property = "latestPayDate", column = "latest_pay_date"), @Result(property = "financerUid", column = "financer_uid"),
-    	@Result(property = "customerUid", column = "customer_uid"), @Result(property = "productId", column = "product_id"),
+    	@Result(property = "customerUid", column = "customer_uid"), @Result(property = "customerCardNo", column = "customer_card_no"), @Result(property = "productId", column = "product_id"),
     	@Result(property = "comRatio", column = "commission_ratio"), @Result(property = "commission", column = "commission"),
     	@Result(property = "proRatio", column = "profit_ratio"), @Result(property = "profit", column = "profit"),
     	@Result(property = "status", column = "status"), @Result(property = "voucherStatus", column = "voucher_status"),
@@ -97,7 +97,7 @@ public interface OrderMapper {
     	@Result(property = "id", column = "uid"), @Result(property = "orderNo", column = "order_no"),
     	@Result(property = "amount", column = "amount"), @Result(property = "orderDate", column = "order_date"),
     	@Result(property = "latestPayDate", column = "latest_pay_date"), @Result(property = "financerUid", column = "financer_uid"),
-    	@Result(property = "customerUid", column = "customer_uid"), @Result(property = "productId", column = "product_id"),
+    	@Result(property = "customerUid", column = "customer_uid"), @Result(property = "customerCardNo", column = "customer_card_no"), @Result(property = "productId", column = "product_id"),
     	@Result(property = "comRatio", column = "commission_ratio"), @Result(property = "commission", column = "commission"),
     	@Result(property = "proRatio", column = "profit_ratio"), @Result(property = "profit", column = "profit"),
     	@Result(property = "status", column = "status"), @Result(property = "voucherStatus", column = "voucher_status"),
@@ -112,7 +112,7 @@ public interface OrderMapper {
     	@Result(property = "id", column = "uid"), @Result(property = "orderNo", column = "order_no"),
     	@Result(property = "amount", column = "amount"), @Result(property = "orderDate", column = "order_date"),
     	@Result(property = "latestPayDate", column = "latest_pay_date"), @Result(property = "financerUid", column = "financer_uid"),
-    	@Result(property = "customerUid", column = "customer_uid"), @Result(property = "productId", column = "product_id"),
+    	@Result(property = "customerUid", column = "customer_uid"), @Result(property = "customerCardNo", column = "customer_card_no"), @Result(property = "productId", column = "product_id"),
     	@Result(property = "comRatio", column = "commission_ratio"), @Result(property = "commission", column = "commission"),
     	@Result(property = "proRatio", column = "profit_ratio"), @Result(property = "profit", column = "profit"),
     	@Result(property = "status", column = "status"), @Result(property = "voucherStatus", column = "voucher_status"),
