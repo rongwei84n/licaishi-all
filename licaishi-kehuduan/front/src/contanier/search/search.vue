@@ -2,7 +2,7 @@
   <div class="settings-all-0">
     <!-- 头部功能模块 -->
     <div class="setting-header">
-      <div class="content-wrapper" v-on:click="gotoLogin">
+      <div class="content-wrapper" @click="gotoLogin">
         <div class="avatar">
           <img width="64" height="64" v-if="headerAvatar.length <= 0" src="~@/common/image/head_portrait.png" />
           <img width="64" height="64" v-else :src="headerAvatar" class="header_avatar" />
@@ -13,7 +13,7 @@
         </div>
       </div>
       <div class="right-icon">
-        <div class="ri-setting" v-on:click="gotoPersonInfo">设置</div>
+        <div class="ri-setting" @click="gotoPersonInfo">设置</div>
         <div class="ri-message">
           <img width="16px" height="18px" src="../../common/image/my_settings_ring.png" />
         </div>
@@ -185,10 +185,12 @@ export default {
         });
       }
     },
+    // 跳转个人信息设置页面
     gotoPersonInfo() {
-      window.phihome.app.openPage("lcs.account.personinfo", null, function(
-        response
-      ) {});
+      this.$router.push("/personinfo");
+      // window.phihome.app.openPage("lcs.account.personinfo", null, function(
+      //   response
+      // ) {});
     },
 
     gotoAllOrderList() {
@@ -321,8 +323,8 @@ export default {
     .icon {
       position: absolute;
       top: -13px;
-      left: calc(50% - 12px);
-      width: 24px;
+      left: calc(50% - 14px);
+      width: 27px;
       height: 27px;
     }
 

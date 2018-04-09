@@ -2,41 +2,59 @@
  * @Author: 张浩然 
  * @Date: 2018-04-07 14:49:34 
  * @Last Modified by: zhanghr
- * @Last Modified time: 2018-04-09 17:55:17
+ * @Last Modified time: 2018-04-09 16:55:21
  * 
  *  注册页面
  */
 
 
 <template>
-  <div id="Register">
-    <mt-header title="注册">
+  <div id="personinfo">
+    <mt-header title="账号设置">
       <mt-button icon="back" @click="back" slot="left"></mt-button>
     </mt-header>
-    <div class="Register-content">
-      <div class="Register-content-logo">
-
+    <div class="personinfo-content">
+      <div class="personinfo-content-input">
+        <div class="personinfo-content-input-head">
+          <img src="~common/image/my_settings_order.png" alt="" @click="updataHead">
+        </div>
+        <div class="personinfo-content-input-cell">
+          <mt-cell :title="account" is-link>
+            <span slot="icon">姓名:</span>
+          </mt-cell>
+        </div>
+        <div class="personinfo-content-input-cell">
+          <mt-cell :title="pwd">
+            <span slot="icon">登录名：</span>
+          </mt-cell>
+        </div>
+        <div class="personinfo-content-input-cell">
+          <mt-cell :title="phoneCode">
+            <span slot="icon">手机号：</span>
+          </mt-cell>
+        </div>
+        <div class="personinfo-content-input-cell">
+          <mt-cell :title="phoneCode" is-link>
+            <span slot="icon">工作室名称：</span>
+          </mt-cell>
+        </div>
+        <div class="personinfo-content-input-cell">
+          <mt-cell title="" is-link>
+            <span slot="icon">修改登录密码</span>
+          </mt-cell>
+        </div>
+        <div class="personinfo-content-input-cell">
+          <mt-cell title="" is-link>
+            <span slot="icon">关于嘿牛理财师</span>
+          </mt-cell>
+        </div>
       </div>
-      <div class="Register-content-input">
-        <mt-field label="手机号码" placeholder="请输入手机号码" :attr="{ maxlength: 11 }" type="tel" v-model="account">
-          <!-- <i class="fa fa-user fa-fw"></i> -->
-        </mt-field>
-        <mt-field label="密码" placeholder="请输入登录密码" type="password" v-model="pwd"></mt-field>
-        <mt-field label="重复密码" placeholder="请再次输入登录密码" type="password" v-model="pwdB"></mt-field>
-        <mt-field label="验证码" placeholder="请输入验证码" :attr="{ maxlength: 6 }" v-model="phoneCode">
-          <span v-if="phoneCodeStatus" style="color:red;" @click="getPhoneCode">发送验证码</span>
-          <span v-else>{{timer}}秒后重发</span>
-        </mt-field>
-      </div>
-      <div class="Register-btn">
-        <mt-button type="primary" :disable="disable" @click.native="register" size="normal">立即注册</mt-button>
-      </div>
-      <!-- TODO:此处预留，是否阅读用户协议 -->
-      <div class="more-content">
-        <span>我已阅读并同意用户注册协议</span>
-        <!-- <span>忘记密码</span> -->
+      <div class="personinfo-btn">
+        <mt-button type="danger" :disable="disable" @click.native="logout" size="normal">退出当前账号</mt-button>
       </div>
     </div>
+    <mt-actionsheet :actions="actions" v-model="sheetVisible">
+    </mt-actionsheet>
   </div>
 </template>
 
@@ -48,18 +66,36 @@ import { isPhone } from "common/js/Phone";
 export default {
   data() {
     return {
-      account: "", //账户
-      pwd: "", //密码
-      pwdB: "",
+      account: "17762864299", //账户
+      pwd: "ran303030", //密码
       phoneCode: "", //手机验证码
       disable: false,
-      registersource: "x", //注册来源
+      personinfosource: "x", //注册来源
       timeOut: "", //计时器对象
       phoneCodeStatus: true,
-      timer: 59 //倒计时时间
+      timer: 59, //倒计时时间,
+      actions: [
+        {
+          name: "拍照",
+          method: this.photograph
+        },
+        {
+          name: "从相册中选择",
+          method: "111"
+        }
+      ],
+      sheetVisible: false //选择头像弹窗
     };
   },
   methods: {
+    // 退出登录
+    updataHead() {
+      this.sheetVisible = true;
+    },
+    // 拍照函数
+    photograph() {
+      console.log(111);
+    },
     //检测账户状态
     checkPhonenumber() {
       this.$ajax({
@@ -130,7 +166,7 @@ export default {
       });
     },
     // 注册按钮
-    register() {
+    personinfo() {
       if (this.account === "") {
         MessageBox("提示", "手机号码不能为空");
         return;
@@ -139,16 +175,8 @@ export default {
         MessageBox("提示", "密码不能为空");
         return;
       }
-      if (this.pwdB === "") {
-        MessageBox("提示", "请再次输入登录密码");
-        return;
-      }
       if (this.phoneCode === "") {
         MessageBox("提示", "手机验证码不能为空");
-        return;
-      }
-      if (this.pwdB !== this.pwd) {
-        MessageBox("提示", "两次输入的密码不一致");
         return;
       }
       // 判断手机号码是否正确
@@ -159,21 +187,19 @@ export default {
       this.$ajax({
         url: `/cli/v1/account?password=${md5(this.pwd)}&phonenumber=${
           this.account
-        }&registersource=${this.registersource}&verificationcode=${
+        }&personinfosource=${this.personinfosource}&verificationcode=${
           this.phoneCode
         }`,
         method: "post",
         parmas: {
           password: md5(this.pwd),
           phonenumber: this.account,
-          registersource: this.registersource,
+          personinfosource: this.personinfosource,
           verificationcode: this.phoneCode
         }
       }).then(res => {
+        console.log(res);
         if (res.data.error === this.$store.state.status) {
-          // MessageBox.confirm("注册成功").then(action => {
-          //   this.$router.replace("/login");
-          // });
         }
       });
     },
@@ -190,33 +216,65 @@ export default {
 <style lang="stylus">
 @import '~common/stylus/variable';
 
-#Register {
+#personinfo {
   position: relative;
   height: 100%;
   width: 100%;
   z-index: 100;
-  background-color: $color-background-d;
 
-  .Register-content {
+  .personinfo-content {
     position: absolute;
     width: 100vw;
     top: 40px;
     bottom: 0;
+    background-color: $color-background;
 
-    .Register-content-logo {
+    .personinfo-content-logo {
       width: 100vw;
       height: 195px;
       border: 1px solid red;
     }
   }
 
-  .Register-content-input {
+  /* 信息块 */
+  .personinfo-content-input {
+    background-color: $color-background-d;
+
     .mint-cell-title {
-      width: 65px;
+      width: auto;
+    }
+
+    /* 账户头像 */
+    .personinfo-content-input-head {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100px;
+
+      >img {
+        width: 66px;
+        height: 66px;
+      }
+    }
+
+    /* 修改了cell组件内的text样式 */
+    .personinfo-content-input-cell {
+      border-top: 1px solid #c8c8cd;
+
+      .mint-cell-title {
+        >span {
+          color: #7e8c8d;
+        }
+
+        .mint-cell-text {
+          font-size: 16px;
+          color: $color-dialog-background;
+        }
+      }
     }
   }
 
-  .Register-btn {
+  .personinfo-btn {
     width: 100vw;
     padding: 20px;
 
@@ -237,7 +295,6 @@ export default {
   }
 }
 </style>
-
 
 
 

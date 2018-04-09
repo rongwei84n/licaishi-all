@@ -1,22 +1,17 @@
 /*
- * @Author: 张浩然 
- * @Date: 2018-04-07 14:49:34 
+ * @Author: zhanghr 
+ * @Date: 2018-04-09 15:01:40 
  * @Last Modified by: zhanghr
- * @Last Modified time: 2018-04-09 17:55:17
- * 
- *  注册页面
+ * @Last Modified time: 2018-04-09 17:54:28
+ *
+ *  分享进来的注册页
  */
 
 
 <template>
   <div id="Register">
-    <mt-header title="注册">
-      <mt-button icon="back" @click="back" slot="left"></mt-button>
-    </mt-header>
+    <mt-header title="城邀您加入嘿牛理财"></mt-header>
     <div class="Register-content">
-      <div class="Register-content-logo">
-
-      </div>
       <div class="Register-content-input">
         <mt-field label="手机号码" placeholder="请输入手机号码" :attr="{ maxlength: 11 }" type="tel" v-model="account">
           <!-- <i class="fa fa-user fa-fw"></i> -->
@@ -50,7 +45,7 @@ export default {
     return {
       account: "", //账户
       pwd: "", //密码
-      pwdB: "",
+      pwdB: "", //密码
       phoneCode: "", //手机验证码
       disable: false,
       registersource: "x", //注册来源
@@ -58,6 +53,12 @@ export default {
       phoneCodeStatus: true,
       timer: 59 //倒计时时间
     };
+  },
+  created() {
+    if (this.$route.query.uid) {
+      this.registersource = this.$route.query.uid;
+      console.log(this.registersource);
+    }
   },
   methods: {
     //检测账户状态
@@ -143,12 +144,12 @@ export default {
         MessageBox("提示", "请再次输入登录密码");
         return;
       }
-      if (this.phoneCode === "") {
-        MessageBox("提示", "手机验证码不能为空");
-        return;
-      }
       if (this.pwdB !== this.pwd) {
         MessageBox("提示", "两次输入的密码不一致");
+        return;
+      }
+      if (this.phoneCode === "") {
+        MessageBox("提示", "手机验证码不能为空");
         return;
       }
       // 判断手机号码是否正确
@@ -171,9 +172,7 @@ export default {
         }
       }).then(res => {
         if (res.data.error === this.$store.state.status) {
-          // MessageBox.confirm("注册成功").then(action => {
-          //   this.$router.replace("/login");
-          // });
+          MessageBox("提示", "您已注册成功!");
         }
       });
     },
