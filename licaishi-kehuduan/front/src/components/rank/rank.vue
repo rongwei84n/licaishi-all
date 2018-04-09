@@ -48,19 +48,19 @@
       </div>
       <split :sh="6"></split>
       <div class="rank-product-kind">
-        <mt-cell title="集合信托" to="/rank" is-link value="0.00">
-          <img slot="icon" src="../../common/image/my_settings_mystudio.png" width="18" height="14">
+        <mt-cell title="集合信托" to="/rank/caifuProduct/1" is-link value="0.00">
+          <img slot="icon" src="../../common/image/icon_21.jpg" width="18" height="14">
         </mt-cell>
-        <mt-cell title="集合资管" to="/rank/mycustom" is-link  value="0.00">
+        <mt-cell title="集合资管" to="/rank/caifuProduct/2" is-link  value="0.00">
           <img slot="icon" src="../../common/image/my_settings_my_customer.png" width="18" height="14">
         </mt-cell>
-        <mt-cell title="债券基金" is-link value="0.00">
+        <mt-cell title="债券基金" to="/rank/caifuProduct/3" is-link value="0.00">
           <img slot="icon" src="../../common/image/my_settings_spread.png" width="18" height="14">
         </mt-cell>
-        <mt-cell title="阳光私募" is-link value="0.00">
+        <mt-cell title="阳光私募" to="/rank/caifuProduct/4" is-link value="0.00">
           <img slot="icon" src="../../common/image/my_settings_hotline.png" width="18" height="14">
         </mt-cell>
-        <mt-cell title="固定类债权" is-link value="0.00">
+        <mt-cell title="固定类债权" to="/rank/caifuProduct/5" is-link value="0.00">
           <img slot="icon" src="../../common/image/my_settings_hotline.png" width="18" height="14">
         </mt-cell>
       </div>
@@ -70,30 +70,31 @@
 </template>
 
 <script>
-  import split from "components/split/split";
-  export default {
-    data () {
-      return {}
-    },
-    methods:{
-      rankClick(e){
-        let flag = parseInt(e.currentTarget.id);
+    import split from "components/split/split";
+    export default {
+        data () {
 
-        if(flag===1){
-          this.$router.push("/rank/workroominfo")
-        }else if(flag===2){
-          this.$router.push("/rank/mycustom")
-        }else if(flag===3){
-          this.$router.push("/rank/mycommission")
-        }else if(flag===4){
-          this.$router.push("/rank/generalize")
+            return {}
+        },
+        methods:{
+            rankClick(e){
+                let flag = parseInt(e.currentTarget.id);
+
+                if(flag===1){
+                    this.$router.push("/rank/workroominfo")
+                }else if(flag===2){
+                    this.$router.push("/rank/mycustom")
+                }else if(flag===3){
+                    this.$router.push("/rank/mycommission")
+                }else if(flag===4){
+                    this.$router.push("/rank/generalize")
+                }
+            }
+        },
+        components: {
+            split
         }
-      }
-    },
-    components: {
-        split
     }
-  }
 </script>
 
 <style lang="stylus" lang="stylus" rel="stylesheet/stylus">
@@ -116,16 +117,13 @@
         background-image url("~@/common/image/my-co.png")
         background-size 100% 100%
         background-repeat no-repeat
-        //padding-top 10px
         .rank-top-title
-          //height 8vh
-          line-height 50px
+          line-height 8vh
           text-align center
-          //background gold
+
 
         .rank-top-caifu
           height 12vh
-          //background gray
           padding-left 5vw
           padding-top 4vh
           ul
@@ -138,7 +136,7 @@
                 font-size 13px
       .cai-fu-context
         height 8vh
-        //background red
+
         display flex
         padding-top 2vh
         background #FFF

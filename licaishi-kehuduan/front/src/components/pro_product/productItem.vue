@@ -110,6 +110,11 @@ export default {
           query: { pCode: this.productItem.pCode }
         });
       }
+      // // 本地测试用
+      // this.$router.push({
+      //   name: "pDetails",
+      //   query: { pCode: this.productItem.pCode }
+      // });
     }
   }
 };
@@ -123,6 +128,10 @@ export default {
   span {
     font-size: 14px;
     color: #000000;
+  }
+
+  span:first-child {
+    font-size: 16px;
   }
 
   .span-red {

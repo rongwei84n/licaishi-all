@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:itemBar="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="#ffffff"
+    android:orientation="vertical">
+
+    <include layout="@layout/include_common_header" />
+
+    <ImageView
+        android:id="@+id/iv_app_icon"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginBottom="28dp"
+        android:layout_marginTop="45dp" />
+
+    <TextView
+        android:id="@+id/tv_version"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:textColor="#898989"
+        android:textSize="12sp"
+        tools:text="PhiHome 1.0.0" />
+
+
+    <com.auts.lcscli.views.ItemBar
+        android:layout_marginTop="40dp"
+        android:id="@+id/ib_feedback"
+        android:layout_width="match_parent"
+        android:layout_height="52dp"
+        itemBar:left_title="@string/help_and_feedback" />
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="0.5dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:layout_gravity="center_horizontal"
+        android:background="#e7e7e7"/>
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="52dp"
+        android:gravity="center">
+
+        <com.auts.lcscli.views.ItemBar
+            android:id="@+id/ib_update"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            itemBar:left_title="@string/check_update" />
+        <TextView
+            android:id="@+id/tv_placeholder"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="5dp"
+            android:text="@string/check_update"
+            android:textSize="15sp"
+            android:visibility="invisible" />
+
+        <ImageView
+            android:id="@+id/iv_new"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="12dp"
+            android:layout_toRightOf="@+id/tv_placeholder"
+            android:background="@drawable/new_icon"
+            android:paddingLeft="4dp"
+            android:paddingRight="4dp" />
+    </RelativeLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="0.5dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:layout_gravity="center_horizontal"
+        android:background="#e7e7e7"/>
+
+    <com.auts.lcscli.views.ItemBar
+        android:id="@+id/ib_instruction"
+        android:layout_width="match_parent"
+        android:layout_height="52dp"
+        itemBar:left_title="@string/instruction" />
+
+</LinearLayout>

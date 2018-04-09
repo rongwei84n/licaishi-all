@@ -14,7 +14,7 @@
     </router-link>
     <router-link tag="div" class="tab-item" to="/search" replace>
       <img @click.self="linkActive" title="3" src="~@/common/image/userCenter.png" alt="userCenterActive.png"><br/>
-      <span class="tab-link">我的</span>
+      <span class="tab-link">我</span>
     </router-link>
     <!-- <mt-tabbar v-model="selected">
       <mt-tab-item id="recommend">

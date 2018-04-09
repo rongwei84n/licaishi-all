@@ -3,7 +3,7 @@ import { loadSearch, loadPlay, loadFavorite } from 'common/js/cache'
 
 const state = {
   /*  ajax回调状态码 */
-  status: 200,
+  status: "0",
   singer: {},
   playing: false,
   fullScreen: false,

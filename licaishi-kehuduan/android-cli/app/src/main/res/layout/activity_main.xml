@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fitsSystemWindows="true"
+    android:orientation="vertical">
+
+    <com.auts.lcscli.views.MyViewPager
+        android:id="@+id/vp_main"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1" />
+
+    <include layout="@layout/include_common_line" />
+
+    <RadioGroup
+        android:id="@+id/rg_main"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:background="@color/white"
+        android:gravity="center"
+        android:orientation="horizontal"
+        android:padding="7dp">
+
+        <RadioButton
+            android:id="@+id/rb_device"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:button="@null"
+            android:drawablePadding="5dp"
+            android:drawableTop="@drawable/tag_device_selected"
+            android:gravity="center"
+            android:text="@string/device"
+            android:textColor="@color/text_oringe"
+            android:textSize="11sp" />
+
+        <RadioButton
+            android:id="@+id/rb_scene"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:button="@null"
+            android:drawablePadding="5dp"
+            android:gravity="center"
+            android:text="@string/scene"
+            android:textColor="@color/text"
+            android:textSize="11sp" />
+
+        <RadioButton
+            android:id="@+id/rb_mine"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:button="@null"
+            android:drawablePadding="5dp"
+            android:drawableTop="@drawable/tag_mine"
+            android:gravity="center"
+            android:text="@string/mine"
+            android:textColor="@color/text"
+            android:textSize="11sp" />
+    </RadioGroup>
+
+</LinearLayout>

@@ -41,7 +41,7 @@ export default {
 
 .moduleTitle {
     width: 100%;
-    height: 30px;
+    height: 40px;
     display: flex;
     justify-content: space-between;
     align-items: center;

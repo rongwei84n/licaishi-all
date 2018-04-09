@@ -3,7 +3,7 @@
  * @Date: 2018-03-05 10:11:06 
  * @Last Modified by: 张浩然
  * @Last Modified time: 2018-03-17 20:03:22
- * 产品--阳光私募--子组件
+ * 产品--股权私募--子组件
  */
 
 <template>

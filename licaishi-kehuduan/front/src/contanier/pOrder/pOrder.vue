@@ -2,10 +2,9 @@
  * @Author: 张浩然 
  * @Date: 2018-03-07 19:23:27 
  * @Last Modified by: 张浩然
- * @Last Modified time: 2018-03-18 10:46:17
+ * @Last Modified time: 2018-04-04 14:48:24
  *
- * 基础布局组件
- * 带头部与底部布局
+ * 预约组件
  */
 
  <template>
@@ -21,19 +20,16 @@
           <i class="fa fa-address-card"></i>
         </mt-field>
         <mt-field label="身份证号" type="number" placeholder="请输入身份证号" v-model="cardId"></mt-field>
-        <!-- <mt-field label="手机号" placeholder="请输入手机号" v-model="phone"></mt-field> -->
-        <mt-field label="银行卡号" type="number" placeholder="请输入银行卡号" v-model="bankCardNo"></mt-field>
-        <mt-field label="打卡行" disabled placeholder="点击右侧图标选择银行" v-model="bankName" @click.native="updatePickerStatus('bankCardPickStatus')">
+        <mt-field label="发卡行" disabled placeholder="点击右侧图标选择银行" v-model="bankName" @click.native="updatePickerStatus('bankCardPickStatus')">
           <i class="fa fa-credit-card"></i>
         </mt-field>
+        <mt-field label="银行卡号" type="number" placeholder="请输入银行卡号" v-model="bankCardNo"></mt-field>
         <mt-field label="预约金额" type="number" placeholder="请输入预约金额" v-model="amount">
           <span>万元</span>
         </mt-field>
         <mt-field label="最迟打款日期" placeholder="最迟打款日期" disabled v-model="pLatestPayNum">
-          <!-- <mt-field label="最迟打款日期" placeholder="最迟打款日期" disabled v-model="pLatestPayNum" @click.native="openDatePicker"> -->
-          <!-- <i class="fa fa-calendar"></i> -->
         </mt-field>
-        <mt-field label="备注" placeholder="备注" type="textarea" rows="4" v-model="note"></mt-field>
+        <mt-field label="备注" placeholder="【发卡行】选择【其他】时，请在此填写上发卡行" type="textarea" rows="4" v-model="note"></mt-field>
       </div>
     </Scroll>
     <!-- 推荐 -->
@@ -89,7 +85,8 @@ export default {
             "民生银行",
             "平安银行",
             "浦发银行",
-            "中信银行"
+            "中信银行",
+            "其他(具体看下面备注)"
           ],
           className: "slot",
           textAlign: "center",
@@ -125,7 +122,6 @@ export default {
     this.pId = this.$route.query.pId;
     this.pName = this.$route.query.pShortName;
     this.profitRebates = JSON.parse(this.$route.query.profitRebates);
-    console.log(this.profitRebates);
   },
   methods: {
     /* 银行选择组件确定事件 */
@@ -150,16 +146,17 @@ export default {
      * 获取客户列表
      */
     get_Customers() {
+      console.log("获取客户列表");
       ajax({
         url: "/srv/v1/order/queryCustomersForOrder",
-        method: "GET"
+        method: "get"
       }).then(res => {
         if (res.status === 200) {
           this.Customers[0].values = res.data.result.list;
         }
       });
     },
-    /* 校验身份证是否规范 */
+    /* 校验参数是否为空 */
     check_reg(param, msg) {
       if (this[param]) {
         return true;
@@ -181,6 +178,11 @@ export default {
         this.check_reg("amount", "预约金额未填写") &&
         this.check_reg("pLatestPayNum", "最迟打款日期未选择")
       ) {
+        // 对身份证进行验证
+        if (!isCardNo(this.cardId)) {
+          MessageBox("提示", "身份证填写有误!");
+          return;
+        }
         const promise = new Promise(function(resolve, reject) {
           /**
            * 2。首先得判断当前登录状态
@@ -198,6 +200,31 @@ export default {
         });
         promise.then(
           res => {
+            console.log("发送预约请求");
+            // ajax({
+            //   url: `/srv/v1/order/createOrder`,
+            //   params: {
+            //     productId: this.pId,
+            //     customerId: this.customerId,
+            //     customerName: this.customerName,
+            //     cardId: this.cardId,
+            //     amount: this.amount,
+            //     lastPayDate: this.pLatestPayNum,
+            //     comRatio: this.comRatio,
+            //     proRatio: this.proRatio,
+            //     issuingBank: this.bankName,
+            //     bankCardNo: this.bankCardNo,
+            //     note: this.note
+            //   }
+            // }).then(res => {
+            //   console.log("进入预约回调");
+            //   console.log("res");
+            //   if (res.status === 200) {
+            //     this.$router.replace("/pOrderSuccess");
+            //   } else {
+            //     alert("预约失败");
+            //   }
+            // });
             window.phihome.util.netRequest(
               "post",
               `http://47.97.100.240/srv/v1/order/createOrder`,
@@ -220,31 +247,11 @@ export default {
                 // 原生对象包装一层模拟axios返回的对象结构
                 if (res.status == 200) {
                   this.$router.replace("/pOrderSuccess");
+                } else {
+                  MessageBox("提示", "预约失败,详情请咨询客服!");
                 }
               }
             );
-            // ajax({
-            //   url: "/srv/v1/order/createOrder",
-            //   params: {
-            //     productId: this.pId,
-            //     customerId: this.customerId,
-            //     customerName: this.customerName,
-            //     cardId: this.cardId,
-            //     amount: this.amount,
-            //     lastPayDate: this.pLatestPayNum,
-            //     comRatio: this.comRatio,
-            //     proRatio: this.proRatio,
-            //     issuingBank: this.bankName,
-            //     bankCardNo: this.bankCardNo,
-            //     note: this.note
-            //   },
-            //   method: "post"
-            // }).then(res => {
-            //   if (res.status == 200) {
-            //     console.log("预约订单返回成功");
-            //     this.$router.replace("/pOrderSuccess");
-            //   }
-            // });
           },
           // 此处应该跳转登录页
           err => {}
@@ -268,42 +275,28 @@ export default {
       this.$refs.picker.open();
     }
   },
-  computed: {
-    // // 佣金比例
-    // comRatio() {
-    //   this.profitRebates.forEach(item => {
-    //     if (
-    //       parseInt(this.amount) > parseInt(item.prStartAmount) &&
-    //       parseInt(this.amount) < parseInt(item.prEndAmount)
-    //     ) {
-    //       return item.prCommission;
-    //     }
-    //   });
-    // },
-    // // 预期收益率
-    // proRatio() {
-    //   this.profitRebates.forEach(item => {
-    //     if (
-    //       parseInt(this.amount) > parseInt(item.prStartAmount) &&
-    //       parseInt(this.amount) < parseInt(item.prEndAmount)
-    //     ) {
-    //       return item.prExpectAnnualRevenue;
-    //     }
-    //   });
-    // }
-  },
   watch: {
     amount() {
       const unit = 10000;
-      this.profitRebates.forEach(item => {
+      for (let i = 0; i < this.profitRebates.length; i++) {
+        const item = this.profitRebates[i];
         if (
-          parseInt(this.amount) > parseInt(item.prStartAmount) / unit &&
-          parseInt(this.amount) < parseInt(item.prEndAmount) / unit
+          parseInt(this.amount) * unit >= parseInt(item.prStartAmount) &&
+          parseInt(this.amount) * unit < parseInt(item.prEndAmount)
         ) {
           this.comRatio = item.prCommission;
           this.proRatio = item.prExpectAnnualRevenue;
+          return;
+        } else {
+          this.comRatio = "";
+          this.proRatio = "";
         }
-      });
+        // 最后一行不做处理
+        if (i === this.profitRebates.length - 1) {
+          this.comRatio = item.prCommission;
+          this.proRatio = item.prExpectAnnualRevenue;
+        }
+      }
     }
   },
   components: {

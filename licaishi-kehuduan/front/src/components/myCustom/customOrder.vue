@@ -20,19 +20,19 @@
         </div>
         <mt-tab-container v-model="selected">
           <mt-tab-container-item id="1">
-
+            <Emptyorder v-if="customOrderList.length<=0" class="no-order"></Emptyorder>
           </mt-tab-container-item>
           <mt-tab-container-item id="2">
-
+            <Emptyorder v-if="customOrderList.length<=0" class="no-order"></Emptyorder>
           </mt-tab-container-item>
           <mt-tab-container-item id="3">
-
+            <Emptyorder v-if="customOrderList.length<=0" class="no-order"></Emptyorder>
           </mt-tab-container-item>
           <mt-tab-container-item id="4">
-
+            <Emptyorder v-if="customOrderList.length<=0" class="no-order"></Emptyorder>
           </mt-tab-container-item>
           <mt-tab-container-item id="5">
-
+            <Emptyorder v-if="customOrderList.length<=0" class="no-order"></Emptyorder>
           </mt-tab-container-item>
         </mt-tab-container>
         <loading v-if="pullup"></loading>
@@ -55,7 +55,7 @@ import split from "components/split/split";
 import workRoomHeader from "components/workRoomHeader/workRoomHeader";
 import customOrderInfo from "components/myCustom/customOrderInfo";
 import customOrderDetail from "components/myCustom/customOrderDetail";
-
+import Emptyorder from "components/order/Emptyorder";
 export default {
   data() {
     return {
@@ -239,7 +239,8 @@ export default {
     Scroll,
     loading,
     toEnd,
-    customOrderDetail
+    customOrderDetail,
+    Emptyorder
   }
 };
 </script>
@@ -269,6 +270,10 @@ export default {
     width: 100%;
   }
 
+  .no-order {
+    margin auto;
+    text-align center;
+  }
   .order-detail {
     position: absolute;
     width: 100%;
