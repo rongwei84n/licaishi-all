@@ -4,6 +4,7 @@ import android.app.Dialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
 import android.widget.LinearLayout;
@@ -31,13 +32,14 @@ import com.auts.lcssv.views.MyEditText;
 import butterknife.BindView;
 import butterknife.OnClick;
 
+import cn.jiguang.share.android.api.*;
+
 /**
- * 登陆云账号
- *
- * @author qisheng.lv
- * @date 2017/4/12
+ * 登陆，注册.
  */
 public class LoginCloudActivity extends BaseActivity implements ILoadingView {
+
+    private static final String TAG = "LoginCloudActivity";
 
     @BindView(R.id.ll_top)
     LinearLayout mLlTop;
@@ -165,6 +167,32 @@ public class LoginCloudActivity extends BaseActivity implements ILoadingView {
             loginPrepare();
             mTvLogin.requestFocus();
         }
+    }
+
+    private void shareToWechat() {
+        //创建分享参数
+        ShareParams shareParams = new ShareParams();
+        //设置分享的数据类型
+        shareParams.setShareType(Platform.SHARE_TEXT);
+        shareParams.setText("分享的文本！！");
+        shareParams.setTitle("分享的标题！！");
+        //调用分享接口share ，分享到QQ平台。
+        JShareInterface.share(WeChat.Name, shareParams, new PlatActionListener() {
+            @Override
+            public void onComplete(Platform platform, int i, HashMap<String, Object> hashMap) {
+                Log.d(TAG, "onComplete");
+            }
+
+            @Override
+            public void onError(Platform platform, int i, int i1, Throwable throwable) {
+                Log.d(TAG, "onError");
+            }
+
+            @Override
+            public void onCancel(Platform platform, int i) {
+                Log.d(TAG, "onCancel");
+            }
+        });
     }
 
     @OnClick(R.id.tv_register)

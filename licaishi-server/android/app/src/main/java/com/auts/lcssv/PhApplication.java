@@ -14,6 +14,8 @@ import com.tencent.smtt.sdk.QbSdk;
 
 import org.litepal.LitePal;
 
+import cn.jiguang.share.android.api.JShareInterface;
+
 /**
  * Application基类.
  */
@@ -28,6 +30,7 @@ public class PhApplication extends Application {
     @Override
     public void onCreate() {
         super.onCreate();
+        JShareInterface.init(this);
         mContext = getApplicationContext();
         mApplication = this;
         initThirdParty();
