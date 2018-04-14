@@ -7,6 +7,7 @@ import android.text.TextUtils;
 
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.TypeReference;
+import com.auts.lcssv.R;
 import com.auts.lcssv.activity.LoginCloudActivity;
 import com.auts.lcssv.activity.OrderItemDetailActivity;
 import com.auts.lcssv.activity.PersonalInformationActivity;
@@ -71,7 +72,11 @@ public class NativeModel {
                     intent = new Intent(context, OrderItemDetailActivity.class);
                     intent.putExtra("orderid", orderid);
                     break;
-
+                case "lcs.account.share":
+                    String para = jsData.getPageExtra(); //分享平台
+                    String[] paras = para.split(" ");
+                    share(paras[0], paras[1]);
+                    return;
                 default:
                     break;
             }
@@ -87,6 +92,12 @@ public class NativeModel {
             javaBridge.callback2Js(jsCallbacke, 121, e.getMessage());
         }
 
+    }
+
+    private boolean share(String platform, String url) {
+        LogUtils.debug("platform: " + platform + " url: " + url);
+        ToastUtil.show(R.string.toast_share_link);
+        return true;
     }
 
     public String getNetType() {

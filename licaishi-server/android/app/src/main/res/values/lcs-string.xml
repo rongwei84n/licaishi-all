@@ -26,4 +26,6 @@
     <string name="tv_order_detail_customer_name">客户姓名:</string>
 
     <string name="btn_order_detail_cancel_order">取消订单</string>
+
+    <string name="toast_share_link">分享成功</string>
 </resources>
