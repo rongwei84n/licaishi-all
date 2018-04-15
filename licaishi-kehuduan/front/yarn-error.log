@@ -1,5 +1,5 @@
 Arguments: 
-  /usr/local/bin/node /usr/local/bin/yarn stat
+  /usr/local/bin/node /usr/local/bin/yarn start
 
 PATH: 
   /usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin
@@ -34,7 +34,9 @@ npm manifest:
       "create-keyframe-animation": "^0.1.0",
       "fastclick": "^1.0.6",
       "good-storage": "^1.0.1",
+      "js": "^0.1.0",
       "js-base64": "^2.1.9",
+      "js-md5": "^0.7.3",
       "jsonp": "0.2.1",
       "lyric-parser": "^1.0.1",
       "mint-ui": "^2.2.13",
@@ -42,7 +44,8 @@ npm manifest:
       "vue": "^2.3.3",
       "vue-lazyload": "1.0.3",
       "vue-router": "^2.5.3",
-      "vuex": "^2.3.1"
+      "vuex": "^2.3.1",
+      "vux": "^2.8.1"
     },
     "devDependencies": {
       "autoprefixer": "^6.7.2",
@@ -265,13 +268,29 @@ Lockfile:
     version "3.1.0"
     resolved "http://registry.npm.taobao.org/arr-union/download/arr-union-3.1.0.tgz#e39b09aea9def866a8f206e288af63919bae39c4"
   
+  array-filter@^1.0.0:
+    version "1.0.0"
+    resolved "http://registry.npm.taobao.org/array-filter/download/array-filter-1.0.0.tgz#baf79e62e6ef4c2a4c0b831232daffec251f9d83"
+  
   array-find-index@^1.0.2:
     version "1.0.2"
     resolved "http://registry.npm.taobao.org/array-find-index/download/array-find-index-1.0.2.tgz#df010aa1287e164bbda6f9723b0a96a1ec4187a1"
   
+  array-find@^1.0.0:
+    version "1.0.0"
+    resolved "http://registry.npm.taobao.org/array-find/download/array-find-1.0.0.tgz#6c8e286d11ed768327f8e62ecee87353ca3e78b8"
+  
   array-flatten@1.1.1:
     version "1.1.1"
     resolved "http://registry.npm.taobao.org/array-flatten/download/array-flatten-1.1.1.tgz#9a5f699051b1e7073328f2a008968b64ea2955d2"
+  
+  array-map@^0.0.0:
+    version "0.0.0"
+    resolved "http://registry.npm.taobao.org/array-map/download/array-map-0.0.0.tgz#88a2bab73d1cf7bcd5c1b118a003f66f665fa662"
+  
+  array-shuffle@^1.0.1:
+    version "1.0.1"
+    resolved "http://registry.npm.taobao.org/array-shuffle/download/array-shuffle-1.0.1.tgz#7ea4882a356b4bca5f545e0b6e52eaf6d971557a"
   
   array-union@^1.0.1:
     version "1.0.2"
@@ -358,6 +377,10 @@ Lockfile:
       postcss "^5.2.16"
       postcss-value-parser "^3.2.3"
   
+  autosize@^3.0.20:
+    version "3.0.21"
+    resolved "http://registry.npm.taobao.org/autosize/download/autosize-3.0.21.tgz#f182f40d17757d978a139a4c9ca40c4c0e448603"
+  
   aws-sign2@~0.6.0:
     version "0.6.0"
     resolved "http://registry.npm.taobao.org/aws-sign2/download/aws-sign2-0.6.0.tgz#14342dd38dbcc94d0e5b87d763cd63612c0e794f"
@@ -365,6 +388,12 @@ Lockfile:
   aws4@^1.2.1:
     version "1.6.0"
     resolved "http://registry.npm.taobao.org/aws4/download/aws4-1.6.0.tgz#83ef5ca860b2b32e4a0deedee8c771b9db57471e"
+  
+  axios@^0.15.3:
+    version "0.15.3"
+    resolved "http://registry.npm.taobao.org/axios/download/axios-0.15.3.tgz#2c9d638b2e191a08ea1d6cc988eadd6ba5bdc053"
+    dependencies:
+      follow-redirects "1.0.0"
   
   axios@^0.16.1:
     version "0.16.2"
@@ -1021,6 +1050,10 @@ Lockfile:
     version "3.5.1"
     resolved "http://registry.npm.taobao.org/bluebird/download/bluebird-3.5.1.tgz#d9551f9de98f1fcda1e683d17ee91a0602ee2eb9"
   
+  blueimp-md5@^2.6.0:
+    version "2.10.0"
+    resolved "http://registry.npm.taobao.org/blueimp-md5/download/blueimp-md5-2.10.0.tgz#02f0843921f90dca14f5b8920a38593201d6964d"
+  
   bn.js@^4.0.0, bn.js@^4.1.0, bn.js@^4.1.1, bn.js@^4.4.0:
     version "4.11.8"
     resolved "http://registry.npm.taobao.org/bn.js/download/bn.js-4.11.8.tgz#2cde09eb5ee341f484746bb0309b3253b1b1442f"
@@ -1570,6 +1603,10 @@ Lockfile:
       os-homedir "^1.0.1"
       parse-json "^2.2.0"
       require-from-string "^1.1.0"
+  
+  countup.js@^1.8.1:
+    version "1.9.3"
+    resolved "http://registry.npm.taobao.org/countup.js/download/countup.js-1.9.3.tgz#ce3e50cd7160441e478f07da31895edcc0f1c9dd"
   
   create-ecdh@^4.0.0:
     version "4.0.0"
@@ -2484,6 +2521,12 @@ Lockfile:
     dependencies:
       inherits "^2.0.1"
       readable-stream "^2.0.4"
+  
+  follow-redirects@1.0.0:
+    version "1.0.0"
+    resolved "http://registry.npm.taobao.org/follow-redirects/download/follow-redirects-1.0.0.tgz#8e34298cbd2e176f254effec75a1c78cc849fd37"
+    dependencies:
+      debug "^2.2.0"
   
   follow-redirects@^1.2.3:
     version "1.4.1"
@@ -3498,6 +3541,10 @@ Lockfile:
     version "4.5.0"
     resolved "http://registry.npm.taobao.org/lodash.clonedeep/download/lodash.clonedeep-4.5.0.tgz#e23f3f9c4f8fbdde872529c1071857a086e5ccef"
   
+  lodash.debounce@^4.0.8:
+    version "4.0.8"
+    resolved "http://registry.npm.taobao.org/lodash.debounce/download/lodash.debounce-4.0.8.tgz#82d79bff30a67c4005ffd5e2515300ad9ca4d7af"
+  
   lodash.defaults@^3.1.2:
     version "3.1.2"
     resolved "http://registry.npm.taobao.org/lodash.defaults/download/lodash.defaults-3.1.2.tgz#c7308b18dbf8bc9372d701a73493c61192bd2e2c"
@@ -3528,6 +3575,10 @@ Lockfile:
   lodash.restparam@^3.0.0:
     version "3.6.1"
     resolved "http://registry.npm.taobao.org/lodash.restparam/download/lodash.restparam-3.6.1.tgz#936a4e309ef330a7645ed4145986c85ae5b20805"
+  
+  lodash.throttle@^4.1.1:
+    version "4.1.1"
+    resolved "http://registry.npm.taobao.org/lodash.throttle/download/lodash.throttle-4.1.1.tgz#c23e91b710242ac70c37f1e1cda9274cc39bf2f4"
   
   lodash.uniq@^4.5.0:
     version "4.5.0"
@@ -4593,6 +4644,10 @@ Lockfile:
     version "1.5.1"
     resolved "http://registry.npm.taobao.org/q/download/q-1.5.1.tgz#7e32f75b41381291d04611f1bf14109ac00651d7"
   
+  qr.js@0.0.0:
+    version "0.0.0"
+    resolved "http://registry.npm.taobao.org/qr.js/download/qr.js-0.0.0.tgz#cace86386f59a0db8050fa90d9b6b0e88a1e364f"
+  
   qs@6.5.1:
     version "6.5.1"
     resolved "http://registry.npm.taobao.org/qs/download/qs-6.5.1.tgz#349cdf6eef89ec45c12d7d5eb3fc0c870343a6d8"
@@ -5056,6 +5111,10 @@ Lockfile:
     dependencies:
       inherits "^2.0.1"
       safe-buffer "^5.0.1"
+  
+  shake.js@^1.2.2:
+    version "1.2.2"
+    resolved "http://registry.npm.taobao.org/shake.js/download/shake.js-1.2.2.tgz#b2ac560a82abe68d78a029623a7088e1b30bacff"
   
   shelljs@^0.7.5, shelljs@^0.7.6:
     version "0.7.8"
@@ -5672,6 +5731,14 @@ Lockfile:
       spdx-correct "^3.0.0"
       spdx-expression-parse "^3.0.0"
   
+  validator@^9.3.0:
+    version "9.4.1"
+    resolved "http://registry.npm.taobao.org/validator/download/validator-9.4.1.tgz#abf466d398b561cd243050112c6ff1de6cc12663"
+  
+  vanilla-masker@^1.2.0:
+    version "1.2.0"
+    resolved "http://registry.npm.taobao.org/vanilla-masker/download/vanilla-masker-1.2.0.tgz#c2830e9d994a5fecd2261506477c2707fe589756"
+  
   vary@~1.1.2:
     version "1.1.2"
     resolved "http://registry.npm.taobao.org/vary/download/vary-1.1.2.tgz#2299f02c6ded30d4a5961b0b9f74524a18f634fc"
@@ -5756,6 +5823,39 @@ Lockfile:
   vuex@^2.3.1:
     version "2.5.0"
     resolved "http://registry.npm.taobao.org/vuex/download/vuex-2.5.0.tgz#20f0265ade6c9a5ac6724a405d3ffdb4726c9741"
+  
+  vux-blazy@^1.6.4:
+    version "1.6.4"
+    resolved "http://registry.npm.taobao.org/vux-blazy/download/vux-blazy-1.6.4.tgz#e33073d902e0a3844ef1a463cce3ca2e0aab47bf"
+  
+  vux-xscroll@^3.1.10:
+    version "3.1.12"
+    resolved "http://registry.npm.taobao.org/vux-xscroll/download/vux-xscroll-3.1.12.tgz#e352e7f9dc5f9fee9253db331c967dd56b3bc950"
+  
+  vux@^2.8.1:
+    version "2.8.1"
+    resolved "http://registry.npm.taobao.org/vux/download/vux-2.8.1.tgz#abc66ce3fdf5056db5babc9cb2f0f2c9f4e3f0a7"
+    dependencies:
+      array-filter "^1.0.0"
+      array-find "^1.0.0"
+      array-map "^0.0.0"
+      array-shuffle "^1.0.1"
+      autosize "^3.0.20"
+      axios "^0.15.3"
+      big.js "^3.1.3"
+      blueimp-md5 "^2.6.0"
+      countup.js "^1.8.1"
+      fastclick "^1.0.6"
+      lodash.debounce "^4.0.8"
+      lodash.throttle "^4.1.1"
+      object-assign "^4.1.0"
+      qr.js "0.0.0"
+      shake.js "^1.2.2"
+      validator "^9.3.0"
+      vanilla-masker "^1.2.0"
+      vux-blazy "^1.6.4"
+      vux-xscroll "^3.1.10"
+      x-photoswipe "^4.1.3-rc.1"
   
   watchpack@^1.3.1:
     version "1.5.0"
@@ -5901,6 +6001,10 @@ Lockfile:
       async-limiter "~1.0.0"
       safe-buffer "~5.1.0"
   
+  x-photoswipe@^4.1.3-rc.1:
+    version "4.1.3-rc.1"
+    resolved "http://registry.npm.taobao.org/x-photoswipe/download/x-photoswipe-4.1.3-rc.1.tgz#e761901752dd3dd1f718e538514b609b5df5f7db"
+  
   xml-char-classes@^1.0.0:
     version "1.0.0"
     resolved "http://registry.npm.taobao.org/xml-char-classes/download/xml-char-classes-1.0.0.tgz#64657848a20ffc5df583a42ad8a277b4512bbc4d"
@@ -5955,14 +6059,17 @@ Lockfile:
       window-size "0.1.0"
 
 Trace: 
-  Error: Command "stat" not found. Did you mean "start"?
-      at new MessageError (/usr/local/lib/node_modules/yarn/lib/cli.js:186:110)
-      at /usr/local/lib/node_modules/yarn/lib/cli.js:87307:17
-      at Generator.next (<anonymous>)
-      at step (/usr/local/lib/node_modules/yarn/lib/cli.js:98:30)
-      at /usr/local/lib/node_modules/yarn/lib/cli.js:116:14
-      at new Promise (<anonymous>)
-      at new F (/usr/local/lib/node_modules/yarn/lib/cli.js:23451:28)
-      at /usr/local/lib/node_modules/yarn/lib/cli.js:95:12
-      at runCommand (/usr/local/lib/node_modules/yarn/lib/cli.js:87312:22)
-      at Object.<anonymous> (/usr/local/lib/node_modules/yarn/lib/cli.js:87412:14)
+  Error: Command failed.
+  Exit code: 1
+  Command: sh
+  Arguments: -c node build/dev-server.js
+  Directory: /Users/zhanghaoran/prj/licaishi-all/licaishi-kehuduan/front
+  Output:
+  
+      at ProcessTermError.MessageError (/usr/local/lib/node_modules/yarn/lib/cli.js:186:110)
+      at new ProcessTermError (/usr/local/lib/node_modules/yarn/lib/cli.js:226:113)
+      at ChildProcess.<anonymous> (/usr/local/lib/node_modules/yarn/lib/cli.js:30281:17)
+      at emitTwo (events.js:126:13)
+      at ChildProcess.emit (events.js:214:7)
+      at maybeClose (internal/child_process.js:925:16)
+      at Process.ChildProcess._handle.onexit (internal/child_process.js:209:5)

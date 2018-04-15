@@ -1,8 +1,8 @@
 /*
  * @Author: zhanghr 
  * @Date: 2018-04-09 15:01:40 
- * @Last Modified by: zhanghr
- * @Last Modified time: 2018-04-09 17:54:28
+ * @Last Modified by: 张浩然
+ * @Last Modified time: 2018-04-15 12:17:16
  *
  *  分享进来的注册页
  */
@@ -10,7 +10,7 @@
 
 <template>
   <div id="Register">
-    <mt-header title="城邀您加入嘿牛理财"></mt-header>
+    <mt-header title="诚邀您加入嘿牛理财"></mt-header>
     <div class="Register-content">
       <div class="Register-content-input">
         <mt-field label="手机号码" placeholder="请输入手机号码" :attr="{ maxlength: 11 }" type="tel" v-model="account">
@@ -57,7 +57,7 @@ export default {
   created() {
     if (this.$route.query.uid) {
       this.registersource = this.$route.query.uid;
-      console.log(this.registersource);
+      MessageBox("测试", "当前理财师id为" + this.registersource);
     }
   },
   methods: {
@@ -172,7 +172,12 @@ export default {
         }
       }).then(res => {
         if (res.data.error === this.$store.state.status) {
-          MessageBox("提示", "您已注册成功!");
+          MessageBox.confirm("您已注册成功!点击确定按钮下载app").then(
+            action => {
+              // TODO:此处后面得根据安卓或者ios
+              window.location.href = "https://fir.im/terf";
+            }
+          );
         }
       });
     },
