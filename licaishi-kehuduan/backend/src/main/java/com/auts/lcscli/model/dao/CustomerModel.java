@@ -27,6 +27,22 @@ public class CustomerModel {
 	@DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
 	private Date updatetime;
 
+	public CustomerModel() {}
+
+	public CustomerModel(AccountModel accountModel) {
+	    this.userId = Integer.parseInt(accountModel.getUid());
+	    this.name = accountModel.getUser_name();
+	    this.phone = accountModel.getPhone();
+	    this.email = accountModel.getEmail();
+	    this.address = "";
+	    this.sex = accountModel.getSex();
+	    this.birthday = "";
+
+	    Date nowDate = new Date();
+	    this.createtime = nowDate;
+	    this.updatetime = nowDate;
+	}
+
 	public String getName() {
 		return name;
 	}

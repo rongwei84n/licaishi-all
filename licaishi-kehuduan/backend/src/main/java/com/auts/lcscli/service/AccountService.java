@@ -14,7 +14,7 @@ public interface AccountService {
 
     int updateAccount(AccountModel model);
 
-    int register(AccountModel model);
+    int register(AccountModel model, int financerId);
 
     AccountModel queryByUserPhone(String phone);
 }

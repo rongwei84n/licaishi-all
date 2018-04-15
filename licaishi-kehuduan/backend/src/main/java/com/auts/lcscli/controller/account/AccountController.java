@@ -242,14 +242,22 @@ public class AccountController extends SBaseController {
         model.setWorkstudio("");
         model.setAvtr("");
         model.setSex(1);
-        model.setRemark("测试注册接口");
-        model.setRole(1);
+        model.setRemark("客户端测试注册接口");
+        model.setRole(0); //0客户端，1 理财师 2 管理员
         model.setStatus(0);
         long curTime = System.currentTimeMillis() / 1000;
         model.setCreate_time(curTime);
         model.setUpdate_time(curTime);
 
-        int result = accountService.register(model);
+        //根据理财师uid查询对应的理财师uid
+        int financerId = -1;
+        if (StringUtil.isNotEmpty(registersource)) { //传入了理财师uid，需要根据uid查到理财师的id.
+            AccountModel lcsAccount = accountService.queryByUid(registersource);
+            financerId = Integer.parseInt(lcsAccount.getUid());
+            LOGGER.info("pared financerId [{}] ", financerId);
+        }
+
+        int result = accountService.register(model, financerId);
         RegistResponseModel rsp = new RegistResponseModel();
         if (result > 0) {
             rsp.setError(String.valueOf(Const.ErrorCode.Account.OK));
