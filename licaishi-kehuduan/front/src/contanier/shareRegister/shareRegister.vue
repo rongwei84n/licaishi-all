@@ -57,7 +57,7 @@ export default {
   created() {
     if (this.$route.query.uid) {
       this.registersource = this.$route.query.uid;
-      MessageBox("测试", "当前理财师id为" + this.registersource);
+      // MessageBox("测试", "当前理财师id为" + this.registersource);
     }
   },
   methods: {

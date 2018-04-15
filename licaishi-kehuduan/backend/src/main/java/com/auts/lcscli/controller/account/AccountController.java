@@ -251,7 +251,7 @@ public class AccountController extends SBaseController {
 
         //根据理财师uid查询对应的理财师uid
         int financerId = -1;
-        if (StringUtil.isNotEmpty(registersource)) { //传入了理财师uid，需要根据uid查到理财师的id.
+        if (StringUtil.isNotEmpty(registersource) && StringUtil.isDigitsOnly(registersource)) { //传入了理财师uid，需要根据uid查到理财师的id.
             AccountModel lcsAccount = accountService.queryByUid(registersource);
             financerId = Integer.parseInt(lcsAccount.getUid());
             LOGGER.info("pared financerId [{}] ", financerId);
