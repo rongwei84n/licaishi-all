@@ -80,7 +80,7 @@ public class NativeModel {
                     break;
                 case "lcs.account.share.wechat": //微信分享
                     String para = jsData.getPageExtra(); //分享标题，分享链接
-                    String[] paras = para.split(" ");
+                    String[] paras = para.split(";");
                     for (int i = 0; i < paras.length; i++) {
                         LogUtils.debug("i: " + i + " value: " + paras[i]);
                     }
