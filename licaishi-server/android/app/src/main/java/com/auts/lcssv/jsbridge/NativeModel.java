@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.text.TextUtils;
+import android.util.Log;
 
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.TypeReference;
@@ -23,6 +24,10 @@ import com.auts.lcssv.util.ToastUtil;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.Map;
+import java.util.HashMap;
+
+import cn.jiguang.share.wechat.*;
+import cn.jiguang.share.android.api.*;
 
 /**
  * JSBridge-原生端需要实现的方法
@@ -59,6 +64,7 @@ public class NativeModel {
 
     public void openPage(Activity context, JSData jsData, JavaBridge javaBridge, JavaBridge.JsCallback jsCallbacke, String deviceId) {
         try {
+            LogUtils.debug("openage: " + jsData.getPageName());
             Intent intent = null;
             switch (jsData.getPageName()) {
                 case "lcs.account.login":
@@ -72,10 +78,17 @@ public class NativeModel {
                     intent = new Intent(context, OrderItemDetailActivity.class);
                     intent.putExtra("orderid", orderid);
                     break;
-                case "lcs.account.share":
-                    String para = jsData.getPageExtra(); //分享平台
+                case "lcs.account.share.wechat": //微信分享
+                    String para = jsData.getPageExtra(); //分享标题，分享链接
                     String[] paras = para.split(" ");
-                    share(paras[0], paras[1]);
+                    for (int i = 0; i < paras.length; i++) {
+                        LogUtils.debug("i: " + i + " value: " + paras[i]);
+                    }
+                    if (paras == null || paras.length < 2) {
+                        LogUtils.debug("paras size wrong.. can't share");
+                        return;
+                    }
+                    shareToWechat(paras[0], paras[1]);
                     return;
                 default:
                     break;
@@ -94,11 +107,37 @@ public class NativeModel {
 
     }
 
-    private boolean share(String platform, String url) {
-        LogUtils.debug("platform: " + platform + " url: " + url);
-        ToastUtil.show(R.string.toast_share_link);
+    private boolean shareToWechat(String title, String url){
+        ////创建分享参数
+        ShareParams shareParams = new ShareParams();
+
+        //设置分享的数据类型
+        shareParams.setShareType(Platform.SHARE_WEBPAGE);
+        shareParams.setText(title);
+        shareParams.setTitle(title);
+        shareParams.setUrl(url);
+
+        //调用分享接口share，分享到微信平台。
+        JShareInterface.share(Wechat.Name, shareParams, new PlatActionListener(){
+            @Override
+            public void onComplete(Platform platform, int i, HashMap<String,Object> hashMap){
+                LogUtils.debug("share wechat onComplete");
+            }
+
+            @Override
+            public void onError(Platform platform, int i,int i1, Throwable throwable){
+                LogUtils.debug("share wechat onError");
+            }
+
+            @Override
+            public void onCancel(Platform platform, int i){
+                LogUtils.debug("share wechat onCancel");
+            }
+        });
+
         return true;
     }
+
 
     public String getNetType() {
         return NetworkUtils.getNetType();

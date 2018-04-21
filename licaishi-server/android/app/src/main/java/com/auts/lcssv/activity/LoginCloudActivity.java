@@ -31,8 +31,11 @@ import com.auts.lcssv.views.MyEditText;
 
 import butterknife.BindView;
 import butterknife.OnClick;
-
-import cn.jiguang.share.android.api.*;
+import java.util.HashMap;
+//
+//import cn.jiguang.share.wechat.*;
+//
+//import cn.jiguang.share.android.api.*;
 
 /**
  * 登陆，注册.
@@ -167,17 +170,18 @@ public class LoginCloudActivity extends BaseActivity implements ILoadingView {
             loginPrepare();
             mTvLogin.requestFocus();
         }
+//        shareToWechat();
     }
 
-    private void shareToWechat() {
-//        //创建分享参数
+//    private void shareToWechat() {
+////        //创建分享参数
 //        ShareParams shareParams = new ShareParams();
 //        //设置分享的数据类型
 //        shareParams.setShareType(Platform.SHARE_TEXT);
 //        shareParams.setText("分享的文本！！");
 //        shareParams.setTitle("分享的标题！！");
-//        //调用分享接口share ，分享到QQ平台。
-//        JShareInterface.share(WeChat.Name, shareParams, new PlatActionListener() {
+//        //调用分享接口share ，分享到微信平台。
+//        JShareInterface.share(Wechat.Name, shareParams, new PlatActionListener() {
 //            @Override
 //            public void onComplete(Platform platform, int i, HashMap<String, Object> hashMap) {
 //                Log.d(TAG, "onComplete");
@@ -193,7 +197,7 @@ public class LoginCloudActivity extends BaseActivity implements ILoadingView {
 //                Log.d(TAG, "onCancel");
 //            }
 //        });
-    }
+//    }
 
     @OnClick(R.id.tv_register)
     public void tv_register() {

@@ -31,6 +31,7 @@ public class PhApplication extends Application {
     public void onCreate() {
         super.onCreate();
         JShareInterface.init(this);
+        JShareInterface.setDebugMode(true);
         mContext = getApplicationContext();
         mApplication = this;
         initThirdParty();
