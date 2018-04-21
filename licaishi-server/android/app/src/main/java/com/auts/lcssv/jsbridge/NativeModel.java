@@ -90,6 +90,18 @@ public class NativeModel {
                     }
                     shareToWechat(paras[0], paras[1]);
                     return;
+                case "lcs.account.share.wechatmoments": //微信朋友圈分享
+                    para = jsData.getPageExtra(); //分享标题，分享链接
+                    paras = para.split(";");
+                    for (int i = 0; i < paras.length; i++) {
+                        LogUtils.debug("i: " + i + " value: " + paras[i]);
+                    }
+                    if (paras == null || paras.length < 2) {
+                        LogUtils.debug("paras size wrong.. can't share");
+                        return;
+                    }
+                    shareToWechatMoments(paras[0], paras[1]);
+                    return;
                 default:
                     break;
             }
@@ -108,6 +120,17 @@ public class NativeModel {
     }
 
     private boolean shareToWechat(String title, String url){
+        return shareInner(Wechat.Name, title, url);
+    }
+
+    /**
+     * 分享到微信朋友圈
+     */
+    private boolean shareToWechatMoments(String title, String url) {
+        return shareInner(WechatMoments.Name, title, url);
+    }
+
+    private boolean shareInner(String platform, String title, String url) {
         ////创建分享参数
         ShareParams shareParams = new ShareParams();
 
@@ -118,7 +141,7 @@ public class NativeModel {
         shareParams.setUrl(url);
 
         //调用分享接口share，分享到微信平台。
-        JShareInterface.share(Wechat.Name, shareParams, new PlatActionListener(){
+        JShareInterface.share(platform, shareParams, new PlatActionListener(){
             @Override
             public void onComplete(Platform platform, int i, HashMap<String,Object> hashMap){
                 LogUtils.debug("share wechat onComplete");
