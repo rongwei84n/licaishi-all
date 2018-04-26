@@ -5,6 +5,7 @@
 #import "Category.h"
 #import "WebViewJavascriptBridge.h"
 #import <AVFoundation/AVFoundation.h>
+#import "JSHAREService.h"
 
 
 //#if DEBUG || TEST

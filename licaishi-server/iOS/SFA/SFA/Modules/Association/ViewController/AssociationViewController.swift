@@ -154,18 +154,39 @@ class AssociationViewController: UIViewController, InstanceFromStoryBoard {
                 navigationController?.pushViewController(LoginViewController.instanceFromStoryBoard(), animated: true)
             }
             openPageCallback = responseCallback
-            
+            break;
         case "lcs.order.orderdetail":
             
             if let orderId = extraData {
                 let vc = OrderDetailViewController.instanceFromStoryBoard(orderId: orderId)
                 navigationController?.pushViewController(vc, animated: true)
             }
-            
+            break;
+        case "lcs.account.share.wechat": //微信分享
+            print("wechat share click")
+            shareToWechat(title: "s", url: "sxxx")
+            break;
+        case "lcs.account.share.wechatmoments": //微信朋友圈分享
+            print("lcs.account.share.wechatmoments share click")
+            break;
         default:
             break
         }
-
+    }
+    
+    private func shareToWechat(title: String, url: String) {
+        let jshareMsg = JSHAREMessage.init()
+        jshareMsg.text = "理财师老黄 邀请你加入理财师"
+        jshareMsg.title = "理财师邀请"
+        jshareMsg.mediaType = JSHAREMediaType.text
+        jshareMsg.platform = JSHAREPlatform.wechatSession
+        
+        //        JSHAREService.share(jshareMsg, handler: nil)
+        JSHAREService.share(jshareMsg) { (a, b) in
+            print("jshare callback")
+            print(a)
+            print(b)
+        }
     }
 
     // MARK: -  register handlers

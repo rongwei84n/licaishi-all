@@ -38,6 +38,14 @@ Permission is granted to anyone to use this software for any purpose,including c
 - This notice may not be removed or altered from any source or binary distribution.
 
 
+## JCore
+
+Copyright jpush.cn
+
+## JShare
+
+Copyright jpush.cn
+
 ## Kingfisher
 
 The MIT License (MIT)

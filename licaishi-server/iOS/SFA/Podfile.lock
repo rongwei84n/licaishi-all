@@ -1,7 +1,10 @@
 PODS:
   - Alamofire (4.7.0)
   - CryptoSwift (0.7.2)
+  - JCore (1.1.7)
   - JRSwizzle (1.0)
+  - JShare (1.5.0):
+    - JCore (~> 1.1.7)
   - Kingfisher (4.6.1)
   - Localize-Swift (2.0.0)
   - ModelMapper (7.4.0)
@@ -50,6 +53,7 @@ PODS:
 DEPENDENCIES:
   - CryptoSwift (~> 0.7.1)
   - JRSwizzle
+  - JShare (= 1.5.0)
   - Kingfisher
   - Localize-Swift
   - Moya (= 10.0.1)
@@ -68,7 +72,9 @@ DEPENDENCIES:
 SPEC CHECKSUMS:
   Alamofire: 907e0a98eb68cdb7f9d1f541a563d6ac5dc77b25
   CryptoSwift: cd2158be2bf639aabc63ec804707c7137c90157c
+  JCore: f7459c81c135281a874a6beafdd321666adcc834
   JRSwizzle: dd5ead5d913a0f29e7f558200165849f006bb1e3
+  JShare: 8a13dc4d5ae987f69af1ea9876b94c3c9c40c6cd
   Kingfisher: 1f9157d9c02b380cbd0b7cc890161195164eb634
   Localize-Swift: c798ec9286494866f7068f85f7c71283ac5bdab4
   ModelMapper: 467f49f6f187b4e6cde2599e7cc5968cefa3f19b
@@ -85,6 +91,6 @@ SPEC CHECKSUMS:
   SwiftyJSON: 070dabdcb1beb81b247c65ffa3a79dbbfb3b48aa
   SwiftyTimer: 2efd74b060d69ad4f1496baf5bbedbe132125fcf
 
-PODFILE CHECKSUM: 9970a041d345534fa3c70ec226227616327a18ba
+PODFILE CHECKSUM: 247efc427bdea2fa22e3359b11266c7cb661c795
 
 COCOAPODS: 1.4.0

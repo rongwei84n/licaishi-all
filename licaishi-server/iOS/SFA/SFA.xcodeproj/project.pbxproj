@@ -81,6 +81,7 @@
 		76FFD4402047FC1B00C0039D /* WebViewJavascriptBridge_JS.m in Sources */ = {isa = PBXBuildFile; fileRef = 76FFD4392047FC1A00C0039D /* WebViewJavascriptBridge_JS.m */; };
 		76FFD4412047FC1B00C0039D /* WKWebViewJavascriptBridge.m in Sources */ = {isa = PBXBuildFile; fileRef = 76FFD43C2047FC1A00C0039D /* WKWebViewJavascriptBridge.m */; };
 		76FFD4432047FD3100C0039D /* PhiWebJSWebBridge.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76FFD4422047FD3100C0039D /* PhiWebJSWebBridge.swift */; };
+		7AB71D7D208CB47D000358C8 /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 7AB71D7C208CB47D000358C8 /* Default-568h@2x.png */; };
 		AF10062E2DF32A0E9418297B /* Pods_SFA.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 779E49FE2971042FCF9CE375 /* Pods_SFA.framework */; };
 /* End PBXBuildFile section */
 
@@ -213,6 +214,7 @@
 		76FFD43D2047FC1B00C0039D /* WebViewJavascriptBridge_JS.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WebViewJavascriptBridge_JS.h; sourceTree = "<group>"; };
 		76FFD4422047FD3100C0039D /* PhiWebJSWebBridge.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PhiWebJSWebBridge.swift; sourceTree = "<group>"; };
 		779E49FE2971042FCF9CE375 /* Pods_SFA.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_SFA.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		7AB71D7C208CB47D000358C8 /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -368,6 +370,7 @@
 		768C2BFB202AE3A800F8ABB8 = {
 			isa = PBXGroup;
 			children = (
+				7AB71D7C208CB47D000358C8 /* Default-568h@2x.png */,
 				768C2C06202AE3A800F8ABB8 /* SFA */,
 				768C2C1B202AE3A900F8ABB8 /* SFATests */,
 				768C2C26202AE3A900F8ABB8 /* SFAUITests */,
@@ -750,6 +753,7 @@
 			files = (
 				76603604205B5826009A1CC6 /* Main.storyboard in Resources */,
 				766035EE205680B3009A1CC6 /* README.md in Resources */,
+				7AB71D7D208CB47D000358C8 /* Default-568h@2x.png in Resources */,
 				766035C220566006009A1CC6 /* SVProgressHUD.bundle in Resources */,
 				76E01DAC2064DF5F0010ADCF /* Order.storyboard in Resources */,
 				768C2C12202AE3A900F8ABB8 /* LaunchScreen.storyboard in Resources */,
@@ -1095,6 +1099,7 @@
 				INFOPLIST_FILE = "SFA/Supporting Files/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				NEW_SETTING = "";
 				PRODUCT_BUNDLE_IDENTIFIER = com.auts.hein.lcss;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "3fd8bb2c-72d9-4145-bd69-fb4bb7699c1e";
@@ -1117,6 +1122,7 @@
 				INFOPLIST_FILE = "SFA/Supporting Files/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				NEW_SETTING = "";
 				PRODUCT_BUNDLE_IDENTIFIER = com.auts.hein.lcss;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "3ca8e3c0-df56-4d48-a407-6abd05eeee0d";
@@ -1262,6 +1268,7 @@
 				INFOPLIST_FILE = "SFA/Supporting Files/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				NEW_SETTING = "";
 				PRODUCT_BUNDLE_IDENTIFIER = com.auts.hein.lcss;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "0c17d98d-5222-4a66-922a-5a93b0e7ab33";

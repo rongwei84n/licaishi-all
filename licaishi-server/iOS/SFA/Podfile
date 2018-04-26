@@ -2,7 +2,9 @@ platform :ios, '8.0'
 use_frameworks!
 
 target 'SFA' do
-    
+
+pod 'JShare', '1.5.0'
+
 pod 'R.swift'
 pod 'JRSwizzle'
 pod 'SwifterSwift'

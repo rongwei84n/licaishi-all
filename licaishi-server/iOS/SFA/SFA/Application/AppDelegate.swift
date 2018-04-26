@@ -8,15 +8,32 @@
 
 import UIKit
 
+
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
-        
+
         setupAppearance()
         
+        let config = JSHARELaunchConfig.init()
+        config.appKey = "5e20808569da8ba7360d5932";
+////        config.SinaWeiboAppKey = @"374535501";
+////        config.SinaWeiboAppSecret = @"baccd12c166f1df96736b51ffbf600a2";
+//        config.SinaRedirectUri = @"https://www.jiguang.cn";
+////        config.QQAppId = @"1105864531";
+////        config.QQAppKey = @"glFYjkHQGSOCJHMC";
+        config.weChatAppId = "wxb2c92e8437fa2dd2"
+        config.weChatAppSecret = "cd289632a1cbae578ed242245fdea7c5"
+////        config.FacebookAppID = @"1847959632183996";
+////        config.FacebookDisplayName = @"JShareDemo";
+////        config.TwitterConsumerKey = @"4hCeIip1cpTk9oPYeCbYKhVWi";
+////        config.TwitterConsumerSecret = @"DuIontT8KPSmO2Y1oAvby7tpbWHJimuakpbiAUHEKncbffekmC";
+        JSHAREService.setup(with: config)
+        JSHAREService.setDebug(true)
+
         // 自动登录
 //        autoLogin()
         
