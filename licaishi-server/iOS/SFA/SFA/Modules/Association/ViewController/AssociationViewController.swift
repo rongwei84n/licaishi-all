@@ -163,17 +163,18 @@ class AssociationViewController: UIViewController, InstanceFromStoryBoard {
             }
             break;
         case "lcs.account.share.wechat": //微信分享
-            print("wechat share click")
             shareToWechat(title: "s", url: "sxxx")
             break;
         case "lcs.account.share.wechatmoments": //微信朋友圈分享
             print("lcs.account.share.wechatmoments share click")
+            shareToWechatMoments(title: "xxx", url: "dddd")
             break;
         default:
             break
         }
     }
     
+    //MARK: 分享到微信
     private func shareToWechat(title: String, url: String) {
         let jshareMsg = JSHAREMessage.init()
         jshareMsg.text = "理财师老黄 邀请你加入理财师"
@@ -181,9 +182,23 @@ class AssociationViewController: UIViewController, InstanceFromStoryBoard {
         jshareMsg.mediaType = JSHAREMediaType.text
         jshareMsg.platform = JSHAREPlatform.wechatSession
         
-        //        JSHAREService.share(jshareMsg, handler: nil)
         JSHAREService.share(jshareMsg) { (a, b) in
             print("jshare callback")
+            print(a)
+            print(b)
+        }
+    }
+    
+    //MARK: 分享到朋友圈
+    private func shareToWechatMoments(title: String, url: String) { //分享到微信朋友圈
+        let jshareMsg = JSHAREMessage.init()
+        jshareMsg.text = "理财师老黄 邀请你加入理财师xxx"
+        jshareMsg.title = "理财师邀请"
+        jshareMsg.mediaType = JSHAREMediaType.text
+        jshareMsg.platform = JSHAREPlatform.wechatTimeLine
+        
+        JSHAREService.share(jshareMsg) { (a, b) in
+            print("shareToWechatMoments callback")
             print(a)
             print(b)
         }
