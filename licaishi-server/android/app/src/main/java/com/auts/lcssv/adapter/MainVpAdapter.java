@@ -30,7 +30,7 @@ public class MainVpAdapter extends FragmentPagerAdapter {
         if (position == 0) {
             fragment = new DeviceFragment();
         } else if (position == 1) {
-//            fragment = new SceneFragment();
+            fragment = new DeviceFragment();
         } else {
             fragment = new MineFragment();
         }

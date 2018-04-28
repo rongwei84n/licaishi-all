@@ -52,17 +52,6 @@ public class MainActivity extends BaseFragmentActivity {
         mViewPager.setOffscreenPageLimit(2);
         new UpdateManager(this).appUpdate(false);
         startService(new Intent(this, CommonService.class));
-        justTest();
-    }
-
-    private void justTest() {
-        LogUtils.debug("log ok!");
-        String channel = AppInfoUtils.getChannelName();
-        if (channel.equals("qa")) {
-            ToastUtil.showLong("你使用的版本是测试环境");
-        } else if (channel.equals("szrd")) {
-            ToastUtil.showLong("你使用的版本是开发环境");
-        }
     }
 
     @OnPageChange(R.id.vp_main)
@@ -72,19 +61,19 @@ public class MainActivity extends BaseFragmentActivity {
 
     @OnClick(R.id.rb_device)
     public void rb_device() {
-//        togglePage(0);
+        togglePage(0);
         mViewPager.setCurrentItem(0);
     }
 
     @OnClick(R.id.rb_scene)
     public void rb_scene() {
-//        togglePage(1);
+        togglePage(1);
         mViewPager.setCurrentItem(1);
     }
 
     @OnClick(R.id.rb_mine)
     public void rb_my() {
-//        togglePage(2);
+        togglePage(2);
         mViewPager.setCurrentItem(2);
     }
 
@@ -95,16 +84,16 @@ public class MainActivity extends BaseFragmentActivity {
      */
     private void togglePage(int position) {
         toggleRb(getResources().getDrawable(R.drawable.tag_device), mRbDevice, getResources().getColor(R.color.text));
-//        toggleRb(getResources().getDrawable(R.drawable.tag_scene), mRbScene, getResources().getColor(R.color.text));
+        toggleRb(getResources().getDrawable(R.drawable.tag_mine), mRbScene, getResources().getColor(R.color.text));
         toggleRb(getResources().getDrawable(R.drawable.tag_mine), mRbMine, getResources().getColor(R.color.text));
 
-//        if (position == 0) {
-//            toggleRb(getResources().getDrawable(R.drawable.tag_device_selected), mRbDevice, getResources().getColor(R.color.text_oringe));
-//        } else if (position == 1) {
-//            toggleRb(getResources().getDrawable(R.drawable.tag_scene_selected), mRbScene, getResources().getColor(R.color.text_oringe));
-//        } else {
-//            toggleRb(getResources().getDrawable(R.drawable.tag_mine_selected), mRbMine, getResources().getColor(R.color.text_oringe));
-//        }
+        if (position == 0) {
+            toggleRb(getResources().getDrawable(R.drawable.tag_device_selected), mRbDevice, getResources().getColor(R.color.text_oringe));
+        } else if (position == 1) {
+            toggleRb(getResources().getDrawable(R.drawable.tag_device_selected), mRbScene, getResources().getColor(R.color.text_oringe));
+        } else {
+            toggleRb(getResources().getDrawable(R.drawable.tag_mine_selected), mRbMine, getResources().getColor(R.color.text_oringe));
+        }
     }
 
     @Override
@@ -132,7 +121,7 @@ public class MainActivity extends BaseFragmentActivity {
             long secondTime = System.currentTimeMillis();
             if (0.0 != mFirstTime && secondTime - mFirstTime < 2000) {
                 AppManager.getAppManager().finishAllActivity();
-//                System.exit(0);
+                System.exit(0);
             } else {
                 ToastUtil.show(R.string.app_exit_hit);
                 mFirstTime = System.currentTimeMillis();

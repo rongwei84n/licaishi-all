@@ -556,25 +556,5 @@ public class DeviceFragment extends BaseFragment implements ILoadingView {
     @Override
     public void setUserVisibleHint(boolean isVisibleToUser) {
         super.setUserVisibleHint(isVisibleToUser);
-        try {
-            if (isVisibleToUser) {
-                showLoading();
-                startTask(0);
-            } else {
-                stopTask();
-                mHandler.postDelayed(new Runnable() {
-                    @Override
-                    public void run() {
-                        if (mPopupTitle != null) {
-                            mPopupTitle.dismiss();
-                        }
-                    }
-                }, 100);
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-
     }
-
 }
