@@ -32,7 +32,7 @@
             android:drawablePadding="5dp"
             android:drawableTop="@drawable/tag_device_selected"
             android:gravity="center"
-            android:text="@string/device"
+            android:text="@string/homepage"
             android:textColor="@color/text_oringe"
             android:textSize="11sp" />
 
@@ -45,7 +45,7 @@
             android:drawablePadding="5dp"
             android:drawableTop="@drawable/tag_mine"
             android:gravity="center"
-            android:text="@string/scene"
+            android:text="@string/products"
             android:textColor="@color/text"
             android:textSize="11sp" />
 

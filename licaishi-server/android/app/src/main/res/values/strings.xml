@@ -102,8 +102,10 @@
     <string name="get_wifi_info_fail">获取WiFi信息失败，请稍后再试</string>
     <string name="close_device_soft_ap">设备与路由器及网络连接成功，将关闭设备ssid</string>
     <string name="close_device_soft_ap_success">关闭设备成功</string>
-    <string name="device">设备</string>
-    <string name="mine">我</string>
+    <string name="homepage">首页</string>
+    <string name="products">产品</string>
+    <string name="workstudio">工作室</string>
+    <string name="mine">我的</string>
 
     <!-- dialog -->
     <string name="update_progress">0%</string>
@@ -172,7 +174,6 @@
 
     <string name="are_you_sure_to_exit">确定要退出吗？</string>
 
-
     <!-- zxing -->
     <string name="zxing_title">添加设备</string>
     <string name="msg_camera_framework_bug">很遗憾，Android 相机出现问题。你可能需要重启设备。</string>
@@ -237,7 +238,6 @@
     <string name="room_edit_title">编辑房间</string>
 
     <!--场景-->
-    <string name="scene">场景</string>
     <string name="add_scene">添加场景</string>
     <string name="edit_scene">编辑场景</string>
     <string name="scene_name">场景名称</string>
@@ -277,11 +277,6 @@
     <string name="allow">允许</string>
     <string name="input_device_name">请输入设备名称</string>
 
-    <string name="living_room">客厅</string>
-    <string name="bedroom">卧室</string>
-    <string name="kitchen">厨房</string>
-    <string name="restaurant">餐厅</string>
-
     <string name="add_room">添加房间</string>
     <string name="room_name">房间名称</string>
     <string name="room_image">房间图片</string>
@@ -290,7 +285,6 @@
     <string name="select_wifi">选择WiFi</string>
     <string name="refresh">刷新</string>
 
-    <string name="smart_link_null_password">请输入WiFi密码</string>
     <string name="one_minute">60s</string>
 
     <!-- 设备首页 -->
