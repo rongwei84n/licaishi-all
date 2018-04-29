@@ -30,22 +30,34 @@
             android:layout_weight="1"
             android:button="@null"
             android:drawablePadding="5dp"
-            android:drawableTop="@drawable/tag_device_selected"
+            android:drawableTop="@drawable/tab_home_selected"
             android:gravity="center"
             android:text="@string/homepage"
             android:textColor="@color/text_oringe"
             android:textSize="11sp" />
 
         <RadioButton
-            android:id="@+id/rb_scene"
+            android:id="@+id/rb_product"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:button="@null"
             android:drawablePadding="5dp"
-            android:drawableTop="@drawable/tag_mine"
+            android:drawableTop="@drawable/tab_product"
             android:gravity="center"
             android:text="@string/products"
+            android:textColor="@color/text"
+            android:textSize="11sp" />
+        <RadioButton
+            android:id="@+id/rb_workstudio"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:button="@null"
+            android:drawablePadding="5dp"
+            android:drawableTop="@drawable/tab_workroom"
+            android:gravity="center"
+            android:text="@string/workstudio"
             android:textColor="@color/text"
             android:textSize="11sp" />
 
@@ -56,7 +68,7 @@
             android:layout_weight="1"
             android:button="@null"
             android:drawablePadding="5dp"
-            android:drawableTop="@drawable/tag_mine"
+            android:drawableTop="@drawable/tab_mine"
             android:gravity="center"
             android:text="@string/mine"
             android:textColor="@color/text"

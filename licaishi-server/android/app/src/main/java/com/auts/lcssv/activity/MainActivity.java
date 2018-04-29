@@ -11,9 +11,7 @@ import com.auts.lcssv.adapter.MainVpAdapter;
 import com.auts.lcssv.base.BaseFragmentActivity;
 import com.auts.lcssv.manager.UpdateManager;
 import com.auts.lcssv.service.CommonService;
-import com.auts.lcssv.util.AppInfoUtils;
 import com.auts.lcssv.util.AppManager;
-import com.auts.lcssv.util.LogUtils;
 import com.auts.lcssv.util.ToastUtil;
 import com.auts.lcssv.views.MyViewPager;
 
@@ -23,18 +21,17 @@ import butterknife.OnClick;
 import butterknife.OnPageChange;
 
 /**
- * 主页，包含三个Fragment：设备、场景、我的
- *
- * @author qisheng.lv
- * @date 2017/7/5
+ * 主页，包含各个fragement.
  */
 public class MainActivity extends BaseFragmentActivity {
     @BindView(R.id.vp_main)
     public MyViewPager mViewPager;
     @BindView(R.id.rb_device)
     RadioButton mRbDevice;
-    @BindView(R.id.rb_scene)
-    RadioButton mRbScene;
+    @BindView(R.id.rb_product)
+    RadioButton mRbProduct;
+    @BindView(R.id.rb_workstudio)
+    RadioButton mRbWorkstudio;
     @BindView(R.id.rb_mine)
     RadioButton mRbMine;
     private long mFirstTime;
@@ -65,16 +62,22 @@ public class MainActivity extends BaseFragmentActivity {
         mViewPager.setCurrentItem(0);
     }
 
-    @OnClick(R.id.rb_scene)
-    public void rb_scene() {
+    @OnClick(R.id.rb_product)
+    public void rb_product() {
         togglePage(1);
         mViewPager.setCurrentItem(1);
     }
 
-    @OnClick(R.id.rb_mine)
-    public void rb_my() {
+    @OnClick(R.id.rb_workstudio)
+    public void rb_workstudio() {
         togglePage(2);
         mViewPager.setCurrentItem(2);
+    }
+
+    @OnClick(R.id.rb_mine)
+    public void rb_my() {
+        togglePage(3);
+        mViewPager.setCurrentItem(3);
     }
 
     /**
@@ -83,16 +86,19 @@ public class MainActivity extends BaseFragmentActivity {
      * @param position
      */
     private void togglePage(int position) {
-        toggleRb(getResources().getDrawable(R.drawable.tag_device), mRbDevice, getResources().getColor(R.color.text));
-        toggleRb(getResources().getDrawable(R.drawable.tag_mine), mRbScene, getResources().getColor(R.color.text));
-        toggleRb(getResources().getDrawable(R.drawable.tag_mine), mRbMine, getResources().getColor(R.color.text));
+        toggleRb(getResources().getDrawable(R.drawable.tab_home), mRbDevice, getResources().getColor(R.color.text));
+        toggleRb(getResources().getDrawable(R.drawable.tab_product), mRbProduct, getResources().getColor(R.color.text));
+        toggleRb(getResources().getDrawable(R.drawable.tab_workroom), mRbWorkstudio, getResources().getColor(R.color.text));
+        toggleRb(getResources().getDrawable(R.drawable.tab_mine), mRbMine, getResources().getColor(R.color.text));
 
         if (position == 0) {
-            toggleRb(getResources().getDrawable(R.drawable.tag_device_selected), mRbDevice, getResources().getColor(R.color.text_oringe));
+            toggleRb(getResources().getDrawable(R.drawable.tab_home_selected), mRbDevice, getResources().getColor(R.color.text_oringe));
         } else if (position == 1) {
-            toggleRb(getResources().getDrawable(R.drawable.tag_device_selected), mRbScene, getResources().getColor(R.color.text_oringe));
+            toggleRb(getResources().getDrawable(R.drawable.tab_product_selected), mRbProduct, getResources().getColor(R.color.text_oringe));
+        } else if (position == 2) { //工作室
+            toggleRb(getResources().getDrawable(R.drawable.tab_workroom_selected), mRbWorkstudio, getResources().getColor(R.color.text_oringe));
         } else {
-            toggleRb(getResources().getDrawable(R.drawable.tag_mine_selected), mRbMine, getResources().getColor(R.color.text_oringe));
+            toggleRb(getResources().getDrawable(R.drawable.tab_mine_selected), mRbMine, getResources().getColor(R.color.text_oringe));
         }
     }
 

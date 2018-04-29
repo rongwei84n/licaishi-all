@@ -31,6 +31,8 @@ public class MainVpAdapter extends FragmentPagerAdapter {
             fragment = new DeviceFragment();
         } else if (position == 1) {
             fragment = new DeviceFragment();
+        }else if (position == 2) {
+            fragment = new DeviceFragment();
         } else {
             fragment = new MineFragment();
         }
@@ -40,7 +42,7 @@ public class MainVpAdapter extends FragmentPagerAdapter {
 
     @Override
     public int getCount() {
-        return 3;
+        return 4;
     }
 
     public Fragment getFragment(int position) {
