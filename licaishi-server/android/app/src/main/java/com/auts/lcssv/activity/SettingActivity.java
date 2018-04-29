@@ -37,7 +37,7 @@ public class SettingActivity extends BaseActivity {
 
     @Override
     public void afterInitView() {
-        setPageTitle(R.string.set_action);
+        setPageTitle(R.string.app_name);
         position = getIntent().getIntExtra("position", 0);
         if (getIntent().getBooleanExtra("state", false)) {
             mIvOpen.setVisibility(View.VISIBLE);

@@ -215,36 +215,16 @@
     <string name="room_manage_title">房间管理</string>
     <string name="room_edit_title">编辑房间</string>
 
-    <!--场景-->
-    <string name="add_scene">添加场景</string>
-    <string name="edit_scene">编辑场景</string>
-    <string name="scene_name">场景名称</string>
-    <string name="scene_edit_pic">编辑图标</string>
-    <string name="scene_pic">场景图标</string>
-    <string name="remove_scene">删除场景</string>
-    <string name="check_scene_name">请输入场景名称</string>
-    <string name="check_mission_name">请添加任务</string>
-    <string name="mission">任务</string>
-    <string name="add_mission">添加任务</string>
-    <string name="continue_add">继续添加</string>
-    <string name="set_action">设置动作</string>
-    <string name="execute_fail">操作失败</string>
-
-    <string name="scan_qr_code_to_add_device">扫描二维码添加设备</string>
-    <string name="to_connect_wifi">手机尚未连接可用2.4G频段WiFi，无法添加设备</string>
     <string name="set">设置</string>
     <string name="sure_to_cancel_add_devices">确认要取消添加设备吗?</string>
     <string name="no">否</string>
     <string name="yes">是</string>
     <string name="no_password_wifi">无密码WiFi</string>
-    <string name="connect_warning">连接过程中请保持设备、手机、路由器\n之间尽量靠近</string>
     <string name="add_success">添加成功</string>
     <string name="device_name_label">设备名称：</string>
     <string name="device_icon_label">设备图标</string>
     <string name="vest_in_room_label">所属房间：</string>
     <string name="un_connect_network">设备未连接网络</string>
-    <string name="un_connect_network_message">请检查路由器是否正常连接网络</string>
-    <string name="connect_network_fail">手机连接网络失败，请检查网络设置，确认手机正常联网后点击“重试”</string>
     <string name="connect_network_fail_again">手机连接网络失败，请检查网络设置</string>
     <string name="retry">重试</string>
     <string name="server_error">服务器异常，请重试</string>
@@ -277,12 +257,8 @@
     <string name="input_ssid">请选择需要设备连接的网络</string>
     <string name="add_device_to_room_fail">添加设备到房间失败</string>
     <string name="connect_wifi_first">请先连接WiFi</string>
-    <string name="connect_wifi_first_for_soft">请将手机WiFi连接到&device_soft_ap;</string>
-    <string name="connect_wifi_and_refresh">请将手机WiFi连接到“&device_soft_ap;”后点击“刷新”</string>
     <string name="device_connect_phone_fail">设备与手机连接失败</string>
-    <string name="smart_platooninsert_t1">智能排插TC1</string>
     <string name="offline">离线</string>
-    <string name="device_connect_router">设备连接路由器</string>
 
     <!--关于界面-->
     <string name="help_and_feedback">帮助与反馈</string>
