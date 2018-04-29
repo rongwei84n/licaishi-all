@@ -18,7 +18,6 @@ import android.widget.ListView;
 import android.widget.PopupWindow;
 import android.widget.TextView;
 
-import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.auts.lcssv.BuildConfig;
 import com.auts.lcssv.PhApplication;
 import com.auts.lcssv.R;
@@ -48,6 +47,7 @@ import com.auts.lcssv.util.SpfUtils;
 import com.auts.lcssv.util.ToastUtil;
 import com.auts.lcssv.util.ViewUtils;
 import com.auts.lcssv.views.refresh.RefreshLayout;
+import com.chad.library.adapter.base.BaseQuickAdapter;
 
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
@@ -61,10 +61,9 @@ import butterknife.OnLongClick;
 
 
 /**
- * 设备页
- * Created by qisheng.lv on 2017/7/5.
+ * 产品页面.
  */
-public class DeviceFragment extends BaseFragment implements ILoadingView {
+public class ProductsFragment extends BaseFragment implements ILoadingView {
     @BindView(R.id.recycler_view)
     RecyclerView mRecyclerView;
     @BindView(R.id.iv_back)

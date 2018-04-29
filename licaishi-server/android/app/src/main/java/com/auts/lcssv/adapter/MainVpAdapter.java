@@ -5,13 +5,13 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.util.SparseArray;
 
-import com.auts.lcssv.fragment.DeviceFragment;
+import com.auts.lcssv.fragment.HomepageFragment;
+import com.auts.lcssv.fragment.ProductsFragment;
 import com.auts.lcssv.fragment.MineFragment;
+import com.auts.lcssv.fragment.WorkroomFragment;
 
 /**
  *
- * @author qisheng.lv
- * @date 2017/4/12
  */
 public class MainVpAdapter extends FragmentPagerAdapter {
     private SparseArray<Fragment> mSa = new SparseArray<>();
@@ -28,11 +28,11 @@ public class MainVpAdapter extends FragmentPagerAdapter {
         }
 
         if (position == 0) {
-            fragment = new DeviceFragment();
+            fragment = new HomepageFragment();
         } else if (position == 1) {
-            fragment = new DeviceFragment();
+            fragment = new ProductsFragment();
         }else if (position == 2) {
-            fragment = new DeviceFragment();
+            fragment = new WorkroomFragment();
         } else {
             fragment = new MineFragment();
         }
