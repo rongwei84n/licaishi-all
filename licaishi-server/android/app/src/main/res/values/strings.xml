@@ -80,28 +80,6 @@
     <!--加载框-->
     <string name="loading_text">加载中...</string>
 
-
-    <string name="common_image_description">通用图片描述</string>
-    <string name="add_device">添加设备</string>
-    <string name="reset_hint_for_smart_link">接通电源，长按开关5s，直至\n指示灯橙色快闪</string>
-    <string name="reset_hint_for_soft_ap">双击开关，指示灯灭2秒继续橙色快闪</string>
-
-    <string name="add_t1_smart_inserts">添加TC1智能排插</string>
-    <string name="add_smart_devices">添加智能排插</string>
-    <string name="device_connect_to_router">将设备连接到路由器</string>
-    <string name="will_connect_device_to_router">将设备连接到服务器</string>
-    <string name="getting_wifi">正在获取WiFi，请稍候&#8230;</string>
-    <string name="get_wifi_fail">获取WiFi失败，请稍后再试</string>
-    <string name="get_device_wifi_fail">获取WiFi列表异常</string>
-    <string name="write_ssid_info_fail">写入ssid信息失败</string>
-    <string name="write_ssid_info_success">写入ssid信息成功</string>
-    <string name="input_wifi_password">请输入WiFi密码</string>
-    <string name="only_support_2.4_wifi">仅支持2.4G频段的无线网络</string>
-    <string name="connect">连接</string>
-    <string name="auto_open_wifi_fail">自动开启WiFi失败，请手动开启</string>
-    <string name="get_wifi_info_fail">获取WiFi信息失败，请稍后再试</string>
-    <string name="close_device_soft_ap">设备与路由器及网络连接成功，将关闭设备ssid</string>
-    <string name="close_device_soft_ap_success">关闭设备成功</string>
     <string name="homepage">首页</string>
     <string name="products">产品</string>
     <string name="workstudio">工作室</string>
