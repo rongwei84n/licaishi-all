@@ -53,7 +53,7 @@
 		768C2C28202AE3A900F8ABB8 /* SFAUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 768C2C27202AE3A900F8ABB8 /* SFAUITests.swift */; };
 		768C2C39202AE6EC00F8ABB8 /* Account.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 768C2C38202AE6EC00F8ABB8 /* Account.storyboard */; };
 		768C2C3B202C2EB700F8ABB8 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 768C2C3A202C2EB700F8ABB8 /* LoginViewController.swift */; };
-		7690EF6D2041587900BDA115 /* Me.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7690EF6C2041587900BDA115 /* Me.storyboard */; };
+		7690EF6D2041587900BDA115 /* Me.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7690EF6C2041587900BDA115 /* Me.storyboard */; settings = {ASSET_TAGS = ("test-vc", ); }; };
 		7690EF70204158C600BDA115 /* AssociationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7690EF6F204158C600BDA115 /* AssociationViewController.swift */; };
 		76A89AEE203F9EB00007C13D /* Dictionary+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76A89AED203F9EB00007C13D /* Dictionary+Extension.swift */; };
 		76A89AF0203FA5F10007C13D /* LoginViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76A89AEF203FA5F10007C13D /* LoginViewModel.swift */; };
@@ -706,6 +706,9 @@
 		768C2BFC202AE3A800F8ABB8 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
+				KnownAssetTags = (
+					"test-vc",
+				);
 				LastSwiftUpdateCheck = 0910;
 				LastUpgradeCheck = 0910;
 				ORGANIZATIONNAME = runkenxu;
@@ -1271,7 +1274,7 @@
 				NEW_SETTING = "";
 				PRODUCT_BUNDLE_IDENTIFIER = com.auts.hein.lcss;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "0c17d98d-5222-4a66-922a-5a93b0e7ab33";
+				PROVISIONING_PROFILE = "c2d26026-14c3-46df-a416-e0ea9eabee02";
 				PROVISIONING_PROFILE_SPECIFIER = lcssDistribution;
 				SWIFT_OBJC_BRIDGING_HEADER = "SFA/Supporting Files/SFA-Bridging-Header.h";
 				SWIFT_VERSION = 4.0;
