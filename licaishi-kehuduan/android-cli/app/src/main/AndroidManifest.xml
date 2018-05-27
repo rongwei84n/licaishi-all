@@ -29,6 +29,8 @@
         tools:replace="android:allowBackup"
         >
 
+	<meta-data android:name="android.max_aspect" android:value="2.1" />
+
         <!-- Glide配置 -->
         <meta-data
             android:name="com.auts.lcscli.manager.imageloader.GlideConfig"
