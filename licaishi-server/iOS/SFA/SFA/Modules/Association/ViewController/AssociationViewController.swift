@@ -37,8 +37,8 @@ class AssociationViewController: UIViewController, InstanceFromStoryBoard {
         view.backgroundColor = UIColor.white // 解决'卡顿'
         extendedLayoutIncludesOpaqueBars = true
         
-        setupViews()
-        setupJSBridge()
+//        setupViews()
+//        setupJSBridge()
         
     }
     
