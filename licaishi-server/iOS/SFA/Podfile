@@ -3,7 +3,7 @@ use_frameworks!
 
 target 'SFA' do
 
-pod 'JShare', '1.5.0'
+pod 'JShare', '1.3.0'
 
 pod 'R.swift'
 pod 'JRSwizzle'
