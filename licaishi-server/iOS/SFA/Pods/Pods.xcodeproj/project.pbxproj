@@ -1168,7 +1168,6 @@
 		83D9325020876B64FA49871BFCCCCCB0 /* PriorityQueue.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = PriorityQueue.swift; path = Platform/DataStructures/PriorityQueue.swift; sourceTree = "<group>"; };
 		8407463EBF6EB7AF8795A97975BF5F6B /* SynchronizedDisposeType.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = SynchronizedDisposeType.swift; path = RxSwift/Concurrency/SynchronizedDisposeType.swift; sourceTree = "<group>"; };
 		843D5E12AA1FFFCC81E62BE886EE1667 /* Moya.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Moya.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		845A3BF1CE49DDD039285FCE9F3D4610 /* libjshare-ios-1.5.0.a */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = archive.ar; path = "libjshare-ios-1.5.0.a"; sourceTree = "<group>"; };
 		848B7D12439884B33E33ADCADB2D5D88 /* DelegateProxyType.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = DelegateProxyType.swift; path = RxCocoa/Common/DelegateProxyType.swift; sourceTree = "<group>"; };
 		854DCFA6CAC7FD2E3A3452664D07654F /* Localize-Swift.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.module; path = "Localize-Swift.modulemap"; sourceTree = "<group>"; };
 		85DB55331019AADEDA793FDB24B3C46D /* RxTarget.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = RxTarget.swift; path = RxCocoa/Common/RxTarget.swift; sourceTree = "<group>"; };
@@ -1334,6 +1333,7 @@
 		C2DEF5075820E69938689B8AD5442DF8 /* Utils.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Utils.swift; path = Sources/CryptoSwift/Utils.swift; sourceTree = "<group>"; };
 		C36DBD492F8F91069C1274D7BA9EFFF7 /* SignedNumericExtensions.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = SignedNumericExtensions.swift; path = Sources/Extensions/SwiftStdlib/SignedNumericExtensions.swift; sourceTree = "<group>"; };
 		C3B582DD5AA94F124AC6A7DE675D9E27 /* _RX.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = _RX.m; path = RxCocoa/Runtime/_RX.m; sourceTree = "<group>"; };
+		C3B9570B074E3299BAB311E89DBB6722 /* libjcore-ios-1.1.9.a */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = archive.ar; path = "libjcore-ios-1.1.9.a"; sourceTree = "<group>"; };
 		C42EABC8EA622DFBDA18C23279E68F87 /* DoubleExtensions.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = DoubleExtensions.swift; path = Sources/Extensions/SwiftStdlib/DoubleExtensions.swift; sourceTree = "<group>"; };
 		C440015F3F98E64A8AD23B894A5F1735 /* ResponseAvailability.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = ResponseAvailability.swift; path = "Sources/Moya-ModelMapper/ResponseAvailability.swift"; sourceTree = "<group>"; };
 		C4488EE58E080DE3C2187967D6B7A33A /* GroupedObservable.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = GroupedObservable.swift; path = RxSwift/GroupedObservable.swift; sourceTree = "<group>"; };
@@ -1391,7 +1391,6 @@
 		D4D491B249420EE2CCE19E591C78E1AB /* Alamofire.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.module; path = Alamofire.modulemap; sourceTree = "<group>"; };
 		D519C452E38D10511ED12E50307B5573 /* PKCS5.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = PKCS5.swift; path = Sources/CryptoSwift/PKCS/PKCS5.swift; sourceTree = "<group>"; };
 		D5806BF2B91C7200ECE408DEC563A599 /* ImmediateSchedulerType.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = ImmediateSchedulerType.swift; path = RxSwift/ImmediateSchedulerType.swift; sourceTree = "<group>"; };
-		D5C679EE50BC0F0B351AE885D1660336 /* libjcore-ios-1.1.7.a */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = archive.ar; path = "libjcore-ios-1.1.7.a"; sourceTree = "<group>"; };
 		D62885153BDB9EF6B36CF37BF8B86424 /* Operators.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Operators.swift; path = Sources/Operators.swift; sourceTree = "<group>"; };
 		D63FD9165872330FC7FD5B3674496B78 /* ImagePrefetcher.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = ImagePrefetcher.swift; path = Sources/ImagePrefetcher.swift; sourceTree = "<group>"; };
 		D6587B6B433CDAB98EA9D2B0AE41CCB3 /* Event.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Event.swift; path = RxSwift/Event.swift; sourceTree = "<group>"; };
@@ -1498,6 +1497,7 @@
 		F993692F41BA2B08587A24D52D5A33B7 /* Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		F995AE04CDCF08519CD03EFBD2891C49 /* Localize-Swift-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Localize-Swift-prefix.pch"; sourceTree = "<group>"; };
 		F9E34EDCC9A894219405DC4144BFCAAC /* CSArrayType+Foundation.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = "CSArrayType+Foundation.swift"; path = "Sources/CryptoSwift/Foundation/CSArrayType+Foundation.swift"; sourceTree = "<group>"; };
+		FA20D49E6C10CA3A1666184AE73FADC2 /* libjshare-ios-1.3.0.a */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = archive.ar; path = "libjshare-ios-1.3.0.a"; sourceTree = "<group>"; };
 		FA7A076C5EEDF6259B646460C44E5FB2 /* RxCollectionViewDataSourceProxy.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = RxCollectionViewDataSourceProxy.swift; path = RxCocoa/iOS/Proxies/RxCollectionViewDataSourceProxy.swift; sourceTree = "<group>"; };
 		FA8AC88DD563B99A60E7BA45DCC6B5F8 /* AccessTokenPlugin.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = AccessTokenPlugin.swift; path = Sources/Moya/Plugins/AccessTokenPlugin.swift; sourceTree = "<group>"; };
 		FB36EACDDD2E8C3F165B653C311A04CF /* RxPickerViewAdapter.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = RxPickerViewAdapter.swift; path = RxCocoa/iOS/DataSources/RxPickerViewAdapter.swift; sourceTree = "<group>"; };
@@ -1722,14 +1722,6 @@
 			path = SwiftyTimer;
 			sourceTree = "<group>";
 		};
-		0F61970938134946EA681E45610E0574 /* Frameworks */ = {
-			isa = PBXGroup;
-			children = (
-				845A3BF1CE49DDD039285FCE9F3D4610 /* libjshare-ios-1.5.0.a */,
-			);
-			name = Frameworks;
-			sourceTree = "<group>";
-		};
 		113CDE2D310E5E17D0C8CA9CDF05C97A /* iOS */ = {
 			isa = PBXGroup;
 			children = (
@@ -1867,6 +1859,14 @@
 				5C2661190786222EA72A129D02BDEBD1 /* Single+ModelMapper.swift */,
 			);
 			name = RxSwift;
+			sourceTree = "<group>";
+		};
+		36F8DB8DF106E63F543C372BC29D333E /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				C3B9570B074E3299BAB311E89DBB6722 /* libjcore-ios-1.1.9.a */,
+			);
+			name = Frameworks;
 			sourceTree = "<group>";
 		};
 		3A93967977BA1CF7E954EB0AA8550B7E /* ModelMapper */ = {
@@ -2041,7 +2041,7 @@
 		51520EFB58477D0172C45AE2ABF0A698 /* JCore */ = {
 			isa = PBXGroup;
 			children = (
-				AEF9BFACE677206A833212F7073FCB79 /* Frameworks */,
+				36F8DB8DF106E63F543C372BC29D333E /* Frameworks */,
 			);
 			name = JCore;
 			path = JCore;
@@ -2426,14 +2426,6 @@
 			path = JRSwizzle;
 			sourceTree = "<group>";
 		};
-		AEF9BFACE677206A833212F7073FCB79 /* Frameworks */ = {
-			isa = PBXGroup;
-			children = (
-				D5C679EE50BC0F0B351AE885D1660336 /* libjcore-ios-1.1.7.a */,
-			);
-			name = Frameworks;
-			sourceTree = "<group>";
-		};
 		B529D596955E92F8AC3C022A6D48CF5E /* SwiftStdlib */ = {
 			isa = PBXGroup;
 			children = (
@@ -2452,7 +2444,7 @@
 			isa = PBXGroup;
 			children = (
 				E7441C616636CF91D14D5ACFC6D35EEE /* JSHAREService.h */,
-				0F61970938134946EA681E45610E0574 /* Frameworks */,
+				BE9C10A19A64438962FF89C93485E4EE /* Frameworks */,
 			);
 			name = JShare;
 			path = JShare;
@@ -2509,6 +2501,14 @@
 			children = (
 			);
 			name = AppKit;
+			sourceTree = "<group>";
+		};
+		BE9C10A19A64438962FF89C93485E4EE /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				FA20D49E6C10CA3A1666184AE73FADC2 /* libjshare-ios-1.3.0.a */,
+			);
+			name = Frameworks;
 			sourceTree = "<group>";
 		};
 		C6A851697D22DE900BA0939851CD7662 /* Support Files */ = {
